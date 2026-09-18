@@ -1,5 +1,17 @@
 # SoloMeal 当前状态与 Agent 交接
 
+## 97. 2026-09-18 UI 侧偏好覆盖缺陷修复（第96节保留项处置），前端冻结量随之更替
+
+2026-09-18第97节：用户授权处置三项低成本决定中的第1项——第96节「刻意未做」的 UI 侧缺陷（真实用户慢网络下，偏好面板挂载 GET `/me/preferences` 晚落地会清掉已输入厨具）本轮修复。应用改动仅 `frontend/src/main.tsx` 的 `Preferences` 组件（+4/−2 行）：新增 `edited` ref，四个字段的全部 `onChange` 统一经 `edit()` 置位，挂载 GET 落地改判 `if(!edited.current)setValue(stored)`——未编辑照常回填、已编辑则响应作废。新增回归 `frontend/e2e/preferences-race.test.mjs`：`page.route` 注入 1500ms 延迟（与第96节 A/B 同源），切 tab 即输入「煮锅」，响应落地后断言输入框未变，再保存断言 PUT 响应 `equipment:["煮锅"]`；**双向验证**——还原旧 `main.tsx` 重建后同一用例失败、恢复修复版通过，用例确实钉住该缺陷而非恒真。本地套件：插件 Windows 373+298、前端 `npm test` 36、`npm run build` 产物 `index-D2Luux6J.js`、`npm run e2e` **19/19**（原 18 场景断言未放宽＋新用例 1）。**第95节前端冻结量自本节起被取代（历史值不改写）**：前端源码聚合 `4285ae31…`→`1a99ab46a45e6431b08e20cb3743990b6445e482d7ae0740d32c6593acd7ba48`（同口径 15 文件，定义见竞态报告）、产物 `BTAvzu0t`→`D2Luux6J`；后端聚合 `c3161b9b…`、API 镜像 `908cf165568b…` 不变，web 镜像须按新产物重建（第95节 `f2928999404b…` 不再是新版本目标）。两条 freeze 测试与 `files_sha256` 均不引用这两个文档性哈希（全仓仅 `.md` 引用），CI 无预期失败项。代码提交 `4c47ee2`（pre-commit 实跑 373+298，无 `--no-verify`）；其远程 CI 复验、以新镜像重部署源 18080（仅 web、卷不动）与 Dependabot PR #1 处置为本轮后续步骤，结果以 Actions 运行列表为准、不在本节自我登记。**仍未做**：其它面板「挂载即 GET＋受控输入」同类竞态未穷举；未做 stress 多轮 e2e。模型新增 0、累计 1685/30；根下 5 个 ACL 锁死目录未动。P5/P8/P9 整体及旧 48/60、`holdout_gate=failed`、真人清晰度 null 保持。见[修复报告](docs/validation/ui-preferences-clobber-fix-0918.md)。
+
+## 96. 2026-09-18 收口文档推送暴露的 browser-e2e 竞态：定位、注入复现与驱动侧修复
+
+2026-09-18第96节：第95节的两份收口文档提交（`5ef812f`/`1b6cf00`）推送后，run `35320718788` 的 `browser-e2e` 失败 2/18 并连带 `ci-complete` failure，其余七作业 success——**「CI 全绿」自此只在冻结点 `f3f9c7b` 上成立，不在分支 HEAD 上成立**。**先排除回归再查因**：`f3f9c7b..1b6cf00` 的 diff 只有 7 个 `.md`（94 增/14 删），且两轮 `npm run build` 产物同为内容哈希命名的 `index-BTAvzu0t.js`，被测 JS 字节相同，故属同一输入下的非确定性失败。**根因（读代码得证，非推测）**：偏好面板每次挂载都 `setValue(await api('/me/preferences'))`（`frontend/src/main.tsx:79`）且保存按钮 `disabled={busy}`（`:80`、`:58`），而 e2e 驱动 `useTab` 切 tab 后不等待该 GET（`frontend/e2e/support.mjs:120`）即 `fill` 厨具；GET 晚落地会用服务端旧值重渲染受控输入，Playwright 又必须等 `busy` 解除才能点保存——**慢响应下「输入被覆盖」发生在点击之前是必然顺序**。随后 PUT 保存空厨具，`backend/app/services/planning.py:56-58`/`:115` 按厨具子集硬过滤，候选清零，页面即 CI 里逐字相同的「没有符合条件的菜谱」。**故障注入 A/B（离线、模型新增 0）**：对同一 GET 注入 1500ms 延迟，旧写法 PUT body `equipment: []` 且复现失败文案，新写法 `equipment: ["煮锅"]` 且页面出「补购价格未知」；全量 `npm run e2e` 18/18。**修复 `d3fcb9d` 仅四个 e2e 文件**（新增 `openPreferences` 就绪等待，改四处写入前置调用点；`mobile.test.mjs:103` 的读取回显等待未动），**未放宽任何断言、应用代码零改动**；复跑 run `35322761131` 九作业全 success、`ci-complete` 于 `2026-09-18T08:18:03Z`；本节文档提交 `348fdf6` 的 run `35324565914` 同样九作业全 success（`08:39:22Z`），即文档改动未触及任何冻结校验（两条 freeze 测试与 `files_sha256` 核对通过），其后为补记该事实而生的提交不再自我登记、以 Actions 运行列表为准。**冻结量复核**：前端源码聚合在本轮改动后仍为 `4285ae314aace08a32801cff5c3228213c0d9093e3a6c51a94b76e31205001aa`（15 文件，`e2e/` 不在口径内），产物与后端 `c3161b9b…`、两个镜像 digest 均未变，第95节冻结值不被推翻；该口径此前只记结果未记算法，已在报告补全为可复现定义。**顺带查实一处过期事实**：交接文本写的「本地插件套件 372+298」经同一 clone 在 `39ab68f`/`f3f9c7b` 两提交对拍，实为 372→373，来源是 `test_unit.py:2271` 逐 `- uses:` 行核对钉版、而修 CI 时给 backend 作业加了一行 `setup-node`；Linux CI 为 376+300（差额含 `test_unit.py:1825`/`:2011` 两处 Windows SKIP 与 `:2048` posix-only 分支，后者未逐项对拍、属推断）。四处交接已按平台分别标注。**刻意未做**：UI 侧同一覆盖缺陷（真实用户在慢网络下输入后仍可能被挂载响应清掉）未修，修它要改 `main.tsx`、会使已冻结并通过 CI 的前端产物变化、须重新走冻结与验收，待用户决定；「挂载即 GET ＋受控输入」在其它面板是否也构成竞态未穷举；未做 stress 多轮重跑来量化其余场景的残余抖动。环境：模型调用新增 0、累计聊天 1685/视觉 30；未部署，源 18080 与 18082 未触碰；注入脚本在仓库外，跑完删除；根下 5 个 ACL 锁死目录仍未删未改权限。P5/P8/P9 整体及旧 48/60、`holdout_gate=failed`、真人清晰度 null 保持。见[竞态报告](docs/validation/browser-e2e-preferences-race-0918.md)。下一步：v1.0 发布与 P9-04 其余条件、Dependabot PR #1 处置、源 18080 是否重部署新前端，均待用户决定。
+
+## 95. 2026-09-18 发布准备收口：推送至自有私有仓库、远程 ci-complete 全绿、哈希冻结
+
+2026-09-18第95节：用户授权「完整执行：提交+推送+CI+冻结哈希」，本轮已跑到 CI 绿。**提交前安全盘点**：420 个待入库文件（约 3.0 MB）逐项筛查，无真实凭据——真实 `.env`/`node_modules`/`dist`/`private_uploads` 均未进清单，两个 `synthetic.env` 为占位符夹具、`receipt.png` 为 1×1 测试夹具、`uploads.tar` 为合成故障夹具，`SoloMeal-Acceptance`/`dashscope.aliyuncs.com` 仅作路径/主机名文字出现。**本地离线套件全绿（模型新增 0）**：插件本地 Windows 373+298（2 项平台 SKIP；Linux CI 376+300）、前端 `npm test` 36、`npm run build` 产物 `index-BTAvzu0t.js`（与线上验证版本一致）、e2e fixture 18、后端 pytest 530 通过/16 MySQL 跳过（专用 basetemp 已清理）；mypy 本机仅报 6 处 Linux 专有 `fcntl` API（Windows 预期）。**分组提交**：`9a060b0` ci 隔离+行尾规范化、`f9fbcf8` backend（124 文件）、`5eb512f` frontend（41）、`0935c99` deploy（12）、`39ab68f` docs+evaluation（236），修 CI 的 `1882669` 证据逐字节钉住与 `f3f9c7b` CI 作业修复；`.githooks` pre-commit 每次实跑两套件（373+298），无 `--no-verify`。**远程拓扑更正**：初稿把推送 403 记为「xpzzzzz 无写权限、待管理员核实」，该前提错了——用户与 `sergiparpal` 无关联，`sergiparpal/meal-manager` 只是 `docs/upstream.md:4` 早已记录的只读上游（本地基线 `a923d77c…`，从未向其提交/推送），403 不是待修授权缺口而是对不该写入的仓库发起写入。改为用户自有私有仓库 `https://github.com/xpzzzzz/SoloMeal` 作 `origin`（创建后核对可见性并改 private），`upstream` 保留 fetch、push URL 置 `DISABLED`，GPL-3.0 与原归属文件原样保留。**首次 CI 三类失败全部本地复现后修复**：（1）`evaluation/freeze-v1*` 链与 `docs/validation/` 各报告 `files_sha256` 记录的是原始 CRLF 字节摘要，`9a060b0` 的 LF 规范化使 CI 检出算出 `bb575852…`/`39337fdd…` 而非记录值 `2aa39319…`/`0e41e266…`，两条冻结测试失败——以机器判据（全仓 64 位十六进制为针，工作区 sha256 命中且与索引 blob 不同者入选）找出 31 个路径，`.gitattributes` 标 `-text` 并 `--renormalize` 回原字节，diff 6963 增/6963 删逐行相等、零内容改动、零摘要改写，31/31 索引 blob 现命中已记录摘要（`compose.yaml` 本就混合换行 `i/mixed`，是必须逐字节存档的佐证）；（2）`mypy -p meal_manager` 包模式遍历到 `deploy/` 验收驱动与 `docs/validation/` 证据脚本报 42 errors，exclude 增列二者，类型门回到插件本体；（3）backend 作业两轮全量 pytest 撞 15 分钟上限（dispatch run `06:40:28→06:55:44 cancelled`）且登记测试要冻结 `frontend/dist`（`backend/scripts/recommendation_diagnostic.py:46` rglob）而裸检出无构建产物——作业内 `npm ci && npm run build`、`timeout-minutes` 15→20，**未放宽任何断言**。`browser-e2e` 在 dispatch run 3 场景超时、在 PR run 与本轮 push run 通过，记为「该轮通过」不宣称竞态已消除（该保留在下一节被验证：第96节定位到偏好面板挂载读取的真实竞态并在驱动侧消除）。验证以 `git -c core.autocrlf=false clone file://…` 造 Linux 等价检出：修复前精确复现 3 失败（其余 543 通过），修复后 `pytest` 退出码 0。**远程 `ci-complete` 首次全绿**：run `35319166877`（push，`main`=`f3f9c7b`）九作业 tests 3.12/3.13/3.14 + types + coverage + backend + frontend + browser-e2e + ci-complete 全 success，`ci-complete` 于 `2026-09-18T07:34:33Z`；backend 内 MySQL 轮 546 通过/7:09、SQLite 回退轮 530 通过/16 跳过/2:24。**冻结值**：提交 `f3f9c7b3b799f42199562227f9b9c47a2cb4806c`、tree `d0d02354092c94c82ad853f9307311e0f0bb1fc3`、后端源码聚合 `c3161b9b8c69fcfad70e7b12425e2d7c94aafce3391b486fe67e811ebd95bcb3`（67 文件，与第84/91节记录一致即后端本轮零改动，口径同 `backend/scripts/diagnose_purchase.py:source_hash()`）、前端源码 `4285ae314aac…205001aa`（15 文件自订口径）、API 镜像 `sha256:908cf165568b…f69ec0d3`、web 镜像 `sha256:f2928999404b…b0f5da0f`（本轮未重建）。**哈希口径限制**：源码聚合按工作区字节算，跨平台换行不同即不同值；逐字节可复现的是 31 个 `-text` 路径的索引 blob 与 git tree/commit 标识，发布应以 commit SHA＋tree＋镜像 digest 为准。工作区限定：已跟踪文件除本轮文档外无未提交改动；根下 **5 个**（初稿误记 6 个）未跟踪且未 ignore 的 ACL 锁死目录 git 不可读，`git status --porcelain` 逐个打权限警告但**退出码 0**（初稿误记 2）且不出现在 `??` 行，`.test-tmp-shopping-0907` 为空目录故不列、其余 `.tmp-*` 命中 `.gitignore:29` 被跳过；这些目录未删除、未改权限。环境：启用 `core.hooksPath=.githooks`；行尾用单次 `-c core.autocrlf=input`/`false` 处理，未改任何 git 全局配置；`C:\Users\xiaopeng\bin` 的 `python3` shim 修复商店占位符（exit 49）。Dependabot PR #1（`setup-node` 升版）仍 open、head 早于本轮两提交，未合并未关闭，待用户决定。**本节不并入任何完成宣称**：CI 绿只解除「远程流水线未跑」这一条，P9-04 的新物理主机验收与 v1.0 发布仍是独立条件；P5/P8/P9 整体及旧 48/60、`holdout_gate=failed`、真人清晰度 null 保持；累计模型 1685/30 不变。见[发布准备报告](docs/validation/release-prep-0918.md)。下一步：v1.0 发布与 P9-04 其余条件须另行授权与资源；可选小改动（源 18080 是否重部署新前端、Dependabot PR 处置）待用户决定。
+
 ## 94. 2026-09-17 18082 真实堆栈补验通过（第92/93节驱动收口）
 
 2026-09-17第94节：用户授权下构建 `solomeal-web:review-fixes-0917`（f2928999404b，镜像内 npm ci/build），私有叠加文件重启 18082 组合项目（模型/视觉关闭实测、卷复用、三容器 healthy）后运行补严驱动：429 页面场景通过——150 请求→103×200/47×429、Retry-After:60 由 Nginx 本体、页面中文提示复现；**恢复以本轮 5 类 api GET 逐条 200+busy 窗口闭合+提示清除+数据回显成立，真实耗时 3.6 秒/2 次点击，取代第91节作废的 0.2 秒**。本地化验证通过——POST 前仅终态 run 可探测（全 409、英文契约逐字节保留）、failed 页面断言完整中文正文。补验中定位并修复两个驱动缺陷：列表投影无 result 导致旧版 failed 正文断言从未真正生效（改读单个 run 详情）；本 Playwright 版本 `locator.waitFor` 不支持 enabled/disabled 致首轮 busy 窗口判定恒 false（改页内轮询，判据未放宽）。离线 `npm test` 36、`e2e` fixture 18、build 全过。模型新增 0、累计 1685/30；18082 补验后 stop 卷保留、卷内累计 2 个一次性洪泛空账号；源 18080 未动、健康、仍未部署新前端。第91～94节的修正与补验已全部收口：2026-09-18 用户独立核对最终脚本、报告与两份实际 checks.json 后确认证据与汇报一致，第91节「429 恢复已收口」的限定就此终结、无需就同一问题重跑；3.6 秒/2 次点击只是本次受控场景的实测值，不是恢复时间保证。旧报告与旧证据不改写，仅以本节取代恢复/耗时两项。P5/P8/P9 整体及旧 48/60 保持，无提交推送。见[报告](docs/validation/p9-review-live-verify-0917.md)。下一步：发布准备（提交/远程 CI/冻结哈希），须用户授权。
@@ -212,8 +224,8 @@
 - 最新验证：P2/P4时MySQL全量61通过；P5加入后70通过/1个旧工具清单断言失败，修正后最终专项11通过。本轮MySQL首批20通过、最终采购/Agent专项17通过；前端8测试与最终构建通过；迁移e821b469a103，20业务表。原插件本轮368/298通过；mypy51文件、coverage91%仍为此前证据。见docs/validation/shopping-0907.md。
 - 最新前端验证（2026-09-08）：npm test 15 passed、tsc/Vite 构建通过、新增 `npm run e2e` 真实浏览器 8 场景全通过；本轮未改后端业务与迁移，故未重跑后端全量，第19节的 MySQL 数字仍为报价采购时的验证日期。见docs/validation/p6-e2e-0908.md。
 - 浏览器已验证归档恢复、菜谱编辑、方案历史/取消、做饭撤销与重登录恢复；脚本环境确认写入2→1→2及待确认刷新恢复。9月7日补双标签页确认同步及窄屏检查。9月8日新增 frontend/e2e 真实浏览器套件：Chromium 离线仿真下的运行中断网、离线自动同步、离线标签页取消与落后收敛、采购丢包重试、手机纯键盘录入与采购做饭撤销、双账号切换均已断言通过；真实模型仍待验。
-- 未做：新源码上的完整合成留出复验（旧 48/60 未达 85%）、独立人工清晰度与新小票留出、逐 token 成本留证、提交推送与远程 CI 验收、新物理主机部署；主机断电与 MySQL 数据盘写满另列未演练。真实模型闭环与真实视觉验收已有实测证据，不再列入未做。
-- 用户已授权继续执行 PLAN；保留全部未提交工作，未 commit/push；不重复询问产品目标。
+- 未做：新源码上的完整合成留出复验（旧 48/60 未达 85%）、独立人工清晰度与新小票留出、逐 token 成本留证、新物理主机部署、v1.0 发布（tag/Release 与镜像 digest 绑定）；主机断电与 MySQL 数据盘写满另列未演练。真实模型闭环与真实视觉验收已有实测证据，不再列入未做；提交推送与远程 CI 验收已于第95节完成（私有 origin、ci-complete 全绿）。
+- 用户已授权继续执行 PLAN；第95节起实现与文档已提交并推送到私有 `origin`（`main`=`f3f9c7b`），此前「全部未提交」的状态不再成立；不重复询问产品目标。
 
 ## 2. 已完成的规划工作
 
@@ -240,7 +252,7 @@
 | P6 前端完整化 | IN_PROGRESS | 见PLAN依赖 | 核心浏览器套件、弱网页面提示、真实 Nginx 限流堆栈下 429 中文提示、真实模型 Agent 页面恢复、安卓真机五项检查通过（第82、87、89、91节）；仅远程 CI 实际运行未验收 |
 | P7 小票与边界 | DONE | 见PLAN执行顺序补充 | v5关闭思考：三份真实字段与页面闭环通过；权限/事务/文件历史证据齐，限制见第31节 |
 | P8 评测与试用 | IN_PROGRESS | P7 | 三模式 180 位置执行/审计/评审/聚合、单人安卓补充试用与四项清晰度样本已完成并留证（第63～70、82节）；合成留出 48/60＝80% 未达 85% 门槛、独立人工清晰度与新小票留出仍缺 |
-| P9 部署与交付 | IN_PROGRESS | P8 | Compose 空环境启动、数据库/私有图片联合备份恢复、恢复失败保护、限流分页组合验收、弱网/断线演练与交付文档已完成（第80、83、85、87、89节）；新物理主机部署与 v1.0 发布未做 |
+| P9 部署与交付 | IN_PROGRESS | P8 | Compose 空环境启动、数据库/私有图片联合备份恢复、恢复失败保护、限流分页组合验收、弱网/断线演练与交付文档已完成（第80、83、85、87、89节），源码已提交推送且远程 ci-complete 全绿（第95节）；新物理主机部署与 v1.0 发布未做 |
 
 ## 4. 任务清单
 
@@ -255,7 +267,7 @@
 | P1-01 项目骨架 | DONE | backend/ 与 frontend/；TypeScript/Vite构建通过 |
 | P1-02 数据模型与迁移 | IN_PROGRESS | 21业务表+Alembic版本表，真实MySQL升降级通过；未来模型见docs/data-model.md |
 | P1-03 认证与隔离 | DONE | Argon2/可撤销会话/身份隔离；SQLite和MySQL验证 |
-| P1-04 CI | IN_PROGRESS | CI新增backend/frontend/browser-e2e并隔离原扫描；全部汇入ci-complete，本地通过，远程尚未执行 |
+| P1-04 CI | DONE | CI新增backend/frontend/browser-e2e并隔离原扫描，全部汇入ci-complete；第95节远程 run 35319166877（main=f3f9c7b）九作业全绿，见docs/validation/release-prep-0918.md |
 | P2-01 食材与单位 | DONE | 标准名/别名、同维度换算、歧义拒绝、常备标记；test_food/test_optional验证 |
 | P2-02 批次与事件 | DONE | 批次数量/日期/位置编辑、归档恢复、版本化事件；MySQL与浏览器验收见第16节 |
 | P2-03 菜谱与种子数据 | DONE | 定量菜谱/必需可选/来源/3道原创示例；幂等导入及冲突回滚通过 |
@@ -286,17 +298,17 @@
 | P9-01 Compose | DONE | 独立项目空环境启动、迁移退出 0、容器健康、模型关闭降级与 demo seed/verify 幂等重放通过；见 deployment-restore-0916.md、p9-combined-0917.md，第80、85节 |
 | P9-02 备份恢复 | DONE | 数据库＋私有图片联合备份、manifest 哈希校验、向新空项目实际恢复并 verify 闭环、恢复失败保护与 ENOSPC/部分导入故障注入通过；见 p9-fault-0917.md，第80、83节；主机断电与数据盘写满另列未演练 |
 | P9-03 文档/演示 | DONE | README、docs/architecture.md、docs/data-model.md、docs/upstream.md、deploy/README.md 与 docs/delivery.md（演示脚本＋技术问答＋新主机清单）齐备，七段脚本真实浏览器预演通过；三分钟录制按用户 2026-09-17 决定移出范围 |
-| P9-04 新环境验收 | IN_PROGRESS | 复验脚本 deploy/verify_deployment.py 与清单已备并在独立 Compose 项目验证；未在新物理主机执行，源码未提交推送、v1.0 未发布 |
+| P9-04 新环境验收 | IN_PROGRESS | 复验脚本 deploy/verify_deployment.py 与清单已备并在独立 Compose 项目验证；源码已提交并推送到私有 origin、远程 ci-complete 全绿（第95节，docs/validation/release-prep-0918.md）；仍未在新物理主机执行、v1.0 未发布 |
 
 ## 5. 下一位 Agent 的起步动作
 
-当前首要任务：按 docs/validation/final-acceptance-checklist-0917.md 第 E 节顺序收口——第 1、2 步已完成（第90节文档、第91节 409 等错误原文本地化与真实 Nginx 限流堆栈浏览器 429 页面场景，均无需模型调用）；下一步做发布准备（整理提交、跑远程 CI、冻结源码哈希与镜像 digest），需用户授权提交推送；随后按性价比处理需授权或有成本的项目（独立人工清晰度包、新小票留出、新源码完整留出复验、新物理主机部署、主机断电/数据盘写满），先给有界估算由用户决定。P7/P9-01～03 已完成，不重建；第35节的 12 个调试场景与三模式批次均已执行完毕，不重跑或追加旧目录。以下为此前阶段的保护与环境说明。
+当前首要任务：按 docs/validation/final-acceptance-checklist-0917.md 第 E 节顺序收口——第 1、2、3 步已完成（第90节文档、第91节 409 等错误原文本地化与真实 Nginx 限流堆栈浏览器 429 页面场景、第95节发布准备：整理提交、远程 CI 全绿、冻结哈希）；下一步按性价比处理需授权或有成本的项目（独立人工清晰度包、新小票留出、新源码完整留出复验、新物理主机部署、主机断电/数据盘写满），先给有界估算由用户决定。P7/P9-01～03 已完成，不重建；第35节的 12 个调试场景与三模式批次均已执行完毕，不重跑或追加旧目录。以下为此前阶段的保护与环境说明。
 
-1. 读 PLAN/STATUS、docs/data-model.md、docs/planning.md、backend/README.md，核对未提交工作；不要重跑早期生成脚本覆盖文件。
+1. 读 PLAN/STATUS、docs/data-model.md、docs/planning.md、backend/README.md；工作已提交推送（第95节），核对以 `git log`/`git status` 实际状态为准，不要重跑早期生成脚本覆盖文件。
 2. P2批次归档恢复/日期位置编辑/菜谱修改删除已经完成，不重做；见第16节。
 3. P4取消/版本历史/评分配置及跨日/取消竞争已经验证；报价持久化与采购流程已补，见第19节。
 4. P5独立session/条件继承/上下文摘录已实现；P6浏览器断网/移动/多用户/采购已固化成 `npm run e2e` 可重放套件（第22节），不再重做。真实模型已在第77、79、88、89节的演练环境完成配置并跑通闭环，剩余是效果门槛复验与 `failed` 人工恢复、多标签/长离线等未覆盖边界；模型凭据只在被忽略的私有 env 与 D:/SoloMeal-Acceptance 目录，不搜索或打印其他项目凭据。
-5. 库存盘点、可选菜谱表单、会话恢复与全链路浏览器场景均已有；browser-e2e CI已配置浏览器安装/固定SHA/ci-complete汇聚，远程执行尚未验收（第23节）。已保存方案按方案份数确认；独立菜谱按钮按原菜谱份数记录。
+5. 库存盘点、可选菜谱表单、会话恢复与全链路浏览器场景均已有；browser-e2e CI已配置浏览器安装/固定SHA/ci-complete汇聚，远程执行已在第95节验收通过（run 35319166877 九作业全绿；dispatch run 曾 3 场景超时、本轮通过，未宣称竞态成因已消除）。已保存方案按方案份数确认；独立菜谱按钮按原菜谱份数记录。
 6. 数据库测试仅用 solomeal_test（脚本有保护），不得并行运行共享库测试；不要修改机器原有 MySQL80。依赖使用 backend/.venv。
 7. 当前开发服务曾启动 http://127.0.0.1:8000 与 :5173；若未运行按 README 重启，检查进程归属再停止，不依赖过期PID。
 

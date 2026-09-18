@@ -121,6 +121,14 @@ export async function useTab(page,name){
  await page.getByRole('navigation',{name:'主导航'}).getByRole('button',{name,exact:true}).click();
 }
 
+// The panel re-reads preferences on every mount and the field is controlled, so a
+// response that lands after the caller typed silently reverts what was typed.
+export async function openPreferences(page){
+ const loaded=page.waitForResponse(r=>r.url().endsWith('/me/preferences')&&r.request().method()==='GET',{timeout:30_000});
+ await useTab(page,'厨房偏好');
+ await loaded;
+}
+
 const UNIT_TEXT = {g: '克', kg: '千克', ml: '毫升', l: '升', piece: '个'};
 
 // The inventory form is a real <select>, so a new option is attached long before it is visible.

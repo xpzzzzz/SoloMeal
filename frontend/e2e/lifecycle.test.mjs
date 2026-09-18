@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
- addKindAndBatch,desktopContext,launchBrowser,makeApi,openPage,shot,signIn,signUp,startFixture,useTab,waitText,
+ addKindAndBatch,desktopContext,launchBrowser,makeApi,openPage,openPreferences,shot,signIn,signUp,startFixture,useTab,waitText,
 } from './support.mjs';
 
 test('盘点归档恢复、菜谱编辑和方案版本取消在刷新后与服务端一致',async()=>{
@@ -39,7 +39,7 @@ test('盘点归档恢复、菜谱编辑和方案版本取消在刷新后与服�
   await waitText(page,/批次已恢复/);
   assert.deepEqual((await inventory()).map(b=>[Number(b.quantity),b.archived,b.location]),[[5,false,'冰箱上层']]);
 
-  await useTab(page,'厨房偏好');
+  await openPreferences(page);
   await page.getByLabel('现有厨具（逗号分隔）').fill('煮锅');
   const saved=page.waitForResponse(r=>r.url().endsWith('/me/preferences')&&r.request().method()==='PUT');
   await page.getByRole('button',{name:'保存偏好'}).click();
