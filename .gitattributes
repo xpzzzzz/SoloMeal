@@ -1,0 +1,37 @@
+# Files whose exact bytes are recorded as sha256 in committed evidence manifests
+# (evaluation/freeze-v1*.json and the docs/validation reports' per-file maps).
+# The digests were captured on the original working-tree bytes, so these paths
+# must be stored and checked out verbatim: any newline conversion silently
+# breaks the freeze verification the acceptance trail depends on.
+# Everything else in the repository is unaffected and keeps the usual rules.
+/backend/app/__init__.py -text
+/backend/app/api/__init__.py -text
+/backend/app/core/__init__.py -text
+/backend/app/core/errors.py -text
+/backend/app/models/__init__.py -text
+/backend/app/models/identity.py -text
+/backend/app/schemas/__init__.py -text
+/backend/app/schemas/identity.py -text
+/backend/app/services/__init__.py -text
+/backend/scripts/cohort_agent.py -text
+/backend/scripts/review_agent.py -text
+/backend/tests/test_planning.py -text
+/backend/tests/test_receipt_confirmation.py -text
+/backend/tests/test_receipt_vision.py -text
+/compose.yaml -text
+/docs/validation/mysql-engineering-0915/pytest.log -text
+/docs/validation/mysql-engineering-0915/report.json -text
+/docs/validation/p8-a014-chat-budget-review-0910.json -text
+/docs/validation/p8-a014-chat-budget-review-0910.manifest.json -text
+/docs/validation/p8-review-0910.json -text
+/docs/validation/p8-review-0910.manifest.json -text
+/docs/validation/p8-v12-latency-0912.json -text
+/docs/validation/p8-v13-latency-0912.json -text
+/docs/validation/p9-boundaries-0917-backend.xml -text
+/docs/validation/p9-fault-0917/synthetic-backup/database.sql -text
+/evaluation/freeze-v1.1.json -text
+/evaluation/freeze-v1.2.json -text
+/evaluation/freeze-v1.json -text
+/evaluation/scenarios-v1.json -text
+/frontend/src/AgentPanel.tsx -text
+/frontend/src/main.tsx -text
