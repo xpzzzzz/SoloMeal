@@ -41,6 +41,7 @@ P5/P8/P9 整体、合成留出 48/60＝80%、`holdout_gate=failed`、独立人�
 ## 复跑与冻结量核对
 
 - 修复提交 `d3fcb9d`（push）→ run `35322761131` 九作业全 `success`，含 `ci-complete`（`2026-09-18T08:18:03Z`）。`browser-e2e` 该轮 18/18。
+- 本节文档提交 `348fdf6`（push，仅 7 个 `.md`）→ run `35324565914` 九作业全 `success`、`ci-complete` 于 `2026-09-18T08:39:22Z`，即本轮文档改动未触及任何冻结校验（两条 freeze 测试与 `files_sha256` 核对全通过）。登记到此为止：其后若再有为补记本行而生的文档提交，其结果以 GitHub Actions 运行列表为准，不在本报告内自我登记。
 - 前端源码聚合在本轮改动后**仍为** `4285ae314aace08a32801cff5c3228213c0d9093e3a6c51a94b76e31205001aa`（15 文件），构建产物仍 `index-BTAvzu0t.js`，即第95节冻结值未被本轮推翻。该口径此前只记了结果没记算法，现补全以便复现：按 `frontend/` 下 `sorted(src/**/* + index.html + tsconfig.json + vite.config.ts + package.json)` 逐文件喂入 `相对路径(POSIX) + b'\0' + 文件字节` 后取 sha256；`e2e/` 目录不在其内，故本轮四处驱动改动不进入该哈希。后端聚合 `c3161b9b…` 未受影响（后端文件零改动）。
 
 ## 修复范围
