@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
- addKindAndBatch,desktopContext,launchBrowser,makeApi,openPage,shot,signUp,startFixture,useTab,waitText,
+ addKindAndBatch,desktopContext,launchBrowser,makeApi,openPage,openPreferences,shot,signUp,startFixture,useTab,waitText,
 } from './support.mjs';
 
 test('无可行菜谱、未知补购预算和旧方案确认均在页面解释且不扣库存',async()=>{
@@ -30,7 +30,7 @@ test('无可行菜谱、未知补购预算和旧方案确认均在页面解释�
   await waitText(page,/没有符合条件的菜谱，请核对厨具、用时与忌口设置/);
   assert.equal(await page.getByRole('button',{name:'保存这餐方案'}).count(),0);
 
-  await useTab(page,'厨房偏好');
+  await openPreferences(page);
   await page.getByLabel('现有厨具（逗号分隔）').fill('煮锅');
   const saved=page.waitForResponse(r=>r.url().endsWith('/me/preferences')&&r.request().method()==='PUT');
   await page.getByRole('button',{name:'保存偏好'}).click();

@@ -2,7 +2,7 @@ import test,{before,after} from 'node:test';
 import assert from 'node:assert/strict';
 import {
  testDate,addKind,launchBrowser,makeApi,mobileContext,openPage,shot,signIn,signOut,signUp,startFixture,
- horizontalOverflow,useTab,visibleButtons,waitText,
+ horizontalOverflow,openPreferences,useTab,visibleButtons,waitText,
 } from './support.mjs';
 
 let server,browser,api;
@@ -72,7 +72,7 @@ test('手机纯键盘可以建号、录库存、保存偏好与包装报价，�
  assert.ok(table.includes(testDate(12)));
  assert.match(table,/3 个/);
 
- await useTab(page,'厨房偏好');
+ await openPreferences(page);
  await page.getByLabel('现有厨具（逗号分隔）').tap();
  await page.keyboard.type('煮锅，炒锅',{delay:15});
  const savedPreferences=await savePreferences(page);
@@ -115,7 +115,7 @@ test('手机上可以从报价走到采购入库、做饭与撤销',async()=>{
  const page=await openPage(context,server.url);
  await signUp(page,'ui_mob_shop_0908',PASSWORD);
  await addKind(page,{name:'鸡蛋'});
- await useTab(page,'厨房偏好');
+ await openPreferences(page);
  await page.getByLabel('现有厨具（逗号分隔）').fill('煮锅');
  await savePreferences(page);
 
