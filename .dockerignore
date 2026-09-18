@@ -1,0 +1,17 @@
+**/.env
+**/.env.*
+**/.venv
+**/node_modules
+**/dist
+**/.test-build
+**/.tmp-*
+**/.pytest*
+**/__pycache__
+**/*.pyc
+**/*.db
+**/private_uploads
+.git
+data
+docs
+evaluation
+src

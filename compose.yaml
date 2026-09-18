@@ -1,0 +1,78 @@
+services:
+  db:
+    image: mysql:8.0@sha256:7dcddc01f13bab2f15cde676d44d01f61fc9f99fe7785e86196dfc07d358ae2b
+    environment:
+      MYSQL_DATABASE: solomeal
+      MYSQL_USER: solomeal
+      MYSQL_PASSWORD: ${DB_PASSWORD:?Generate a deployment env file first}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?Generate a deployment env file first}
+    volumes:
+      - database:/var/lib/mysql
+    healthcheck:
+      test: [CMD-SHELL, 'MYSQL_PWD="$$MYSQL_PASSWORD" mysql -h 127.0.0.1 -u solomeal -D solomeal -e "SELECT 1" >/dev/null']
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+    restart: unless-stopped
+  migrate:
+    image: solomeal-api:${IMAGE_TAG:-local}
+    build:
+      context: .
+      dockerfile: deploy/backend.Dockerfile
+    environment: &api-environment
+      SOLOMEAL_DATABASE_URL: mysql+pymysql://solomeal:${DB_PASSWORD}@db:3306/solomeal?charset=utf8mb4
+      SOLOMEAL_RECEIPT_STORAGE_DIR: /var/lib/solomeal/uploads
+      SOLOMEAL_AGENT_ENABLED: ${SOLOMEAL_AGENT_ENABLED:-false}
+      SOLOMEAL_RECEIPT_VISION_ENABLED: ${SOLOMEAL_RECEIPT_VISION_ENABLED:-false}
+      SOLOMEAL_MODEL_BASE_URL: ${SOLOMEAL_MODEL_BASE_URL:-https://api.openai.com/v1}
+      SOLOMEAL_MODEL_NAME: ${SOLOMEAL_MODEL_NAME:-}
+      SOLOMEAL_MODEL_API_KEY: ${SOLOMEAL_MODEL_API_KEY:-}
+      SOLOMEAL_MODEL_TOOL_PROTOCOL: ${SOLOMEAL_MODEL_TOOL_PROTOCOL:-native}
+      SOLOMEAL_MODEL_ENABLE_THINKING: ${SOLOMEAL_MODEL_ENABLE_THINKING-omit}
+      SOLOMEAL_MODEL_MAX_COMPLETION_TOKENS: ${SOLOMEAL_MODEL_MAX_COMPLETION_TOKENS-1500}
+      SOLOMEAL_RECEIPT_MODEL_ENABLE_THINKING: ${SOLOMEAL_RECEIPT_MODEL_ENABLE_THINKING-omit}
+      SOLOMEAL_RECEIPT_PARSE_DAILY_LIMIT: ${SOLOMEAL_RECEIPT_PARSE_DAILY_LIMIT-10}
+      SOLOMEAL_RECEIPT_PARSER_TIMEOUT_SECONDS: ${SOLOMEAL_RECEIPT_PARSER_TIMEOUT_SECONDS-30}
+    command: [python, -m, alembic, upgrade, head]
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+  api:
+    image: solomeal-api:${IMAGE_TAG:-local}
+    build:
+      context: .
+      dockerfile: deploy/backend.Dockerfile
+    environment: *api-environment
+    volumes:
+      - uploads:/var/lib/solomeal/uploads
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: [CMD, python, -c, 'import urllib.request; urllib.request.urlopen("http://127.0.0.1:8000/health/ready", timeout=3)']
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+    restart: unless-stopped
+  web:
+    image: solomeal-web:${IMAGE_TAG:-local}
+    build:
+      context: .
+      dockerfile: deploy/frontend.Dockerfile
+    ports:
+      - "${BIND_ADDRESS:-127.0.0.1}:${HTTP_PORT:-18080}:8080"
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test: [CMD-SHELL, 'wget -q -O /dev/null http://127.0.0.1:8080/health/ready']
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+volumes:
+  database:
+  uploads:

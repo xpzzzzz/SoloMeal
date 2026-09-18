@@ -1,0 +1,1 @@
+"""SoloMeal independent application."""
