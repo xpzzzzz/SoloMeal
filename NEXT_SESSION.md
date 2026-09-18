@@ -1,3 +1,19 @@
+# SoloMeal 接手（2026-09-18，第98节：其它面板挂载 GET 竞态穷举收口，报价表单重挂载缺陷修复，前端冻结量再更替且发布锚点改系 commit/产物/镜像）
+
+第98节（用户授权按上一轮推荐穷举第96/97节保留项）：答案是一处真、三处排除——`AgentPanel`/`ReceiptPanel`/`InventoryEditor` 均不构成「先输入、后被响应覆盖」窗口（聊天框不被 GET 回填；小票编辑器在 GET 落地前不挂载；批次编辑回填是选行交互）；**`ShoppingPanel` 报价表单为真实同类缺陷**，机制不同：`key={selected+':'+(quote?.version||0)}`，挂载 GET `/quotes` 晚落地翻转 key，React 重挂载整个表单、四个非受控输入重置为服务端旧值。修复净 1 行 `key={selected}`（切食材重载默认值只依赖 `selected`，`expected_version` 提交时现取）。新回归 `frontend/e2e/quotes-race.test.mjs` 用门控 Promise 精确扣住挂载 GET、断言已输入 `8/7.20` 存活并落库，**双向验证**（旧代码下输入被重置为 `6.000` 必失败）。调试实录：首版 `loaded` 门控被证明不足，中间版本未入提交。本地：前端 36、build 产物 `index-xzzr0Hjd.js`、e2e **20/20**（原 19 未放宽）、插件随 pre-commit 373+298。**前端冻结量取代第97节（历史不改写）**：产物 `D2Luux6J`→`xzzr0Hjd`；聚合按口径复算 `1a99ab46…`→`17670f7b594d…9a68`（15 文件），并**如实记录一处不复现**——同法对修复前字节复算得 `160ee684…`≠第97节记录值，根因是聚合按工作区字节而本机 `core.autocrlf` 改变换行（实测 `src/sse.ts` HEAD 纯 LF vs 工作区 38 CRLF＋2 裸 LF，内容一致故 git 干净），系第95节声明过的口径限制的显性发作：**发布锚点自此只认 commit SHA＋tree＋产物名＋镜像 digest，聚合值仅作同机对照**。后端 `c3161b9b…`/API 镜像不变；线上 18080 当前仍为第97节产物 `index-D2Luux6J.js`（本轮实测核对、三容器 healthy）。代码提交 `fd795a1`（pre-commit 实跑）。**本轮后续步骤（结果以 Actions 运行列表为准，不在本节预写）**：推送复验远程九作业 → 以新 `frontend/` 重建 web 镜像重部署源 18080（仅 web、卷不动）。模型新增 0、累计 1685/30。详见[穷举与修复报告](docs/validation/quotes-mount-race-0918.md)与 SOLOMEAL_STATUS 第98节。
+
+下一步（严格顺序，均须前置就绪）：
+1. CI 绿只了结「远程流水线未跑」这一条（绿点随 HEAD 推进需重验）。**P9-04 的新物理主机验收与 v1.0 发布仍是独立条件**，不得并入完成宣称；P5/P8/P9 整体、旧 48/60、`holdout_gate=failed`、真人清晰度 null 全部保持。
+2. v1.0 发布（Release/Tag 与镜像 digest 绑定）须用户另行授权；**冻结锚点按第98节更正为 commit SHA＋tree＋前端产物名＋两镜像 digest**（后端/API 仍为第95节 `f3f9c7b` 系值不变，前端目标为 `index-xzzr0Hjd.js`，web 镜像重建后 digest 另行登记；源码聚合哈希只作同机对照、不再充当跨环境发布依据）。
+3. 剩余待用户决定的小改动：409 即时本地化的真实断线路径可在下次模型 weaknet 演练顺带补测。（第96/97节保留的「其它面板同类竞态」一项已由第98节穷举收口。）
+4. 需授权/需资源，先给有界估算再由用户决定：独立人工清晰度包与新小票留出、新源码完整留出复验、新物理主机部署、主机断电与 MySQL 数据盘写满。
+
+保留原样不改写：合成留出 Agent 48/60＝80%、`holdout_gate=failed`、独立人工清晰度 null、旧各批失败与超时样本；后续修复与小批诊断属已暴露回归，不冒充新盲测、不改旧分数。旧私有目录与各模型批次禁止重跑或追加，第82节五项真机反馈不重复索取，源 18080 用户试用环境不作故障目标。
+
+环境与保护：18082 项目现含 2 个空的演示外洪泛账号（第91节 `ratelimit429941349`、第94节 `ratelimit429469801`），记入证据 scope；证据与凭据在私有 `D:/SoloMeal-Acceptance/p9-combined-0917-01/demo-evidence/`（含 credentials.json、deployed-429-*、deployed-errtext-* 与 review-fixes-0917-* 的 JSON/PNG），禁止打印或提交、禁止重跑。第94节以 `combined-429-v2.override.yaml`（web=solomeal-web:review-fixes-0917）启动后已 stop、卷保留；不带叠加文件启动会回到 p9-boundaries-0917。`verify_deployment.py` auth-flood 会耗尽登录配额须最后跑。演练项目卷不 down -v。根下 5 个 ACL 锁死的 `.pytest-*`/`.test-tmp-crud-0906` 目录未跟踪未 ignore 且 git 不可读，`git status --porcelain` 打权限警告但退出码 0，勿删除勿改权限。竞态类注入复现均已固化为仓库内 e2e 用例（第97节 `preferences-race.test.mjs`、第98节 `quotes-race.test.mjs`），无仓库外脚本残留。
+
+以下为历史快照。
+
 # SoloMeal 接手（2026-09-18，第97节：UI 侧偏好覆盖缺陷修复，前端冻结量更替，18080 重部署与 Dependabot 处置进行中）
 
 第97节（用户授权处置三项低成本决定）：第1项已完成——第96节保留的 UI 侧缺陷（偏好面板挂载 GET `/me/preferences` 晚落地清掉用户已输入厨具）修复于 `frontend/src/main.tsx` 的 `Preferences`（+4/−2 行：`edited` ref，四个字段 `onChange` 统一经 `edit()` 置位，挂载响应仅在未编辑时回填）。新增 e2e 回归 `frontend/e2e/preferences-race.test.mjs`：注入 1500ms 延迟断言输入不被覆盖、PUT 存 `["煮锅"]`，并做**双向验证**（还原旧代码该用例失败、修复版通过）。本地全绿：插件 Windows 373+298、前端 36、build 产物 `index-D2Luux6J.js`、e2e **19/19**（原 18 未放宽）。**前端冻结量取代第95节值（历史不改写）**：源码聚合 `4285ae31…`→`1a99ab46a45e6431b08e20cb3743990b6445e482d7ae0740d32c6593acd7ba48`（同口径 15 文件）、产物 `BTAvzu0t`→`D2Luux6J`；后端 `c3161b9b…`/API 镜像 `908cf165568b…` 不变，web 镜像待按新产物重建（`f2928999404b…` 不再是新版本目标）。两文档性哈希不被 freeze 测试引用，CI 无预期失败项。代码提交 `4c47ee2`（pre-commit 实跑）。**本轮后续步骤（结果以 Actions 运行列表为准，不在本节预写）**：推送复验远程九作业 → 以新 `frontend/` 构建 web 镜像重部署源 18080（仅 web、卷不动）→ 处置 Dependabot PR #1。仍未做：其它面板「挂载即 GET＋受控输入」同类竞态未穷举；未做 stress 多轮 e2e。模型新增 0、累计 1685/30。详见[修复报告](docs/validation/ui-preferences-clobber-fix-0918.md)与 SOLOMEAL_STATUS 第97节。
