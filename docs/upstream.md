@@ -2,7 +2,7 @@
 
 日期：2026-09-05。上游：https://github.com/sergiparpal/meal-manager 。
 本地基线 a923d77c7c281f2fcd165a71ad062f1ec0d851bc；该上游始终只读（`upstream` 的 push URL 已置 `DISABLED`）。
-2026-09-18 起 `origin` 指向用户自有私有仓库 https://github.com/xpzzzzz/SoloMeal ，独立应用实现与验收文档已提交并推送到该仓库（`main` = `f3f9c7b`，远程 `ci-complete` 全绿，见 docs/validation/release-prep-0918.md）；上一句「origin 仍指向上游，未提交或推送」只描述 2026-09-05 当时的状态。
+2026-09-18 起 `origin` 指向用户自有私有仓库 https://github.com/xpzzzzz/SoloMeal ，独立应用实现与验收文档已提交并推送到该仓库（实现冻结点 `f3f9c7b`，远程 `ci-complete` 在该提交上全绿，见 docs/validation/release-prep-0918.md）；上一句「origin 仍指向上游，未提交或推送」只描述 2026-09-05 当时的状态。
 保留 GPL-3.0 与原归属。改造初期原 src 不更改业务实现。
 
 ## 基线与验证
