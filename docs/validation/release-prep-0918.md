@@ -6,6 +6,8 @@
 
 这不是 P9-04 的完成宣称：CI 绿只解除「远程流水线未跑」这一条，新物理主机验收与 v1.0 发布仍是独立条件。P5/P8/P9 整体、合成留出 48/60＝80%、`holdout_gate=failed`、独立人工清晰度 null 全部保持原样。
 
+后见限定（第96节）：本节的绿只在冻结点 `f3f9c7b` 上成立。紧接着的两份收口文档提交推送后 `browser-e2e` 失败 2/18，其驱动侧修复与复跑绿记录在[竞态报告](browser-e2e-preferences-race-0918.md)，不并入本节结论。
+
 ## 远程拓扑更正（推翻第95节初稿的权限推测）
 
 初稿把推送 403 记为「`xpzzzzz` 对 `sergiparpal/meal-manager` 无写权限、根因待管理员核实」。该推测的前提是错的：用户与 `sergiparpal` 无账号关联，也从未持有该仓库权限；`sergiparpal/meal-manager` 只是本项目的只读上游，此事实早写在 `docs/upstream.md:4`（本地基线 `a923d77c…`、`origin` 指向上游、从未向其提交或推送）。403 因此不是待修复的授权缺口，而是对一个本就不该写入的仓库发起写入。
@@ -19,6 +21,8 @@
 | `35315860979` | workflow_dispatch @ `39ab68f` | `ci-complete` failure | `types` failure、`backend` cancelled、`browser-e2e` failure |
 | `35315916647` | Dependabot PR #1 @ `146d592` | failure | `backend` 跑完但 3 failed / 543 passed |
 | `35319166877` | push @ `f3f9c7b` | success | 九作业全绿 |
+| `35320718788` | push @ `1b6cf00`（纯文档两提交后） | `ci-complete` failure | `browser-e2e` 失败 2/18，其余七作业 success |
+| `35322761131` | push @ `d3fcb9d`（仅 e2e 驱动修复） | success | 九作业全绿，`ci-complete` 于 `2026-09-18T08:18:03Z` |
 
 三类根因，逐条都在本地以等价检出复现后才动手：
 
@@ -26,7 +30,7 @@
 2. **`mypy -p meal_manager` 走进了非插件目录。** 包模式会遍历仓库根下所有 `.py`，把 `deploy/` 的验收驱动和 `docs/validation/` 的证据脚本一并纳入严格检查，报 42 errors in 7 files。这些从来不在插件的类型检查面上。
 3. **backend 作业预算与前置产物。** 该作业顺序跑两轮全量 pytest（真实 MySQL 与 SQLite 回退），15 分钟上限在 dispatch run 里正好砍在第一轮（`06:40:28 → 06:55:44 cancelled`）；`test_registration_refuses_existing_directory_and_freezes_protocol` 断言一次真实诊断登记会把 `frontend/dist/*` 冻结进清单（`backend/scripts/recommendation_diagnostic.py:46` 直接 rglob 该目录），而裸检出没有构建产物——本地能过只是因为先前构建残留。
 
-`browser-e2e` 在 dispatch run 里 3 个场景超时，在与主代码同内容、无并发争抢的 PR run 里通过；本轮 push run 全绿。据观测记录为「该轮通过」，不宣称竞态成因已被消除。
+`browser-e2e` 在 dispatch run 里 3 个场景超时，在与主代码同内容、无并发争抢的 PR run 里通过；本轮 push run 全绿。当时据观测只记为「该轮通过」，不宣称竞态成因已消除——该保留随后被验证是必要的：两次文档提交后的 push 就失败了 2/18，成因确认为偏好面板挂载读取与受控输入的真实竞态，已在驱动侧消除（见[竞态报告](browser-e2e-preferences-race-0918.md)）。
 
 ## 修复
 
@@ -41,9 +45,9 @@
 
 ## 冻结值
 
-- 提交：`f3f9c7b3b799f42199562227f9b9c47a2cb4806c`（`main`，已推送至私有 `origin`），tree `d0d02354092c94c82ad853f9307311e0f0bb1fc3`。
+- 提交：`f3f9c7b3b799f42199562227f9b9c47a2cb4806c`（本轮的 CI 验证点，已推送至私有 `origin`），tree `d0d02354092c94c82ad853f9307311e0f0bb1fc3`。其后的 `5ef812f`/`1b6cf00`/`d3fcb9d` 及本节文档提交只改文档或测试驱动，未被第95节冻结面覆盖；分支高水位以 `git log` 为准，不要把本行当作 HEAD。
 - 后端源码聚合：`c3161b9b8c69fcfad70e7b12425e2d7c94aafce3391b486fe67e811ebd95bcb3`（67 个 `app/**/*.py` + `scripts/**/*.py`，口径同 `backend/scripts/diagnose_purchase.py:source_hash()`），与第84/91节记录值一致，即后端源码本轮零改动。
-- 前端源码（15 文件自订补充口径）：`4285ae314aac…205001aa`；构建产物 `index-BTAvzu0t.js`。
+- 前端源码（15 文件自订补充口径）：`4285ae314aac…205001aa`；构建产物 `index-BTAvzu0t.js`。口径的可复现定义（文件集合与逐文件喂入格式、`e2e/` 不在其内）见[竞态报告](browser-e2e-preferences-race-0918.md)。
 - 镜像：API `sha256:908cf165568b…f69ec0d3`、web `sha256:f2928999404b…b0f5da0f`（本轮未重建，故 digest 不变）。
 
 口径限制必须写明：上述源码聚合哈希按工作区字节计算，Windows 与 Linux 检出的换行不同即不同值；逐字节可复现的是 31 个 `-text` 路径的索引 blob 与 git tree/commit 标识。发布应以 commit SHA + git tree + 镜像 digest 为准，源码聚合哈希作为其派生记录，不当作跨平台常量。
