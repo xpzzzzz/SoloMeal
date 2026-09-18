@@ -1,0 +1,214 @@
+{
+  "date": "2026-09-10",
+  "scope": "faithfulness_debug_not_full_acceptance",
+  "trials": [
+    {
+      "scenario": "A014",
+      "prompt_version": "solomeal-agent-v6",
+      "private_directory": "D:\\SoloMeal-Acceptance\\p8-faithful-A014-agent-v6-0910-01",
+      "report_sha256": "bcbed76e1bf01c0206771ddf3442349b9fff877d96765dc3a1bcdf8220a56e46",
+      "source_sha256": "cdd5af48b8655ca1a6fe44f670e6d2764a4d69a6d82f8b799e927f7524831207",
+      "system_sha256": "6a64ca5c2d9a4b2dbb93902f7f5018cd24a5d14a0f0dce886a017079f265b2b5",
+      "objective_pass": false,
+      "business_unchanged": true,
+      "invalid_calls": 0,
+      "requests": 1,
+      "usage_records": 0,
+      "observed_total_tokens": 0,
+      "diagnostics": [
+        "timeout"
+      ],
+      "task_success": null,
+      "human_clarity": null
+    },
+    {
+      "scenario": "A014",
+      "prompt_version": "solomeal-agent-v6",
+      "private_directory": "D:\\SoloMeal-Acceptance\\p8-faithful-A014-agent-v6-0910-02",
+      "report_sha256": "60123ed79dbad48a18ec35fae6515dccfa5c158a693d6667b36741fd3af482b1",
+      "source_sha256": "cdd5af48b8655ca1a6fe44f670e6d2764a4d69a6d82f8b799e927f7524831207",
+      "system_sha256": "6a64ca5c2d9a4b2dbb93902f7f5018cd24a5d14a0f0dce886a017079f265b2b5",
+      "objective_pass": false,
+      "business_unchanged": true,
+      "invalid_calls": 0,
+      "requests": 1,
+      "usage_records": 1,
+      "observed_total_tokens": 4017,
+      "diagnostics": [
+        null
+      ],
+      "task_success": null,
+      "human_clarity": null
+    },
+    {
+      "scenario": "A018",
+      "prompt_version": "solomeal-agent-v6",
+      "private_directory": "D:\\SoloMeal-Acceptance\\p8-faithful-A018-agent-v6-0910-01",
+      "report_sha256": "c6b46d9e11869714727c7e6dd85d69c4739e64c6f0c5f7b2ecb6256b42178e15",
+      "source_sha256": "cdd5af48b8655ca1a6fe44f670e6d2764a4d69a6d82f8b799e927f7524831207",
+      "system_sha256": "6a64ca5c2d9a4b2dbb93902f7f5018cd24a5d14a0f0dce886a017079f265b2b5",
+      "objective_pass": true,
+      "business_unchanged": true,
+      "invalid_calls": 0,
+      "requests": 1,
+      "usage_records": 1,
+      "observed_total_tokens": 3865,
+      "diagnostics": [
+        null
+      ],
+      "task_success": null,
+      "human_clarity": null
+    },
+    {
+      "scenario": "A020",
+      "prompt_version": "solomeal-agent-v6",
+      "private_directory": "D:\\SoloMeal-Acceptance\\p8-faithful-A020-agent-v6-0910-01",
+      "report_sha256": "957acf314d3ef8b74e705d53e7ebc488d4f30b78a2785f2e2da8eee06d15e8d2",
+      "source_sha256": "cdd5af48b8655ca1a6fe44f670e6d2764a4d69a6d82f8b799e927f7524831207",
+      "system_sha256": "6a64ca5c2d9a4b2dbb93902f7f5018cd24a5d14a0f0dce886a017079f265b2b5",
+      "objective_pass": true,
+      "business_unchanged": true,
+      "invalid_calls": 1,
+      "requests": 3,
+      "usage_records": 3,
+      "observed_total_tokens": 12245,
+      "diagnostics": [
+        null,
+        null,
+        null
+      ],
+      "task_success": null,
+      "human_clarity": null
+    },
+    {
+      "scenario": "A014",
+      "prompt_version": "solomeal-agent-v7",
+      "private_directory": "D:\\SoloMeal-Acceptance\\p8-faithful-A014-agent-v7-0910-01",
+      "report_sha256": "34df31b020a0ff787b944f1b0a91fd2c03af79524bcc41d6f881bcc69aece7b6",
+      "source_sha256": "18118bc9f091e9a7c1a17b61a03ec23aaab55968243d0416f67d0abf8ac98e8d",
+      "system_sha256": "5b1edf4afc1001201104507a3a50e68d845b0e27eaa0ef09c6e3d481c5373dfb",
+      "objective_pass": false,
+      "business_unchanged": true,
+      "invalid_calls": 0,
+      "requests": 1,
+      "usage_records": 0,
+      "observed_total_tokens": 0,
+      "diagnostics": [
+        "timeout"
+      ],
+      "task_success": null,
+      "human_clarity": null
+    },
+    {
+      "scenario": "A018",
+      "prompt_version": "solomeal-agent-v7",
+      "private_directory": "D:\\SoloMeal-Acceptance\\p8-faithful-A018-agent-v7-0910-01",
+      "report_sha256": "cab86a89cff1ff1928c9a61df5fbd5ed384720f4c869285cd338a83fb65e08a1",
+      "source_sha256": "18118bc9f091e9a7c1a17b61a03ec23aaab55968243d0416f67d0abf8ac98e8d",
+      "system_sha256": "5b1edf4afc1001201104507a3a50e68d845b0e27eaa0ef09c6e3d481c5373dfb",
+      "objective_pass": true,
+      "business_unchanged": true,
+      "invalid_calls": 0,
+      "requests": 1,
+      "usage_records": 1,
+      "observed_total_tokens": 3945,
+      "diagnostics": [
+        null
+      ],
+      "task_success": null,
+      "human_clarity": null
+    },
+    {
+      "scenario": "A020",
+      "prompt_version": "solomeal-agent-v7",
+      "private_directory": "D:\\SoloMeal-Acceptance\\p8-faithful-A020-agent-v7-0910-01",
+      "report_sha256": "ee41986394f8683f710bda04bf5cb8f18be28188ac0038ce8de515055702b2a9",
+      "source_sha256": "18118bc9f091e9a7c1a17b61a03ec23aaab55968243d0416f67d0abf8ac98e8d",
+      "system_sha256": "5b1edf4afc1001201104507a3a50e68d845b0e27eaa0ef09c6e3d481c5373dfb",
+      "objective_pass": false,
+      "business_unchanged": true,
+      "invalid_calls": 0,
+      "requests": 1,
+      "usage_records": 1,
+      "observed_total_tokens": 3963,
+      "diagnostics": [
+        null
+      ],
+      "task_success": null,
+      "human_clarity": null
+    },
+    {
+      "scenario": "A014",
+      "prompt_version": "solomeal-agent-v8",
+      "private_directory": "D:\\SoloMeal-Acceptance\\p8-faithful-A014-agent-v8-0910-01",
+      "report_sha256": "7d9aec95995c66920f4647d14f31ff9b35c34dd236de9c5cf6f7c198ae249694",
+      "source_sha256": "5906018321a2447eb498637cdad0f512b686e2803ba297aa6935f1c33cc5bf37",
+      "system_sha256": "e2a899e6a03afffd3cceafd99cd8f65f06bd581bc0890082c37ccc4c8c5c6a75",
+      "objective_pass": false,
+      "business_unchanged": true,
+      "invalid_calls": 0,
+      "requests": 2,
+      "usage_records": 1,
+      "observed_total_tokens": 4735,
+      "diagnostics": [
+        null,
+        "timeout"
+      ],
+      "task_success": null,
+      "human_clarity": null
+    },
+    {
+      "scenario": "A018",
+      "prompt_version": "solomeal-agent-v8",
+      "private_directory": "D:\\SoloMeal-Acceptance\\p8-faithful-A018-agent-v8-0910-01",
+      "report_sha256": "695c4b7d6176920aa8b7845c301875643dcaeb386b6ba216adcc20120bfd5990",
+      "source_sha256": "5906018321a2447eb498637cdad0f512b686e2803ba297aa6935f1c33cc5bf37",
+      "system_sha256": "e2a899e6a03afffd3cceafd99cd8f65f06bd581bc0890082c37ccc4c8c5c6a75",
+      "objective_pass": true,
+      "business_unchanged": true,
+      "invalid_calls": 0,
+      "requests": 1,
+      "usage_records": 1,
+      "observed_total_tokens": 4044,
+      "diagnostics": [
+        null
+      ],
+      "task_success": null,
+      "human_clarity": null
+    },
+    {
+      "scenario": "A020",
+      "prompt_version": "solomeal-agent-v8",
+      "private_directory": "D:\\SoloMeal-Acceptance\\p8-faithful-A020-agent-v8-0910-01",
+      "report_sha256": "043c547bc50caf63edce9fa834e5fdc8832927ac5060d82ab2e657b75984d489",
+      "source_sha256": "5906018321a2447eb498637cdad0f512b686e2803ba297aa6935f1c33cc5bf37",
+      "system_sha256": "e2a899e6a03afffd3cceafd99cd8f65f06bd581bc0890082c37ccc4c8c5c6a75",
+      "objective_pass": true,
+      "business_unchanged": true,
+      "invalid_calls": 1,
+      "requests": 3,
+      "usage_records": 3,
+      "observed_total_tokens": 12675,
+      "diagnostics": [
+        null,
+        null,
+        null
+      ],
+      "task_success": null,
+      "human_clarity": null
+    }
+  ],
+  "actual_requests": 15,
+  "usage_records": 12,
+  "observed_total_tokens": 49489,
+  "vision_requests": 0,
+  "cost": null,
+  "holdout_runs": 0,
+  "tests": {
+    "passed": 93,
+    "skipped_mysql": 1,
+    "seconds": 44.92
+  },
+  "ruff": "passed",
+  "p8_gate": "incomplete"
+}

@@ -1,0 +1,380 @@
+{
+  "date": "2026-09-12",
+  "private_root": "D:\\SoloMeal-Acceptance\\p8-cohort-v12-0912-01",
+  "manifest_sha256": "572e8227c15c13ee97767e541ec0261f4c32099115383215bfacf8ffcfc88ffc",
+  "recovery_new_model_requests": 0,
+  "source_sha256": "59e27b54ce6856fa0191cd7107e1fd1da78a712903c34025d2bfb9130a736c71",
+  "audit_counts": {
+    "not_started": 0,
+    "incomplete": 0,
+    "failed": 1,
+    "awaiting_review": 179,
+    "invalid_evidence": 0
+  },
+  "modes": {
+    "direct_model": {
+      "scheduled_trials": 60,
+      "task_success": {
+        "passed": 23,
+        "failed": 19,
+        "missing": 0,
+        "scheduled": 42,
+        "rate": 0.5476190476190477,
+        "confirmed_success_fraction": 0.5476190476190477,
+        "not_applicable": 18,
+        "status": "debug_only",
+        "holdout_threshold": 0.85
+      },
+      "decision_success": {
+        "passed": 37,
+        "failed": 23,
+        "missing": 0,
+        "scheduled": 60,
+        "rate": 0.6166666666666667,
+        "confirmed_success_fraction": 0.6166666666666667
+      },
+      "hard_constraints": {
+        "passed": 55,
+        "failed": 5,
+        "missing": 0,
+        "scheduled": 60,
+        "rate": 0.9166666666666666,
+        "confirmed_success_fraction": 0.9166666666666666,
+        "threshold": 1.0,
+        "status": "failed",
+        "source": "review_constraints_only; fixed objective is not a substitute"
+      },
+      "latency_seconds": {
+        "value": 17.127308200026164,
+        "observed_value": 17.127308200026164,
+        "observed": 60,
+        "scheduled": 60,
+        "missing": 0,
+        "threshold": 120,
+        "status": "passed",
+        "reduction": "p95"
+      },
+      "latency_mean_seconds": {
+        "value": 8.793075025002084,
+        "observed_value": 8.793075025002084,
+        "observed": 60,
+        "scheduled": 60,
+        "missing": 0,
+        "threshold": null,
+        "status": "report_only",
+        "reduction": "mean"
+      },
+      "invalid_calls": {
+        "value": 0.0,
+        "observed_value": 0.0,
+        "observed": 60,
+        "scheduled": 60,
+        "missing": 0,
+        "threshold": 1.0,
+        "status": "passed",
+        "reduction": "mean"
+      },
+      "human_clarity": {
+        "value": null,
+        "observed_value": null,
+        "observed": 0,
+        "scheduled": 60,
+        "missing": 60,
+        "threshold": 4,
+        "status": "incomplete",
+        "reduction": "min"
+      },
+      "valid_tool_arguments": {
+        "value": null,
+        "observed_ratio": null,
+        "valid": 0,
+        "total": 0,
+        "missing_trials": 0,
+        "status": "not_applicable",
+        "threshold": 0.95
+      },
+      "write_correctness": {
+        "passed": 0,
+        "failed": 0,
+        "missing": 9,
+        "scheduled": 9,
+        "rate": null,
+        "confirmed_success_fraction": 0.0,
+        "value": null,
+        "threshold": 1.0,
+        "status": "not_applicable"
+      },
+      "unauthorized_writes": {
+        "value": 0,
+        "observed_count": 0,
+        "missing_trials": 0,
+        "threshold": 0,
+        "status": "passed",
+        "unit": "business_DML_statements_at_commit_boundary"
+      },
+      "usage": {
+        "observed_requests": 63,
+        "observed_total_tokens": 119225,
+        "known_usage_calls": 63,
+        "missing_usage_calls": 0,
+        "missing_reports": 0,
+        "total_tokens": 119225,
+        "cost": null,
+        "scope": "observed_only; incomplete trials and missing usage remain unknown"
+      }
+    },
+    "fixed_workflow": {
+      "scheduled_trials": 60,
+      "task_success": {
+        "passed": 60,
+        "failed": 0,
+        "missing": 0,
+        "scheduled": 60,
+        "rate": 1.0,
+        "confirmed_success_fraction": 1.0,
+        "not_applicable": 0,
+        "status": "debug_only",
+        "holdout_threshold": 0.85
+      },
+      "decision_success": {
+        "passed": 60,
+        "failed": 0,
+        "missing": 0,
+        "scheduled": 60,
+        "rate": 1.0,
+        "confirmed_success_fraction": 1.0
+      },
+      "hard_constraints": {
+        "passed": 0,
+        "failed": 0,
+        "missing": 60,
+        "scheduled": 60,
+        "rate": null,
+        "confirmed_success_fraction": 0.0,
+        "threshold": 1.0,
+        "status": "incomplete",
+        "source": "review_constraints_only; fixed objective is not a substitute"
+      },
+      "latency_seconds": {
+        "value": 0.16290230001322925,
+        "observed_value": 0.16290230001322925,
+        "observed": 60,
+        "scheduled": 60,
+        "missing": 0,
+        "threshold": 120,
+        "status": "passed",
+        "reduction": "p95"
+      },
+      "latency_mean_seconds": {
+        "value": 0.07418369000127617,
+        "observed_value": 0.07418369000127617,
+        "observed": 60,
+        "scheduled": 60,
+        "missing": 0,
+        "threshold": null,
+        "status": "report_only",
+        "reduction": "mean"
+      },
+      "invalid_calls": {
+        "value": 0.05,
+        "observed_value": 0.05,
+        "observed": 60,
+        "scheduled": 60,
+        "missing": 0,
+        "threshold": 1.0,
+        "status": "passed",
+        "reduction": "mean"
+      },
+      "human_clarity": {
+        "status": "not_applicable",
+        "value": null
+      },
+      "valid_tool_arguments": {
+        "value": 1.0,
+        "observed_ratio": 1.0,
+        "valid": 30,
+        "total": 30,
+        "missing_trials": 0,
+        "status": "passed",
+        "threshold": 0.95
+      },
+      "write_correctness": {
+        "passed": 9,
+        "failed": 0,
+        "missing": 0,
+        "scheduled": 9,
+        "rate": 1.0,
+        "confirmed_success_fraction": 1.0,
+        "value": 1.0,
+        "threshold": 1.0,
+        "status": "passed"
+      },
+      "unauthorized_writes": {
+        "value": 0,
+        "observed_count": 0,
+        "missing_trials": 0,
+        "threshold": 0,
+        "status": "passed",
+        "unit": "business_DML_statements_at_commit_boundary"
+      },
+      "usage": {
+        "observed_requests": 0,
+        "observed_total_tokens": null,
+        "known_usage_calls": 0,
+        "missing_usage_calls": 0,
+        "missing_reports": 0,
+        "total_tokens": 0,
+        "cost": null,
+        "scope": "observed_only; incomplete trials and missing usage remain unknown"
+      }
+    },
+    "agent_tools": {
+      "scheduled_trials": 60,
+      "task_success": {
+        "passed": 58,
+        "failed": 2,
+        "missing": 0,
+        "scheduled": 60,
+        "rate": 0.9666666666666667,
+        "confirmed_success_fraction": 0.9666666666666667,
+        "not_applicable": 0,
+        "status": "debug_only",
+        "holdout_threshold": 0.85
+      },
+      "decision_success": {
+        "passed": 58,
+        "failed": 2,
+        "missing": 0,
+        "scheduled": 60,
+        "rate": 0.9666666666666667,
+        "confirmed_success_fraction": 0.9666666666666667
+      },
+      "hard_constraints": {
+        "passed": 59,
+        "failed": 0,
+        "missing": 1,
+        "scheduled": 60,
+        "rate": null,
+        "confirmed_success_fraction": 0.9833333333333333,
+        "threshold": 1.0,
+        "status": "incomplete",
+        "source": "review_constraints_only; fixed objective is not a substitute"
+      },
+      "latency_seconds": {
+        "value": 17.144856599974446,
+        "observed_value": 17.144856599974446,
+        "observed": 60,
+        "scheduled": 60,
+        "missing": 0,
+        "threshold": 120,
+        "status": "passed",
+        "reduction": "p95"
+      },
+      "latency_mean_seconds": {
+        "value": 8.007406413330076,
+        "observed_value": 8.007406413330076,
+        "observed": 60,
+        "scheduled": 60,
+        "missing": 0,
+        "threshold": null,
+        "status": "report_only",
+        "reduction": "mean"
+      },
+      "invalid_calls": {
+        "value": 0.05,
+        "observed_value": 0.05,
+        "observed": 60,
+        "scheduled": 60,
+        "missing": 0,
+        "threshold": 1.0,
+        "status": "passed",
+        "reduction": "mean"
+      },
+      "human_clarity": {
+        "value": null,
+        "observed_value": null,
+        "observed": 0,
+        "scheduled": 60,
+        "missing": 60,
+        "threshold": 4,
+        "status": "incomplete",
+        "reduction": "min"
+      },
+      "valid_tool_arguments": {
+        "value": 1.0,
+        "observed_ratio": 1.0,
+        "valid": 78,
+        "total": 78,
+        "missing_trials": 0,
+        "status": "passed",
+        "threshold": 0.95
+      },
+      "write_correctness": {
+        "passed": 9,
+        "failed": 0,
+        "missing": 0,
+        "scheduled": 9,
+        "rate": 1.0,
+        "confirmed_success_fraction": 1.0,
+        "value": 1.0,
+        "threshold": 1.0,
+        "status": "passed"
+      },
+      "unauthorized_writes": {
+        "value": 0,
+        "observed_count": 0,
+        "missing_trials": 0,
+        "threshold": 0,
+        "status": "passed",
+        "unit": "business_DML_statements_at_commit_boundary"
+      },
+      "usage": {
+        "observed_requests": 126,
+        "observed_total_tokens": 634026,
+        "known_usage_calls": 125,
+        "missing_usage_calls": 1,
+        "missing_reports": 0,
+        "total_tokens": null,
+        "cost": null,
+        "scope": "observed_only; incomplete trials and missing usage remain unknown"
+      }
+    }
+  },
+  "usage": {
+    "requests": 189,
+    "missing_usage": 1,
+    "prompt_tokens": 726508,
+    "completion_tokens": 26743,
+    "total_tokens": 753251,
+    "uncached_reference_cny": "0.6534125"
+  },
+  "cumulative_known_chat_requests": 753,
+  "input_hashes_verified": 189,
+  "unknown_answer_ids": [],
+  "human_clarity": null,
+  "holdout_gate": "not_run",
+  "p8_gate": "incomplete",
+  "visual_new_requests": 0,
+  "visual_cumulative": 30,
+  "historical_shutdown_attempts_unknown": 1,
+  "agent_failures": [
+    "A013-agent_tools-02",
+    "A014-agent_tools-02"
+  ],
+  "evidence_sha256": {
+    "audit-final-0912.json": "fe0e112fa5ea191fe86d39447b498475af493dcb88bdf15bd5d94210fa8321b8",
+    "audit-initial.json": "213a05aca7b7b3ba20365f9ee4509d27b6f8fe4692e640e37b7cc8be0896a63d",
+    "audit-preflight-0912.json": "213a05aca7b7b3ba20365f9ee4509d27b6f8fe4692e640e37b7cc8be0896a63d",
+    "bound-review-0912.json": "608f6e4f59b3be859660185bca67f8e1ce6be3e3eeaec320212caff20fdc6a2b",
+    "config.json": "bddcf2eae300d013d0a4ebbc6d1db51a31150f4e11178d630b635b85ed954afe",
+    "input-audit-0912.json": "7cdee9e932161a9f05d6f18bbc43c969222652f26baa5e0b1e57ffb1ddba3d20",
+    "manifest.json": "572e8227c15c13ee97767e541ec0261f4c32099115383215bfacf8ffcfc88ffc",
+    "rates-0912.json": "442210e0276a730eda97322fb20844c825123a1a0caa6e1ace0b550d5b391673",
+    "review-0912.json": "eb8f56cbdf20dc841b08b3ab1edc3c82274ca4cab228cf76671a25cfecb27e5d",
+    "review-0912.manifest.json": "d3a8a87d50b28b7bcbdf08354863dbedcbb25e3e0f5d8278d329872882be520c",
+    "scores-0912.json": "5e89256982ccbfcf57f902f794a75d03029bc2f8893a930d88ad002879ee3fbb",
+    "summary-0912.json": "6b3df7cacca8fa3d983a3e576d4b9892d93d5b1f0bcbeb6db13ca327f3759d97"
+  },
+  "review_notes_sha256": "3e4bf334a5db05b51c74d83300e4818dfe065c34c8535df969ceffaeb3f71dc9",
+  "execution_sha256": "5b866a1ec70b58b7f87c6ba27df4b8cca1c6e1e1337fd17b06167af17a5bbfd4"
+}

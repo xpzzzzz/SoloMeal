@@ -1,0 +1,35 @@
+{
+  "ran_at": "2026-09-08T15:07:21.254976+00:00",
+  "prompt_version": "receipt-v1",
+  "model": "qwen3.8-flash",
+  "status": "failed",
+  "cases": [
+    {
+      "id": "receipt-01",
+      "image_sha256": "30f6d2f8dc1839191174aba319c78336d74c9b18ee996092c8850d65aec6abbd",
+      "status": "failed",
+      "error_code": "RECEIPT_PARSER_FAILED",
+      "elapsed_seconds": 12.83
+    },
+    {
+      "id": "receipt-02",
+      "image_sha256": "d4de663df1249d6da84eedb934a787e220eb3063f525594131a589aff4e6b7bf",
+      "status": "failed",
+      "error_code": "VISION_ACCEPTANCE_ERROR",
+      "elapsed_seconds": 30.012
+    },
+    {
+      "id": "receipt-03",
+      "image_sha256": "8e254eddcb7f37de7e12b6ab852c16457ea340b1406f167f4fa590df95a31c1b",
+      "status": "mismatch",
+      "correct_fields": 30,
+      "total_fields": 34,
+      "all_require_review": true,
+      "elapsed_seconds": 23.453
+    }
+  ],
+  "scope": "recognition_fields_only",
+  "inventory_workflow_verified": false,
+  "dataset_sha256": "0df3d36b99546e9ae28ee8150343fa38b2d3f5b2753172cd73b0f2795cc677b1",
+  "dataset_kind": "real"
+}

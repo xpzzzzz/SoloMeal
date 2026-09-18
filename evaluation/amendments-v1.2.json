@@ -1,0 +1,12 @@
+{
+  "version": "solomeal-eval-amendments-v1.2",
+  "extends": "amendments-v1.1.json",
+  "frozen_before_affected_case_first_run": true,
+  "amendments": [{
+    "scenario_id": "A007",
+    "fixture": "low_stock",
+    "reason": "Standard has enough stock for all recipes, so no purchase price is needed. Use the existing low_stock contract (50g rice, zero eggs, no quotes) to exercise unknown purchase cost.",
+    "oracle": "budget=8; all three recipes have missing ingredients with unknown prices, budget_status=unknown and budget_feasible=false. The answer must not guarantee the budget; semantic review remains separate.",
+    "previous_results": "No A007 runs before this amendment; original corpus and freezes remain unchanged."
+  }]
+}

@@ -1,0 +1,180 @@
+{
+  "version": "package-v9-debug",
+  "trials": [
+    {
+      "directory": "D:\\SoloMeal-Acceptance\\p8-A006-package-v9-0911-01",
+      "objective_pass": true,
+      "business_unchanged": true,
+      "elapsed_seconds": 11.15607519999321,
+      "requests": 2,
+      "usage": [
+        {
+          "prompt_tokens": 3925,
+          "completion_tokens": 60,
+          "total_tokens": 3985,
+          "reasoning_tokens": null
+        },
+        {
+          "prompt_tokens": 5964,
+          "completion_tokens": 280,
+          "total_tokens": 6244,
+          "reasoning_tokens": null
+        }
+      ],
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 1,
+          "total": 1,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      },
+      "hashes": {
+        "attempt.json": "a21e1a91f04377ed30fc999d37b83913398e5e2bd8e15e85561ba7ff25943c4c",
+        "call-01-attempt.json": "46a2089a699287441d9cdc2e9662b244a3bee78991e7062988a843cbf9581fdd",
+        "call-01-input.json": "9127a5ad2c344eb3deb253c8d490730d8b9838f2d02ebc926c8205f462138263",
+        "call-01-result.json": "e71286578655679889027db6c400453e22b94337545b41ffbd6d84f21ec15ee4",
+        "call-02-attempt.json": "2b4095521a72472a8e3f0939025dc3882a605afd9aca0f39bc835bdf6edb7cbf",
+        "call-02-input.json": "5e6868688667ea2f296fcc1590e0641a01e8546af6b62f01582b776926af9a49",
+        "call-02-result.json": "0ec5adfb785730f283fc8850b85a8c377dab9fdfb4c4d003560522b83a0c163d",
+        "report.json": "ec9b58deb6ed23b51299130e08495f28f027724990f83bd54848f7d1c405ef0a"
+      }
+    },
+    {
+      "directory": "D:\\SoloMeal-Acceptance\\p8-A006-package-v9-0911-02",
+      "objective_pass": true,
+      "business_unchanged": true,
+      "elapsed_seconds": 6.566340100005618,
+      "requests": 2,
+      "usage": [
+        {
+          "prompt_tokens": 3925,
+          "completion_tokens": 19,
+          "total_tokens": 3944,
+          "reasoning_tokens": null
+        },
+        {
+          "prompt_tokens": 5904,
+          "completion_tokens": 228,
+          "total_tokens": 6132,
+          "reasoning_tokens": null
+        }
+      ],
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 1,
+          "total": 1,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      },
+      "hashes": {
+        "attempt.json": "37444e258417e27ac58e9ae1045031830d3e3cfeaaec01839de7510bb0a0bc2b",
+        "call-01-attempt.json": "f7cf4d7964326aedc543213147bd3a2bf319e2392d6da714449fed7d12064882",
+        "call-01-input.json": "9127a5ad2c344eb3deb253c8d490730d8b9838f2d02ebc926c8205f462138263",
+        "call-01-result.json": "5c946a6c7a1a18f248465d6533b8b78003ea04d524aab30d2c23a9747cff78b7",
+        "call-02-attempt.json": "3e6d9f589d74e54d1055430c6130b38a2b57855e4c2cede6a7e77bed68228601",
+        "call-02-input.json": "0e9c93f4cf7b37ecec54db92cbe7f65fb93da95f650e72e0a68793f44f1ae565",
+        "call-02-result.json": "f51dc5d0d2412976ed28d345397c4d869088bdb80242c9d11cfa47a63998b9c6",
+        "report.json": "ccb8afc0ef68ca8514c4f23441d44718547e58bda5660149e1e0ceec165ceabb"
+      }
+    },
+    {
+      "directory": "D:\\SoloMeal-Acceptance\\p8-A006-package-v9-0911-03",
+      "objective_pass": true,
+      "business_unchanged": true,
+      "elapsed_seconds": 10.437637300012284,
+      "requests": 2,
+      "usage": [
+        {
+          "prompt_tokens": 3925,
+          "completion_tokens": 139,
+          "total_tokens": 4064,
+          "reasoning_tokens": null
+        },
+        {
+          "prompt_tokens": 5975,
+          "completion_tokens": 407,
+          "total_tokens": 6382,
+          "reasoning_tokens": null
+        }
+      ],
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 1,
+          "total": 1,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      },
+      "hashes": {
+        "attempt.json": "aac928fbcfdc94f1859f9fcb98b1af3cbf24aca05c82c1f184e50a436f5a322a",
+        "call-01-attempt.json": "b0bed09a1e44f4f5219f995931855bc4c70314dcf7d48fffb697f0256db6009f",
+        "call-01-input.json": "9127a5ad2c344eb3deb253c8d490730d8b9838f2d02ebc926c8205f462138263",
+        "call-01-result.json": "db018155f2f50fae97acc12c2bff65d56ce3ab04f8fa3c87f3afdc419093e544",
+        "call-02-attempt.json": "5a5dd9a23a4bff60c2e47f978fed9f58d81dc991ff1dde00beafb89838bb5244",
+        "call-02-input.json": "1c18375f4a9451abb2b50b47baf43f7c770df4fc2c6373aa11c4c102808ecdef",
+        "call-02-result.json": "0ab5b3196d9e0bab041b610ecd0dbf1e51df7de1af07754c336e0e31aa4ea067",
+        "report.json": "9c9bd0c687adfc1137e59f1611e2cfd4af36b5cbf3263a7ebfb3b6e485ebadd8"
+      }
+    }
+  ],
+  "review_counts": {
+    "passed": 3,
+    "failed": 0,
+    "unscored": 0,
+    "not_applicable": 0
+  },
+  "review_hashes": {
+    "D:\\SoloMeal-Acceptance\\p8-A006-package-v9-0911-review.json": "e1ba115948b4d075f2953f04fc35c32b0f1b8bbfa56b17f980eb8d80d21dfe30",
+    "D:\\SoloMeal-Acceptance\\p8-A006-package-v9-0911-review.manifest.json": "7e886592a8b84781ba269e037f1bea8335e81baa6b1329f3e1ddeaeeccf3ba5c",
+    "D:\\SoloMeal-Acceptance\\p8-A006-package-v9-0911-scores.json": "c2a8563797043513f02738b678a81a8c7fd7a05ee14e9ef83b3847d81bba43ea"
+  },
+  "actual_requests": 6,
+  "observed_tokens": 30751,
+  "cumulative_known_chat_requests": 318,
+  "interrupted_historical_attempts": 1,
+  "vision_requests": 30,
+  "human_clarity": null,
+  "cost": null,
+  "input_hashes_verified": 6,
+  "tests_passed": 154,
+  "ruff": "passed",
+  "p8_gate": "incomplete"
+}

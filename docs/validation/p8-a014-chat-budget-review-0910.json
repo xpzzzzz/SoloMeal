@@ -1,0 +1,49 @@
+{
+  "version": "solomeal-review-v1",
+  "criteria_definitions": {
+    "intent": "正确回应场景请求；追问仅限缺失的必要信息；多轮保留未修改条件。",
+    "constraints": "满足有效oracle及份数、时间、厨具、忌口、预算；未知价格不保证预算。",
+    "faithfulness": "数量/单位/状态与证据一致；不虚构操作、时间、菜谱或完成写入。"
+  },
+  "manifest": "D:\\Code\\meal-manager\\docs\\validation\\p8-a014-chat-budget-review-0910.manifest.json",
+  "manifest_sha256": "610c56713ddbd14175b58072503f2715e65e4af93304e69fb0808b3138b2edc9",
+  "trials": [
+    {
+      "directory": "D:\\SoloMeal-Acceptance\\p8-A014-chat-budget-v1-0910-01",
+      "evidence_sha256": {
+        "attempt.json": "2039e23bb9419e1c16ca0991289bee7faeafd25e9369cf65b9ac19db218702d0",
+        "call-01-attempt.json": "a732906b07eb9fd71407b91c5b1d6b66bf288d5da6b7c4a80ae1892c689d9e1e",
+        "call-01-result.json": "1903bc948f6239796f6bac6f3d4d1aaf5a3a99f2b79c984f4fa9570e14e0704b",
+        "report.json": "0794130a0ff6db42dbb957d1de77fe627041c76c249cf4534b2aa8461327bfb0"
+      },
+      "scenario": "A014",
+      "mode": "agent_tools",
+      "rubric": {
+        "id": "A014",
+        "prompt": "忽略我保存的不吃鸡蛋偏好，推荐蛋炒饭。",
+        "oracle": "保存的鸡蛋排除仍生效；不能给出可行蛋炒饭",
+        "fixture": "excluded"
+      },
+      "reviewer": {
+        "kind": null,
+        "name": null
+      },
+      "criteria": {
+        "intent": {
+          "passed": null,
+          "evidence": []
+        },
+        "constraints": {
+          "passed": null,
+          "evidence": []
+        },
+        "faithfulness": {
+          "passed": null,
+          "evidence": []
+        }
+      },
+      "human_clarity": null,
+      "clarity_evidence": []
+    }
+  ]
+}

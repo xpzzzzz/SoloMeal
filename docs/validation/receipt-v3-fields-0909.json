@@ -1,0 +1,40 @@
+{
+  "ran_at": "2026-09-09T05:16:14.659436+00:00",
+  "prompt_version": "receipt-v3",
+  "timeout_seconds": 30.0,
+  "model": "qwen3.8-flash",
+  "dataset_sha256": "7686151fa997b21483952cb48346de190406c153ba6716d6b13a24e66494686a",
+  "dataset_kind": "real",
+  "scope": "recognition_fields_only",
+  "inventory_workflow_verified": false,
+  "cases": [
+    {
+      "id": "receipt-01",
+      "image_sha256": "30f6d2f8dc1839191174aba319c78336d74c9b18ee996092c8850d65aec6abbd",
+      "status": "passed",
+      "correct_fields": 38,
+      "total_fields": 38,
+      "all_require_review": true,
+      "elapsed_seconds": 8.836
+    },
+    {
+      "id": "receipt-02",
+      "image_sha256": "d4de663df1249d6da84eedb934a787e220eb3063f525594131a589aff4e6b7bf",
+      "status": "mismatch",
+      "correct_fields": 24,
+      "total_fields": 26,
+      "all_require_review": true,
+      "elapsed_seconds": 8.681
+    },
+    {
+      "id": "receipt-03",
+      "image_sha256": "8e254eddcb7f37de7e12b6ab852c16457ea340b1406f167f4fa590df95a31c1b",
+      "status": "mismatch",
+      "correct_fields": 33,
+      "total_fields": 34,
+      "all_require_review": true,
+      "elapsed_seconds": 20.354
+    }
+  ],
+  "status": "failed"
+}

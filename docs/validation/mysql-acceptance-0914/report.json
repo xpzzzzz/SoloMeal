@@ -1,0 +1,109 @@
+{
+  "started_at": "2026-09-14T13:06:06.380921+00:00",
+  "endpoint": "127.0.0.1:13316",
+  "development_before": {
+    "version": "8.0.46",
+    "database_name": "solomeal",
+    "tables": {
+      "agent_run_events": {
+        "rows": 3,
+        "sha256": "cb05f9e69d473f956056060561c3b9aff1d66433f13b43cfcbf84e21a9c7d352"
+      },
+      "agent_runs": {
+        "rows": 1,
+        "sha256": "690771e2fdefe68382c9a9c27708e34645ecd579082730dce596ad86e22100d7"
+      },
+      "agent_sessions": {
+        "rows": 1,
+        "sha256": "12904ef8af6ac34f15bc10df19baa8453944437402b5df598235ddbe68b6de47"
+      },
+      "alembic_version": {
+        "rows": 1,
+        "sha256": "fdaff30348cbb466c7ea13387befa1c5010b21a70c5d03970017a697e50be0f5"
+      },
+      "auth_sessions": {
+        "rows": 4,
+        "sha256": "157f086d3dfbfa8b9307f8ff251c42a22ca1d5c117d0b6a371f570bd146b8ee1"
+      },
+      "cooking_consumptions": {
+        "rows": 1,
+        "sha256": "51c86a93333e3804b6534416cc02b3558600b42dd074cab886fb59f606979599"
+      },
+      "cooking_records": {
+        "rows": 1,
+        "sha256": "85c7f9991c2e26c317eda388828df7589c47a22fafae3c1bb7f792720e49df72"
+      },
+      "ingredient_aliases": {
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "ingredients": {
+        "rows": 14,
+        "sha256": "4f0dc3595b45f3a16032864176bb3e50127fd802dfa8ffdddd2dbfea9098658d"
+      },
+      "inventory_batches": {
+        "rows": 2,
+        "sha256": "0de2e69fda666e6d0a231cedffc9a91433df90ce958eb79cd87f41ae8b9364ed"
+      },
+      "inventory_events": {
+        "rows": 7,
+        "sha256": "a7cd5f7b320a5f624d24301f3e5d2bd18faa788c6b74bf6ba3c6a431d982dbd3"
+      },
+      "meal_plans": {
+        "rows": 2,
+        "sha256": "4c857b266d3fa7e894aa2b08490ea56eda6bf744a0b83d4fb07670ae11673544"
+      },
+      "operations": {
+        "rows": 15,
+        "sha256": "6620f1ab983103d77f728123eb87af388ff3cf997966d1ac5885886d48183eb6"
+      },
+      "plan_revisions": {
+        "rows": 3,
+        "sha256": "a00b3761615e60670cc0a2defa191307b29d0ae3bf56d645f6b4b7ea4df73f84"
+      },
+      "price_quotes": {
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "receipt_imports": {
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "recipe_ingredients": {
+        "rows": 31,
+        "sha256": "c5b6f730bbb9c175c71ae31be88545f69e745402c51f757eddc4d5b5c7007133"
+      },
+      "recipes": {
+        "rows": 7,
+        "sha256": "dc653a48f435d52162b1299cdb1f5915934581810500e7c7c21a06616e5a115d"
+      },
+      "shopping_lists": {
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "tool_executions": {
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "user_preferences": {
+        "rows": 2,
+        "sha256": "204d2bd680cc58bf5ac655127e1095d6108dd644c5d6782151e2847d859db6a7"
+      },
+      "users": {
+        "rows": 2,
+        "sha256": "fcd22e15d3c428ba4ecb3d176c8ed5eb9dbf0c96a82fea26c7a47f9961aadc80"
+      }
+    }
+  },
+  "test_before": {
+    "version": "8.0.46",
+    "database_name": "solomeal_test",
+    "tables": {
+      "alembic_version": {
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "real_model_calls": 0
+}

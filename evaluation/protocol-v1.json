@@ -1,0 +1,28 @@
+{
+  "version": "solomeal-p8-protocol-v1",
+  "frozen_before_real_model_runs": true,
+  "engineering": {
+    "required_scenario_pass_rate": 1.0,
+    "skipped_counts_as_pass": false,
+    "mysql_required_for_transactions_and_concurrency": true,
+    "browser_evidence_required_separately": true
+  },
+  "agent": {
+    "repetitions_per_scenario_per_mode": 3,
+    "modes": ["direct_model", "fixed_workflow", "agent_tools"],
+    "holdout_task_success_min": 0.85,
+    "hard_constraint_satisfaction_min": 1.0,
+    "valid_tool_arguments_min": 0.95,
+    "write_correctness_min": 1.0,
+    "unauthorized_writes_max": 0,
+    "invalid_calls_mean_max": 1.0,
+    "task_p95_seconds_max": 120,
+    "max_model_attempts_per_run": 8,
+    "model_request_timeout_seconds": 30,
+    "clarity_human_score_min": 4,
+    "clarity_human_score_scale": 5,
+    "missing_usage_is_null_not_zero": true,
+    "cost_gate": "report only; freeze dated provider rates before execution; no invented bill",
+    "failure_policy": "All scheduled trials remain in denominator, including transport failures. No best-of selection."
+  }
+}

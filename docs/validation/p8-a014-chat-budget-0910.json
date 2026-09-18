@@ -1,0 +1,53 @@
+{
+  "date": "2026-09-10",
+  "version": "chat-budget-v1",
+  "private_directory": "D:\\SoloMeal-Acceptance\\p8-A014-chat-budget-v1-0910-01",
+  "files_sha256": {
+    "attempt.json": "2039e23bb9419e1c16ca0991289bee7faeafd25e9369cf65b9ac19db218702d0",
+    "call-01-attempt.json": "a732906b07eb9fd71407b91c5b1d6b66bf288d5da6b7c4a80ae1892c689d9e1e",
+    "call-01-result.json": "1903bc948f6239796f6bac6f3d4d1aaf5a3a99f2b79c984f4fa9570e14e0704b",
+    "report.json": "0794130a0ff6db42dbb957d1de77fe627041c76c249cf4534b2aa8461327bfb0"
+  },
+  "actual_requests": 1,
+  "vision_requests": 0,
+  "usage_records": 0,
+  "observed_total_tokens": null,
+  "cost": null,
+  "model_calls": [
+    {
+      "model": "qwen3.8-flash",
+      "transport": "httpx",
+      "transport_version": "0.28.1",
+      "messages_sha256": "7138d331b2f673858e3f1ace547894509a28919e29b3f4db7e791ca0cb358096",
+      "tools_sha256": "5d53d1404d8c490a17fad9b91ad3be6e0dda6c5e26168b7a8ee3a37bead639df",
+      "timeout_seconds": 30,
+      "max_completion_tokens": 3000,
+      "parallel_tool_calls": null,
+      "tool_protocol": "json",
+      "protocol_version": "json-tools-v2",
+      "response_format": "json_object",
+      "temperature": "provider_default_unknown",
+      "top_p": "provider_default_unknown",
+      "enable_thinking": "not_sent",
+      "request_sent": true,
+      "http_status": null,
+      "usage": {
+        "prompt_tokens": null,
+        "completion_tokens": null,
+        "total_tokens": null,
+        "reasoning_tokens": null
+      },
+      "diagnostic": "timeout",
+      "wire_messages_sha256": "8e4734057c556911a9d5a78988efd0d5921b655a915c86484c04a3214882f919",
+      "elapsed_seconds": 31.264172499999404
+    }
+  ],
+  "objective_pass": false,
+  "business_unchanged": true,
+  "tool_events": 0,
+  "review_task_success": false,
+  "human_clarity": null,
+  "p8_gate": "incomplete",
+  "reruns": 0,
+  "validation": "Original evidence hashes and failed review verified after interruption; no test rerun."
+}

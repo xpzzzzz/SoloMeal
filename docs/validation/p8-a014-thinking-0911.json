@@ -1,0 +1,106 @@
+{
+  "version": "a014-chat-thinking-off-v1",
+  "actual_requests": 2,
+  "elapsed_seconds": 8.477735300009954,
+  "objective_pass": true,
+  "semantic_pass": true,
+  "task_success": true,
+  "human_clarity": null,
+  "business_unchanged": true,
+  "measurements": {
+    "version": "evaluation-measurements-v1",
+    "arguments": {
+      "valid": 1,
+      "total": 1,
+      "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+    },
+    "write_correctness": {
+      "passed": null,
+      "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+    },
+    "unauthorized_writes": {
+      "count": 0,
+      "attempted_statements": 0,
+      "complete": true,
+      "unclassified_statements": 0,
+      "unit": "business_DML_statements_at_commit_boundary",
+      "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+    }
+  },
+  "invalid_calls": 0,
+  "model_calls": [
+    {
+      "model": "qwen3.8-flash",
+      "transport": "httpx",
+      "transport_version": "0.28.1",
+      "messages_sha256": "7138d331b2f673858e3f1ace547894509a28919e29b3f4db7e791ca0cb358096",
+      "tools_sha256": "5d53d1404d8c490a17fad9b91ad3be6e0dda6c5e26168b7a8ee3a37bead639df",
+      "timeout_seconds": 30,
+      "max_completion_tokens": 3000,
+      "parallel_tool_calls": null,
+      "tool_protocol": "json",
+      "protocol_version": "json-tools-v2",
+      "response_format": "json_object",
+      "temperature": "provider_default_unknown",
+      "top_p": "provider_default_unknown",
+      "enable_thinking": "false",
+      "request_sent": true,
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 3824,
+        "completion_tokens": 76,
+        "total_tokens": 3900,
+        "reasoning_tokens": null
+      },
+      "diagnostic": null,
+      "wire_messages_sha256": "8e4734057c556911a9d5a78988efd0d5921b655a915c86484c04a3214882f919",
+      "elapsed_seconds": 3.1350024999992456
+    },
+    {
+      "model": "qwen3.8-flash",
+      "transport": "httpx",
+      "transport_version": "0.28.1",
+      "messages_sha256": "b91ce4fcaf147b03895b7e16cfe45dff7c5e579cea815389e98dd5b70182fd86",
+      "tools_sha256": "5d53d1404d8c490a17fad9b91ad3be6e0dda6c5e26168b7a8ee3a37bead639df",
+      "timeout_seconds": 30,
+      "max_completion_tokens": 3000,
+      "parallel_tool_calls": null,
+      "tool_protocol": "json",
+      "protocol_version": "json-tools-v2",
+      "response_format": "json_object",
+      "temperature": "provider_default_unknown",
+      "top_p": "provider_default_unknown",
+      "enable_thinking": "false",
+      "request_sent": true,
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4902,
+        "completion_tokens": 189,
+        "total_tokens": 5091,
+        "reasoning_tokens": null
+      },
+      "diagnostic": null,
+      "wire_messages_sha256": "2a63d9226ed0f48bcf1c0179b48d40fe7e29031110da5cbc94e289c50898c4d7",
+      "elapsed_seconds": 5.237778900002013
+    }
+  ],
+  "observed_total_tokens": 8991,
+  "estimated_cost": null,
+  "first_request_three_hashes_match_original": true,
+  "private_directory": "D:\\SoloMeal-Acceptance\\p8-A014-thinking-off-v1-0911-01",
+  "files_sha256": {
+    "D:\\SoloMeal-Acceptance\\p8-A014-thinking-off-v1-0911-01\\attempt.json": "60e9ea0925124b7a02b3f2453ce4872108bb0353c5d3651e536ee6ac71b66f23",
+    "D:\\SoloMeal-Acceptance\\p8-A014-thinking-off-v1-0911-01\\call-01-attempt.json": "5be12531c696365c507554962f143aece1d8d765022f7c730c937a6b0f16a2cf",
+    "D:\\SoloMeal-Acceptance\\p8-A014-thinking-off-v1-0911-01\\call-01-result.json": "3072672fdb6ca7a1aa24bb696522c61b3b77265f5e5b1256e480dfed607c3937",
+    "D:\\SoloMeal-Acceptance\\p8-A014-thinking-off-v1-0911-01\\call-02-attempt.json": "4580cd21d8c16aa2c1d33271cbce8a5a262594f9b848ed23b62dd048f3810e5b",
+    "D:\\SoloMeal-Acceptance\\p8-A014-thinking-off-v1-0911-01\\call-02-result.json": "dfbcb6bdcf6a68527cae38b0ffe8c37116c0fcc42fc8c993f4a708128e39f826",
+    "D:\\SoloMeal-Acceptance\\p8-A014-thinking-off-v1-0911-01\\report.json": "a294faaff3260c518ab5ed81b6c889477cb4458f64f06961e10ee5fc71aa5685",
+    "D:\\SoloMeal-Acceptance\\p8-A014-thinking-off-v1-0911-scores.json": "3016f91d042baa8b19d6de1e92dc9dd8d65ee86c65f7e972f21e6525b159aa6d",
+    "D:\\SoloMeal-Acceptance\\p8-A014-thinking-off-v1-0911-review.json": "10f9f303d5b71be1fc1ce75dca33a831b4312c1e870b26b3ddb86859590247db",
+    "D:\\SoloMeal-Acceptance\\p8-A014-thinking-off-v1-0911-review.manifest.json": "089e07af7e0cdca4fa75f5a9f25cc205bcd3ad6f958d64521be02aec4f9913ea"
+  },
+  "p8_gate": "incomplete",
+  "cumulative_known_chat_requests": 126,
+  "additional_interrupted_attempts": 1,
+  "cumulative_vision_requests": 30
+}

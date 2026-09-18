@@ -1,0 +1,75 @@
+{
+  "version": "a026-contract-audit-v1",
+  "model_requests": 0,
+  "source_sha256": "1b7be0ddc4889def69f19edd8f7cf74d1d7e0143aec6ed0cf9abaf35a5e4c4e6",
+  "frozen_json_sha256": {
+    "amendments-v1.1.json": "5e5f9dfa11a2d8e3c427025410642edf61d5c07c1ba6ddf27380fb9f0054334e",
+    "amendments-v1.2.json": "e34e1e2d39a4e02a484e08a0aff2e473334cf8244aa7478c3468d233d889a3eb",
+    "freeze-v1.1.json": "0e41e2667f31b3cbe2db142e4db80b0d2f4fccb8ebb18aed8be30bde2ee9b299",
+    "freeze-v1.2.json": "c424e6e47c11cda2c3e568910edbc9a9a8de30e2be25710640289d0102e112ac",
+    "freeze-v1.json": "a95b47646254b93a32a58022e7e09d71d0121436f6b99eb951391cd256126ba1",
+    "protocol-v1.json": "df0ee4c6171f026b6d520b93f8b0597f5e4beacb74505b45a499e2d20f7b4862",
+    "scenarios-v1.json": "2aa39319b14a91242e0a0aa6c58625eb78f3da4efb505bc47b24d8a590bc3ae7"
+  },
+  "recommendations": [
+    {
+      "arguments": {
+        "budget": "6"
+      },
+      "servings": 1,
+      "rice": {
+        "name": "大米",
+        "unit": "g",
+        "missing_quantity": "30.000",
+        "packages": 1,
+        "purchase_quantity": "100.000",
+        "estimated_cost": "3.00",
+        "source": "P8 synthetic quote",
+        "observed_on": "2026-09-14",
+        "price_status": "estimate"
+      },
+      "legacy_oracle_pass": false
+    },
+    {
+      "arguments": {
+        "servings": 3,
+        "budget": "6"
+      },
+      "servings": 3,
+      "rice": {
+        "name": "大米",
+        "unit": "g",
+        "missing_quantity": "190.000",
+        "packages": 2,
+        "purchase_quantity": "200.000",
+        "estimated_cost": "6.00",
+        "source": "P8 synthetic quote",
+        "observed_on": "2026-09-14",
+        "price_status": "estimate"
+      },
+      "legacy_oracle_pass": true
+    }
+  ],
+  "estimate_purchase": {
+    "as_of": "2026-09-14",
+    "ingredient": {
+      "name": "大米",
+      "unit": "g"
+    },
+    "requested_quantity": "190",
+    "requested_unit": "g",
+    "shortage_quantity": "190",
+    "shortage_unit": "g",
+    "packages": 2,
+    "purchase_quantity": "200.000",
+    "estimated_cost": "6.00",
+    "source": "P8 synthetic quote",
+    "observed_on": "2026-09-14",
+    "price_status": "estimate",
+    "budget": "6",
+    "budget_status": "within_estimate",
+    "advisory_only": true,
+    "scope": "user_stated_shortage; no recipe, servings or inventory reservation"
+  },
+  "business_unchanged": true
+}

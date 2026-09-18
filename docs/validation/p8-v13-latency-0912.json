@@ -1,0 +1,156 @@
+{
+  "new_requests": 0,
+  "scope": "existing v13 evidence only",
+  "groups": {
+    "agent_tools": {
+      "requests": 125,
+      "missing_usage": 3,
+      "mean_seconds": 5.239740748800803,
+      "over_20_seconds": 6
+    },
+    "direct_model": {
+      "requests": 63,
+      "missing_usage": 0,
+      "mean_seconds": 9.582179311111787,
+      "over_20_seconds": 3
+    }
+  },
+  "first_calls": [
+    {
+      "trial": "A001-agent_tools-01",
+      "result_sha256": "063272fa898bc75f96c392dee76bfd8c9ee042a6909ec2002ea46901705f3e65",
+      "input_sha256": "380306c01f4135fbc33e8cbf7141b8979eeb35f8e4b51097b7434ff8bcb73c7a",
+      "elapsed_seconds": 2.1861063000105787,
+      "diagnostic": null,
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4565,
+        "completion_tokens": 14,
+        "total_tokens": 4579,
+        "reasoning_tokens": null
+      },
+      "wire_messages_sha256": "243a0a950862dd0b26553804264a8b2fd897540f9924ccef3908fd4238271097"
+    },
+    {
+      "trial": "A001-agent_tools-02",
+      "result_sha256": "00f4e3f88f6d1a71f4b76fd04d0e45791dbf145a5b61a846064079bfc62857b1",
+      "input_sha256": "380306c01f4135fbc33e8cbf7141b8979eeb35f8e4b51097b7434ff8bcb73c7a",
+      "elapsed_seconds": 31.066967199993087,
+      "diagnostic": "timeout",
+      "http_status": null,
+      "usage": {
+        "prompt_tokens": null,
+        "completion_tokens": null,
+        "total_tokens": null,
+        "reasoning_tokens": null
+      },
+      "wire_messages_sha256": "243a0a950862dd0b26553804264a8b2fd897540f9924ccef3908fd4238271097"
+    },
+    {
+      "trial": "A001-agent_tools-03",
+      "result_sha256": "06788a49dd29329c4fcc376cedd578a673c95e2985e4bd09bf797a01a520b9d4",
+      "input_sha256": "380306c01f4135fbc33e8cbf7141b8979eeb35f8e4b51097b7434ff8bcb73c7a",
+      "elapsed_seconds": 2.398086000001058,
+      "diagnostic": null,
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4565,
+        "completion_tokens": 14,
+        "total_tokens": 4579,
+        "reasoning_tokens": null
+      },
+      "wire_messages_sha256": "243a0a950862dd0b26553804264a8b2fd897540f9924ccef3908fd4238271097"
+    },
+    {
+      "trial": "A004-agent_tools-01",
+      "result_sha256": "9390b73eef4a89bfbe2d33ccc0cb8d5649bc233a17ac20d677615116eacd1af8",
+      "input_sha256": "0e7c0453276660fbf740a69b3db5a6cfb7d48028244b69d3e5b66fc4f7d3b9c3",
+      "elapsed_seconds": 1.9487862999958452,
+      "diagnostic": null,
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4568,
+        "completion_tokens": 19,
+        "total_tokens": 4587,
+        "reasoning_tokens": null
+      },
+      "wire_messages_sha256": "f04f9a5a6c66eb1acba8bf0dfbde846af651b89f5630947907b1fec69af39599"
+    },
+    {
+      "trial": "A004-agent_tools-02",
+      "result_sha256": "8b2633d56a42b1544ce2c68ac6f8e51d6116b2dd429925b0b3c264eea821157d",
+      "input_sha256": "0e7c0453276660fbf740a69b3db5a6cfb7d48028244b69d3e5b66fc4f7d3b9c3",
+      "elapsed_seconds": 31.133724400016945,
+      "diagnostic": "timeout",
+      "http_status": null,
+      "usage": {
+        "prompt_tokens": null,
+        "completion_tokens": null,
+        "total_tokens": null,
+        "reasoning_tokens": null
+      },
+      "wire_messages_sha256": "f04f9a5a6c66eb1acba8bf0dfbde846af651b89f5630947907b1fec69af39599"
+    },
+    {
+      "trial": "A004-agent_tools-03",
+      "result_sha256": "df4b925a6d460cdebf4c328660efe2d3de88c4394637cdccd08baa20f8a5faf8",
+      "input_sha256": "0e7c0453276660fbf740a69b3db5a6cfb7d48028244b69d3e5b66fc4f7d3b9c3",
+      "elapsed_seconds": 1.8244880000129342,
+      "diagnostic": null,
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4568,
+        "completion_tokens": 19,
+        "total_tokens": 4587,
+        "reasoning_tokens": null
+      },
+      "wire_messages_sha256": "f04f9a5a6c66eb1acba8bf0dfbde846af651b89f5630947907b1fec69af39599"
+    },
+    {
+      "trial": "A008-agent_tools-01",
+      "result_sha256": "5e0843da1841ff89b545c6adcbedea2e7f2f4a2d475eade7c36f81e563cd3b4a",
+      "input_sha256": "833093e6f940b96c807bbc22de5f39cdd7d652f8983bc9c8b2e22357f0c0c4f6",
+      "elapsed_seconds": 2.297245699999621,
+      "diagnostic": null,
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4567,
+        "completion_tokens": 30,
+        "total_tokens": 4597,
+        "reasoning_tokens": null
+      },
+      "wire_messages_sha256": "3be80c1ed5a3ea21719731638433f930aa831e627ed27e9dbff21b5f9aba1f7e"
+    },
+    {
+      "trial": "A008-agent_tools-02",
+      "result_sha256": "aafe30f99342aa9001095cf5f6e8aba82923c28f4dcda4d03aa5779551b4074e",
+      "input_sha256": "833093e6f940b96c807bbc22de5f39cdd7d652f8983bc9c8b2e22357f0c0c4f6",
+      "elapsed_seconds": 31.001153099990916,
+      "diagnostic": "timeout",
+      "http_status": null,
+      "usage": {
+        "prompt_tokens": null,
+        "completion_tokens": null,
+        "total_tokens": null,
+        "reasoning_tokens": null
+      },
+      "wire_messages_sha256": "3be80c1ed5a3ea21719731638433f930aa831e627ed27e9dbff21b5f9aba1f7e"
+    },
+    {
+      "trial": "A008-agent_tools-03",
+      "result_sha256": "855be63e5c39e3cc1f8f30286f4bfaa2c2ed53ea241dd0cda7165020fd5ef9b9",
+      "input_sha256": "833093e6f940b96c807bbc22de5f39cdd7d652f8983bc9c8b2e22357f0c0c4f6",
+      "elapsed_seconds": 8.282174599997234,
+      "diagnostic": null,
+      "http_status": 200,
+      "usage": {
+        "prompt_tokens": 4567,
+        "completion_tokens": 19,
+        "total_tokens": 4586,
+        "reasoning_tokens": null
+      },
+      "wire_messages_sha256": "3be80c1ed5a3ea21719731638433f930aa831e627ed27e9dbff21b5f9aba1f7e"
+    }
+  ],
+  "conclusion": "Timeouts retained; input equality and latency do not identify network/provider root cause."
+}

@@ -1,0 +1,14 @@
+{
+  "dataset_version": "solomeal-p8-v1",
+  "dataset_sha256": "2aa39319b14a91242e0a0aa6c58625eb78f3da4efb505bc47b24d8a590bc3ae7",
+  "source_sha256": "17c27286c0cfae2b1d7ff411382d12c4552996681c02592333e3959c3fb459e8",
+  "commit": "a923d77c7c281f2fcd165a71ad062f1ec0d851bc",
+  "python": "3.13.13",
+  "database": "isolated SQLite",
+  "started_at": "2026-09-09T10:04:40.711490+00:00",
+  "mode": "engineering_regression",
+  "model": null,
+  "prompt_version": null,
+  "sampling": null,
+  "repetitions": 1
+}

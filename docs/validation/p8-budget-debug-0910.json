@@ -1,0 +1,56 @@
+{
+  "p8_gate": "incomplete",
+  "attempts_without_result": 1,
+  "known_requests": 8.0,
+  "cost": null,
+  "interruption_note": "User reported unexpected shutdown. A007 first trial has two responses and a third reserved attempt with no result; send status, usage, final business state and outcome are unknown. No original evidence was overwritten.",
+  "scope": "diagnostic_subset_not_formal_score",
+  "observed_total_tokens": 34773.0,
+  "trials": [
+    {
+      "objective_pass": true,
+      "source_sha256": "87f5706ad1f907d127bcf7e16fd0aaf70e7559383d8b6f3ff75990aeed53623b",
+      "status": "completed",
+      "elapsed_seconds": 30.676326399901882,
+      "invalid_calls": 0,
+      "known_requests": 4,
+      "evidence_directory": "D:/SoloMeal-Acceptance/p8-budget-A006-json-v2-0910-01",
+      "scenario_id": "A006",
+      "observed_total_tokens": 17970.0,
+      "business_unchanged": true,
+      "human_clarity": null,
+      "attempts_without_result": 0,
+      "task_success": null
+    },
+    {
+      "objective_pass": null,
+      "source_sha256": "87f5706ad1f907d127bcf7e16fd0aaf70e7559383d8b6f3ff75990aeed53623b",
+      "status": "interrupted",
+      "elapsed_seconds": null,
+      "invalid_calls": null,
+      "known_requests": 2,
+      "evidence_directory": "D:/SoloMeal-Acceptance/p8-budget-A007-json-v2-0910-01",
+      "scenario_id": "A007",
+      "observed_total_tokens": 7762.0,
+      "business_unchanged": null,
+      "human_clarity": null,
+      "attempts_without_result": 1,
+      "task_success": null
+    },
+    {
+      "objective_pass": true,
+      "source_sha256": "87f5706ad1f907d127bcf7e16fd0aaf70e7559383d8b6f3ff75990aeed53623b",
+      "status": "completed",
+      "elapsed_seconds": 22.21516969999999,
+      "invalid_calls": 0,
+      "known_requests": 2,
+      "evidence_directory": "D:/SoloMeal-Acceptance/p8-budget-A007-json-v2-0910-02",
+      "scenario_id": "A007",
+      "observed_total_tokens": 9041.0,
+      "business_unchanged": true,
+      "human_clarity": null,
+      "attempts_without_result": 0,
+      "task_success": null
+    }
+  ]
+}

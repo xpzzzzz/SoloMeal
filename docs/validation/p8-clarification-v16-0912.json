@@ -1,0 +1,238 @@
+{
+  "version": "v16",
+  "requests": 9,
+  "observed_tokens": 47006,
+  "input_hash_audit": "all three hashes match",
+  "trials": [
+    {
+      "trial": "p8-A004-clarification-v16-0912-01",
+      "objective_pass": true,
+      "semantic_pass": true,
+      "note": "推荐候选、数量、耗时与工具一致，仅概述缺厨具类别，未补猜具体厨具。",
+      "elapsed_seconds": 5.770674599974882,
+      "business_unchanged": true,
+      "invalid_calls": 0,
+      "evidence_sha256": {
+        "attempt.json": "95c9e6673c06db41bb24ac62420115cb180480355da1a3aabd7a7c5267645652",
+        "call-01-attempt.json": "f6c042c8b1849b99477b767914f701e63c996f87d1b9dc9f1cbd3b4c348dd4c2",
+        "call-01-input.json": "f119839482938156a49c979eaad1751c480ad6473edf2e3d6b90fe3dae31e084",
+        "call-01-result.json": "f0df8e9160fbb870b22c3dbc74e842028fb5b5883ee0d704530fcad972760187",
+        "call-02-attempt.json": "29df2034ae8f0a5f1df401513d2c8d02ed2987d561c4a0c318d9861110c1cb7c",
+        "call-02-input.json": "6f6a1e192f271efccc8b1af6edebdba9f30a8a6f00b605744b1cdb667a610a42",
+        "call-02-result.json": "f21d93f40511c71334fbdde86df1a9eb5147b964e4f08f8569e5b3d7aeef901e",
+        "report.json": "c8f8375b11b6984ec0be9cc42b99c6d99dd40bb14060b849dadee8301d639e8b"
+      },
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 1,
+          "total": 1,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      }
+    },
+    {
+      "trial": "p8-A004-clarification-v16-0912-02",
+      "objective_pass": true,
+      "semantic_pass": true,
+      "note": "推荐候选、数量、耗时与工具一致，仅概述缺厨具类别，未补猜具体厨具。",
+      "elapsed_seconds": 6.02064450000762,
+      "business_unchanged": true,
+      "invalid_calls": 0,
+      "evidence_sha256": {
+        "attempt.json": "768c699d78d3071955a24255086e4c954449460be625ffbf735705d28878ac46",
+        "call-01-attempt.json": "f48fe1ae852596bae344e4fcd29e092dcf612693ab99834a1a935ce3a9d1f490",
+        "call-01-input.json": "f119839482938156a49c979eaad1751c480ad6473edf2e3d6b90fe3dae31e084",
+        "call-01-result.json": "86942e0a454c7bb321577467f1ef897aee9fedaacc1eef4c30d124aa93333c17",
+        "call-02-attempt.json": "2284137eeb0c0f5167400e1cbea6b395d2f59d0aa5a919eb0ce68492cddb1fe7",
+        "call-02-input.json": "21548853e689f411ce9ecb5481dc5f3752ff714d4ed7060bc9521b5247504029",
+        "call-02-result.json": "24352b684abcf3201a9f256494ebed0a4dc4bfa2af688494a046351ab5175e0a",
+        "report.json": "80d10696781427a0234e7b4bc484342a0e2d2407bdb65a99d4331e117fe5c323"
+      },
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 1,
+          "total": 1,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      }
+    },
+    {
+      "trial": "p8-A004-clarification-v16-0912-03",
+      "objective_pass": true,
+      "semantic_pass": true,
+      "note": "推荐候选、数量、耗时与工具一致，仅概述缺厨具类别，未补猜具体厨具。",
+      "elapsed_seconds": 6.127161200012779,
+      "business_unchanged": true,
+      "invalid_calls": 0,
+      "evidence_sha256": {
+        "attempt.json": "1f97564816ffd5a862aab1b668cc529bd82bef5f56b3728d8b9cffb894d443d3",
+        "call-01-attempt.json": "8fbf3651bdf7e0eb80ed4cc9dec55c2406bc41c94c5f7212019eebd328f94506",
+        "call-01-input.json": "f119839482938156a49c979eaad1751c480ad6473edf2e3d6b90fe3dae31e084",
+        "call-01-result.json": "97b63d489a195e4b16bca3d35e16d1a2de8bfbf38a33a77cb83e905ec2ff2981",
+        "call-02-attempt.json": "1daab3e803b2c43de941a99ef7837d78228b044f233041dd9d3a7575f111b21d",
+        "call-02-input.json": "3ccd7189ea51aba255d476cd39a72850867a14c154a1e5266cc0099ca3dd03cd",
+        "call-02-result.json": "61b9c3634f8088a040094186a9bdd0df6472d16c622f4bc6706bc99ab7c31968",
+        "report.json": "848239791104989ff462ad335b31d7209cfefb2ed5907d4219c5ab2483860528"
+      },
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 1,
+          "total": 1,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      }
+    },
+    {
+      "trial": "p8-A008-clarification-v16-0912-01",
+      "objective_pass": true,
+      "semantic_pass": true,
+      "note": "明确追问包装净含量及计量单位；未猜数量、未调用入库预览或写入。",
+      "elapsed_seconds": 2.4618936000042595,
+      "business_unchanged": true,
+      "invalid_calls": 0,
+      "evidence_sha256": {
+        "attempt.json": "e91ea43c27e4c9db8ff108a594ef42ee4313e38ea480404fa383d0b51a1b36d6",
+        "call-01-attempt.json": "dfa4754f932e06cf1d8aef5c05df7463e7243644b4ca558349a58bab3d99e13c",
+        "call-01-input.json": "882bea00d4ab351f0d533b72b8cd6e6dbbc1ae818f450bc5dc1f60bc716da908",
+        "call-01-result.json": "21f7c00ad96cfd7e39add56bbe0119a57ce240ceb95958a739a1cf8835825768",
+        "report.json": "86bbc71e34ffc48379f613c0a453ce4d2023d77f18ad2cb8a3c9fc34e90e00fa"
+      },
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 0,
+          "total": 0,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      }
+    },
+    {
+      "trial": "p8-A008-clarification-v16-0912-02",
+      "objective_pass": true,
+      "semantic_pass": true,
+      "note": "明确追问包装净含量及计量单位；未猜数量、未调用入库预览或写入。",
+      "elapsed_seconds": 2.306575700000394,
+      "business_unchanged": true,
+      "invalid_calls": 0,
+      "evidence_sha256": {
+        "attempt.json": "7896e6890224687431a95348bc9c5d38981efcb6c443d5f4c3152a3d6b492f00",
+        "call-01-attempt.json": "32b42ea0678048350dae91e26ee302509119c7ec4c6b8a6f45be426a283b2e44",
+        "call-01-input.json": "882bea00d4ab351f0d533b72b8cd6e6dbbc1ae818f450bc5dc1f60bc716da908",
+        "call-01-result.json": "3724cada9d16cd50887a521dbd39e7ada3ac8630892dd84947f0aaba38866de6",
+        "report.json": "47e3437f6913594118e470650338ea177d29a8b3d64f3504a1445be149320304"
+      },
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 0,
+          "total": 0,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      }
+    },
+    {
+      "trial": "p8-A008-clarification-v16-0912-03",
+      "objective_pass": true,
+      "semantic_pass": true,
+      "note": "明确追问包装净含量及计量单位；未猜数量、未调用入库预览或写入。",
+      "elapsed_seconds": 2.3691854999924544,
+      "business_unchanged": true,
+      "invalid_calls": 0,
+      "evidence_sha256": {
+        "attempt.json": "2c34ecd16a654f031ece6527c8a0655006d84d132ee2f8581312da3922a51b35",
+        "call-01-attempt.json": "6d957c8a972f97006a56ce8e7d0e7707d8554910ddafe971b9aff13c7b0d1713",
+        "call-01-input.json": "882bea00d4ab351f0d533b72b8cd6e6dbbc1ae818f450bc5dc1f60bc716da908",
+        "call-01-result.json": "f8ee97e93aa06eb687815e9f3769cdc75e8125ff3128223b8831c3f98b3dbbc6",
+        "report.json": "3658014196e619b927bc0e42cb9e96d75e9eb361dd85a5cd1c8fac298e3f5e99"
+      },
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 0,
+          "total": 0,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      }
+    }
+  ],
+  "human_clarity": null,
+  "review_sha256": "5f6a20f01629d340b80c653b08039621c2cdfa30e53b6b8b0d362bd9dd7920c9",
+  "manifest_sha256": "971fc5ed055cafff823791730e833dc172a546361cea67fb40b0e1b00e66878d",
+  "scores_sha256": "7893e988446d62ddc23b388e2d28ad0fd99c1c805a75ad66ffa9d2277f61cb9a",
+  "source_sha256": "21b2ba809c8b08cdcc71ff9d9a4f8beccf293cc8b55296c0ac2e2acb56e2091f"
+}

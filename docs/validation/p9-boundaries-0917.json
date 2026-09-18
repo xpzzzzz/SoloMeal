@@ -1,0 +1,31 @@
+{
+  "date": "2026-09-17",
+  "scope": "P9 request limits, REST pagination, container settings, delivery material",
+  "model_requests": 0,
+  "known_chat_requests_total": 1663,
+  "known_vision_requests_total": 30,
+  "source_files": 67,
+  "source_sha256": "c3161b9b8c69fcfad70e7b12425e2d7c94aafce3391b486fe67e811ebd95bcb3",
+  "api_image_id": "sha256:908cf165568b66eff3295df8d13bc5cf4aa0102646cb0f961326b336f69ec0d3",
+  "backend_first": {"passed": 100, "failed": 1, "skipped": 4},
+  "backend_final": {"passed": 530, "failed": 0, "skipped": 16, "seconds": 234.957},
+  "linux_overlapping_subset_passed": 58,
+  "frontend_unit_passed": 29,
+  "frontend_build_passed": true,
+  "browser_passed": 9,
+  "container_results": "p9-boundaries-0917-container-final/results.json",
+  "source_18080_redeployed": false,
+  "source_18080_readiness": "ready",
+  "p5_complete": false,
+  "p8_complete": false,
+  "p9_complete": false,
+  "files_sha256": {
+    "compose.yaml": "2f7f9fccb9b9096a5b622be672b892391fe601535d1cf9c1d875d807df92a91e",
+    "deploy/nginx.conf": "cf97091f876dbeff610f6921444c61bef3e61f6d27b1cee6f89a0fa962189ae1",
+    "frontend/src/session.ts": "3c4152dd8485843282860dc30d7672e9cd6c597a573fea6ee6f947198b31ba63",
+    "frontend/src/main.tsx": "df9ff0bfc11bc562b5c1b119ecb1fcee9791de8f150fb0424e0ec37e537f024b",
+    "deploy/verify_boundaries.py": "3d697b5b420f7339a9e42640f0ab55dbe003eb62e1d0aa421b72c9e8f2c6a5a5",
+    "docs/validation/p9-boundaries-0917-backend.xml": "92df640940595c3481017dc93fbb6078408e69cabef8aec54610a3fefeebc53b",
+    "docs/validation/p9-boundaries-0917-final.xml": "8c82bf82ffaa15ae72e249cfeab6697bdb185a352e84ec9a8df77476dcadd5c0"
+  }
+}

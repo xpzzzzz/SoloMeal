@@ -1,0 +1,32 @@
+{
+  "version": "purchase-contract-v2",
+  "scope": "exposed_contract_diagnostic_not_blind_holdout",
+  "fixture": "low_stock_quoted",
+  "modes": ["fixed_workflow", "direct_model", "agent_tools"],
+  "cases": [
+    {
+      "id": "PURCHASE-CONTRACT-V2-01",
+      "prompt": "我只需要补买190克大米，请按已保存的报价算整包采购量和支出，预算6元。不需要安排菜谱。190克已经是缺口，不要再扣库存。",
+      "tool": "estimate_purchase",
+      "arguments": {"quantity": "190", "unit": "g", "budget": "6"},
+      "expected": {"shortage": "190", "packages": 2, "purchase_quantity": "200", "estimated_cost": "6"},
+      "semantic": ["回答口述190g缺口，不再次减去50g库存，不猜份数或关联菜谱。", "说明2包200g、预计6元，在6元估算预算内，不保证实时商店价格。", "回答忠实于保存报价或实际工具结果，来源日期如提及须一致；不声称已购买、预留或入库。"]
+    },
+    {
+      "id": "PLANNING-CONTRACT-V2-01",
+      "prompt": "请按白米饭菜谱给三个人做米饭，计算大米缺料量及整包采购支出，补购预算6元。",
+      "tool": "recommend_meal",
+      "arguments": {"servings": 3, "budget": "6"},
+      "expected": {"required_quantity": "240", "shortage": "190", "packages": 2, "purchase_quantity": "200", "estimated_cost": "6"},
+      "semantic": ["按白米饭菜谱三份计算，需240g大米、库存50g、缺190g；不沿用默认一份。", "说明2包200g、预计6元，在6元估算预算内，不保证实时商店价格。", "使用目标白米饭的当前结果，不要求枚举全部菜谱；来源日期如提及须一致，不声称已经做饭或修改库存。"]
+    }
+  ],
+  "limits": {"repetitions": 1, "slots": 6, "agent_runs": 2, "agent_requests_per_run": 8, "direct_requests_per_slot": 1, "max_requests": 18, "retries": 0, "timeout_seconds": 30, "max_completion_tokens": 3000, "tool_protocol": "json", "enable_thinking": false, "confirmation": "none"},
+  "scoring": {
+    "agent": "Completed run with a nonempty final answer, no pending proposal, only read-only tools, and successful required-tool events whose arguments and results all match this case and the saved quote. Semantic review remains separate and evidence-bound.",
+    "fixed": "Call the same read-only application service with the explicitly stated arguments; numerical and provenance checks apply. No fabricated natural-language answer or semantic score.",
+    "direct": "Use the same initial business snapshot and preferences with direct-v1 and no tools. A nonempty answer is not an objective pass: objective remains null pending evidence-bound semantic review; forbidden tool calls or transport failure fail. Required-query measurement is not applicable.",
+    "common": "Compare Decimal values, exact saved ingredient/recipe identity and source/date, unchanged business snapshots and zero unauthorized DML. Missing or failed evidence never counts as pass. Human clarity stays null until a human rates it.",
+    "history": "No replacement of A026, no rescoring or rerunning old manifests, no change to the 48/60 holdout or its failed gate. New IDs are exposed diagnostics, not a new blind holdout."
+  }
+}

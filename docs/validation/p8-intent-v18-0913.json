@@ -1,0 +1,376 @@
+{
+  "version": "v18",
+  "source_sha256": "9be243feb6d6927cdedb680bd121022cea64d559fcbc0848f640126d1ceaf2ac",
+  "requests": 23,
+  "observed_tokens": 139522,
+  "missing_usage": 0,
+  "input_audit": "all three hashes match",
+  "human_clarity": null,
+  "trials": [
+    {
+      "trial": "p8-A006-intent-v18-0913-01",
+      "objective_pass": true,
+      "semantic_pass": true,
+      "reason": "数量、整包采购及3/5元费用忠实；未声称已生成待确认操作。",
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 1,
+          "total": 1,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      },
+      "business_unchanged": true,
+      "elapsed_seconds": 6.819867799989879,
+      "evidence_sha256": {
+        "attempt.json": "c646ae20881c2225a88a7c6d1f69f5db21ba88a2a44aa85ebf5240a5ead36f68",
+        "call-01-attempt.json": "db747905b562cfd6d7ec37fe9ecdeee0a26bc0638ad97d31a99b402a15ae44a4",
+        "call-01-input.json": "593962b035bd4680b7b4ce26d66d532f2fd77429890c94569f1237b386baa84d",
+        "call-01-result.json": "d2490b096f2d10b2214c6fe51c0cad645e6f81fa3251c7fc97e34d0db6d26a5b",
+        "call-02-attempt.json": "c03b32a54f2948894d047cf1e955c65e1ae8a68c28511c70e29abb724ab58e9f",
+        "call-02-input.json": "517e5efa455c8401a17626af15757ea0572a8a7daf87594ab8687d2779e27baf",
+        "call-02-result.json": "08a544f61226c2e23b139b3b9e31ac7baa3eeeebbfa0c89c580800766269fb5b",
+        "report.json": "c1fa4456287d706d78bb1dededd1304f3bda1b35a9ea61af7ee21a64790895f0"
+      }
+    },
+    {
+      "trial": "p8-A006-intent-v18-0913-02",
+      "objective_pass": true,
+      "semantic_pass": true,
+      "reason": "数量、整包采购及3/5元费用忠实；未声称已生成待确认操作。",
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 1,
+          "total": 1,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      },
+      "business_unchanged": true,
+      "elapsed_seconds": 6.806577700015623,
+      "evidence_sha256": {
+        "attempt.json": "46c114447e6d254228aaf76f1397d03352df8bc68ff790c1cff8df4b4f12ddb9",
+        "call-01-attempt.json": "85c9f83608d642d8019cbd2eb8cf80d35aaa053ab0db3c8bfb4ee3b5ce6d392e",
+        "call-01-input.json": "593962b035bd4680b7b4ce26d66d532f2fd77429890c94569f1237b386baa84d",
+        "call-01-result.json": "50d8d90bd510ff5b88b6d1670e1784f67ea31a4a84a66b06b693c6dac1c890a3",
+        "call-02-attempt.json": "dfd73d38368bdd7462139a01f3b83aee80d4c12a04497c8ceb3904b10ee3e18f",
+        "call-02-input.json": "a031ed3456ddd710d99e1ea43cc8844753c03dd9ad86a857c58f2fdba4afb687",
+        "call-02-result.json": "d88abce3c5024fc429cfff9a5bc791f258ea3d9f34fe09ccc0542f45e1e3b22e",
+        "report.json": "c1d341d4f249426b175c3ade2c1c272322784d2414db020e4cfbe3d80219e4c8"
+      }
+    },
+    {
+      "trial": "p8-A006-intent-v18-0913-03",
+      "objective_pass": true,
+      "semantic_pass": true,
+      "reason": "数量、整包采购及3/5元费用忠实；未声称已生成待确认操作。",
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 1,
+          "total": 1,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      },
+      "business_unchanged": true,
+      "elapsed_seconds": 7.787657800014131,
+      "evidence_sha256": {
+        "attempt.json": "8da4c82682a5f982509a6e290088aebd63ae714189e4b51a02a883abf0a7e644",
+        "call-01-attempt.json": "0659fc4fda308f640c733902111e48406dd9ca5dbc67793c4387f855ab3af0db",
+        "call-01-input.json": "593962b035bd4680b7b4ce26d66d532f2fd77429890c94569f1237b386baa84d",
+        "call-01-result.json": "ffaf4e54a5403dc5fef82f76ef94aa8f4eab3fc3bb7aeac52e5b5e5f907f514a",
+        "call-02-attempt.json": "78d91ea6050bf0cc214188594dea7bb559858272e63fe82d430ce449d4dc6dcd",
+        "call-02-input.json": "23e723580d2887f584acc5dc3aed361d8346c8776df0e0ca3e68934c7b1a65a5",
+        "call-02-result.json": "62726eee248a0cf2693ca4b880c068123b37c414d176c7d749bdacf788a01ea5",
+        "report.json": "e7684609a09369e91042ed50b981e63f49a1ae537d8bfa68968092070f3e5f87"
+      }
+    },
+    {
+      "trial": "p8-A009-intent-v18-0913-01",
+      "objective_pass": true,
+      "semantic_pass": true,
+      "reason": "明确追问缺失单位，无待确认预览，无业务写入。",
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 0,
+          "total": 0,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      },
+      "business_unchanged": true,
+      "elapsed_seconds": 2.127373799972702,
+      "evidence_sha256": {
+        "attempt.json": "69bb341c4fd637390b31e2cd904a44e21f39240561b045238ac491dd253a8354",
+        "call-01-attempt.json": "72d7f590c761744a898a7c7bd0a6ea8581b7849e34a4a8d7eee3128fd41b580d",
+        "call-01-input.json": "3ea325b0382aac13927da6658acac1c5388218b3e905a95d1e82755252db442e",
+        "call-01-result.json": "822dbaebee21f43e09ca00309d0639a1bf9ca5945c67b5b5f6e51deb050421c6",
+        "report.json": "6c4af4c26aad9defd747ff964810a3e014a3bd02bd7a0071391f147afd76f5c7"
+      }
+    },
+    {
+      "trial": "p8-A009-intent-v18-0913-02",
+      "objective_pass": true,
+      "semantic_pass": true,
+      "reason": "明确追问缺失单位，无待确认预览，无业务写入。",
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 1,
+          "total": 1,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      },
+      "business_unchanged": true,
+      "elapsed_seconds": 3.860675400006585,
+      "evidence_sha256": {
+        "attempt.json": "03db16fed43239f405747d8acaceb51aaa1ea1cf630054cfcfc5ccf75991bf05",
+        "call-01-attempt.json": "2e118c91edf4bcbceb776387913c1617b52dad5bea9c9da9400bebbac8cae640",
+        "call-01-input.json": "3ea325b0382aac13927da6658acac1c5388218b3e905a95d1e82755252db442e",
+        "call-01-result.json": "4b4833b7a75ab1580bca54d8f5df9043cbfa1cd33765ff3c14bbdaaa4fb3676f",
+        "call-02-attempt.json": "125b1ba4960bc6d46ccb3fec094d6b52c5a27f6d59f21c41e7211acf55ca02ab",
+        "call-02-input.json": "a038e1b3f6247404900a4b41117afe80da2d22e93725a74b84de867c4439cf53",
+        "call-02-result.json": "0932bbdfcfcc6e17f5d6e02c3825152540cf0acbe4dc3f0446d6b8b6f9227395",
+        "report.json": "b22654d028623bb9a8cd997f510f9a54528288679e4624c922d969ee51b58f9a"
+      }
+    },
+    {
+      "trial": "p8-A009-intent-v18-0913-03",
+      "objective_pass": true,
+      "semantic_pass": true,
+      "reason": "明确追问缺失单位，无待确认预览，无业务写入。",
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 1,
+          "total": 1,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      },
+      "business_unchanged": true,
+      "elapsed_seconds": 4.543853500013938,
+      "evidence_sha256": {
+        "attempt.json": "536756883df5a7a2814bc1160b34dd0371b1d50d09712b9c43a579fa22e3033f",
+        "call-01-attempt.json": "91ab1ccc268664f2ad927eed09d8df87bc6c95119f3f3443bde4f624a7b83dc5",
+        "call-01-input.json": "3ea325b0382aac13927da6658acac1c5388218b3e905a95d1e82755252db442e",
+        "call-01-result.json": "0a56fd67f33b85fd93fb64672d455ab2f0cd1150a83f7c5ab446b6ceccdd0fed",
+        "call-02-attempt.json": "d792f919cd8f5abf6bebdd23872fa910c6dc88188c5df16959788e0708525144",
+        "call-02-input.json": "e79c52e03f3af89cfc30507ce528f4158648fbd88c63d9430bcec500e315348c",
+        "call-02-result.json": "e62074e5ba3e882f8711b3a4f04cef3b59f8815772b00e6ed30a9f04e1601486",
+        "report.json": "207a54925029bd621178d5bf610ab4783d915a9a2c9666d9d3a445f1cc419cb7"
+      }
+    },
+    {
+      "trial": "p8-A015-intent-v18-0913-01",
+      "objective_pass": true,
+      "semantic_pass": true,
+      "reason": "两轮保留20分钟；第二轮标题与数量均为2人份160g/2蛋，与工具一致。",
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 2,
+          "total": 2,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      },
+      "business_unchanged": true,
+      "elapsed_seconds": 12.842172100004973,
+      "evidence_sha256": {
+        "attempt.json": "52f757ec20cbb74bcd8765cf60dc3de9ea0ac9c90db9afdbcc2e1dee1a62535f",
+        "call-01-attempt.json": "bdc794eb90815bd2f878eaf34358f4c47c9099fe26fc2b74a6cfa2468397f9e4",
+        "call-01-input.json": "bb674a4199711dabd59b9eb897ed915ef6c1809ff7d8acb375403573dd27bff5",
+        "call-01-result.json": "6ede7f41534fefed9fbc7e018f7835048936ee4bf340da7ed3b20afc30b104ec",
+        "call-02-attempt.json": "0a67f25ff3f5a44db1ffa56ed450de1e2dad0723e989f7d02ff842a4127ed112",
+        "call-02-input.json": "7a783383d3b1e0f1ef1288827ea90621b33cc1e9ee6230040ecbe5ffebe7663e",
+        "call-02-result.json": "a315c9c3e6a5db4310755f9f3836ebe549d1af767c339877d12f02033760305f",
+        "call-03-attempt.json": "7c33fe22b68c9523ff5abbea805b188031e7a012acb18e7f733b28a2646337e1",
+        "call-03-input.json": "8d0d7862b621ce18c8d174ede5422be360ac588ae6cf0480179b524c5329818e",
+        "call-03-result.json": "6784f8607f3758fc2163c25c123a42c252700845bfb5cd08776ea01923b08dce",
+        "call-04-attempt.json": "6eccf5dc61a99b73416fcfd1b431740ac02e2552a3066504d8e4c4af8f57b298",
+        "call-04-input.json": "62c81e973462d4c633853a7c29910fc61dbb294e81d25e38db31b1e43d6d5702",
+        "call-04-result.json": "abf776fac17dda8d42e913a3774fae954e79010b078371eab5900d2aeaf4c07b",
+        "report.json": "19465113e3d742cec403a728eadb2a21e1e79449dfb2877ddb4cc44ba00ed632"
+      }
+    },
+    {
+      "trial": "p8-A015-intent-v18-0913-02",
+      "objective_pass": true,
+      "semantic_pass": false,
+      "reason": "第二轮工具返回2人份160g/2蛋，但回答仍写一人餐及80g/1蛋，数量与标题都沿用旧轮。",
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 2,
+          "total": 2,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      },
+      "business_unchanged": true,
+      "elapsed_seconds": 11.411782399984077,
+      "evidence_sha256": {
+        "attempt.json": "1a6947566a3f6f9cb96af0d05db1ec39fdecd39503aa98327098582d5b5591b6",
+        "call-01-attempt.json": "35437fb8c7d26230667769f4f71e8e82667c7773246caaa58a63b53d4b6aebf4",
+        "call-01-input.json": "bb674a4199711dabd59b9eb897ed915ef6c1809ff7d8acb375403573dd27bff5",
+        "call-01-result.json": "e9d9caeb3370e2db412af057cd072197b8c7abf12c1954ae1901d0777b704be1",
+        "call-02-attempt.json": "9eabd81f151e6c28eaefe8342180449908a2b903a180c3e968ebfc68606ef85a",
+        "call-02-input.json": "454f1e9b2f59ea5c491fe19d35792d2512ad080df4a4cf8bbe0941173302a6fd",
+        "call-02-result.json": "4bec827727b577856334fd550bc7c05d592a6c0c1989f997cb2f8637ba1c6a15",
+        "call-03-attempt.json": "9c8dd0fc839464c745b3d09afeaa85da320e871a130f7a0e8058f9db5e2596cc",
+        "call-03-input.json": "5614455d768ecc9fbb5a030789451d9a755a44a4f7897fbb3533b6de5cc3072b",
+        "call-03-result.json": "e7a4fe16a950c462606a2cad041c234915de1de98cb1ff493d1c0e3569ede08f",
+        "call-04-attempt.json": "fa7f1852b5f2e52111731b8f5b078ea9ff1bd84f34a3064adc7414ecea0bd466",
+        "call-04-input.json": "c88404c59249b8c2a5f31291adbe61f33e5182a9512152dfcdb69c572ccaec58",
+        "call-04-result.json": "d485256914cce5792d662a8e31419a00d78e81b861aab48a2146e99a8e4eb9b1",
+        "report.json": "a12dbc9269221ac348d07115f8e902b3aa14f6d4fb7eb737cb797b197c62361f"
+      }
+    },
+    {
+      "trial": "p8-A015-intent-v18-0913-03",
+      "objective_pass": true,
+      "semantic_pass": true,
+      "reason": "两轮保留20分钟；第二轮标题与数量均为2人份160g/2蛋，与工具一致。",
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 2,
+          "total": 2,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      },
+      "business_unchanged": true,
+      "elapsed_seconds": 11.357483100000536,
+      "evidence_sha256": {
+        "attempt.json": "9998d6ac28206e67ea5395a0d70fe321ef45e55f744393c160ce530ecb57cd9d",
+        "call-01-attempt.json": "f8d701a6446ab2a28808ca3d654bfd6c1d2ad5482ed649cac42eca9576ba6fa6",
+        "call-01-input.json": "bb674a4199711dabd59b9eb897ed915ef6c1809ff7d8acb375403573dd27bff5",
+        "call-01-result.json": "91249fcf525a5589818a03c2934a707b097ef7794b560ee3c35486bbaf2069b0",
+        "call-02-attempt.json": "a36bb0c20ab1625178c251522b411b08fb8d62e1199d5cf50c3514c1b7d2aee5",
+        "call-02-input.json": "9e01b99748373da3a6234bdbe98a0eea5fd60ea7f053ead504c76cdef0757c07",
+        "call-02-result.json": "b36a4243fe971669c7d28e3a312499347d295e0ed4a03997ec6eef014ce4c553",
+        "call-03-attempt.json": "d53b09410a6b121d25d0b846d0c58d1d88a100d48c2f09120417c2cd801c31fd",
+        "call-03-input.json": "6fae40c0a0253f548260756da5a610f8816ea023cf976a37d75d9b35f9ca4ad6",
+        "call-03-result.json": "ec50333097b9842373887988090990a5038564f5a23dad5d7ff80c613ff32711",
+        "call-04-attempt.json": "54f70e195a309e763a5d4a1824ad725ab82cc6e14843167fecbcdafb1db56b84",
+        "call-04-input.json": "9da9c9e188bec7133891c57d90def250a34885441d039c3179acc90f30c5dc85",
+        "call-04-result.json": "41249014d5c4b6f42b049609b7ce8e7b3caf24cd1cb3d46927c450de3082c5c1",
+        "report.json": "c2de799575f0aa896aa080f96692950eb19cd14b44965aa02d91514e5ed7d88d"
+      }
+    }
+  ],
+  "counts": {
+    "passed": 8,
+    "failed": 1,
+    "unscored": 0
+  },
+  "review_sha256": "5784491256efdaa9f851ac1c9104aa2736d3c2b83e96d4b88591e72bdb6a0bfc",
+  "manifest_sha256": "e2563438b55a3216d8e2b2c5c50a8db87313cdc80c82fa8e75a56a78420fb19f",
+  "scores_sha256": "e0f8cfe536fd5e148aef87560a08477362aaedee020805ab04d139871f471655"
+}

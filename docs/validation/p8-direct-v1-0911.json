@@ -1,0 +1,212 @@
+{
+  "scope": "direct_prompt_diagnostic_not_full_cohort",
+  "p8_gate": "incomplete",
+  "requests": 5,
+  "observed_tokens": 9681,
+  "trials": [
+    {
+      "trial": "p8-A002-direct-v1-0911-01",
+      "objective_pass": null,
+      "semantic_pass": true,
+      "human_clarity": null,
+      "elapsed_seconds": 4.350705899996683,
+      "actual_requests": 1,
+      "observed_tokens": 1790,
+      "business_unchanged": true,
+      "evidence_sha256": {
+        "attempt.json": "088beec41a6e3f390adf5b6fde89bf647ea4dc84b042256fadd35e53c4dadfdb",
+        "call-01-attempt.json": "5de140677b3a8febd735dff0e0b5682a11e1f3f7683413f3700cdd3607682986",
+        "call-01-input.json": "81a0577ace0b12bb38cf751ddaaaa8cfbc16b7a2c50d52fe703d907898b39e21",
+        "call-01-result.json": "577eb7123c9830e64aa20770f7430c837f46338e83473f5cd0d234e7251b816d",
+        "report.json": "163d80a375ca5783f56406795c94cb5d862d4d3a89deb046cd159b63d9df246f"
+      },
+      "attempt": {
+        "scenario": "A002",
+        "mode": "direct_model",
+        "dataset_sha256": "2aa39319b14a91242e0a0aa6c58625eb78f3da4efb505bc47b24d8a590bc3ae7",
+        "protocol_sha256": "df0ee4c6171f026b6d520b93f8b0597f5e4beacb74505b45a499e2d20f7b4862",
+        "commit": "a923d77c7c281f2fcd165a71ad062f1ec0d851bc",
+        "source_sha256": "5ed779604fb811d7fe051abddae9d3eeaecfe838da1611be273d155694a83228",
+        "prompt_version": "solomeal-agent-v10",
+        "direct_prompt_version": "solomeal-direct-v1",
+        "direct_system_sha256": "2f610a708ccb623d6f133e8b117ccdf60fd91cd5b34affe9cae54db61e23962b",
+        "tool_protocol": "json",
+        "max_completion_tokens": 3000,
+        "model_timeout_seconds": 30,
+        "enable_thinking": "false",
+        "confirmation_extension": "none",
+        "oracle_amendments_sha256": "5e5f9dfa11a2d8e3c427025410642edf61d5c07c1ba6ddf27380fb9f0054334e",
+        "budget_amendments_sha256": "e34e1e2d39a4e02a484e08a0aff2e473334cf8244aa7478c3468d233d889a3eb",
+        "system_sha256": "7aeb51d8239cb72abc91abb8cf13347db1dcfd65a040d5225e60397eeaa91680",
+        "tools_sha256": "5d53d1404d8c490a17fad9b91ad3be6e0dda6c5e26168b7a8ee3a37bead639df",
+        "repetitions": 1,
+        "scope": "diagnostic_subset",
+        "started_at": "2026-09-11T13:13:03.731244+00:00",
+        "p8_gate": "incomplete"
+      },
+      "review_notes": [
+        "Answers catalog request with all three available recipes.",
+        "Per-serving quantities and maximum servings agree with stock and saved equipment.",
+        "Names, times, stock and servings are supported by retained private snapshot; no tools or writes claimed."
+      ]
+    },
+    {
+      "trial": "p8-A006-direct-v1-0911-01",
+      "objective_pass": null,
+      "semantic_pass": false,
+      "human_clarity": null,
+      "elapsed_seconds": 8.158309999998892,
+      "actual_requests": 1,
+      "observed_tokens": 1882,
+      "business_unchanged": true,
+      "evidence_sha256": {
+        "attempt.json": "269c07083dd06c4a5d6303abfdaab68036cea2d69ce49ea4dfbf0ed3d54bf349",
+        "call-01-attempt.json": "e7864f7a436aa83d9bed41c8e2e30dc05a5a98e369d9535e5964575d83ba06b6",
+        "call-01-input.json": "fd37678d3b2afbf7dec6ce3e3c9eef5befbbc3bf0f0cc289c37daa1a6da03cb0",
+        "call-01-result.json": "4e896f3a2b9e3214a7137dd40a94c1de26e9b508d4ae6e6c50e56f3980745ef0",
+        "report.json": "5b3430f39576b3c6a7234d18aa3f33df8a0328ce82070a689e2cedc1e75e9001"
+      },
+      "attempt": {
+        "scenario": "A006",
+        "mode": "direct_model",
+        "dataset_sha256": "2aa39319b14a91242e0a0aa6c58625eb78f3da4efb505bc47b24d8a590bc3ae7",
+        "protocol_sha256": "df0ee4c6171f026b6d520b93f8b0597f5e4beacb74505b45a499e2d20f7b4862",
+        "commit": "a923d77c7c281f2fcd165a71ad062f1ec0d851bc",
+        "source_sha256": "5ed779604fb811d7fe051abddae9d3eeaecfe838da1611be273d155694a83228",
+        "prompt_version": "solomeal-agent-v10",
+        "direct_prompt_version": "solomeal-direct-v1",
+        "direct_system_sha256": "2f610a708ccb623d6f133e8b117ccdf60fd91cd5b34affe9cae54db61e23962b",
+        "tool_protocol": "json",
+        "max_completion_tokens": 3000,
+        "model_timeout_seconds": 30,
+        "enable_thinking": "false",
+        "confirmation_extension": "none",
+        "oracle_amendments_sha256": "5e5f9dfa11a2d8e3c427025410642edf61d5c07c1ba6ddf27380fb9f0054334e",
+        "budget_amendments_sha256": "e34e1e2d39a4e02a484e08a0aff2e473334cf8244aa7478c3468d233d889a3eb",
+        "system_sha256": "7aeb51d8239cb72abc91abb8cf13347db1dcfd65a040d5225e60397eeaa91680",
+        "tools_sha256": "5d53d1404d8c490a17fad9b91ad3be6e0dda6c5e26168b7a8ee3a37bead639df",
+        "repetitions": 1,
+        "scope": "diagnostic_subset",
+        "started_at": "2026-09-11T13:13:10.441694+00:00",
+        "p8_gate": "incomplete"
+      },
+      "review_notes": [
+        "Provides purchase proposals for the requested budget.",
+        "Contradicts 3+2=5 by claiming an added egg exceeds 5; says 100 g covers 1-2 servings of 80 g.",
+        "Unsupported two-serving coverage and over-budget claim; correct main baskets do not erase contradictions."
+      ]
+    },
+    {
+      "trial": "p8-A015-direct-v1-0911-01",
+      "objective_pass": null,
+      "semantic_pass": false,
+      "human_clarity": null,
+      "elapsed_seconds": 21.009073899986106,
+      "actual_requests": 2,
+      "observed_tokens": 4395,
+      "business_unchanged": true,
+      "evidence_sha256": {
+        "attempt.json": "0b9f1a48acb4d9b614be5e2ffb8d4aab39b7fdd878903c91c62d525abd614c65",
+        "call-01-attempt.json": "47aed9d2f6fd83a0dfd14284cb905a284ac928a9bc3463900b72c74d3365ba55",
+        "call-01-input.json": "dcb0bffb9f60ca2bbd0c0bcc49b5bd8500c350d55bc47effe062484288ebdc2a",
+        "call-01-result.json": "d1f6a8b1aeb4f4cc611d4510527bddabf955842ca45b65e3525a94f340dee46a",
+        "call-02-attempt.json": "b65c1bbb27bcea06c338f1eb6d450ed9bb542ce6629863e21bf01d2c7ba1bc5c",
+        "call-02-input.json": "aff1c256f4bedefebb2510225619b0856db4c9b923ec747ffad19c2978186a2e",
+        "call-02-result.json": "227772597efba300ac27f25629ce25033062b24e22088ceebaaa080372cf2f2e",
+        "report.json": "f8e01dd9304c3cc46100dba834401aaf5031cfc56bd97affa566fa103f7a9ac1"
+      },
+      "attempt": {
+        "scenario": "A015",
+        "mode": "direct_model",
+        "dataset_sha256": "2aa39319b14a91242e0a0aa6c58625eb78f3da4efb505bc47b24d8a590bc3ae7",
+        "protocol_sha256": "df0ee4c6171f026b6d520b93f8b0597f5e4beacb74505b45a499e2d20f7b4862",
+        "commit": "a923d77c7c281f2fcd165a71ad062f1ec0d851bc",
+        "source_sha256": "5ed779604fb811d7fe051abddae9d3eeaecfe838da1611be273d155694a83228",
+        "prompt_version": "solomeal-agent-v10",
+        "direct_prompt_version": "solomeal-direct-v1",
+        "direct_system_sha256": "2f610a708ccb623d6f133e8b117ccdf60fd91cd5b34affe9cae54db61e23962b",
+        "tool_protocol": "json",
+        "max_completion_tokens": 3000,
+        "model_timeout_seconds": 30,
+        "enable_thinking": "false",
+        "confirmation_extension": "none",
+        "oracle_amendments_sha256": "5e5f9dfa11a2d8e3c427025410642edf61d5c07c1ba6ddf27380fb9f0054334e",
+        "budget_amendments_sha256": "e34e1e2d39a4e02a484e08a0aff2e473334cf8244aa7478c3468d233d889a3eb",
+        "system_sha256": "7aeb51d8239cb72abc91abb8cf13347db1dcfd65a040d5225e60397eeaa91680",
+        "tools_sha256": "5d53d1404d8c490a17fad9b91ad3be6e0dda6c5e26168b7a8ee3a37bead639df",
+        "repetitions": 1,
+        "scope": "diagnostic_subset",
+        "started_at": "2026-09-11T13:13:20.956726+00:00",
+        "p8_gate": "incomplete"
+      },
+      "review_notes": [
+        "Retains changed two servings and the previous twenty-minute limit.",
+        "Invents 20-25 minute estimates and changes feasibility instead of using fixture recipe times.",
+        "Second turn adds unsupported timing adjustments and experiential claims; quantities 160 g/two eggs remain correct."
+      ]
+    },
+    {
+      "trial": "p8-A020-direct-v1-0911-01",
+      "objective_pass": null,
+      "semantic_pass": true,
+      "human_clarity": null,
+      "elapsed_seconds": 2.75866780000797,
+      "actual_requests": 1,
+      "observed_tokens": 1614,
+      "business_unchanged": true,
+      "evidence_sha256": {
+        "attempt.json": "aa0158eeda3107211a5d31dbfdc8e3c2d9e7533ff9aea6ce1b4370ec8e9feaed",
+        "call-01-attempt.json": "202ffe9d0697c62c219f6e7c0111d7072e5273d1edadb236f3d68c867563714b",
+        "call-01-input.json": "c91aaa2b51068cbd6279ebee9f82e427c5f78fa73355161f3e60e34982ef4683",
+        "call-01-result.json": "0b83def7d818db4677618ea1606625bbd06db259d53aad7b75effce133b8882c",
+        "report.json": "e15377f4b840556b63a9380bf9d96327d1c1fec9e44977df2ea8c9ea2d454a3c"
+      },
+      "attempt": {
+        "scenario": "A020",
+        "mode": "direct_model",
+        "dataset_sha256": "2aa39319b14a91242e0a0aa6c58625eb78f3da4efb505bc47b24d8a590bc3ae7",
+        "protocol_sha256": "df0ee4c6171f026b6d520b93f8b0597f5e4beacb74505b45a499e2d20f7b4862",
+        "commit": "a923d77c7c281f2fcd165a71ad062f1ec0d851bc",
+        "source_sha256": "5ed779604fb811d7fe051abddae9d3eeaecfe838da1611be273d155694a83228",
+        "prompt_version": "solomeal-agent-v10",
+        "direct_prompt_version": "solomeal-direct-v1",
+        "direct_system_sha256": "2f610a708ccb623d6f133e8b117ccdf60fd91cd5b34affe9cae54db61e23962b",
+        "tool_protocol": "json",
+        "max_completion_tokens": 3000,
+        "model_timeout_seconds": 30,
+        "enable_thinking": "false",
+        "confirmation_extension": "none",
+        "oracle_amendments_sha256": "5e5f9dfa11a2d8e3c427025410642edf61d5c07c1ba6ddf27380fb9f0054334e",
+        "budget_amendments_sha256": "e34e1e2d39a4e02a484e08a0aff2e473334cf8244aa7478c3468d233d889a3eb",
+        "system_sha256": "7aeb51d8239cb72abc91abb8cf13347db1dcfd65a040d5225e60397eeaa91680",
+        "tools_sha256": "5d53d1404d8c490a17fad9b91ad3be6e0dda6c5e26168b7a8ee3a37bead639df",
+        "repetitions": 1,
+        "scope": "diagnostic_subset",
+        "started_at": "2026-09-11T13:13:44.260757+00:00",
+        "p8_gate": "incomplete"
+      },
+      "review_notes": [
+        "Responds from provided snapshot while explicitly saying no new query or change occurred.",
+        "Snapshot quantities remain 300 g rice and two eggs.",
+        "User mentioned timeout; answer does not claim a real retry or write. Actual tool retry task is not applicable to no-tool mode."
+      ]
+    }
+  ],
+  "counts": {
+    "passed": 1,
+    "failed": 2,
+    "unscored": 0,
+    "not_applicable": 1
+  },
+  "review_sha256": "34e14e6c9d98391ef7030fecf8f35ac696d016689925211e2db4d5d8223c91d1",
+  "manifest_sha256": "ae74f5f0a2be4c3d3f5a65468bb503d6556157e54cc8b471b486b1e3f3e36e44",
+  "scores_sha256": "287da3dcf722d5ed83b3dba0664386b82ba69db72402bee59898d1a382127356",
+  "new_cohort": {
+    "directory": "D:\\SoloMeal-Acceptance\\p8-cohort-real-v4-0911-01",
+    "manifest_sha256": "e48d7cbe5acd3825614510750ff3a3c3263421aeb584e1f09168f7139e379839",
+    "config_sha256": "38a4beae78dab28058d9acd8205a2a8f96fd50d6a66f79208d0dd58f8677673a",
+    "audit_sha256": "70444a78f9b92495a9966d313532bb33b098db5432ae29643b1a2e8c348073ce",
+    "not_started": 180,
+    "actual_requests": 0
+  }
+}

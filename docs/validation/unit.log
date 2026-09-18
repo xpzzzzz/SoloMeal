@@ -1,0 +1,566 @@
+
+-- Dish.normalize_ingredient --
+  PASS  strips and lowercases
+  PASS  empty string
+  PASS  already normalized
+
+-- Dish.normalize_name --
+  PASS  strips and lowercases
+  PASS  empty string
+  PASS  already normalized
+
+-- Dish.can_cook_with --
+  PASS  all essentials available
+  PASS  essentials only
+  PASS  missing essential
+  PASS  empty fridge
+  PASS  extra ingredients ok
+
+-- Dish.can_cook_with (no ingredients) --
+  PASS  no ingredients = can cook
+
+-- Dish.can_cook_with (only optional) --
+  PASS  only optionals = can cook
+
+-- Dish.to_dict --
+  PASS  has name
+  PASS  has ingredients
+  PASS  no prep_time
+
+-- Dish.from_dict --
+  PASS  name lowercased
+  PASS  ingredient lowercased
+  PASS  prep_time ignored
+  PASS  ingredients loaded
+  PASS  missing ingredients = empty dict
+
+-- Dish.from_dict (invalid) --
+  PASS  rejects non-dict ingredients
+  PASS  rejects blank name
+
+-- Dish.add_ingredient --
+  PASS  rice normalized
+  PASS  rice is essential
+  PASS  pepper normalized
+  PASS  pepper is optional
+
+-- Dish.add_ingredient (validation) --
+  PASS  rejects blank ingredient
+  PASS  rejects non-bool flags
+
+-- Dish: ingredient keys normalized on direct construction --
+  PASS  ingredient keys stripped+lowercased
+  PASS  can_cook_with matches normalized fridge
+
+-- Dish: colliding ingredient keys rejected --
+  PASS  rejects contradictory colliding keys
+  PASS  from_dict still loads legacy rows
+
+-- Dish.instructions --
+  PASS  defaults to None
+  PASS  to_dict omits the key entirely when unset
+  PASS  stored stripped
+  PASS  to_dict emits the key when set
+  PASS  whitespace-only normalizes to None
+  PASS  blank still omitted from to_dict
+  PASS  over-length raises ValueError
+  PASS  length checked after stripping
+  PASS  non-string int raises
+  PASS  non-string list raises
+  PASS  non-string dict raises
+  PASS  non-string bool raises
+  PASS  from_dict(to_dict(dish)) preserves instructions
+  PASS  from_dict without the key yields None
+
+-- calculate_score (basic) --
+  PASS  positive score
+  PASS  essentials-only dish scores the recency term
+  PASS  max score = 1.0
+
+-- calculate_score (cooldown) --
+  PASS  0 days = blocked
+  PASS  1 day = blocked
+  PASS  2 days = allowed
+
+-- calculate_score (no ingredients) --
+  PASS  empty ingredients = 0
+
+-- calculate_score (partial) --
+  PASS  optional increases score
+
+-- calculate_score (declaring optionals never penalizes) --
+  PASS  describing the recipe better never lowers its score
+  PASS  present optionals raise the score
+
+-- calculate_score (match depends on present count only) --
+  PASS  equal present-optional counts score equally
+  PASS  declaring no optionals is not a free full match
+
+-- calculate_score (recency scaling) --
+  PASS  more days = higher score
+  PASS  14+ days capped
+
+-- score_components (agrees with calculate_score) --
+  PASS  gated day 0 scores 0
+  PASS  gated day 1 scores 0
+  PASS  day 2 blend matches
+  PASS  day 7 blend matches
+  PASS  day 14 blend matches
+  PASS  day 30 blend matches
+  PASS  no-ingredient dish is gated
+
+-- suggest_dishes (basic) --
+  PASS  only rice bowl suggested
+  PASS  correct dish
+
+-- suggest_dishes (excludes recent) --
+  PASS  cooked yesterday = excluded
+
+-- suggest_dishes (default recency) --
+  PASS  new dish suggested
+
+-- suggest_quick_shopping (basic) --
+  PASS  one suggestion
+  PASS  missing eggs
+  PASS  unlocks omelette
+
+-- suggest_quick_shopping (two missing) --
+  PASS  no suggestion when 2 missing
+
+-- suggest_quick_shopping (groups by ingredient) --
+  PASS  eggs unlocks both
+  PASS  ingredient is eggs
+
+-- suggest_quick_shopping (max_missing) --
+  PASS  default threshold stays single-unlock
+  PASS  threshold 2 still excludes a three-away dish
+  PASS  threshold 3 surfaces the dish
+  PASS  every missing essential is credited
+  PASS  still_missing reports the basket size
+
+-- suggest_quick_shopping (ranks by reach) --
+  PASS  highest-reach ingredient ranks first
+  PASS  reach count is reported
+
+-- suggest_quick_shopping (cheapest basket leads) --
+  PASS  true one-item unlock ranks first
+  PASS  higher-reach-but-useless ingredient ranks below it
+  PASS  reach still leads within a basket size
+
+-- suggest_quick_shopping (row describes the cheapest unlock) --
+  PASS  still_missing is the smallest basket
+  PASS  score belongs to that basket's dish, not the pricier one
+  PASS  reach counts only what this basket reaches
+  PASS  the pricier dish is not advertised here
+  PASS  pricier dish still surfaces at its real basket size
+
+-- JsonFridgeRepository (counts) --
+  PASS  load round-trips counts
+  PASS  load_set excludes zero counts
+  PASS  consume reports only what changed
+  PASS  onion decremented
+  PASS  staple untouched
+  PASS  zero stays zero
+
+-- JsonFridgeRepository (unreadable file degrades) --
+  SKIP  unreadable-file probe (running with override access)
+
+-- JsonFridgeRepository (non-finite counts) --
+  PASS  non-finite counts dropped, file still usable
+  PASS  load_set survives
+
+-- expiry_status --
+  PASS  no date yields no status
+  PASS  expiring today counts as expiring soon, not expired
+  PASS  the last day inside the window is expiring soon
+  PASS  one day past the window is fresh
+  PASS  yesterday is expired
+  PASS  far future is fresh
+  PASS  unreadable dates are treated as no date
+  PASS  accepts a date object
+
+-- JsonFridgeRepository.load_entries / save_entries --
+  PASS  object form parsed
+  PASS  legacy scalar loads with no expiry
+  PASS  null still means pantry staple
+  PASS  load() keeps its {name: count} contract
+  PASS  load_set() is unaffected by expiry
+  PASS  no-expiry entries round-trip as bare scalars
+  PASS  expiry entries round-trip as objects
+  PASS  unreadable expires_on keeps the ingredient
+  PASS  non-finite counts dropped in the object form too
+  PASS  object without a count means one portion
+
+-- JsonFridgeRepository: mutations keep expiry --
+  PASS  consume decrements without losing the date
+  PASS  count-only save keeps the date
+  PASS  remove_items drops the whole entry
+
+-- normalize_ingredient_entries --
+  PASS  list means one portion each
+  PASS  counts and staples pass through
+  PASS  object form carries the date
+  PASS  an omitted expires_on leaves the key out
+  PASS  an explicit null keeps the key
+  PASS  malformed date rejected
+  PASS  non-string date rejected
+  PASS  unknown field rejected
+  PASS  bad count rejected
+  PASS  boolean count rejected
+  PASS  negative count rejected
+  PASS  colliding keys rejected
+
+-- JsonAliasRepository --
+  PASS  missing file loads as empty
+  PASS  resolve returns the input unchanged when unmapped
+  PASS  nothing is created just by reading
+  PASS  alias resolves to its canonical
+  PASS  canonical resolves to itself
+  PASS  pre-existing alias is re-pointed, no chain forms
+  PASS  the retired name resolves to the new canonical
+  PASS  no alias points at another alias
+  PASS  self-alias rejected
+  PASS  corrupt file loads as empty
+  PASS  non-object file loads as empty
+  PASS  non-string and blank entries are skipped
+
+-- JsonDishRepository.restore (delta-rollback) --
+  PASS  dish is gone before restore
+  PASS  restore reports it re-added the dish
+  PASS  dish is back in the catalog
+  PASS  ingredients survive the round trip
+
+-- JsonDishRepository.restore (name already present) --
+  PASS  restore declines when the name is present
+  PASS  no duplicate row was written
+  PASS  the stored dish is untouched
+
+-- atomic_write_json (cleanup on failure) --
+  PASS  non-serializable payload raises
+  PASS  no temp file is left behind
+  PASS  the pre-existing target is intact
+
+-- atomic_write_json (keeps the target's permissions) --
+  FAIL  existing mode survives the replace  -- got 0o666
+  FAIL  a brand-new file is not owner-only  -- got 0o666
+
+-- atomic_write_json (sweeps orphaned temp files) --
+  PASS  stale temp file is removed
+  PASS  a temp file that could still be in flight is left alone
+  PASS  temp files this module did not create are never touched
+
+-- dii.session.from_dict (validates a restored backup) --
+  PASS  a well-formed backup round-trips
+  PASS  dish name is normalized on restore
+  PASS  essential wins when a backup lists a name in both
+  PASS  rejects a queue entry with no 'ingredient'
+  PASS  rejects a non-object queue entry
+  PASS  rejects a non-bool is_essential
+  PASS  rejects a malformed current_suggestion
+  PASS  rejects a non-list ingredient field
+  PASS  rejects a non-string ingredient
+  PASS  rejects a non-bool finalized
+
+-- dii.finalizer (essential wins over optional) --
+  PASS  a name in both lists commits as essential
+
+-- atomic_write_json (happy path) --
+  PASS  parent directory is created lazily
+  PASS  payload round-trips
+  PASS  target is replaced, not appended
+  PASS  no temp file survives a successful write
+
+-- DataDirLock (reentrancy) --
+  PASS  starts unheld
+  PASS  depth 1 after first acquire
+  PASS  depth 2 after nested acquire
+  PASS  depth 3 after third acquire
+  PASS  depth unwinds to 2
+  PASS  depth unwinds to 1
+  PASS  depth unwinds to 0
+  PASS  file descriptor released
+  FAIL  lock file was created
+
+-- DataDirLock (configure while held) --
+  PASS  configure while held rejected
+  PASS  path unchanged after refusal
+  PASS  configure works once released
+
+-- DataDirLock (release on exception) --
+  PASS  depth back to 0 after an exception
+  PASS  fd released after an exception
+  PASS  a fresh acquisition still succeeds
+  PASS  and unwinds again
+
+-- DataDirLock (cross-process exclusion) --
+  SKIP  fcntl unavailable on this platform
+
+-- DataDirLock (shared across repositories) --
+  PASS  dish and fridge share one lock object
+  PASS  tuning shares it too
+  PASS  alias shares it too
+  PASS  history shares it too
+  PASS  configure moves the lock into the new data dir
+  PASS  configure restores the previous lock path
+
+-- CookingEvent.from_dict (strict) --
+  PASS  round-trips
+  PASS  active when not retracted
+  PASS  missing key raises ValueError naming it
+  PASS  unknown key raises ValueError naming it
+  PASS  bad id prefix raises ValueError
+  PASS  blank dish name raises ValueError
+  PASS  bad cooked_on raises ValueError
+  PASS  naive recorded_at raises ValueError
+  PASS  non-bool backfilled raises ValueError
+  PASS  naive retracted_at raises ValueError
+
+-- JsonHistoryRepository.load (projection) --
+  PASS  projects the latest date per dish
+  PASS  every event is retained
+  PASS  written in the v2 envelope
+
+-- JsonHistoryRepository: an older event never wins --
+  PASS  backdated event does not move the projection
+  PASS  but the backdated event is still on record
+  PASS  a genuinely newer event does move it
+
+-- JsonHistoryRepository: retract vs delete --
+  PASS  retracts the most recent cook
+  PASS  projection falls back to the earlier cook
+  PASS  retracted event is still in the log
+  PASS  retracted event is marked, not removed
+  PASS  retracting an already-retracted id returns None
+  PASS  retracting an unknown id returns None
+  PASS  delete_event reports success
+  PASS  deleted event is gone from the log
+  PASS  deleting an unknown id reports failure
+  PASS  projection is empty once the last active event is gone
+  PASS  retract_latest_for_dish on an unknown dish returns None
+
+-- JsonHistoryRepository: legacy {dish: date} migration --
+  PASS  one event per readable entry
+  PASS  names normalized
+  PASS  projection matches the legacy mapping
+  PASS  load_events never writes
+  PASS  ids are deterministic across migrations
+  PASS  the next write persists the v2 shape
+  PASS  no duplicates after the rewrite
+
+-- JsonHistoryRepository: corrupt storage --
+  PASS  invalid JSON: non-strict yields an empty log
+  PASS  invalid JSON: strict raises HistoryDataError
+  PASS  top-level list: non-strict yields an empty log
+  PASS  top-level list: strict raises HistoryDataError
+  PASS  unsupported schema_version: non-strict yields an empty log
+  PASS  unsupported schema_version: strict raises HistoryDataError
+  PASS  non-list events: non-strict yields an empty log
+  PASS  non-list events: strict raises HistoryDataError
+  PASS  invalid event row: non-strict yields an empty log
+  PASS  invalid event row: strict raises HistoryDataError
+  PASS  load() tolerates corruption
+
+-- _normalize_ingredients (dict) --
+  PASS  keys normalized
+
+-- _normalize_ingredients (list) --
+  PASS  all essential
+
+-- _normalize_ingredients (JSON string dict) --
+  PASS  parsed from string
+
+-- _normalize_ingredients (JSON string list) --
+  PASS  parsed from string
+
+-- _normalize_ingredients (invalid) --
+  PASS  rejects int
+  PASS  rejects bad string
+
+-- normalize_ingredients: empty rejected --
+  PASS  rejects empty []
+  PASS  rejects empty {}
+  PASS  rejects empty '[]'
+  PASS  rejects empty '{}'
+
+-- normalize_ingredients: dedupes before applying the cap --
+  PASS  repeats collapse to one ingredient
+  PASS  rejects >100 distinct ingredients
+
+-- normalize_ingredients: colliding dict keys rejected --
+  PASS  dict collision rejected
+  PASS  list repeats still collapse
+
+-- normalize_ingredient_names --
+  PASS  list normalized and deduped
+  PASS  dict values ignored
+  PASS  JSON string accepted
+
+-- reject_unknown_args --
+  PASS  declared keys pass
+  PASS  unknown key raises ValueError naming it
+  PASS  non-dict args raises ValueError
+  PASS  extra_args widens the allowed set
+
+-- tool_handler (schema-derived validation) --
+  PASS  declared argument passes through
+  PASS  unknown argument returns an error envelope
+  PASS  error names the offending key
+  PASS  schema=None stays unvalidated
+
+-- _safe_error_message --
+  PASS  ValueError passes through verbatim
+  PASS  LookupError passes through verbatim
+  PASS  KeyError passes through (a LookupError subclass)
+  PASS  OSError is replaced
+  PASS  FileNotFoundError is replaced
+  PASS  JSONDecodeError is matched before ValueError
+  PASS  unanticipated types get the generic default
+  PASS  TypeError gets the generic default
+
+-- tool_handler (sanitized error envelope) --
+  PASS  OSError envelope hides the path
+  PASS  deliberate ValueError still visible verbatim
+
+-- tuning.initialize_state --
+  PASS  deploys prior w
+  PASS  time weight complements availability
+  PASS  zero observations
+  PASS  all candidates in band
+  PASS  anchor is the initial argmax
+
+-- tuning.deployed_weights (fallback) --
+  PASS  falls back to prior blend
+
+-- tuning.deployed_weights (clamp + re-derive) --
+  PASS  clamps match weight to band upper bound
+  PASS  re-derives complementary time weight
+  PASS  clamps match weight to band lower bound
+
+-- tuning.validate_state --
+  PASS  accepts a well-formed state
+  PASS  rejects non-dict
+  PASS  rejects missing fields
+
+-- tuning.validate_state (corruption branches) --
+  PASS  rejects mismatched candidate set
+  PASS  rejects S/C key mismatch
+  PASS  rejects non-numeric mass
+  PASS  rejects boolean mass (bool is not a valid float here)
+  PASS  rejects NaN mass
+  PASS  rejects Infinity mass
+
+-- tuning.validate_state (candidate list must be usable) --
+  PASS  rejects a candidate list containing a string
+  PASS  rejects a candidate list containing None
+  PASS  rejects a candidate list containing a nested list
+  PASS  rejects a candidate list containing a bool
+  PASS  rejects a candidate list containing NaN
+  PASS  rejects a duplicated candidate (a set comparison hid it)
+  PASS  an intact candidate list still validates
+
+-- tuning.compute_rewards (cooked dish not cookable) --
+  PASS  returns None (degenerate)
+
+-- tuning.compute_rewards (N < 2) --
+  PASS  returns None (no ranking signal)
+
+-- tuning.compute_rewards (w-dependent ranking -> signal) --
+  PASS  returns a reward dict
+  PASS  reward discriminates between candidates
+  PASS  the low-w candidate ranks it top
+
+-- tuning.compute_rewards (uniform reward skipped) --
+  PASS  weight-independent ranking yields no signal
+
+-- tuning.compute_rewards (no-signal cook returns None) --
+  PASS  cooldown-zeroed cook yields no signal (None)
+  PASS  normal cook produces rewards
+
+-- tuning.apply_update (pure, non-mutating) --
+  PASS  input left unchanged
+  PASS  observations incremented
+  PASS  count discounted then +1
+
+-- tuning.select_deployed (cold start) --
+  PASS  stays at prior below MIN_OBSERVATIONS
+
+-- tuning.select_deployed (shifts once warm) --
+  PASS  shifts upward after MIN_OBSERVATIONS
+  PASS  stays within band
+  PASS  weights still sum to 1.0
+
+-- tuning.select_deployed (hysteresis) --
+  PASS  sub-margin advantage does not switch deploy
+
+-- Dish: invalid ingredient names/flags rejected on construction --
+  PASS  empty ingredient name rejected
+  PASS  non-boolean essential flag rejected
+  PASS  valid ingredients still accepted
+  PASS  from_dict still rejects a non-boolean flag
+
+-- JsonAliasRepository: cached reads stay correct --
+  PASS  missing file resolves to the input
+  PASS  a write is visible immediately
+  PASS  repeated reads stay correct
+  PASS  load() returns a copy, not the cache
+  PASS  a later write invalidates the cache
+  PASS  an external rewrite is picked up
+  PASS  deletion is picked up
+
+-- tuning.select_deployed (deployed weight off the candidate grid) --
+  PASS  an off-grid weight snaps onto the grid
+  PASS  hysteresis is enforced from an off-grid start
+  PASS  weights still sum to 1.0
+
+-- tuning.compute_rewards (reward is normalized over the ranking) --
+  PASS  a one-dish ranking carries no signal
+  PASS  a discriminating event produces rewards
+  PASS  every reward is within [0, 1]
+  PASS  bottom of a two-dish ranking scores exactly 0.0
+  PASS  top of a two-dish ranking scores exactly 1.0
+  PASS  low availability weight ranks the recency pick first
+  PASS  high availability weight ranks the cooked dish first
+
+-- .githooks/pre-commit (present, executable) --
+  PASS  the hook is committed
+  PASS  the hook is executable
+
+-- .githooks/pre-commit (runs both suites) --
+  PASS  the hook runs test_unit.py
+  PASS  the hook runs test_integration.py
+  PASS  the hook says how to install itself
+
+-- .githooks/pre-commit (no virtualenv) --
+  PASS  the hook does not invoke pip
+  PASS  the hook does not invoke mypy
+  PASS  the hook does not invoke coverage
+  PASS  the hook does not invoke .venv
+
+-- tests.yml (runs both suites) --
+  PASS  CI runs test_unit.py
+  PASS  CI runs test_integration.py
+
+-- tests.yml (matrix covers the declared floor) --
+  PASS  AGENTS.md still declares a minimum
+  PASS  the matrix includes the floor 3.12
+
+-- tests.yml (actions pinned to SHAs) --
+  PASS  there are actions to check
+  PASS  3d3c42e5aac5... is a full commit SHA
+  PASS  5fda3b95a4ea... is a full commit SHA
+  PASS  3d3c42e5aac5... is a full commit SHA
+  PASS  5fda3b95a4ea... is a full commit SHA
+  PASS  3d3c42e5aac5... is a full commit SHA
+  PASS  5fda3b95a4ea... is a full commit SHA
+
+-- tests.yml (every job feeds ci-complete) --
+  PASS  the gate job exists
+  PASS  no job gates nothing
+
+-- tests.yml (checkout untouched) --
+  PASS  CI checks data/ was not created
+  PASS  CI checks the tree is clean
+
+========================================
+  361 passed, 3 failed
+========================================

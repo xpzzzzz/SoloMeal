@@ -1,0 +1,60 @@
+{
+  "reviewer": "Codex",
+  "human_clarity": null,
+  "registrations": [
+    {
+      "batch": "p8-real-agent-0916-01",
+      "registration_sha256": "f1f34c1da9123e04ed612c0de5c6f15ffdb84a0fd0e7ab0bcdbfa08603cd13a8"
+    },
+    {
+      "batch": "p6-real-ui-0916-01",
+      "registration_sha256": "dde735927a288c4662b9e6febee80c77410d2279f92d39e95650617d6085f801"
+    },
+    {
+      "batch": "p8-real-multi-0916-02",
+      "registration_sha256": "ec0fb94d2f99212344be6f26b7a147bcee4afd9be664a3466cd2a38c82b9f280"
+    }
+  ],
+  "first_multi": {
+    "objective_pass": false,
+    "semantic_pass": true,
+    "limitation": "Driver compared live session navigation metadata; original failure retained; no final parent reread retained."
+  },
+  "recovery": {
+    "objective_pass": true,
+    "semantic_pass": true,
+    "limitation": "Controlled invalid call; real model recovery only. Answer includes extra menu options but correct requested rice purchase, source and date."
+  },
+  "second_multi": {
+    "objective_pass": true,
+    "semantic_pass": false,
+    "reason": "Turn 3 offers cooking preview although one egg is missing; same answer also requires replenishment, leaving a contradictory next step. Preserve failure."
+  },
+  "page": {
+    "business_pass": true,
+    "refresh_pending_same_run": true,
+    "rice_checkpoints": [
+      "300.000",
+      "300.000",
+      "400.000",
+      "400.000",
+      "320.000",
+      "320.000",
+      "400.000"
+    ],
+    "display_defect": "Internal history JSON shown; subsequently fixed and tested with scripted model, no further real calls.",
+    "shutdown": "Process interrupted exit 1, final checkpoint saved before shutdown; no finally after.json/runs.json produced."
+  },
+  "actual_requests": 20,
+  "usage": {
+    "prompt_tokens": 116866,
+    "completion_tokens": 1814,
+    "total_tokens": 118680
+  },
+  "model_elapsed_seconds_sum": 60.49042649992043,
+  "cumulative_chat": 1655,
+  "cumulative_vision": 30,
+  "source_sha256": "1d129290b62f21d1fd6831dfcf3eb53e1b962f2f2fa47f9aa6e0e00248ddd50d",
+  "holdout_gate": "unchanged_failed",
+  "holdout_score": "48/60"
+}

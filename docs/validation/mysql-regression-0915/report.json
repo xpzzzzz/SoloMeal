@@ -1,0 +1,326 @@
+{
+  "started_at": "2026-09-15T03:01:15.803955+00:00",
+  "selectors": [
+    "tests/test_agent_sessions.py",
+    "tests/test_identity.py",
+    "tests/test_optional.py"
+  ],
+  "source_hashes": {
+    "backend/app/__init__.py": "f7e498d70b6cdabdcba4a64b8f96a46c0d1621ca0f0d2268dba1b4d99803ee7c",
+    "backend/app/api/__init__.py": "f7e498d70b6cdabdcba4a64b8f96a46c0d1621ca0f0d2268dba1b4d99803ee7c",
+    "backend/app/api/agent.py": "2ba68ba6f0e32a4c30c00fa54124d80cc1f102588600dbe9b9a15d2e52e3f104",
+    "backend/app/api/food.py": "38a5cbbeaa88097ebf4c73be6ef312bea995d9c3d0588197b9fb2439dc783a3b",
+    "backend/app/api/planning.py": "84939d32b3813e1aef6c34c2d1e33c75b77bce9f095d6737d3d492a9387d8e11",
+    "backend/app/api/receipts.py": "5c032b65f2b28edd1b12c1c633cc27b1d5f4e087ab8dcdcb50fc694eba2a8404",
+    "backend/app/api/routes.py": "58fc257f83ebf7645c94bac368226992b407f890d85acc57d1331b0d8f4a199a",
+    "backend/app/api/run_events.py": "b014b69706daf548d0149145097679c41ae7f324d5d5eb17737a97545b6200b7",
+    "backend/app/api/shopping.py": "ea016a34dd9c382144ecdd7ab11b418529a38e68cfdc5c801698d205efe29f6d",
+    "backend/app/core/__init__.py": "f7e498d70b6cdabdcba4a64b8f96a46c0d1621ca0f0d2268dba1b4d99803ee7c",
+    "backend/app/core/config.py": "d547cd9e51df5385847ffe7a52829be7417e920d64313a3c9835249e7ecace6f",
+    "backend/app/core/database.py": "261c44416af2ac2de2f4a08f975686819bb3082a6b169747f37c499452983ed2",
+    "backend/app/core/errors.py": "cd6a99a92e3c8991b6a111742d8a23b7a9ffe2be8e4406b4d66e8589bc44c3ce",
+    "backend/app/main.py": "48d6e9b7481e91eff9cdc193021061c6466d7d2522c39abfb1572722b04f9d5e",
+    "backend/app/models/__init__.py": "f7e498d70b6cdabdcba4a64b8f96a46c0d1621ca0f0d2268dba1b4d99803ee7c",
+    "backend/app/models/agent.py": "5579d882e4064198d0a0d323268518a18da9a57852c9249d9e680c0a1062edf1",
+    "backend/app/models/food.py": "e65a5abf6c47e647871022e8bdcffc66c5176c0b3e4d73a262da04f439ed60c5",
+    "backend/app/models/identity.py": "276be2eb90d51b5cc129e419bfbde1e1b72dfa04f0d4736098c8778eda0d2c1c",
+    "backend/app/models/plans.py": "ff0b61f7f7888b6b9886ef3a9dfc803abde1d6510998f343b5c3e878ffaf98bc",
+    "backend/app/models/receipts.py": "020b7fe25e5d49dae47c37977b1714e46832063fd65b91dfdde459118c31ddeb",
+    "backend/app/models/shopping.py": "d7ac46396369abb583bc6e09a859220d59eb94243a0d299aabb4f30b76e7f9c0",
+    "backend/app/schemas/__init__.py": "f7e498d70b6cdabdcba4a64b8f96a46c0d1621ca0f0d2268dba1b4d99803ee7c",
+    "backend/app/schemas/agent.py": "95875dc4144efd8e0175fa45ed33b070246e23fdbe7d03faeb57d47155b7048c",
+    "backend/app/schemas/food.py": "4d07110ac2e6dd7568f64a294e7623f44c9af577d1fefdd67978a796fc4ea455",
+    "backend/app/schemas/identity.py": "2a0976f0398664be0bd784eafe3e04b06f6a59e9a17d521d8b281f220c7c790b",
+    "backend/app/schemas/planning.py": "b6e879181ba59ba2fd93dcef8e98723e76add3d5d0f9081055081623e529bd63",
+    "backend/app/schemas/receipts.py": "65d94e56c00c10db2a7f9a4ab06c64d29a6b006bae98fc4d93bc596f9bcdc76d",
+    "backend/app/schemas/shopping.py": "bd43be5ec85464488afb10253ff70a93fbf19b8416d5a85c5ddc1ff81c2a6d58",
+    "backend/app/services/__init__.py": "f7e498d70b6cdabdcba4a64b8f96a46c0d1621ca0f0d2268dba1b4d99803ee7c",
+    "backend/app/services/agent.py": "d231966a54c0ae889376093f4430530b716e3f316226666425a758475ac65e79",
+    "backend/app/services/agent_actions.py": "24daef6d98ad58ebbc54ace50afc86abca6b242c61db73b28f930e6457f2d6a5",
+    "backend/app/services/agent_model.py": "0748d0e724b5361d70fd0986ff29d8f23a4d38139898dc3c458d1c52f3065a8a",
+    "backend/app/services/examples.py": "56337979019147d3663afbb53a77564cefba9ee471fd1cba966943f716d180d3",
+    "backend/app/services/food.py": "ef43307ba668ae6674ca3f44373c8402fdf8c0feef084d4cecb537cefbca6b02",
+    "backend/app/services/identity.py": "1f86a4cf036f19015d36a5bb624cd47470eaba9f6cec93cb27543cd4c0a901ea",
+    "backend/app/services/planning.py": "0eb87afd0265084de1af0a6e1948cb2e96504cd8fa3f3c9c6ad3999ec22b7cb3",
+    "backend/app/services/plans.py": "347ac197065871ac8a64c363a85ee83dddc03b328314706c399f8f22574df49d",
+    "backend/app/services/quantities.py": "60388e6e2109cd0bbe5d3d5b8e1a17927f1572882a57e19813f1c750ce13d98f",
+    "backend/app/services/receipt_images.py": "dcf0c582f42cbc97c1666007120c73eacf06697d10932a4b72ba412bf788e7ce",
+    "backend/app/services/receipt_parser.py": "db49fd3a10b5925895f64d44fc9608a5d0b14cacf5ca786290d76ab4b1dafa79",
+    "backend/app/services/receipts.py": "f24334d561a6e3cd46e53d54da699a3597d559ac3f511cbd4ed99a863582f10a",
+    "backend/app/services/run_events.py": "52544dcdd36eeba552681a01722f9cdd79f03bb28dd0ffc80ad092b642261ef9",
+    "backend/app/services/shopping.py": "5298c4be1b024aac48769b1e97664e60ca7b1f716fe1934173a515fadeac2e52",
+    "backend/app/services/tool_protocol.py": "f68e8dc023d7cebfe8f0809b68f57159dc87f94c167c205c72eab4e5c42a4b37",
+    "backend/tests/conftest.py": "25ac7fed366f7cf53e966881af4f473e09c5ca8087513628d84833f0c750e9e5",
+    "backend/tests/test_agent.py": "ca6ddf1a4ee4ce4d907b3b2ff585cc569f69b9682391084d324ea09edcdd15ea",
+    "backend/tests/test_agent_actions.py": "2ed0d45f67b5966c0af12b8f73e5c178991611c94b47006ca6a0c37adc67b0a6",
+    "backend/tests/test_agent_cohort.py": "5f9e6c26c6ee4a1dd68c7510a2ba616993f19cab172e93f2c96ae35141905407",
+    "backend/tests/test_agent_evaluation.py": "10ad2d6143d9744cde2b29054d2d668a6fecc9f48efb994b0c5319473514b830",
+    "backend/tests/test_agent_recovery.py": "9a70d55b563a072199eadb6c795213090daf220debe3d8215c90b3da6d5a2416",
+    "backend/tests/test_agent_review.py": "435b8c95b5741f245626e21f32b3c873d0fe83fe8f7a1900f4a4ba1f1f1f6978",
+    "backend/tests/test_agent_sessions.py": "9dd3c863be20df22e55054bbc132b7dbfbeee9efa69bbf41ffc94e7b75b5bda5",
+    "backend/tests/test_chat_history.py": "12e264a993d1985b2860c9a6720de24bc1b591abd14a1dca475c9dd2d068ca78",
+    "backend/tests/test_cohort_metrics.py": "0b8ee26225af841fea68acd13efed8f6f72fa92e21d15c027fca1dc4b44a01c9",
+    "backend/tests/test_compact_probe.py": "0cbca30f2f7c0e5ae0d4acbc8b74b6927f797d9cd2d55deb83e44ac435ef5ca9",
+    "backend/tests/test_crud.py": "28c69885962d236bb6357a5ca5213164c57225950d425ee7ed052f55a45e7f0d",
+    "backend/tests/test_evaluation.py": "db9501591baa491c92610fbc811bb948af0f4c770a31c5e1243654e48be9e6cb",
+    "backend/tests/test_evaluation_measurements.py": "488947b7c183856fbf5d963cb5b1bca5c9a3b90c3396288b069ac1631abf9e46",
+    "backend/tests/test_final_budget_probe.py": "9b566cba5c9bda552d232b38f134d629db27676dbba131dee1c92db0689f1b5d",
+    "backend/tests/test_food.py": "a8c04d94f2a7d10ce3d66df36ed01551888fc54b928f89ca169ef3da431db89c",
+    "backend/tests/test_identity.py": "e2ffa00a59cc29c00677a97079467554e73e01a995698f200b6e510dfdb5808d",
+    "backend/tests/test_model_transport.py": "fa6dedc51c50b67eaead7eabbcc5abedac12f0659c0447b866baa470f71b6a4c",
+    "backend/tests/test_optional.py": "e050b2f80fa8a7ac87ee5560c50b71f9b82ba82a782a0acdfd31acfb52918aba",
+    "backend/tests/test_plan_lifecycle.py": "ba0d477cef1aca9df6d65e1aa5e97c8ab32dd4e305ed8fabb124b31ee51b5898",
+    "backend/tests/test_planning.py": "0e05f1c28ad6b533c08697bffa835aa510a0476299e2657955f1bb509b069bde",
+    "backend/tests/test_plans.py": "9a4edf7018153ab25e09df292c851eae1696cf3e7fdb6a7290516dd3a0bba3cd",
+    "backend/tests/test_purchase_contract.py": "b0c84c146481181213e2ad2fb6836be8d8b412341d0be60ea16cc3cc2ade20e9",
+    "backend/tests/test_purchase_contract_review.py": "568ba420dbecb171a13d47b010fac4fe128f79035f15db67ba3f1d381d2f2c36",
+    "backend/tests/test_purchase_diagnostic.py": "120d4de0ffae1f43cd66aaab34e8872364b248b8bf42f0545c065e5ed62c1e9b",
+    "backend/tests/test_receipt_acceptance.py": "31336f72a3b249509a4cffd63883f5275585647a26338c73e0f58257148ee811",
+    "backend/tests/test_receipt_confirmation.py": "f0625e065487072157a4131a79d856d2a686eac94bb6d88d7fd9194b540f135f",
+    "backend/tests/test_receipt_vision.py": "5f35af6a733463ab94a12260e89c053ddbd651b5151104c28c7d143fb08c06a3",
+    "backend/tests/test_receipts.py": "de4d850c8a0828112cd87969479e1286acf1e41155bafe453ffa48d41a122374",
+    "backend/tests/test_run_events.py": "d94ef9d53e1a5f1722e8dbf29d4979a09e10ef80170a1b3ef0278c18b3020677",
+    "backend/tests/test_shopping.py": "bcdcfa8368e226900b492c066cac44da6bdaddd809f844764aff9a7533e85474",
+    "backend/tests/test_timeout_probe.py": "51eb7b35a644c808b092ac9e78641086273fbb6dcb55013bf2f45eeef59ab4ae",
+    "backend/tests/test_tool_protocol.py": "306f49a1415371e10b0fe20354b52ecf39bbe28cf5405c1f79044fc4fd5ea25f",
+    "backend/scripts/analyze_chat_history.py": "4656ef5c3885483e78b4e255fffdd374c4e2ff801828036e29d4b1c68356d810",
+    "backend/scripts/browser_fixture.py": "d865c96e14164c923a89b10c7bf37393e1ea8491da7c8c80ecfdbd7f1276a90d",
+    "backend/scripts/cohort_agent.py": "a0b7004902fa03981f314da7d76dc1df814511c4b4929299ef03b956392467bf",
+    "backend/scripts/cohort_metrics.py": "2b67fd6c064cd12fe14bface476d9cf55e3f38d3886696760341d939fb2ede26",
+    "backend/scripts/diagnose_purchase.py": "d70a01f07dfa9f5ef79dbf407591ac7b515af4c15290fb2ad52de22148ed00ec",
+    "backend/scripts/direct_prompt.py": "ff4af011db5826eb28c40b54504597114d1fd7356b3cc48e90d99ccbe9bb125f",
+    "backend/scripts/evaluate.py": "0f2a074b496094ebd8944d5e19a822f47482466e7d5fdaa304326989b4fe5880",
+    "backend/scripts/evaluate_agent.py": "4bd7a2fe98f8d82dadb80571f4843cf8613713125912785730bcc03edb8dbd4e",
+    "backend/scripts/evaluation_measurements.py": "0d5b4c754c99377f73e6d0cc106365d3da444831a251b6114153e2dc531c2aa2",
+    "backend/scripts/probe_a014_budget.py": "5d8bd7c6c2a46012a130344c5e1e0ffa93a4eac399a6eb1128b9ae2608bb41d0",
+    "backend/scripts/probe_a014_compact.py": "cad516f43371e94c94e1d62bc86de827fc0aa83cfb34ebdce08a6e04c15203b5",
+    "backend/scripts/probe_a014_final_budget.py": "d54bcf8cd6558db76084e712b2060943e65a40ad40df1988e54664d822afc4fa",
+    "backend/scripts/probe_a014_timeout.py": "3b7a3be0aea99d0a77c415996e4239556d3a3cd1c3b5cd231e7df6652d5c22ff",
+    "backend/scripts/probe_tool_schema.py": "fe06ef11eeb4af0e6b50e68a748d3bf0c7a24e8af9d713ab4c0802b26a990b02",
+    "backend/scripts/purchase_contract.py": "5d450a31108c22985b66e2a2d69e214c1e99fd348a4d9033cfd3aa1ccf7c8bcb",
+    "backend/scripts/review_agent.py": "9185a2c0cc7ce33482c35bcb1350ebbc45e61eedb4e0c9ef7922e08f83af0409",
+    "backend/scripts/review_purchase_contract.py": "32c8672dd4319970ddb1fb21005f38e448e88e90536d1ab56eeb147c3abaa3c9",
+    "backend/scripts/test_mysql.py": "36195911dc30b93dc50f25f9d9215d4767d88c72dc38dae921fe3cf78a661e5d",
+    "backend/scripts/validate_receipt_vision.py": "44e228ad3d46e6b0359b8d7699a9220f10ef5444273560bcc71b83fdc0835833",
+    "evaluation/amendments-v1.1.json": "5e5f9dfa11a2d8e3c427025410642edf61d5c07c1ba6ddf27380fb9f0054334e",
+    "evaluation/amendments-v1.2.json": "e34e1e2d39a4e02a484e08a0aff2e473334cf8244aa7478c3468d233d889a3eb",
+    "evaluation/freeze-v1.1.json": "0e41e2667f31b3cbe2db142e4db80b0d2f4fccb8ebb18aed8be30bde2ee9b299",
+    "evaluation/freeze-v1.2.json": "c424e6e47c11cda2c3e568910edbc9a9a8de30e2be25710640289d0102e112ac",
+    "evaluation/freeze-v1.json": "a95b47646254b93a32a58022e7e09d71d0121436f6b99eb951391cd256126ba1",
+    "evaluation/protocol-v1.json": "df0ee4c6171f026b6d520b93f8b0597f5e4beacb74505b45a499e2d20f7b4862",
+    "evaluation/scenarios-v1.json": "2aa39319b14a91242e0a0aa6c58625eb78f3da4efb505bc47b24d8a590bc3ae7"
+  },
+  "development_before": {
+    "version": "8.0.46",
+    "database_name": "solomeal",
+    "tables": {
+      "agent_run_events": {
+        "rows": 3,
+        "sha256": "cb05f9e69d473f956056060561c3b9aff1d66433f13b43cfcbf84e21a9c7d352"
+      },
+      "agent_runs": {
+        "rows": 1,
+        "sha256": "690771e2fdefe68382c9a9c27708e34645ecd579082730dce596ad86e22100d7"
+      },
+      "agent_sessions": {
+        "rows": 1,
+        "sha256": "12904ef8af6ac34f15bc10df19baa8453944437402b5df598235ddbe68b6de47"
+      },
+      "alembic_version": {
+        "rows": 1,
+        "sha256": "fdaff30348cbb466c7ea13387befa1c5010b21a70c5d03970017a697e50be0f5"
+      },
+      "auth_sessions": {
+        "rows": 4,
+        "sha256": "157f086d3dfbfa8b9307f8ff251c42a22ca1d5c117d0b6a371f570bd146b8ee1"
+      },
+      "cooking_consumptions": {
+        "rows": 1,
+        "sha256": "51c86a93333e3804b6534416cc02b3558600b42dd074cab886fb59f606979599"
+      },
+      "cooking_records": {
+        "rows": 1,
+        "sha256": "85c7f9991c2e26c317eda388828df7589c47a22fafae3c1bb7f792720e49df72"
+      },
+      "ingredient_aliases": {
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "ingredients": {
+        "rows": 14,
+        "sha256": "4f0dc3595b45f3a16032864176bb3e50127fd802dfa8ffdddd2dbfea9098658d"
+      },
+      "inventory_batches": {
+        "rows": 2,
+        "sha256": "0de2e69fda666e6d0a231cedffc9a91433df90ce958eb79cd87f41ae8b9364ed"
+      },
+      "inventory_events": {
+        "rows": 7,
+        "sha256": "a7cd5f7b320a5f624d24301f3e5d2bd18faa788c6b74bf6ba3c6a431d982dbd3"
+      },
+      "meal_plans": {
+        "rows": 2,
+        "sha256": "4c857b266d3fa7e894aa2b08490ea56eda6bf744a0b83d4fb07670ae11673544"
+      },
+      "operations": {
+        "rows": 15,
+        "sha256": "6620f1ab983103d77f728123eb87af388ff3cf997966d1ac5885886d48183eb6"
+      },
+      "plan_revisions": {
+        "rows": 3,
+        "sha256": "a00b3761615e60670cc0a2defa191307b29d0ae3bf56d645f6b4b7ea4df73f84"
+      },
+      "price_quotes": {
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "receipt_imports": {
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "recipe_ingredients": {
+        "rows": 31,
+        "sha256": "c5b6f730bbb9c175c71ae31be88545f69e745402c51f757eddc4d5b5c7007133"
+      },
+      "recipes": {
+        "rows": 7,
+        "sha256": "dc653a48f435d52162b1299cdb1f5915934581810500e7c7c21a06616e5a115d"
+      },
+      "shopping_lists": {
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "tool_executions": {
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "user_preferences": {
+        "rows": 2,
+        "sha256": "204d2bd680cc58bf5ac655127e1095d6108dd644c5d6782151e2847d859db6a7"
+      },
+      "users": {
+        "rows": 2,
+        "sha256": "fcd22e15d3c428ba4ecb3d176c8ed5eb9dbf0c96a82fea26c7a47f9961aadc80"
+      }
+    }
+  },
+  "matches_0914_development_snapshot": true,
+  "test_before": {
+    "version": "8.0.46",
+    "database_name": "solomeal_test",
+    "tables": {
+      "alembic_version": {
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "real_model_calls": 0,
+  "exit_code": 0,
+  "development_after": {
+    "version": "8.0.46",
+    "database_name": "solomeal",
+    "tables": {
+      "agent_run_events": {
+        "rows": 3,
+        "sha256": "cb05f9e69d473f956056060561c3b9aff1d66433f13b43cfcbf84e21a9c7d352"
+      },
+      "agent_runs": {
+        "rows": 1,
+        "sha256": "690771e2fdefe68382c9a9c27708e34645ecd579082730dce596ad86e22100d7"
+      },
+      "agent_sessions": {
+        "rows": 1,
+        "sha256": "12904ef8af6ac34f15bc10df19baa8453944437402b5df598235ddbe68b6de47"
+      },
+      "alembic_version": {
+        "rows": 1,
+        "sha256": "fdaff30348cbb466c7ea13387befa1c5010b21a70c5d03970017a697e50be0f5"
+      },
+      "auth_sessions": {
+        "rows": 4,
+        "sha256": "157f086d3dfbfa8b9307f8ff251c42a22ca1d5c117d0b6a371f570bd146b8ee1"
+      },
+      "cooking_consumptions": {
+        "rows": 1,
+        "sha256": "51c86a93333e3804b6534416cc02b3558600b42dd074cab886fb59f606979599"
+      },
+      "cooking_records": {
+        "rows": 1,
+        "sha256": "85c7f9991c2e26c317eda388828df7589c47a22fafae3c1bb7f792720e49df72"
+      },
+      "ingredient_aliases": {
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "ingredients": {
+        "rows": 14,
+        "sha256": "4f0dc3595b45f3a16032864176bb3e50127fd802dfa8ffdddd2dbfea9098658d"
+      },
+      "inventory_batches": {
+        "rows": 2,
+        "sha256": "0de2e69fda666e6d0a231cedffc9a91433df90ce958eb79cd87f41ae8b9364ed"
+      },
+      "inventory_events": {
+        "rows": 7,
+        "sha256": "a7cd5f7b320a5f624d24301f3e5d2bd18faa788c6b74bf6ba3c6a431d982dbd3"
+      },
+      "meal_plans": {
+        "rows": 2,
+        "sha256": "4c857b266d3fa7e894aa2b08490ea56eda6bf744a0b83d4fb07670ae11673544"
+      },
+      "operations": {
+        "rows": 15,
+        "sha256": "6620f1ab983103d77f728123eb87af388ff3cf997966d1ac5885886d48183eb6"
+      },
+      "plan_revisions": {
+        "rows": 3,
+        "sha256": "a00b3761615e60670cc0a2defa191307b29d0ae3bf56d645f6b4b7ea4df73f84"
+      },
+      "price_quotes": {
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "receipt_imports": {
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "recipe_ingredients": {
+        "rows": 31,
+        "sha256": "c5b6f730bbb9c175c71ae31be88545f69e745402c51f757eddc4d5b5c7007133"
+      },
+      "recipes": {
+        "rows": 7,
+        "sha256": "dc653a48f435d52162b1299cdb1f5915934581810500e7c7c21a06616e5a115d"
+      },
+      "shopping_lists": {
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "tool_executions": {
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "user_preferences": {
+        "rows": 2,
+        "sha256": "204d2bd680cc58bf5ac655127e1095d6108dd644c5d6782151e2847d859db6a7"
+      },
+      "users": {
+        "rows": 2,
+        "sha256": "fcd22e15d3c428ba4ecb3d176c8ed5eb9dbf0c96a82fea26c7a47f9961aadc80"
+      }
+    }
+  },
+  "development_unchanged": true,
+  "test_after": {
+    "version": "8.0.46",
+    "database_name": "solomeal_test",
+    "tables": {
+      "alembic_version": {
+        "rows": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "finished_at": "2026-09-15T03:05:19.090074+00:00"
+}

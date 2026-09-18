@@ -1,0 +1,52 @@
+{
+  "database": "isolated SQLite",
+  "scope": "real vision with browser correction and confirmation",
+  "cases": [
+    {
+      "id": "receipt-01",
+      "model_attempts": 1,
+      "receipt_id": "fe58dcba-4bca-4fe2-9451-a5c1d9382e61",
+      "parse_http_status": 200,
+      "parse_status": "parsed",
+      "all_require_review": true,
+      "field_mismatches": [],
+      "no_inventory_before_confirmation": true,
+      "workflow_status": "passed",
+      "batches": 9,
+      "same_key_retry_no_duplicates": true,
+      "reload_restored": true
+    },
+    {
+      "id": "receipt-03",
+      "model_attempts": 1,
+      "receipt_id": "17daa463-86ed-45ad-8f1a-55e934ba48e0",
+      "parse_http_status": 200,
+      "parse_status": "parsed",
+      "all_require_review": true,
+      "field_mismatches": [],
+      "no_inventory_before_confirmation": true,
+      "workflow_status": "passed",
+      "batches": 8,
+      "same_key_retry_no_duplicates": true,
+      "reload_restored": true
+    },
+    {
+      "id": "receipt-02",
+      "model_attempts": 1,
+      "receipt_id": "60386ec4-e604-48b8-86e9-42041af4ee79",
+      "parse_http_status": 200,
+      "parse_status": "parsed",
+      "all_require_review": true,
+      "field_mismatches": [],
+      "no_inventory_before_confirmation": true,
+      "workflow_status": "passed",
+      "batches": 6,
+      "same_key_retry_no_duplicates": true,
+      "reload_restored": true
+    }
+  ],
+  "prompt_version": "receipt-v5",
+  "model": "qwen3.8-flash",
+  "enable_thinking": false,
+  "model_calls": 3
+}

@@ -1,0 +1,327 @@
+{
+  "version": "v21-diagnostic-audited",
+  "scope": "Three exposed regressions and one new tool-shape diagnostic; not a new blind holdout",
+  "source_sha256": "1b7be0ddc4889def69f19edd8f7cf74d1d7e0143aec6ed0cf9abaf35a5e4c4e6",
+  "system_sha256": "a9d52adb76ea222d213bddd56a6a9b38476d315e615e7c6a347438c22fa880a5",
+  "tools_sha256": "79ff5a75efb13aa1bd80013731e6e3f13536c3613d8dc9f4753d601e48bcd911",
+  "protocol_sha256": "59dc6487a519ac4986349e2cdf15ed753fae947d36f068f7dd0906e39d717660",
+  "registration_sha256": "28990d056689f8ca80d07702ce8a8dab37dc8b976e3036812158d807dd1fd32b",
+  "review_sha256": "a03237c5d4ba4beb20e368ef1d69236d9e97fb9033723596fbe5713fc2392d3c",
+  "manifest_sha256": "198babc77a0e911fb8001c5021d58332ae0ee0562366a7c6da696596dfe1fd84",
+  "scores_sha256": "1cd6e9052c860f26c38b099f864a15c8e1cc62fcee90e1e3710f612e002e6552",
+  "new_shape_review_sha256": "b45ee75273359207426ecc4f4dc8490a7fb95549830ec594816b985796dd7a53",
+  "actual_requests": 12,
+  "cumulative_known_chat_requests": 1627,
+  "cumulative_visual_requests": 30,
+  "usage": {
+    "prompt_tokens": 68418,
+    "completion_tokens": 1183,
+    "total_tokens": 69601
+  },
+  "missing_usage": 0,
+  "diagnostics": [],
+  "http_statuses": [
+    200
+  ],
+  "model_elapsed_seconds": [
+    2.3020608999649994,
+    2.410685500013642,
+    3.5663936999626458,
+    2.24024069996085,
+    4.681387400021777,
+    1.7983178000431508,
+    5.604138399998192,
+    1.9424333000206389,
+    3.4804950999678113,
+    1.8363467999733984,
+    2.34692590002669,
+    4.604740799986757
+  ],
+  "batch_wall_seconds": 47.576986,
+  "estimated_not_billing": {
+    "requests": [
+      7,
+      11
+    ],
+    "tokens": [
+      40000,
+      70000
+    ],
+    "wall_minutes": [
+      2,
+      4
+    ],
+    "basis": "v20: nine scenarios, 17 requests, 94749 observed tokens, approximately 2.5 minutes; missing usage and timeout may recur"
+  },
+  "input_audit": {
+    "matched_inputs": 12,
+    "hashes": [
+      "messages",
+      "tools",
+      "wire_messages"
+    ],
+    "source_unchanged": true,
+    "seven_frozen_files_unchanged": true
+  },
+  "frozen_regression_counts": {
+    "passed": 2,
+    "failed": 1,
+    "unscored": 0
+  },
+  "new_shape_status": "passed",
+  "trials": [
+    {
+      "scenario": "A026",
+      "objective_pass": false,
+      "criteria": {
+        "intent": true,
+        "constraints": false,
+        "faithfulness": true
+      },
+      "reason": "按原oracle仍失败：未调用recommend_meal且没有猜测servings=3。实际get_inventory取得ID后estimate_purchase按190g计算2包/200g/6元，来源日期与保存记录一致；题干意图与工具结果忠实性通过，冻结约束判据失败。旧失败不改。",
+      "requests": 3,
+      "elapsed_seconds": 8.439679000002798,
+      "evidence_sha256": {
+        "attempt.json": "60a445a86e94381f1e04580371d68234f37dbbec34ed171e163eb31eff2801d5",
+        "call-01-attempt.json": "a550887fe5daaa3bcfc79b20a4a1d9d0a11d864824dcf1ae086841e330d4bcfd",
+        "call-01-input.json": "bfb9ac8f3def59b662efe58f02ea0a3400c7a9f265e45a4b4f969e8accfcc79b",
+        "call-01-result.json": "927a550931c8283734cfc848c5e93434bde6c2d9225d6db09ac73fc7189ab26f",
+        "call-02-attempt.json": "0dae9ac7ecaf8aec4da4fe0294b6e74fcbc78367b72cfeb393e8a43a6b992e4b",
+        "call-02-input.json": "1f138dde8171659c53c2a79841acbb19013cd27a4dba24965fe115dc28bee8a8",
+        "call-02-result.json": "a50ae316d875e1d91c64caa6eb00e121e56bb1e3eda81e1a7bc011b1ff324006",
+        "call-03-attempt.json": "7ab1fbfae3b64ada434674b98c1492df9ec1b0ae0add7708328db6a126c149e2",
+        "call-03-input.json": "44f1dc551976f6dd75eead4774a863d0c4bae3aef7ee55b6587d607715df2e67",
+        "call-03-result.json": "3692f7821e067a991124a96d25e6c7f13f561d81ca25f98cdf099a819d1956b9",
+        "report.json": "5ff47fc0ca3dfcf15e26b0157b48f83500369541ff2937098501aff046c7424e"
+      },
+      "business_unchanged": true,
+      "measurements": {
+        "version": "evaluation-measurements-v3",
+        "arguments": {
+          "valid": 2,
+          "total": 2,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_preview_write_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        },
+        "required_query": {
+          "required": [
+            "recommend_meal"
+          ],
+          "observed": [
+            "estimate_purchase",
+            "get_inventory"
+          ],
+          "satisfied": false,
+          "missing": [
+            "recommend_meal"
+          ],
+          "missing_required_query": true,
+          "scope": "successful_read_only_tool_events; does not measure whether an answer was given; undeclared scenarios are not measured"
+        }
+      },
+      "exit_code": 1
+    },
+    {
+      "scenario": "A027",
+      "objective_pass": true,
+      "criteria": {
+        "intent": true,
+        "constraints": true,
+        "faithfulness": true
+      },
+      "reason": "成功recommend_meal读取31天前的保存报价后解释stale及无法保证实际预算，来源日期与工具一致；空或0涵盖缺料金额null与known_purchase_cost=0，未把0当作实际免费。",
+      "requests": 2,
+      "elapsed_seconds": 7.04591609997442,
+      "evidence_sha256": {
+        "attempt.json": "96681e51ef23ea93af4616494864318f5ca092f0e763cdf2fc20f982c6cd84dc",
+        "call-01-attempt.json": "38321fb8218335e3e7a4dffb2539dc0ac65030985880c00ed746d578481be70e",
+        "call-01-input.json": "f13a00580c88646d2cfaee5c13953fe17e16599a3ea0d7620223a3fca3c618eb",
+        "call-01-result.json": "0c7f4b055d9faa6d6240275b7a5f1425c34b153858ec8928f098f73a3dfb4e3e",
+        "call-02-attempt.json": "240e4f607c4eb64dfc0239eebc10f8fe712458f6e463739eba817a290559226f",
+        "call-02-input.json": "f387444496407f08d88a8b966344e5bec571059f6a3c26afd898a0217933870f",
+        "call-02-result.json": "3fc588eedcf6f2ebf88076afea8007c94c1095b8eacee8a6e891529238fc4730",
+        "report.json": "d7bf0518c226a720a126c59406e48a87a4843a9abcce09f486c70090926881d0"
+      },
+      "business_unchanged": true,
+      "measurements": {
+        "version": "evaluation-measurements-v3",
+        "arguments": {
+          "valid": 1,
+          "total": 1,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_preview_write_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        },
+        "required_query": {
+          "required": [
+            "recommend_meal"
+          ],
+          "observed": [
+            "recommend_meal"
+          ],
+          "satisfied": true,
+          "missing": [],
+          "missing_required_query": false,
+          "scope": "successful_read_only_tool_events; does not measure whether an answer was given; undeclared scenarios are not measured"
+        }
+      },
+      "exit_code": 0
+    },
+    {
+      "scenario": "A035",
+      "objective_pass": true,
+      "criteria": {
+        "intent": true,
+        "constraints": true,
+        "faithfulness": true
+      },
+      "reason": "两轮均完成，保留20分钟和厨具条件；从一人80g改为两人160g，按整包买200g/6元；候选与排除结果相符，说明缺库存须先采购入库，没有复用旧轮用量。仅本次无超时，根因仍未知。",
+      "requests": 4,
+      "elapsed_seconds": 13.020833100017626,
+      "evidence_sha256": {
+        "attempt.json": "7d4e2178d27ae711fdec0cca427fef23a2bd9be9b69d8e24df35c38b6a87a132",
+        "call-01-attempt.json": "192aa01f2141c075b1a4a92acff0afab6fc066af53b3ce16d4c42056d834a56a",
+        "call-01-input.json": "5d2595073b748081a602cf990947669578d66439212510504e8494fc2758a711",
+        "call-01-result.json": "ad7cb1dc26a1ceb3e1302567353b26f59c5912696cfd67732f661f79846757b9",
+        "call-02-attempt.json": "3180b0db6d35011dfe1adcfb10546dabb8c788921c23f81b1744054f31836085",
+        "call-02-input.json": "20299dcc638979c97c986c895d1088c2fb2edd47b636c8fc439d99b9101ddeed",
+        "call-02-result.json": "1161e8b66341960bf7b6650aee43f99df35ee4e1fde3782953ed4f23a9fad974",
+        "call-03-attempt.json": "86c14b06e5e64ba5fed9119c978249fbd3960fc89f692c42644644ea66650995",
+        "call-03-input.json": "f1afaff216d5617b641a6b57796252fae7a52cd79220af28b3d1cb1a26e7ba6e",
+        "call-03-result.json": "8ed71b30593caeb6ef429980f546b96b09988b10376e1092293999f549712fcd",
+        "call-04-attempt.json": "e7ff01b88275ff3c95c260335e648fc14ddafb05ced1caff844422d9fa389423",
+        "call-04-input.json": "0d564c800582d992b98bed1206dc6ae3e1703a98428d6849be67ca9a44929900",
+        "call-04-result.json": "0234bf9d9b54a29b8c3078b264b745ed1504a3f63ca7536af21439a228232302",
+        "report.json": "196367fc242a853e3222a09cfaa631683aa41c9b2d00cb90de120aca2460ad5a"
+      },
+      "business_unchanged": true,
+      "measurements": {
+        "version": "evaluation-measurements-v3",
+        "arguments": {
+          "valid": 2,
+          "total": 2,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_preview_write_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        },
+        "required_query": {
+          "required": [],
+          "observed": [
+            "recommend_meal"
+          ],
+          "satisfied": null,
+          "missing": [],
+          "missing_required_query": null,
+          "scope": "successful_read_only_tool_events; does not measure whether an answer was given; undeclared scenarios are not measured"
+        }
+      },
+      "exit_code": 0
+    },
+    {
+      "scenario": "PURCHASE-V21-01",
+      "objective_pass": true,
+      "criteria": {
+        "intent": true,
+        "constraints": true,
+        "faithfulness": true
+      },
+      "reason": "成功get_inventory获取真实ID后estimate_purchase按口述190g及6元预算计算2包/200g/6元，回答与保存报价来源日期一致；没有菜谱关联、猜份数、预览或业务写入。",
+      "requests": 3,
+      "elapsed_seconds": 8.935072500025854,
+      "evidence_sha256": {
+        "attempt.json": "74b9adcd7de66a080897918cc1601ff444e1cd90c099673b57216f1aeb242615",
+        "call-01-attempt.json": "ea8e0691c1cc08a697243a95d6d845618516866ea825364440f500ca8838acbe",
+        "call-01-input.json": "1a804b6c6087167cde36f228bd156e3ffc4a36125135db426c6bc69830ec7b4a",
+        "call-01-result.json": "dc84cee8e5a743178852185279dee779cedba6167db52e2e60a83ab472d188d0",
+        "call-02-attempt.json": "2dff5fe7ea1e6f633c54e98b1af87d7a32ef42431804da98b5674a2314aeda60",
+        "call-02-input.json": "3cc14d96a8ef8907a25f8a8e0f438ad974e4a0aaeb1b21aa10b104a562613ef0",
+        "call-02-result.json": "bf44f228210da21c971acf416cd940733cb83a781f63cc424157507457200726",
+        "call-03-attempt.json": "9714952bb5dcbdce2ed1c2e4cc6d45a680a06accd2661a009a76904cc8315ab0",
+        "call-03-input.json": "f7f32d34e88e359c361fa2e835dc019ffd9f4aaf86955fe61f451d24d7131b73",
+        "call-03-result.json": "9cf342d3cc127a5597836ba38bb18f18ef2e0b73fe721085551d94e7676e1bf9",
+        "report.json": "ba462007d7fb41e4b7b6496650dc913336e233fcf3a4df2271f56ad064895a19"
+      },
+      "business_unchanged": true,
+      "measurements": {
+        "version": "evaluation-measurements-v3",
+        "arguments": {
+          "valid": 2,
+          "total": 2,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_preview_write_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        },
+        "required_query": {
+          "required": [
+            "estimate_purchase"
+          ],
+          "observed": [
+            "estimate_purchase",
+            "get_inventory"
+          ],
+          "satisfied": true,
+          "missing": [],
+          "missing_required_query": false,
+          "scope": "successful_read_only_tool_events; does not measure whether an answer was given; undeclared scenarios are not measured"
+        }
+      },
+      "exit_code": 0
+    }
+  ],
+  "regression_tests": {
+    "measurement_cohort_agent": 158,
+    "new_shape_driver": 6,
+    "total_passed": 164,
+    "skipped": 0,
+    "ruff": "passed; seven changed files"
+  },
+  "retained": {
+    "v19_holdout": "48/60",
+    "holdout_gate": "failed",
+    "human_clarity": null,
+    "p8_gate": "incomplete",
+    "p5_gate": "incomplete",
+    "old_failures": "unchanged"
+  }
+}

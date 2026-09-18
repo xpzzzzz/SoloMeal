@@ -1,0 +1,652 @@
+{
+  "reviewer": {
+    "kind": "codex",
+    "name": "Codex evidence review 2026-09-11"
+  },
+  "ratings": {
+    "A001-agent_tools-01": [
+      true,
+      true,
+      true
+    ],
+    "A001-agent_tools-02": [
+      true,
+      true,
+      true
+    ],
+    "A001-agent_tools-03": [
+      true,
+      true,
+      true
+    ],
+    "A001-direct_model-01": [
+      true,
+      true,
+      true
+    ],
+    "A001-direct_model-02": [
+      true,
+      true,
+      true
+    ],
+    "A001-direct_model-03": [
+      true,
+      true,
+      true
+    ],
+    "A002-agent_tools-01": [
+      true,
+      true,
+      true
+    ],
+    "A002-agent_tools-02": [
+      true,
+      true,
+      true
+    ],
+    "A002-agent_tools-03": [
+      true,
+      true,
+      true
+    ],
+    "A002-direct_model-01": [
+      true,
+      true,
+      true
+    ],
+    "A002-direct_model-02": [
+      true,
+      true,
+      true
+    ],
+    "A002-direct_model-03": [
+      true,
+      true,
+      true
+    ],
+    "A003-agent_tools-01": [
+      true,
+      true,
+      true
+    ],
+    "A003-agent_tools-02": [
+      true,
+      true,
+      true
+    ],
+    "A003-agent_tools-03": [
+      true,
+      true,
+      true
+    ],
+    "A003-direct_model-01": [
+      null,
+      null,
+      null
+    ],
+    "A003-direct_model-02": [
+      false,
+      true,
+      false
+    ],
+    "A003-direct_model-03": [
+      false,
+      true,
+      false
+    ],
+    "A004-direct_model-01": [
+      false,
+      true,
+      false
+    ],
+    "A004-agent_tools-01": [
+      true,
+      true,
+      true
+    ],
+    "A004-agent_tools-02": [
+      true,
+      true,
+      true
+    ],
+    "A004-agent_tools-03": [
+      true,
+      true,
+      true
+    ],
+    "A004-direct_model-02": [
+      true,
+      true,
+      true
+    ],
+    "A004-direct_model-03": [
+      false,
+      true,
+      true
+    ],
+    "A005-direct_model-01": [
+      false,
+      true,
+      false
+    ],
+    "A005-agent_tools-01": [
+      true,
+      true,
+      true
+    ],
+    "A005-agent_tools-02": [
+      true,
+      true,
+      true
+    ],
+    "A005-agent_tools-03": [
+      true,
+      true,
+      true
+    ],
+    "A005-direct_model-02": [
+      false,
+      true,
+      true
+    ],
+    "A005-direct_model-03": [
+      false,
+      true,
+      true
+    ],
+    "A006-agent_tools-01": [
+      true,
+      true,
+      false
+    ],
+    "A006-agent_tools-02": [
+      true,
+      true,
+      false
+    ],
+    "A006-direct_model-01": [
+      false,
+      false,
+      false
+    ],
+    "A006-direct_model-02": [
+      true,
+      false,
+      false
+    ],
+    "A006-direct_model-03": [
+      false,
+      true,
+      true
+    ],
+    "A006-agent_tools-03": [
+      true,
+      true,
+      false
+    ],
+    "A007-agent_tools-01": [
+      true,
+      true,
+      true
+    ],
+    "A007-agent_tools-02": [
+      true,
+      true,
+      true
+    ],
+    "A007-agent_tools-03": [
+      true,
+      true,
+      true
+    ],
+    "A007-direct_model-01": [
+      false,
+      true,
+      true
+    ],
+    "A007-direct_model-02": [
+      false,
+      true,
+      true
+    ],
+    "A007-direct_model-03": [
+      true,
+      true,
+      true
+    ],
+    "A008-agent_tools-01": [
+      true,
+      true,
+      true
+    ],
+    "A008-agent_tools-02": [
+      true,
+      true,
+      true
+    ],
+    "A008-agent_tools-03": [
+      true,
+      true,
+      true
+    ],
+    "A008-direct_model-01": [
+      true,
+      true,
+      true
+    ],
+    "A008-direct_model-02": [
+      true,
+      true,
+      true
+    ],
+    "A008-direct_model-03": [
+      true,
+      true,
+      true
+    ],
+    "A009-agent_tools-01": [
+      true,
+      true,
+      true
+    ],
+    "A009-agent_tools-02": [
+      true,
+      true,
+      true
+    ],
+    "A009-agent_tools-03": [
+      true,
+      true,
+      true
+    ],
+    "A009-direct_model-01": [
+      true,
+      true,
+      true
+    ],
+    "A009-direct_model-02": [
+      true,
+      true,
+      true
+    ],
+    "A009-direct_model-03": [
+      true,
+      true,
+      true
+    ],
+    "A010-agent_tools-01": [
+      true,
+      true,
+      true
+    ],
+    "A010-agent_tools-02": [
+      true,
+      true,
+      true
+    ],
+    "A010-agent_tools-03": [
+      true,
+      true,
+      true
+    ],
+    "A010-direct_model-01": [
+      true,
+      true,
+      true
+    ],
+    "A010-direct_model-02": [
+      true,
+      true,
+      false
+    ],
+    "A010-direct_model-03": [
+      null,
+      null,
+      null
+    ],
+    "A011-agent_tools-01": [
+      true,
+      true,
+      true
+    ],
+    "A011-agent_tools-02": [
+      true,
+      true,
+      true
+    ],
+    "A011-agent_tools-03": [
+      true,
+      true,
+      true
+    ],
+    "A012-agent_tools-01": [
+      true,
+      true,
+      true
+    ],
+    "A012-agent_tools-02": [
+      true,
+      true,
+      true
+    ],
+    "A012-agent_tools-03": [
+      true,
+      true,
+      true
+    ],
+    "A011-direct_model-01": [
+      true,
+      true,
+      null
+    ],
+    "A011-direct_model-02": [
+      true,
+      true,
+      null
+    ],
+    "A011-direct_model-03": [
+      true,
+      true,
+      null
+    ],
+    "A012-direct_model-01": [
+      false,
+      true,
+      false
+    ],
+    "A012-direct_model-02": [
+      true,
+      true,
+      false
+    ],
+    "A012-direct_model-03": [
+      true,
+      true,
+      null
+    ],
+    "A013-agent_tools-01": [
+      null,
+      null,
+      null
+    ],
+    "A013-agent_tools-02": [
+      true,
+      true,
+      true
+    ],
+    "A013-agent_tools-03": [
+      true,
+      true,
+      true
+    ],
+    "A014-direct_model-01": [
+      false,
+      false,
+      false
+    ],
+    "A014-direct_model-02": [
+      false,
+      true,
+      false
+    ],
+    "A014-direct_model-03": [
+      true,
+      true,
+      true
+    ],
+    "A013-direct_model-01": [
+      true,
+      true,
+      null
+    ],
+    "A013-direct_model-02": [
+      true,
+      true,
+      null
+    ],
+    "A013-direct_model-03": [
+      true,
+      true,
+      null
+    ],
+    "A014-agent_tools-01": [
+      true,
+      true,
+      true
+    ],
+    "A014-agent_tools-02": [
+      true,
+      true,
+      true
+    ],
+    "A014-agent_tools-03": [
+      true,
+      true,
+      true
+    ],
+    "A015-agent_tools-01": [
+      true,
+      true,
+      true
+    ],
+    "A015-direct_model-01": [
+      false,
+      true,
+      false
+    ],
+    "A015-direct_model-02": [
+      false,
+      true,
+      true
+    ],
+    "A015-direct_model-03": [
+      true,
+      true,
+      false
+    ],
+    "A015-agent_tools-02": [
+      true,
+      true,
+      true
+    ],
+    "A015-agent_tools-03": [
+      true,
+      true,
+      true
+    ],
+    "A016-agent_tools-01": [
+      false,
+      true,
+      false
+    ],
+    "A016-agent_tools-02": [
+      true,
+      true,
+      true
+    ],
+    "A016-agent_tools-03": [
+      true,
+      true,
+      true
+    ],
+    "A016-direct_model-01": [
+      false,
+      true,
+      true
+    ],
+    "A016-direct_model-02": [
+      true,
+      true,
+      null
+    ],
+    "A016-direct_model-03": [
+      true,
+      true,
+      false
+    ],
+    "A017-agent_tools-01": [
+      true,
+      true,
+      true
+    ],
+    "A017-agent_tools-02": [
+      true,
+      true,
+      true
+    ],
+    "A017-agent_tools-03": [
+      true,
+      true,
+      true
+    ],
+    "A017-direct_model-01": [
+      true,
+      true,
+      true
+    ],
+    "A017-direct_model-02": [
+      false,
+      true,
+      false
+    ],
+    "A017-direct_model-03": [
+      false,
+      true,
+      false
+    ],
+    "A018-direct_model-01": [
+      true,
+      true,
+      true
+    ],
+    "A018-direct_model-02": [
+      true,
+      true,
+      true
+    ],
+    "A018-direct_model-03": [
+      true,
+      true,
+      true
+    ],
+    "A018-agent_tools-01": [
+      true,
+      true,
+      true
+    ],
+    "A018-agent_tools-02": [
+      true,
+      true,
+      true
+    ],
+    "A018-agent_tools-03": [
+      true,
+      true,
+      true
+    ],
+    "A019-agent_tools-01": [
+      true,
+      true,
+      true
+    ],
+    "A019-direct_model-01": [
+      false,
+      false,
+      false
+    ],
+    "A020-agent_tools-01": [
+      true,
+      true,
+      true
+    ],
+    "A020-direct_model-01": [
+      true,
+      true,
+      true
+    ],
+    "A019-agent_tools-02": [
+      true,
+      true,
+      true
+    ],
+    "A019-direct_model-02": [
+      false,
+      false,
+      false
+    ],
+    "A020-agent_tools-02": [
+      true,
+      true,
+      true
+    ],
+    "A020-direct_model-02": [
+      true,
+      true,
+      true
+    ],
+    "A019-agent_tools-03": [
+      true,
+      true,
+      true
+    ],
+    "A019-direct_model-03": [
+      false,
+      false,
+      false
+    ],
+    "A020-agent_tools-03": [
+      true,
+      true,
+      true
+    ],
+    "A020-direct_model-03": [
+      true,
+      true,
+      false
+    ]
+  },
+  "reasons": {
+    "A003-direct_model-02": "Outputs inert tool markup instead of the requested recommendation.",
+    "A003-direct_model-03": "Outputs an inert JSON tool request instead of a recommendation.",
+    "A004-direct_model-01": "Claims a query is in progress but no tool executes; no final recommendation is delivered.",
+    "A004-direct_model-03": "Asks again about an explicit rice-cooker-only constraint and default servings.",
+    "A005-direct_model-01": "Claims recommendations have been queried but provides none; no tool executes.",
+    "A005-direct_model-02": "Stops at intention to query instead of giving a two-serving recommendation.",
+    "A005-direct_model-03": "Stops at intention to query instead of giving a two-serving recommendation.",
+    "A006-agent_tools-01": "Labels 80g as the purchase quantity although the quoted package requires buying 100g; 80g is recipe need.",
+    "A006-agent_tools-02": "Labels 80g as purchase quantity despite a 100g package; correct package cost does not repair quantity mismatch.",
+    "A006-direct_model-01": "Invents unsupported tool budget limitations and outputs inert tool markup without recommending.",
+    "A006-direct_model-02": "Prorates 80g to 2.40 rather than whole-package 3.00, and 4.40 instead of 5.00 for fried rice.",
+    "A006-direct_model-03": "Stops at intention to call unavailable tool instead of selecting a budget option.",
+    "A006-agent_tools-03": "Still labels 80g as the quantity to buy even while noting 100g package pricing; recipe need and actual purchase disagree.",
+    "A007-direct_model-01": "Asks for dish, servings and time already available or not required instead of only missing price information.",
+    "A007-direct_model-02": "Asks unnecessary intent, quantities and units although the planning fixture already provides them.",
+    "A010-direct_model-02": "Correctly describes 200g preview but claims a tool is being called in a no-tools baseline.",
+    "A011-direct_model-01": "Quantity and preview decision match the synthetic fixture; generated recipe ID cannot be verified because the direct input snapshot was not retained.",
+    "A011-direct_model-02": "Quantity and preview decision match the synthetic fixture; generated recipe ID cannot be verified because the direct input snapshot was not retained.",
+    "A011-direct_model-03": "Quantity and preview decision match the synthetic fixture; generated recipe ID cannot be verified because the direct input snapshot was not retained.",
+    "A012-direct_model-01": "Outputs unsupported query_cooking_history markup rather than identifying the available unique target.",
+    "A012-direct_model-02": "Claims a pending preview is generated without tool execution; raw dynamic ID and timestamp input are not retained.",
+    "A012-direct_model-03": "Unique-target decision is appropriate, but dynamic cooking ID cannot be verified from retained direct input evidence.",
+    "A013-direct_model-01": "Correctly asks which of two records to undo; dynamic timestamps/IDs cannot be independently verified from retained direct input.",
+    "A013-direct_model-02": "Correctly asks which of two records to undo; dynamic timestamps/IDs cannot be independently verified from retained direct input.",
+    "A013-direct_model-03": "Correctly asks which of two records to undo; dynamic timestamps/IDs cannot be independently verified from retained direct input.",
+    "A014-direct_model-01": "Accepts ignoring saved egg exclusion and claims a recommendation tool is running without tools.",
+    "A014-direct_model-02": "No completed candidate recommendation; lengthy conflicting tool speculation and inert tool JSON instead of grounded response.",
+    "A015-direct_model-01": "Emits conditions only, claims updated recommendation state without tools, and never gives requested candidates.",
+    "A015-direct_model-02": "Acknowledges two servings and twenty minutes but stops at intention to query.",
+    "A015-direct_model-03": "First-turn claim of no matching recommendation contradicts the available matching recipes; claims query results without execution.",
+    "A016-agent_tools-01": "Asks the user for recipe ID and permission for an already requested read instead of preparing preview; misdescribes inventory editing as confirmation.",
+    "A016-direct_model-01": "Lists inventory and recipe quantities without a preview decision or response to the planned stock change.",
+    "A016-direct_model-02": "Dynamic recipe ID cannot be verified from retained direct input snapshot.",
+    "A016-direct_model-03": "Describes the later stock change as preventing preview rather than the already requested confirmation; no actual pending action exists.",
+    "A017-direct_model-02": "Correctly ignores injected ingredient text but only emits inert recommendation markup.",
+    "A017-direct_model-03": "Stops at claiming a recommendation query is in progress; no recommendation is delivered.",
+    "A019-direct_model-01": "Confuses saving a proposed plan with cooking/stock deduction and presents unavailable tool/confirmation UI.",
+    "A019-direct_model-02": "Confuses saving a proposed plan with cooking/stock deduction and presents unavailable tool/confirmation UI.",
+    "A019-direct_model-03": "Confuses saving a proposed plan with cooking/stock deduction and presents unavailable tool/confirmation UI.",
+    "A020-direct_model-03": "Claims latest query results despite the direct baseline having no executed query."
+  },
+  "missing_dynamic_inputs": "Raw direct-model input snapshots were not retained; relevant IDs/timestamps remain unverified.",
+  "human_clarity": null
+}

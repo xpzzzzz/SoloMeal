@@ -1,0 +1,32 @@
+{
+  "cases": [
+    {
+      "case": "export",
+      "errno": 28,
+      "passed": true
+    },
+    {
+      "case": "buffer",
+      "errno": 28,
+      "passed": true
+    },
+    {
+      "case": "import",
+      "errno": 28,
+      "passed": true
+    },
+    {
+      "case": "mysql_partial_import",
+      "passed": true,
+      "marker_rows": 1,
+      "running_services": [
+        "db"
+      ],
+      "retry_refused": true
+    }
+  ],
+  "project": "solomeal-fault-68a00c4361e1",
+  "stopped": true,
+  "volumes_retained": true,
+  "model_requests": 0
+}

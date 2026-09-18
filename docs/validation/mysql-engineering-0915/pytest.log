@@ -1,0 +1,97 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.13, pytest-9.1.1, pluggy-1.6.0 -- D:\Code\meal-manager\backend\.venv\Scripts\python.exe
+rootdir: D:\Code\meal-manager\backend
+configfile: pyproject.toml
+plugins: anyio-4.15.0
+collecting ... collected 77 items
+
+tests/test_identity.py::test_two_users_isolated_and_cannot_inject_identity PASSED [  1%]
+tests/test_identity.py::test_password_and_session_storage_and_logout PASSED [  2%]
+tests/test_identity.py::test_expired_missing_and_invalid_sessions PASSED [  3%]
+tests/test_identity.py::test_duplicate_and_bad_credentials PASSED        [  5%]
+tests/test_identity.py::test_validation_never_reflects_password PASSED   [  6%]
+tests/test_food.py::test_batch_conversion_aliases_and_isolation PASSED   [  7%]
+tests/test_food.py::test_idempotency_and_adjustment_version PASSED       [  9%]
+tests/test_food.py::test_fefo_cook_and_repeated_undo PASSED              [ 10%]
+tests/test_food.py::test_insufficient_and_expired_do_not_mutate PASSED   [ 11%]
+tests/test_food.py::test_failure_after_record_insert_rolls_back PASSED   [ 12%]
+tests/test_food.py::test_composite_foreign_key_rejects_cross_user_reference PASSED [ 14%]
+tests/test_food.py::test_mysql_concurrent_cooking[False] PASSED          [ 15%]
+tests/test_food.py::test_mysql_concurrent_cooking[True] PASSED           [ 16%]
+tests/test_optional.py::test_optional_default_and_explicit_consumption PASSED [ 18%]
+tests/test_optional.py::test_optional_exclusion_and_shortage PASSED      [ 19%]
+tests/test_optional.py::test_staple_is_not_infinite_and_is_owner_scoped PASSED [ 20%]
+tests/test_optional.py::test_plan_confirmation_preserves_optional_choice PASSED [ 22%]
+tests/test_optional.py::test_examples_are_idempotent_and_do_not_add_stock PASSED [ 23%]
+tests/test_optional.py::test_example_conflict_rolls_back_everything PASSED [ 24%]
+tests/test_planning.py::test_constraints_alias_exclusion_and_tenant PASSED [ 25%]
+tests/test_planning.py::test_package_budget_unknown_and_stale PASSED     [ 27%]
+tests/test_planning.py::test_expiry_scaling_determinism_and_no_mutation PASSED [ 28%]
+tests/test_planning.py::test_quote_validation PASSED                     [ 29%]
+tests/test_plans.py::test_confirm_replay_and_owner PASSED                [ 31%]
+tests/test_plans.py::test_stale_stock_revision_and_old_version PASSED    [ 32%]
+tests/test_plans.py::test_preference_change_and_insufficient_rollback PASSED [ 33%]
+tests/test_plans.py::test_concurrent_confirmation PASSED                 [ 35%]
+tests/test_plans.py::test_new_alias_cannot_bypass_saved_exclusion PASSED [ 36%]
+tests/test_plans.py::test_unknown_budget_cannot_confirm PASSED           [ 37%]
+tests/test_plan_lifecycle.py::test_cancel_history_owner_replay_and_terminal PASSED [ 38%]
+tests/test_plan_lifecycle.py::test_scoring_weights_and_snapshot PASSED   [ 40%]
+tests/test_plan_lifecycle.py::test_confirmation_after_date_rollover PASSED [ 41%]
+tests/test_plan_lifecycle.py::test_mysql_cancel_confirm_race PASSED      [ 42%]
+tests/test_shopping.py::test_saved_quotes_priority_snapshot_validation_and_isolation PASSED [ 44%]
+tests/test_shopping.py::test_shopping_edit_confirm_replay_budget_and_cooking PASSED [ 45%]
+tests/test_shopping.py::test_shopping_owner_versions_cancellation_and_draft_recovery PASSED [ 46%]
+tests/test_shopping.py::test_shopping_failure_rolls_back_all_batches_and_operation PASSED [ 48%]
+tests/test_shopping.py::test_mysql_shopping_concurrent_confirmation[True] PASSED [ 49%]
+tests/test_shopping.py::test_mysql_shopping_concurrent_confirmation[False] PASSED [ 50%]
+tests/test_shopping.py::test_agent_proposal_keeps_quoted_price_until_approval PASSED [ 51%]
+tests/test_shopping.py::test_invalid_edit_is_atomic_and_rejects_foreign_items PASSED [ 53%]
+tests/test_shopping.py::test_mysql_quote_and_shopping_edit_competition PASSED [ 54%]
+tests/test_shopping.py::test_scaled_purchase_cannot_create_unconfirmable_draft PASSED [ 55%]
+tests/test_receipt_confirmation.py::test_confirm_replay_terminal_and_owner PASSED [ 57%]
+tests/test_receipt_confirmation.py::test_invalid_confirmation_keeps_draft[quantity] PASSED [ 58%]
+tests/test_receipt_confirmation.py::test_invalid_confirmation_keeps_draft[unit] PASSED [ 59%]
+tests/test_receipt_confirmation.py::test_invalid_confirmation_keeps_draft[review] PASSED [ 61%]
+tests/test_receipt_confirmation.py::test_invalid_confirmation_keeps_draft[mapping] PASSED [ 62%]
+tests/test_receipt_confirmation.py::test_invalid_confirmation_keeps_draft[fraction] PASSED [ 63%]
+tests/test_receipt_confirmation.py::test_invalid_confirmation_keeps_draft[dimension] PASSED [ 64%]
+tests/test_receipt_confirmation.py::test_invalid_confirmation_keeps_draft[source] PASSED [ 66%]
+tests/test_receipt_confirmation.py::test_invalid_confirmation_keeps_draft[date] PASSED [ 67%]
+tests/test_receipt_confirmation.py::test_invalid_confirmation_keeps_draft[empty] PASSED [ 68%]
+tests/test_receipt_confirmation.py::test_cancel_replay_and_no_confirmation PASSED [ 70%]
+tests/test_receipt_confirmation.py::test_second_line_failure_rolls_back_and_retries PASSED [ 71%]
+tests/test_receipt_confirmation.py::test_mysql_confirmation_competition[same-key] PASSED [ 72%]
+tests/test_receipt_confirmation.py::test_mysql_confirmation_competition[other-key] PASSED [ 74%]
+tests/test_receipt_confirmation.py::test_mysql_confirmation_competition[edit] PASSED [ 75%]
+tests/test_receipt_confirmation.py::test_mysql_confirmation_competition[cancel] PASSED [ 76%]
+tests/test_receipt_confirmation.py::test_mysql_late_parse_cannot_overwrite_confirmed_receipt PASSED [ 77%]
+tests/test_run_events.py::test_sse_replay_cursor_and_tenant PASSED       [ 79%]
+tests/test_run_events.py::test_replayed_confirmation_does_not_duplicate_events PASSED [ 80%]
+tests/test_run_events.py::test_existing_runs_receive_bootstrap_event PASSED [ 81%]
+tests/test_agent.py::test_tool_loop_persistence_and_isolation PASSED     [ 83%]
+tests/test_agent.py::test_proposal_requires_approval_and_never_cooks PASSED [ 84%]
+tests/test_agent.py::test_bad_tool_arguments_and_forbidden_tool PASSED   [ 85%]
+tests/test_agent.py::test_failure_retry_and_cancel PASSED                [ 87%]
+tests/test_agent.py::test_stale_proposal_rejected PASSED                 [ 88%]
+tests/test_agent.py::test_model_disabled_fails_without_network PASSED    [ 89%]
+tests/test_agent.py::test_step_limit_and_malformed_arguments PASSED      [ 90%]
+tests/test_agent.py::test_running_lease_blocks_duplicate_and_cancel_wins PASSED [ 92%]
+tests/test_agent_actions.py::test_inventory_approval_is_single_transaction PASSED [ 93%]
+tests/test_agent_actions.py::test_cooking_confirmation_stales_on_adjustment PASSED [ 94%]
+tests/test_agent_sessions.py::test_mysql_concurrent_session_continuation PASSED [ 96%]
+tests/test_receipt_vision.py::test_mysql_pending_parse_admission_across_requests PASSED [ 97%]
+tests/test_receipts.py::test_mysql_edit_during_parser_does_not_hold_owner_lock_or_overwrite PASSED [ 98%]
+tests/test_crud.py::test_mysql_archive_cooking_race PASSED               [100%]
+
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  D:\Code\meal-manager\backend\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+.venv\Lib\site-packages\starlette\testclient.py:53
+  D:\Code\meal-manager\backend\.venv\Lib\site-packages\starlette\testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: D:\Code\meal-manager\docs\validation\mysql-engineering-0915\junit.xml -
+================= 77 passed, 2 warnings in 781.77s (0:13:01) ==================

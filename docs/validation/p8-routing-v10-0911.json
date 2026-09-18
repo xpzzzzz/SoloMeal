@@ -1,0 +1,419 @@
+{
+  "scope": "six_diagnostic_trials_not_full_cohort",
+  "p8_gate": "incomplete",
+  "trials": [
+    {
+      "trial": "p8-A002-routing-v10-0911-01",
+      "objective_pass": true,
+      "semantic_pass": true,
+      "human_clarity": null,
+      "elapsed_seconds": 9.304355999993277,
+      "actual_requests": 3,
+      "observed_tokens": 15392,
+      "input_hashes_verified": 3,
+      "invalid_calls": 0,
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 2,
+          "total": 2,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      },
+      "approval_statuses": null,
+      "evidence_sha256": {
+        "attempt.json": "c56da4739815b6e21c62558e079975ee9806eed0f29c992825e60ec7aada6d38",
+        "call-01-attempt.json": "d7051f02ce52e7ae986bafe31c69bf6c202c32ec37df5671546532ed27474636",
+        "call-01-input.json": "6c234dece5f1e163440ac246155084697eaba830ed869a767d100572b49ef067",
+        "call-01-result.json": "c6f74401fca42e8152ca8c64a5328606582e4819d68a46810d7f177758d6e099",
+        "call-02-attempt.json": "2bdc85dda79c6a17d09743275ed89bed16a92a50bad8ffd17d2c48d0f79c6b7a",
+        "call-02-input.json": "93b66f40278ea97ba17d26e172647a0e77089e11098cb748aaf6f2ee34c2d09c",
+        "call-02-result.json": "e311a7f82942de5f130b45576e9825921c34e0d052577448c2c5fab6a7668724",
+        "call-03-attempt.json": "39de26b437171a55b24449b30f550b5c696528dedee90e1b31763e4d56455a14",
+        "call-03-input.json": "e4026596ace4da238b72fda794f092191fbde8eb3eeeeb30ecc4686fdc1502c6",
+        "call-03-result.json": "139ad3ab5d079245237e12f43c3154d611faba26f328207da1af5f76021fc060",
+        "report.json": "87f99bd37e1eb53553a1fc3b230cf7fdf589da04cce0a65dfa42ff961159c32e"
+      },
+      "attempt": {
+        "scenario": "A002",
+        "mode": "agent_tools",
+        "dataset_sha256": "2aa39319b14a91242e0a0aa6c58625eb78f3da4efb505bc47b24d8a590bc3ae7",
+        "protocol_sha256": "df0ee4c6171f026b6d520b93f8b0597f5e4beacb74505b45a499e2d20f7b4862",
+        "commit": "a923d77c7c281f2fcd165a71ad062f1ec0d851bc",
+        "source_sha256": "8d69bb57bed1044bad620fbf1783a05c17e06e669dea2a4c5062c9b848df07f4",
+        "prompt_version": "solomeal-agent-v10",
+        "tool_protocol": "json",
+        "max_completion_tokens": 3000,
+        "model_timeout_seconds": 30,
+        "enable_thinking": "false",
+        "confirmation_extension": "none",
+        "oracle_amendments_sha256": "5e5f9dfa11a2d8e3c427025410642edf61d5c07c1ba6ddf27380fb9f0054334e",
+        "budget_amendments_sha256": "e34e1e2d39a4e02a484e08a0aff2e473334cf8244aa7478c3468d233d889a3eb",
+        "system_sha256": "7aeb51d8239cb72abc91abb8cf13347db1dcfd65a040d5225e60397eeaa91680",
+        "tools_sha256": "5d53d1404d8c490a17fad9b91ad3be6e0dda6c5e26168b7a8ee3a37bead639df",
+        "repetitions": 1,
+        "scope": "diagnostic_subset",
+        "started_at": "2026-09-11T13:00:45.940648+00:00",
+        "p8_gate": "incomplete"
+      }
+    },
+    {
+      "trial": "p8-A002-routing-v10-0911-02",
+      "objective_pass": true,
+      "semantic_pass": true,
+      "human_clarity": null,
+      "elapsed_seconds": 9.43210989999352,
+      "actual_requests": 3,
+      "observed_tokens": 15526,
+      "input_hashes_verified": 3,
+      "invalid_calls": 0,
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 2,
+          "total": 2,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      },
+      "approval_statuses": null,
+      "evidence_sha256": {
+        "attempt.json": "17d68f961ec8af15675e281a0239be24d752659910baffacff48ea0ddecc51c7",
+        "call-01-attempt.json": "be41ce298eefd4b03dca5ee2517e4e3ed5f57a1a5257d0e6073253f309dff085",
+        "call-01-input.json": "6c234dece5f1e163440ac246155084697eaba830ed869a767d100572b49ef067",
+        "call-01-result.json": "ddeb7f6e8e5a24852201227003a412cff2078a99b9800e9055a4d5f28aeecf0f",
+        "call-02-attempt.json": "09f123dd2676b79cee63133d9acc44b3fd4fd407997e0f25639d150bed935371",
+        "call-02-input.json": "c6672ecaabeac3c6852cfab55ff066db28a97b23a36b4a8dd5793a36f9abb5ac",
+        "call-02-result.json": "96e16fdda8d5b3f050a5279238c1c8f3059f676e6a85127c370461a1d5e662ae",
+        "call-03-attempt.json": "e4bb9ad9b9e34a35af5aeab0bd71c08f0547698901dee19dd6f6ce000ba13014",
+        "call-03-input.json": "7304dba7c10bb4854664f1acc19b9356f99968b6436285f4102e0592e87b3fc0",
+        "call-03-result.json": "426896fc0690000a51d0de6745c66532a206e4b57e1c195844f6e416edc8be8b",
+        "report.json": "972bb1fe71a05bc17d9e2caca588bb06330a63a727c57cf543e4ffd9707690fb"
+      },
+      "attempt": {
+        "scenario": "A002",
+        "mode": "agent_tools",
+        "dataset_sha256": "2aa39319b14a91242e0a0aa6c58625eb78f3da4efb505bc47b24d8a590bc3ae7",
+        "protocol_sha256": "df0ee4c6171f026b6d520b93f8b0597f5e4beacb74505b45a499e2d20f7b4862",
+        "commit": "a923d77c7c281f2fcd165a71ad062f1ec0d851bc",
+        "source_sha256": "8d69bb57bed1044bad620fbf1783a05c17e06e669dea2a4c5062c9b848df07f4",
+        "prompt_version": "solomeal-agent-v10",
+        "tool_protocol": "json",
+        "max_completion_tokens": 3000,
+        "model_timeout_seconds": 30,
+        "enable_thinking": "false",
+        "confirmation_extension": "none",
+        "oracle_amendments_sha256": "5e5f9dfa11a2d8e3c427025410642edf61d5c07c1ba6ddf27380fb9f0054334e",
+        "budget_amendments_sha256": "e34e1e2d39a4e02a484e08a0aff2e473334cf8244aa7478c3468d233d889a3eb",
+        "system_sha256": "7aeb51d8239cb72abc91abb8cf13347db1dcfd65a040d5225e60397eeaa91680",
+        "tools_sha256": "5d53d1404d8c490a17fad9b91ad3be6e0dda6c5e26168b7a8ee3a37bead639df",
+        "repetitions": 1,
+        "scope": "diagnostic_subset",
+        "started_at": "2026-09-11T13:01:43.334997+00:00",
+        "p8_gate": "incomplete"
+      }
+    },
+    {
+      "trial": "p8-A002-routing-v10-0911-03",
+      "objective_pass": true,
+      "semantic_pass": true,
+      "human_clarity": null,
+      "elapsed_seconds": 13.220341000007465,
+      "actual_requests": 3,
+      "observed_tokens": 15401,
+      "input_hashes_verified": 3,
+      "invalid_calls": 0,
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 2,
+          "total": 2,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      },
+      "approval_statuses": null,
+      "evidence_sha256": {
+        "attempt.json": "289c0b1c3a5e5ad71512db4f50c13b0c735fc0fafdfcdcd1f80db5f220817016",
+        "call-01-attempt.json": "2a904d11dc68561ce77f1dc65253845e4b872fff5879681e8af9fa7e88cf87fd",
+        "call-01-input.json": "6c234dece5f1e163440ac246155084697eaba830ed869a767d100572b49ef067",
+        "call-01-result.json": "45583f165d57bd8f1379e3e8b7d0d9de22c8cb3674c2169dfca3af8eb972dfe9",
+        "call-02-attempt.json": "1b40a7b0c8158c70f938e312512a1e9f0e5b459220c0421b060c4409bdea5209",
+        "call-02-input.json": "2eb4db6ba05c992e42cc4e615cfe4829a3b6b6d8a56c22ea7053fa3189993a97",
+        "call-02-result.json": "afb1e2327c287143f3f618e4eb1e76bb64f2d74775caef71f372c40fc75a476e",
+        "call-03-attempt.json": "f5e6309e2e2f50630f93ce9c9214c8f3a47a5438aab7915dedb188de7befe569",
+        "call-03-input.json": "e9d7e06118f60ecea6522a811b411c3e8201b5193cce3573a8fe8c27ad9797ca",
+        "call-03-result.json": "0e11d25ac668ae3864fc5277a156f24ec3474ae7964e6d6dcd8c7e7612235bfd",
+        "report.json": "a92b138f2b109f37c27153be476a67ea0dcbecb99b2102eebf9d94f893f7eb9a"
+      },
+      "attempt": {
+        "scenario": "A002",
+        "mode": "agent_tools",
+        "dataset_sha256": "2aa39319b14a91242e0a0aa6c58625eb78f3da4efb505bc47b24d8a590bc3ae7",
+        "protocol_sha256": "df0ee4c6171f026b6d520b93f8b0597f5e4beacb74505b45a499e2d20f7b4862",
+        "commit": "a923d77c7c281f2fcd165a71ad062f1ec0d851bc",
+        "source_sha256": "8d69bb57bed1044bad620fbf1783a05c17e06e669dea2a4c5062c9b848df07f4",
+        "prompt_version": "solomeal-agent-v10",
+        "tool_protocol": "json",
+        "max_completion_tokens": 3000,
+        "model_timeout_seconds": 30,
+        "enable_thinking": "false",
+        "confirmation_extension": "none",
+        "oracle_amendments_sha256": "5e5f9dfa11a2d8e3c427025410642edf61d5c07c1ba6ddf27380fb9f0054334e",
+        "budget_amendments_sha256": "e34e1e2d39a4e02a484e08a0aff2e473334cf8244aa7478c3468d233d889a3eb",
+        "system_sha256": "7aeb51d8239cb72abc91abb8cf13347db1dcfd65a040d5225e60397eeaa91680",
+        "tools_sha256": "5d53d1404d8c490a17fad9b91ad3be6e0dda6c5e26168b7a8ee3a37bead639df",
+        "repetitions": 1,
+        "scope": "diagnostic_subset",
+        "started_at": "2026-09-11T13:01:55.031058+00:00",
+        "p8_gate": "incomplete"
+      }
+    },
+    {
+      "trial": "p8-A016-routing-v10-0911-01",
+      "objective_pass": true,
+      "semantic_pass": true,
+      "human_clarity": null,
+      "elapsed_seconds": 5.152919000000111,
+      "actual_requests": 2,
+      "observed_tokens": 8979,
+      "input_hashes_verified": 2,
+      "invalid_calls": 0,
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 2,
+          "total": 2,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      },
+      "approval_statuses": [
+        409,
+        409
+      ],
+      "evidence_sha256": {
+        "attempt.json": "1eb3f579ec151afbef4e2005c0df821a703571f9454c9c340b64a8c8e3dcc35c",
+        "call-01-attempt.json": "e025b78e74b51a3630728011d88167e84f3bf7d6273148acfb602b503602529b",
+        "call-01-input.json": "385646d0dc30031312a0de4d36403187acc8a062a103a8db4bb80a6bc0f3b3d2",
+        "call-01-result.json": "441e515df6b444957771dee438efaedc0df109950b56ef5d53ee5b48712d65da",
+        "call-02-attempt.json": "7a9f444e4c6467f0a0ca9925cbee28b6b956e4a8073a088fb7209d3a987a180a",
+        "call-02-input.json": "0b673681145ba31ec5167837e176cf1b23e3a6fe143ec6ca731fef916687a6e0",
+        "call-02-result.json": "e87b8846ed024b6d5b275b38d1cdf4b39f58d705e794283a25fe045dcf06c553",
+        "report.json": "4ee7dbd2b474d9104743894188ed726bbe56a062705e023794dccb316d43d322"
+      },
+      "attempt": {
+        "scenario": "A016",
+        "mode": "agent_tools",
+        "dataset_sha256": "2aa39319b14a91242e0a0aa6c58625eb78f3da4efb505bc47b24d8a590bc3ae7",
+        "protocol_sha256": "df0ee4c6171f026b6d520b93f8b0597f5e4beacb74505b45a499e2d20f7b4862",
+        "commit": "a923d77c7c281f2fcd165a71ad062f1ec0d851bc",
+        "source_sha256": "8d69bb57bed1044bad620fbf1783a05c17e06e669dea2a4c5062c9b848df07f4",
+        "prompt_version": "solomeal-agent-v10",
+        "tool_protocol": "json",
+        "max_completion_tokens": 3000,
+        "model_timeout_seconds": 30,
+        "enable_thinking": "false",
+        "confirmation_extension": "none",
+        "oracle_amendments_sha256": "5e5f9dfa11a2d8e3c427025410642edf61d5c07c1ba6ddf27380fb9f0054334e",
+        "budget_amendments_sha256": "e34e1e2d39a4e02a484e08a0aff2e473334cf8244aa7478c3468d233d889a3eb",
+        "system_sha256": "7aeb51d8239cb72abc91abb8cf13347db1dcfd65a040d5225e60397eeaa91680",
+        "tools_sha256": "5d53d1404d8c490a17fad9b91ad3be6e0dda6c5e26168b7a8ee3a37bead639df",
+        "repetitions": 1,
+        "scope": "diagnostic_subset",
+        "started_at": "2026-09-11T13:02:10.499163+00:00",
+        "p8_gate": "incomplete"
+      }
+    },
+    {
+      "trial": "p8-A016-routing-v10-0911-02",
+      "objective_pass": true,
+      "semantic_pass": true,
+      "human_clarity": null,
+      "elapsed_seconds": 4.1073590999876615,
+      "actual_requests": 2,
+      "observed_tokens": 8962,
+      "input_hashes_verified": 2,
+      "invalid_calls": 0,
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 2,
+          "total": 2,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      },
+      "approval_statuses": [
+        409,
+        409
+      ],
+      "evidence_sha256": {
+        "attempt.json": "10e37bdba05b279b94bb75e6606ebef51eacb61fd45a09d301227d3d6ff2f3cd",
+        "call-01-attempt.json": "4c973c01d84820dba56066f44968d61ce106c539ad503115ef7a4fffced7bfe9",
+        "call-01-input.json": "385646d0dc30031312a0de4d36403187acc8a062a103a8db4bb80a6bc0f3b3d2",
+        "call-01-result.json": "a6adca51177d124fb3bc3b13a21492bd109a8dd9a9ca4ff12adbe659eeacc334",
+        "call-02-attempt.json": "5df6b23b3c2d557565d530010121ae8661a2484c0ed6efb9df500e509f0e0229",
+        "call-02-input.json": "c165722599c56cdd26466d64d159d4edb9c733d3a182c46415aafc1201b71f1e",
+        "call-02-result.json": "dce30ee47ffce65e9a3de9feeaf7f91ca516fd37cc0b8e3e277ab60acda4028e",
+        "report.json": "d7ec454f98ea77337e00d85de7c0de099ccf0e8ed645db28c34884c5ba19993a"
+      },
+      "attempt": {
+        "scenario": "A016",
+        "mode": "agent_tools",
+        "dataset_sha256": "2aa39319b14a91242e0a0aa6c58625eb78f3da4efb505bc47b24d8a590bc3ae7",
+        "protocol_sha256": "df0ee4c6171f026b6d520b93f8b0597f5e4beacb74505b45a499e2d20f7b4862",
+        "commit": "a923d77c7c281f2fcd165a71ad062f1ec0d851bc",
+        "source_sha256": "8d69bb57bed1044bad620fbf1783a05c17e06e669dea2a4c5062c9b848df07f4",
+        "prompt_version": "solomeal-agent-v10",
+        "tool_protocol": "json",
+        "max_completion_tokens": 3000,
+        "model_timeout_seconds": 30,
+        "enable_thinking": "false",
+        "confirmation_extension": "none",
+        "oracle_amendments_sha256": "5e5f9dfa11a2d8e3c427025410642edf61d5c07c1ba6ddf27380fb9f0054334e",
+        "budget_amendments_sha256": "e34e1e2d39a4e02a484e08a0aff2e473334cf8244aa7478c3468d233d889a3eb",
+        "system_sha256": "7aeb51d8239cb72abc91abb8cf13347db1dcfd65a040d5225e60397eeaa91680",
+        "tools_sha256": "5d53d1404d8c490a17fad9b91ad3be6e0dda6c5e26168b7a8ee3a37bead639df",
+        "repetitions": 1,
+        "scope": "diagnostic_subset",
+        "started_at": "2026-09-11T13:02:17.745679+00:00",
+        "p8_gate": "incomplete"
+      }
+    },
+    {
+      "trial": "p8-A016-routing-v10-0911-03",
+      "objective_pass": true,
+      "semantic_pass": true,
+      "human_clarity": null,
+      "elapsed_seconds": 4.050985299996682,
+      "actual_requests": 2,
+      "observed_tokens": 8953,
+      "input_hashes_verified": 2,
+      "invalid_calls": 0,
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 2,
+          "total": 2,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      },
+      "approval_statuses": [
+        409,
+        409
+      ],
+      "evidence_sha256": {
+        "attempt.json": "47cbfc7a57bf872c61f882a85c5bbe535525a096527dc1a018cdf8f6ab496b3f",
+        "call-01-attempt.json": "8d6bc9508b2eb60174bf0fce54bc1d223ce60bf63bac9bdd9d6d9cf834fc0bd6",
+        "call-01-input.json": "385646d0dc30031312a0de4d36403187acc8a062a103a8db4bb80a6bc0f3b3d2",
+        "call-01-result.json": "7df1d26c56120263d5a6621451ad05ea49f018accab84e50d542c91868f0720e",
+        "call-02-attempt.json": "94631e0c80e25144cd7d4824ba5b6099ef44da604fc007563d5b8be7a2393864",
+        "call-02-input.json": "c4c765da63e87e41d4808237d5821af8fe37ca30b18568353571db178de82fd3",
+        "call-02-result.json": "a4f570d5d1f9a4ca8509a56fc510d168cd455b26af69e16bf26d39838e5dc506",
+        "report.json": "0c51c2bb6fad25cd02f9e9b1d5f86e79ca1004ef9535df20bf4b46dbfc0e9720"
+      },
+      "attempt": {
+        "scenario": "A016",
+        "mode": "agent_tools",
+        "dataset_sha256": "2aa39319b14a91242e0a0aa6c58625eb78f3da4efb505bc47b24d8a590bc3ae7",
+        "protocol_sha256": "df0ee4c6171f026b6d520b93f8b0597f5e4beacb74505b45a499e2d20f7b4862",
+        "commit": "a923d77c7c281f2fcd165a71ad062f1ec0d851bc",
+        "source_sha256": "8d69bb57bed1044bad620fbf1783a05c17e06e669dea2a4c5062c9b848df07f4",
+        "prompt_version": "solomeal-agent-v10",
+        "tool_protocol": "json",
+        "max_completion_tokens": 3000,
+        "model_timeout_seconds": 30,
+        "enable_thinking": "false",
+        "confirmation_extension": "none",
+        "oracle_amendments_sha256": "5e5f9dfa11a2d8e3c427025410642edf61d5c07c1ba6ddf27380fb9f0054334e",
+        "budget_amendments_sha256": "e34e1e2d39a4e02a484e08a0aff2e473334cf8244aa7478c3468d233d889a3eb",
+        "system_sha256": "7aeb51d8239cb72abc91abb8cf13347db1dcfd65a040d5225e60397eeaa91680",
+        "tools_sha256": "5d53d1404d8c490a17fad9b91ad3be6e0dda6c5e26168b7a8ee3a37bead639df",
+        "repetitions": 1,
+        "scope": "diagnostic_subset",
+        "started_at": "2026-09-11T13:02:23.976274+00:00",
+        "p8_gate": "incomplete"
+      }
+    }
+  ],
+  "requests": 15,
+  "observed_tokens": 73213,
+  "review_sha256": "bd423d00b2568b33985179d3ce27dcc9b71264561fe386dd6959f3d20998157e",
+  "manifest_sha256": "db02465fc7c98e603afabdaaee4989465ccf86559222f0133a9567953906174a",
+  "scores_sha256": "f39d418ee1da284a2961948c404b5c3a31022115878d619a58d78386bc14068d",
+  "counts": {
+    "passed": 6,
+    "failed": 0,
+    "unscored": 0,
+    "not_applicable": 0
+  }
+}

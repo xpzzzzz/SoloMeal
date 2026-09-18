@@ -1,0 +1,63 @@
+{
+  "database": "isolated SQLite",
+  "scope": "real vision with browser correction and confirmation",
+  "cases": [
+    {
+      "id": "receipt-01",
+      "model_attempts": 1,
+      "receipt_id": "2c62cf1e-5496-404f-9b2f-62c3907f508f",
+      "parse_http_status": 200,
+      "parse_status": "parsed",
+      "all_require_review": true,
+      "field_mismatches": [],
+      "no_inventory_before_confirmation": true,
+      "workflow_status": "passed",
+      "runner_issue": "Initial runner asserted purchase date on inventory response; actual date is retained in receipt draft. Corrected verification without any new model call.",
+      "batches": 9,
+      "same_key_retry_no_duplicates": true,
+      "reload_restored": true
+    },
+    {
+      "id": "receipt-03",
+      "model_attempts": 1,
+      "receipt_id": "52be5308-41ff-45ff-a421-bfab461eca32",
+      "parse_http_status": 200,
+      "parse_status": "parsed",
+      "all_require_review": true,
+      "field_mismatches": [
+        {
+          "field": "purchased_on"
+        },
+        {
+          "line": 4,
+          "field": "name"
+        },
+        {
+          "line": 4,
+          "field": "quantity"
+        },
+        {
+          "line": 4,
+          "field": "unit"
+        }
+      ],
+      "no_inventory_before_confirmation": true,
+      "workflow_status": "passed",
+      "batches": 8,
+      "same_key_retry_no_duplicates": true,
+      "reload_restored": true
+    },
+    {
+      "id": "receipt-02",
+      "model_attempts": 1,
+      "receipt_id": "ae8e881c-6523-4a88-84d5-815612b748db",
+      "parse_http_status": 200,
+      "parse_status": "failed",
+      "no_inventory_before_confirmation": true,
+      "workflow_status": "passed",
+      "batches": 6,
+      "same_key_retry_no_duplicates": true,
+      "reload_restored": true
+    }
+  ]
+}

@@ -1,0 +1,164 @@
+{
+  "version": "context-v19-diagnostic",
+  "source_sha256": "ec7c27702426f689096b69d52b795ee734e59662f6b0f11068953532f10fbcaa",
+  "p8_gate": "incomplete",
+  "scope": "three_A015_diagnostic_trials_not_holdout",
+  "counts": {
+    "passed": 3,
+    "failed": 0
+  },
+  "human_clarity": null,
+  "actual_requests": 12,
+  "usage_missing": 0,
+  "observed_usage": {
+    "prompt_tokens": 68992,
+    "completion_tokens": 1079,
+    "total_tokens": 70071
+  },
+  "reasoning_tokens": null,
+  "cost": null,
+  "input_hashes_matched": 12,
+  "artifacts_sha256": {
+    "p8-context-v19-0913-registration.json": "b9c0092b9866238fefb37d96882e2c1622f1f0c872dd777044d84181e3674f30",
+    "p8-context-v19-0913-review.manifest.json": "bb470e77ea111e142f501ace07773a728ddf14d23042c40ad063ec653d33d4d4",
+    "p8-context-v19-0913-review.json": "49c5ca18eb6507c51b95acd78be44f7ce02a4189264ef719bbb0d54b673007b4",
+    "p8-context-v19-0913-scores.json": "063f21fb1689420acc61c39477aceeb345784ef777571d7850b15307861c43cd"
+  },
+  "trials": [
+    {
+      "trial": "p8-A015-context-v19-0913-01",
+      "evidence_sha256": {
+        "attempt.json": "4d3c670059affc098d7cd329bb9d3c7490d0812dbcdc45bc9281ac1be33d63df",
+        "call-01-attempt.json": "ca552899b245d7422062068cb4c08900306e03f2dcda814780db4a2c8cf34853",
+        "call-01-input.json": "bb674a4199711dabd59b9eb897ed915ef6c1809ff7d8acb375403573dd27bff5",
+        "call-01-result.json": "c7735eff337ae888a0e957bba5aa7ef62092e0511df74c5b12f19ad0712e6f00",
+        "call-02-attempt.json": "459802b3a0f94e9296858c36aca50f637b7494d69a58eae9dfbba6095f9e11c8",
+        "call-02-input.json": "fc67116e44d2f08508bb3ad78bf22da16918e0ebd0cb6f4e72220807896a2cdc",
+        "call-02-result.json": "49c3a9ebcc214b9cb065e2f63e75a137bd894696550b46c64a737ee7e3d15ba9",
+        "call-03-attempt.json": "f89e12129e85b650d1c3152b660451cdae93ba2ad064bd1e2142349ec1ae10f1",
+        "call-03-input.json": "cb2b5aa5f06936c9241aeb18b4794f48bb5116bd6d4b5cd5db1bb0debd362a4c",
+        "call-03-result.json": "fc73a4559a7dd3240674cadc1b07376fa0f047146cb499657221aabd14007764",
+        "call-04-attempt.json": "31da17a875a237d41e589a84aee7cbca20731515a14c7c4d494e6b7fd831b5b4",
+        "call-04-input.json": "74af19e35d0caa45a813066d14cee708869b54d4ad32acd61a6362a0f5bac39f",
+        "call-04-result.json": "887d2a539db8f5db0868b69697d8c84d1f40dbcf194235dcf51c9284bf5a61e9",
+        "report.json": "b7467d72e873dcf19f184eb45edbe07aa421c94a6d7f126114cc76b4eb7583be"
+      },
+      "objective_pass": true,
+      "semantic_pass": true,
+      "business_unchanged": true,
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 2,
+          "total": 2,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      },
+      "invalid_calls": 0,
+      "elapsed_seconds": 11.977781299996423,
+      "actual_requests": 4
+    },
+    {
+      "trial": "p8-A015-context-v19-0913-02",
+      "evidence_sha256": {
+        "attempt.json": "4835a78705af5ec34476076a9477b6773bfa5d8306d984dedf18c877d3b6b66e",
+        "call-01-attempt.json": "53e691d7b9fe16956c66b298daab438578f33f4af2dde6a95ddf642fb6b83794",
+        "call-01-input.json": "bb674a4199711dabd59b9eb897ed915ef6c1809ff7d8acb375403573dd27bff5",
+        "call-01-result.json": "65bf88b1f1d4bdbf9c37abe6d74c62babf91a3da56b574e7de5eb2d688615e3c",
+        "call-02-attempt.json": "6f1ce0313546d330e52870018c9724efe8675b78f529ea4cbdd23bdded450137",
+        "call-02-input.json": "38125ce0a654c450738da85ed9642703d6f64d939384a2cb9ad07e0273bb63a6",
+        "call-02-result.json": "96777aaa483abde10294e1f2bad52b39d135499da1632bfe1c18a78f17167647",
+        "call-03-attempt.json": "294d94638d9492e7878ce5cfc2bf6102bff18ffd0a4906ad04d448136d877f25",
+        "call-03-input.json": "dda25dafb906f2ca5208d3fdc7cd5fe397e8af8d4a584d97f76320921656f4e1",
+        "call-03-result.json": "be44f78bdbb3cf628a7022f945bb5136678f86120c0e2919f7350aa4f78fa35c",
+        "call-04-attempt.json": "66226fba2ed5a6fb0c349e2691f3602fd6caf3164f1bb43e735c0f74e74309c5",
+        "call-04-input.json": "d95852aeef10d15c0124acd9cfc748a99ae23636759af668e3fe9809f17c21a7",
+        "call-04-result.json": "f309d85d439b32176f139917b44dd75c8f7ae7e925509fbee2d15dfe0fd03207",
+        "report.json": "06b5b2af1998442de0891a2e0d0022bb83f06ccb57bb0d4414303646b2ee5e5a"
+      },
+      "objective_pass": true,
+      "semantic_pass": true,
+      "business_unchanged": true,
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 2,
+          "total": 2,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      },
+      "invalid_calls": 0,
+      "elapsed_seconds": 12.240252099989448,
+      "actual_requests": 4
+    },
+    {
+      "trial": "p8-A015-context-v19-0913-03",
+      "evidence_sha256": {
+        "attempt.json": "97594122da56d6907e1c366e08f354d072f67e647fea121a731f7f1761e110e8",
+        "call-01-attempt.json": "d028786accab92a4f0866faa752e3b3f9dfde514662f4cd7876a6176ba6cf966",
+        "call-01-input.json": "bb674a4199711dabd59b9eb897ed915ef6c1809ff7d8acb375403573dd27bff5",
+        "call-01-result.json": "34fc6d124d354c88ed8540f53fae9e0bc2556fd8b16a63c9f76c7acf1adbd736",
+        "call-02-attempt.json": "b8e08a61d2e7945c4ceaa6565a3564acd9e6762bc5e202fddbb25968fd1890bf",
+        "call-02-input.json": "2f3b25b91b09b90d64404da11aeaf428bfb57172209fc7420342e7c2f998c56e",
+        "call-02-result.json": "e9584f9721ddcdaaf5ad877bd48c8c4670c3484091bec2a78ddafd5072ebe473",
+        "call-03-attempt.json": "5cdb4d83ea4b7f94f0f867f68ad12b630efb083c3518ef9d72c53dd4f67b31c5",
+        "call-03-input.json": "cb3d27ea3b2341244b6cb5790c2fb6764b599f899b484d8b2742eac3e922985d",
+        "call-03-result.json": "fcff33823c2bff2c1903c8ba46f501c12e27a93037046c8e56de9d49855a6087",
+        "call-04-attempt.json": "18ef46e7492e9e00726dbab3d2f8a0e01be3055c98be37948ea52cbfe5b30795",
+        "call-04-input.json": "e2c33f2f249ed16d7c06881d4d765190df228c0ac4304376781bd40e50d156ae",
+        "call-04-result.json": "9f3d7db1e70864cf503d02a6b454c86d30e74197bd3ff814ee81e6c6ef97ea0c",
+        "report.json": "acd6bcd1c87a4772cf0c11801619b897556348f386174486a7a7bd491feab635"
+      },
+      "objective_pass": true,
+      "semantic_pass": true,
+      "business_unchanged": true,
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 2,
+          "total": 2,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      },
+      "invalid_calls": 0,
+      "elapsed_seconds": 12.854767000011634,
+      "actual_requests": 4
+    }
+  ]
+}

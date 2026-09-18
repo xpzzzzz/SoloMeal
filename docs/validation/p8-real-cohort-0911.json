@@ -1,0 +1,726 @@
+{
+  "version": "solomeal-cohort-metrics-v2",
+  "manifest_sha256": "dc47827300d8ec49528883ab334542de0221a9b6eb64fbaf88d42234951fcb86",
+  "aggregator_sha256": "97b25b30c074d089b5ae23934fcae497ad986346fa9df81207dce85382d0db37",
+  "split": "debug",
+  "modes": {
+    "direct_model": {
+      "scheduled_trials": 60,
+      "task_success": {
+        "passed": 19,
+        "failed": 20,
+        "missing": 3,
+        "scheduled": 42,
+        "rate": null,
+        "confirmed_success_fraction": 0.4523809523809524,
+        "not_applicable": 18,
+        "status": "debug_only",
+        "holdout_threshold": 0.85
+      },
+      "decision_success": {
+        "passed": 22,
+        "failed": 30,
+        "missing": 8,
+        "scheduled": 60,
+        "rate": null,
+        "confirmed_success_fraction": 0.36666666666666664
+      },
+      "hard_constraints": {
+        "passed": 52,
+        "failed": 6,
+        "missing": 2,
+        "scheduled": 60,
+        "rate": null,
+        "confirmed_success_fraction": 0.8666666666666667,
+        "threshold": 1.0,
+        "status": "failed",
+        "source": "review_constraints_only; fixed objective is not a substitute"
+      },
+      "latency_seconds": {
+        "value": 14.400731900008395,
+        "observed_value": 14.400731900008395,
+        "observed": 60,
+        "scheduled": 60,
+        "missing": 0,
+        "threshold": 120,
+        "status": "passed",
+        "reduction": "p95"
+      },
+      "latency_mean_seconds": {
+        "value": 5.4985807599994585,
+        "observed_value": 5.4985807599994585,
+        "observed": 60,
+        "scheduled": 60,
+        "missing": 0,
+        "threshold": null,
+        "status": "report_only",
+        "reduction": "mean"
+      },
+      "invalid_calls": {
+        "value": 0.0,
+        "observed_value": 0.0,
+        "observed": 60,
+        "scheduled": 60,
+        "missing": 0,
+        "threshold": 1.0,
+        "status": "passed",
+        "reduction": "mean"
+      },
+      "human_clarity": {
+        "value": null,
+        "observed_value": null,
+        "observed": 0,
+        "scheduled": 60,
+        "missing": 60,
+        "threshold": 4,
+        "status": "incomplete",
+        "reduction": "min"
+      },
+      "valid_tool_arguments": {
+        "value": null,
+        "observed_ratio": null,
+        "valid": 0,
+        "total": 0,
+        "missing_trials": 0,
+        "status": "not_applicable",
+        "threshold": 0.95
+      },
+      "write_correctness": {
+        "passed": 0,
+        "failed": 0,
+        "missing": 9,
+        "scheduled": 9,
+        "rate": null,
+        "confirmed_success_fraction": 0.0,
+        "value": null,
+        "threshold": 1.0,
+        "status": "not_applicable"
+      },
+      "unauthorized_writes": {
+        "value": 0,
+        "observed_count": 0,
+        "missing_trials": 0,
+        "threshold": 0,
+        "status": "passed",
+        "unit": "business_DML_statements_at_commit_boundary"
+      },
+      "usage": {
+        "observed_requests": 63,
+        "observed_total_tokens": 131167,
+        "known_usage_calls": 61,
+        "missing_usage_calls": 2,
+        "missing_reports": 0,
+        "total_tokens": null,
+        "cost": null,
+        "scope": "observed_only; incomplete trials and missing usage remain unknown"
+      }
+    },
+    "fixed_workflow": {
+      "scheduled_trials": 60,
+      "task_success": {
+        "passed": 60,
+        "failed": 0,
+        "missing": 0,
+        "scheduled": 60,
+        "rate": 1.0,
+        "confirmed_success_fraction": 1.0,
+        "not_applicable": 0,
+        "status": "debug_only",
+        "holdout_threshold": 0.85
+      },
+      "decision_success": {
+        "passed": 60,
+        "failed": 0,
+        "missing": 0,
+        "scheduled": 60,
+        "rate": 1.0,
+        "confirmed_success_fraction": 1.0
+      },
+      "hard_constraints": {
+        "passed": 0,
+        "failed": 0,
+        "missing": 60,
+        "scheduled": 60,
+        "rate": null,
+        "confirmed_success_fraction": 0.0,
+        "threshold": 1.0,
+        "status": "incomplete",
+        "source": "review_constraints_only; fixed objective is not a substitute"
+      },
+      "latency_seconds": {
+        "value": 0.16678050000336953,
+        "observed_value": 0.16678050000336953,
+        "observed": 60,
+        "scheduled": 60,
+        "missing": 0,
+        "threshold": 120,
+        "status": "passed",
+        "reduction": "p95"
+      },
+      "latency_mean_seconds": {
+        "value": 0.07339399333432084,
+        "observed_value": 0.07339399333432084,
+        "observed": 60,
+        "scheduled": 60,
+        "missing": 0,
+        "threshold": null,
+        "status": "report_only",
+        "reduction": "mean"
+      },
+      "invalid_calls": {
+        "value": 0.05,
+        "observed_value": 0.05,
+        "observed": 60,
+        "scheduled": 60,
+        "missing": 0,
+        "threshold": 1.0,
+        "status": "passed",
+        "reduction": "mean"
+      },
+      "human_clarity": {
+        "status": "not_applicable",
+        "value": null
+      },
+      "valid_tool_arguments": {
+        "value": 1.0,
+        "observed_ratio": 1.0,
+        "valid": 30,
+        "total": 30,
+        "missing_trials": 0,
+        "status": "passed",
+        "threshold": 0.95
+      },
+      "write_correctness": {
+        "passed": 9,
+        "failed": 0,
+        "missing": 0,
+        "scheduled": 9,
+        "rate": 1.0,
+        "confirmed_success_fraction": 1.0,
+        "value": 1.0,
+        "threshold": 1.0,
+        "status": "passed"
+      },
+      "unauthorized_writes": {
+        "value": 0,
+        "observed_count": 0,
+        "missing_trials": 0,
+        "threshold": 0,
+        "status": "passed",
+        "unit": "business_DML_statements_at_commit_boundary"
+      },
+      "usage": {
+        "observed_requests": 0,
+        "observed_total_tokens": null,
+        "known_usage_calls": 0,
+        "missing_usage_calls": 0,
+        "missing_reports": 0,
+        "total_tokens": 0,
+        "cost": null,
+        "scope": "observed_only; incomplete trials and missing usage remain unknown"
+      }
+    },
+    "agent_tools": {
+      "scheduled_trials": 60,
+      "task_success": {
+        "passed": 52,
+        "failed": 8,
+        "missing": 0,
+        "scheduled": 60,
+        "rate": 0.8666666666666667,
+        "confirmed_success_fraction": 0.8666666666666667,
+        "not_applicable": 0,
+        "status": "debug_only",
+        "holdout_threshold": 0.85
+      },
+      "decision_success": {
+        "passed": 52,
+        "failed": 8,
+        "missing": 0,
+        "scheduled": 60,
+        "rate": 0.8666666666666667,
+        "confirmed_success_fraction": 0.8666666666666667
+      },
+      "hard_constraints": {
+        "passed": 59,
+        "failed": 0,
+        "missing": 1,
+        "scheduled": 60,
+        "rate": null,
+        "confirmed_success_fraction": 0.9833333333333333,
+        "threshold": 1.0,
+        "status": "incomplete",
+        "source": "review_constraints_only; fixed objective is not a substitute"
+      },
+      "latency_seconds": {
+        "value": 12.90867380000418,
+        "observed_value": 12.90867380000418,
+        "observed": 60,
+        "scheduled": 60,
+        "missing": 0,
+        "threshold": 120,
+        "status": "passed",
+        "reduction": "p95"
+      },
+      "latency_mean_seconds": {
+        "value": 6.562441615000717,
+        "observed_value": 6.562441615000717,
+        "observed": 60,
+        "scheduled": 60,
+        "missing": 0,
+        "threshold": null,
+        "status": "report_only",
+        "reduction": "mean"
+      },
+      "invalid_calls": {
+        "value": 0.05,
+        "observed_value": 0.05,
+        "observed": 60,
+        "scheduled": 60,
+        "missing": 0,
+        "threshold": 1.0,
+        "status": "passed",
+        "reduction": "mean"
+      },
+      "human_clarity": {
+        "value": null,
+        "observed_value": null,
+        "observed": 0,
+        "scheduled": 60,
+        "missing": 60,
+        "threshold": 4,
+        "status": "incomplete",
+        "reduction": "min"
+      },
+      "valid_tool_arguments": {
+        "value": 1.0,
+        "observed_ratio": 1.0,
+        "valid": 74,
+        "total": 74,
+        "missing_trials": 0,
+        "status": "passed",
+        "threshold": 0.95
+      },
+      "write_correctness": {
+        "passed": 9,
+        "failed": 0,
+        "missing": 0,
+        "scheduled": 9,
+        "rate": 1.0,
+        "confirmed_success_fraction": 1.0,
+        "value": 1.0,
+        "threshold": 1.0,
+        "status": "passed"
+      },
+      "unauthorized_writes": {
+        "value": 0,
+        "observed_count": 0,
+        "missing_trials": 0,
+        "threshold": 0,
+        "status": "passed",
+        "unit": "business_DML_statements_at_commit_boundary"
+      },
+      "usage": {
+        "observed_requests": 123,
+        "observed_total_tokens": 542516,
+        "known_usage_calls": 122,
+        "missing_usage_calls": 1,
+        "missing_reports": 0,
+        "total_tokens": null,
+        "cost": null,
+        "scope": "observed_only; incomplete trials and missing usage remain unknown"
+      }
+    }
+  },
+  "p8_gate": "incomplete",
+  "holdout_gate": "not_run",
+  "scope": "debug_metrics_not_formal_acceptance",
+  "private_directory": "D:\\SoloMeal-Acceptance\\p8-cohort-real-0911-01",
+  "audit_counts": {
+    "not_started": 0,
+    "incomplete": 0,
+    "failed": 7,
+    "awaiting_review": 173,
+    "invalid_evidence": 0
+  },
+  "review_counts": {
+    "passed": 131,
+    "failed": 28,
+    "unscored": 3,
+    "not_applicable": 18
+  },
+  "reference_costs": {
+    "direct_model": {
+      "observed_input_tokens": 122465,
+      "observed_output_tokens": 8702,
+      "known_calls": 61,
+      "unknown_calls": 2,
+      "observed_uncached_reference_cny": "0.1214674",
+      "actual_bill": null
+    },
+    "fixed_workflow": {
+      "observed_input_tokens": 0,
+      "observed_output_tokens": 0,
+      "known_calls": 0,
+      "unknown_calls": 0,
+      "observed_uncached_reference_cny": "0.0",
+      "actual_bill": null
+    },
+    "agent_tools": {
+      "observed_input_tokens": 531955,
+      "observed_output_tokens": 10561,
+      "known_calls": 122,
+      "unknown_calls": 1,
+      "observed_uncached_reference_cny": "0.4540787",
+      "actual_bill": null
+    }
+  },
+  "source_sha256": "d51584910143dbaccaf63155aff9adef0f70bf130e3ac6c50ede1fca0d4a68a2",
+  "files_sha256": {
+    "manifest.json": "dc47827300d8ec49528883ab334542de0221a9b6eb64fbaf88d42234951fcb86",
+    "config.json": "91468eab357b2842fc52ef73ac90357eaf0adbcf5e0c6600a35c5aa09bc95364",
+    "execution-plan.json": "10ac10540aee11a8466a2cb54b4744c60e3c931668f891c4b4a7fe1de13833fe",
+    "rates.json": "7943586ad702963700f3e67e505ee87d3f58e5e29ad46b5b709fd1beefa37689",
+    "execution.jsonl": "908cf43a33a66b332afb4805990d45ad561acbe2e4bf32937a7362924cf2e3b7",
+    "audit.json": "b2ce4a405b7c1b616957990db8adcf70e0b6ec73a3478f844e316abeb0a64cbf",
+    "review.manifest.json": "72b9e2a50479b6f9f5cd3ebba7da197b89c376722927d7f3dbde5d4a63f96696",
+    "review.json": "266966d66a20803a6698adb212b203da6f2340df5ef146818c62b2ffafc9d693",
+    "scores.json": "4d01c555e65ce722b7e1d9b288f95b469d0842ad88ca703bcff2d7b1eff67cc4",
+    "summary.json": "186c64a78fc7c70c717a9c8130707f5ec73769af88d64d251ace14ebe7d0cc38"
+  },
+  "actual_requests": 186,
+  "observed_total_tokens": 673683,
+  "cumulative_known_chat_requests": 312,
+  "additional_interrupted_attempts": 1,
+  "cumulative_vision_requests": 30,
+  "failed_trials": [
+    {
+      "scenario": "A002",
+      "mode": "agent_tools",
+      "status": "failed",
+      "evidence_sha256": {
+        "attempt.json": "2a2305d54d0ddd38fe7aed4c7211f6da7f749beaba8067d5a51bf885095936bc",
+        "call-01-attempt.json": "d09bbcfeab6e50797a2c1c26605dad4760387f948f0ef4ce706ff912de2ce2b7",
+        "call-01-result.json": "d2de6e96db1865f36e80c755b19e2d51e25662d16d32bdce006b98ed823c1198",
+        "call-02-attempt.json": "e57fb6b3af51db2756b056c08a4fc47c9d5851b6cfe4831a6ade3017f101d78f",
+        "call-02-result.json": "e2f326cf6c5ee1f612b283ed8c30c4854508098277716b34cf0ec36bef0d2ce6",
+        "report.json": "387134ccd779ca4016c25e0ed454021f46407ac94125cb097899c68c2b718094"
+      }
+    },
+    {
+      "scenario": "A002",
+      "mode": "agent_tools",
+      "status": "failed",
+      "evidence_sha256": {
+        "attempt.json": "e71b4d65accd6b03e004f962467199bbdf2bfa34608ecab0d56df940afa8d220",
+        "call-01-attempt.json": "cb43638139a832c49cd412eabcc0a2b490fba26459544b94f172e63eae262d23",
+        "call-01-result.json": "a2cca590255728e88e98199690f5e02ce10a561560fe26bcfddd6b3820f25bcb",
+        "call-02-attempt.json": "2293cacf8558429200355dc67b5beb81d53829408fece5e8bc51fccd16f0a3e5",
+        "call-02-result.json": "a81feebc0d771b2a964442b3ee8a37ff34bcdfa9be12c6f0dd3b2b8663eb1788",
+        "report.json": "c9151858cbca5dc61609543c3feca4c914ad5933195cc568602665b831e227aa"
+      }
+    },
+    {
+      "scenario": "A002",
+      "mode": "agent_tools",
+      "status": "failed",
+      "evidence_sha256": {
+        "attempt.json": "41644e83f4e7da54426f7d7dddf55ba3837b7f919d53dc7610532ffd5c838577",
+        "call-01-attempt.json": "dc530cb01a841ca9b1ee1ba0148c129353c83e8cc4dc9edc990ca2fa2cb8b3bf",
+        "call-01-result.json": "a5b384a7a0c74ce8e9e925ef213ae2c6ecac90cf4f1e02c2381755a3cb5491f4",
+        "call-02-attempt.json": "401f9d6958a427959be54e43382bb4314f743a4f85550984ccffd3d6cdd37778",
+        "call-02-result.json": "2a65185bb4dc17dac27bd5e6736afc9ba83b9a7bc128838fbef2cb35049d3cb2",
+        "report.json": "c2bb36afccf608d080aae7e93db746a533504f2527522204b96bcb5034ac1184"
+      }
+    },
+    {
+      "scenario": "A003",
+      "mode": "direct_model",
+      "status": "failed",
+      "evidence_sha256": {
+        "attempt.json": "07fd1ca3ba7a275b20840d515e8434c717990318c3011de28a4acfd0d26924b0",
+        "call-01-attempt.json": "87855df978f2671fdcadb0dd62a9979545eec7c7aa0d1377b455badcb1862810",
+        "call-01-result.json": "6c540ccece9df1c3f1fc0598f2730cfa8ab5380879f7ec6c8de3b3266155083b",
+        "report.json": "713e0c621fbcd841de44c2b6df0e330d38be29c465f1e3d66a02060f2e3679cd"
+      }
+    },
+    {
+      "scenario": "A003",
+      "mode": "direct_model",
+      "status": "failed",
+      "evidence_sha256": {
+        "attempt.json": "3b3bb61177c52ad9ba2c2423b62cfb3237782651bb865440f433b28e56f651c1",
+        "call-01-attempt.json": "c9697e0a8027066f20f337090e04606e97e2d7c07fbfa49976235f5a6dbeb754",
+        "call-01-result.json": "1e664dd9f3ce21e6e22bd3f4eead8317aab10eadc45e96e84a619a6ba05631ea",
+        "report.json": "987aa447ce5924c2cb9b833741b5ddc7f00d500223562028f8b81bd2073431e3"
+      }
+    },
+    {
+      "scenario": "A003",
+      "mode": "direct_model",
+      "status": "failed",
+      "evidence_sha256": {
+        "attempt.json": "c42892cd639cae3d939f4c2239ef760cbbb7a08b58fc1a4ba3adaaf64b6b0dbf",
+        "call-01-attempt.json": "a4a1f76bf7c69f875ad7f9ea81225ea2e87a9bada2110d29136a886d4fdd2a5b",
+        "call-01-result.json": "7bf1430fa46ec49df8ddc2460661de8b101c47f971c18be570a3c54aa20a86d4",
+        "report.json": "2ebb42d9dd2225e53f19f31320d7ce9c17295f36b41e30b405e1893db3e5f321"
+      }
+    },
+    {
+      "scenario": "A004",
+      "mode": "direct_model",
+      "status": "failed",
+      "evidence_sha256": {
+        "attempt.json": "ad296fa989b69f99184ab4261462d4b2fec138b69d0a798d0417c9dcebec6b30",
+        "call-01-attempt.json": "4b6dbd7d69b39344ab856461a7054d4b8c1442a4269e7c8a069e426bd0494ae9",
+        "call-01-result.json": "24ece9df7485bd5e8891e380c6903ec40f6a048589fb20e3270722ea920b97a0",
+        "report.json": "ae085fffb891f0111216e01b1741f3eeeb1849560e7db0dbd22302d2f3696cb9"
+      }
+    },
+    {
+      "scenario": "A004",
+      "mode": "direct_model",
+      "status": "failed",
+      "evidence_sha256": {
+        "attempt.json": "224997765849134ea92559a4b46271cd79b8a4d1457ed13d14eb4dd1b1a364fa",
+        "call-01-attempt.json": "ba43777918df4fecb566bb618714ee4b55aa3659fffd8524c279a1dd75b643e1",
+        "call-01-result.json": "03734990261bf774ce13ba28fc6b03ed662efdb3da1d5336eda3266a8e40f236",
+        "report.json": "f6329a7521d8e4a00fa6ceff7216578e2dc8f641f17003d0f9ca96c72076f364"
+      }
+    },
+    {
+      "scenario": "A005",
+      "mode": "direct_model",
+      "status": "failed",
+      "evidence_sha256": {
+        "attempt.json": "06c297fcedbb3876281af6ffaf48f70535c4fcab14aaf3bc94cd65eb15eef02e",
+        "call-01-attempt.json": "06bd7107f241d315ea61f3059e7c4032f26850017bad6965cc0bc900642cd515",
+        "call-01-result.json": "2411b566c9ba2455a1b0596047a4da7d560fbadc3b8b9f4c48ff50df6990e09e",
+        "report.json": "95037ee9eee802ea23475f16b3cec0a6776a73271b4b40ac41180d02d048baf1"
+      }
+    },
+    {
+      "scenario": "A005",
+      "mode": "direct_model",
+      "status": "failed",
+      "evidence_sha256": {
+        "attempt.json": "94ab30bed8e6eb87e8742e584c05ad25d9b30f6bea11732c91c55eabc681ad9c",
+        "call-01-attempt.json": "302d06f9f5955be1907f2ef377873c12de08f4ed633a4be02c678291d4cbe1bc",
+        "call-01-result.json": "c66b806f2b5e264d687d3365d1ac233b1ee43cf41a0226dc41b1957ebb6f5302",
+        "report.json": "b000bcd81cbef9c952e132b1089ceea7ecb5e85f56f449887bc1ce38d37cb450"
+      }
+    },
+    {
+      "scenario": "A005",
+      "mode": "direct_model",
+      "status": "failed",
+      "evidence_sha256": {
+        "attempt.json": "9b045cffb772e498bbdcca24d6e6dabf6f5f65bb10b853f8c399e9bb92154015",
+        "call-01-attempt.json": "da07c44cf8c703bb8a6b4addcfc5e1e81f80cb38b744b5efc6d1510332100860",
+        "call-01-result.json": "6f045b290612319952176d083b81a783804ad6000750197868602602e93a2166",
+        "report.json": "e7be73ae450138cb512ac2d0be8f16e85b2c885841c8d3f122423f5a75030954"
+      }
+    },
+    {
+      "scenario": "A006",
+      "mode": "direct_model",
+      "status": "failed",
+      "evidence_sha256": {
+        "attempt.json": "6781db566c439e1cc56ef945f11e8c25d4c2694d89dba83527423c8ccf3d84c5",
+        "call-01-attempt.json": "3c144a2db57f71734982ecd23e3b5141ffd7ff19f133d4e9d85705b4c6a617a6",
+        "call-01-result.json": "9880e0a56231f201e7752aa9c2662b7232d2fa99b9f8de1bea2a0c08262e4c3c",
+        "report.json": "f41066caa8c0e4d8ee21973d7ce9b47cdb282f75c84a6787017eea13138cc830"
+      }
+    },
+    {
+      "scenario": "A006",
+      "mode": "direct_model",
+      "status": "failed",
+      "evidence_sha256": {
+        "attempt.json": "f0f20222a80da5bdafd9737d6c783bf2afb40bc6f9ca819dccad497fda87cbab",
+        "call-01-attempt.json": "6971969edc62adddcb87a2941a377a06437aaaf1f8d6319a6f1c48296a4787fe",
+        "call-01-result.json": "24e02d198e21a8ea30fdd6e68f8867acec823cf7c15945b7e95222dfc65859b1",
+        "report.json": "f79fa0b3d17d9f1d0aefc872e70f7e2795e65e324dc80bc4ab2ef0306fa1d543"
+      }
+    },
+    {
+      "scenario": "A006",
+      "mode": "direct_model",
+      "status": "failed",
+      "evidence_sha256": {
+        "attempt.json": "726db23d490d4f7c1f57382832978fc6b02c1d3bf613dbe2067983f2c869b830",
+        "call-01-attempt.json": "e0d3dd8dd77a0c42c10112d38bfdfd7aa60f2fde35d0a9ae75f1e38aeacaff4b",
+        "call-01-result.json": "477b2c238ed96515780f7fc31f15307fc9a6c26a01c20b0240b6a05fa09b556f",
+        "report.json": "73e0cb7f05fe4c5c0b7bde3e8e678fca881071a27ce8efbaa3263af3cfcbefb4"
+      }
+    },
+    {
+      "scenario": "A006",
+      "mode": "agent_tools",
+      "status": "failed",
+      "evidence_sha256": {
+        "attempt.json": "c2010cd7929cf9c6f8ce353022237b99ed506eb68ee7660419f86a5460633725",
+        "call-01-attempt.json": "73aed2f0dff953aaa39ef313bbce4a7539451bf26969c65b7d1efed8470df35a",
+        "call-01-result.json": "342c51cd88a56d721c43a5a0279330747e70f5bd89a6cf866e4b6385f3901394",
+        "call-02-attempt.json": "a5b72dc0a8ce5f8a0c32ab42f95acb4d526bae90c6c3ed5a29644f09c29a32d1",
+        "call-02-result.json": "06e40675c7097fe715035a04ce40734c0b0e13f2779098a49ee61df108bfd72d",
+        "report.json": "ffb2af3a4d42e4a5e5569b57f91e07df0a3b8f1285178b7fbf8bbeb0221d856a"
+      }
+    },
+    {
+      "scenario": "A006",
+      "mode": "agent_tools",
+      "status": "failed",
+      "evidence_sha256": {
+        "attempt.json": "9f63d3d48834dc40dd399dd2b11514d163b84dbaa93af6f74a8f10a6243330eb",
+        "call-01-attempt.json": "f3aae795cd0dcded4077de2e0aefc39f15551a6ab03108918ca4b6e3ca25c527",
+        "call-01-result.json": "6d560bf6202c578eae913fb308cde1f4efff1000c8f6a01a0792a073a4394423",
+        "call-02-attempt.json": "68804e0553afbcfd8d337c7e82c3aef7c940d5de22bbbf65897b22da8e1382f9",
+        "call-02-result.json": "14b9af1c285e7095a8e76e33578a7483268b4a5b7f13f6b4752cc6172f6d6517",
+        "report.json": "cd1fa4e2ffcc99c07b798c7cc6ca76adf085dc12ee39e253044051b5016ae3ce"
+      }
+    },
+    {
+      "scenario": "A006",
+      "mode": "agent_tools",
+      "status": "failed",
+      "evidence_sha256": {
+        "attempt.json": "ceaec7cd29c6de819f73908a56e3dc8b4ed6874e30ec79a182171b0e350d0b99",
+        "call-01-attempt.json": "03d5185c7b26f1244f839a2803d07d624bfa9f78c413c73d820df96da58ad9ea",
+        "call-01-result.json": "8aca26dbf0c461c7b4e9ba4121523d7f9f786045af42c543690770add6d12383",
+        "call-02-attempt.json": "2a475a776b8f2f2c67d8387d6b52fde0752e08482b5593c40ebbbc80c2d5088c",
+        "call-02-result.json": "a23ffabd06ba46caf4b68053c6f9666c6dbc4a778b9be4304c6bf6911a5fa70d",
+        "report.json": "16e7b4a4ff92a5c8f6bb47489b1e063d88715763d4574f2993fbb332f28fddb5"
+      }
+    },
+    {
+      "scenario": "A007",
+      "mode": "direct_model",
+      "status": "failed",
+      "evidence_sha256": {
+        "attempt.json": "fabf5b54ce0196bdbcd9f275fb3ae67eed44449da32b50f04022a37573c1b922",
+        "call-01-attempt.json": "046f41aec1a33c0a843284f4c61904f8435a235f0ceb2ab834baa8a524e2b52f",
+        "call-01-result.json": "d08483f5cb3a155f23d3c700e49cf8e1b14c454ee43fc5fe77c8a779a09a0bc2",
+        "report.json": "969ba032db47c7b32a47252adcffb3b46f2326c0e863d2168ccdb6e8d274cece"
+      }
+    },
+    {
+      "scenario": "A007",
+      "mode": "direct_model",
+      "status": "failed",
+      "evidence_sha256": {
+        "attempt.json": "aa6b1394b5d3ad78d94983a7f923cccddd5959bee8bd498ff0ec644b71241161",
+        "call-01-attempt.json": "8a8c421242b4aba8f2ec662cd0bf6dd385e12745bf628c5192bbae560a4b0e9e",
+        "call-01-result.json": "6644f3e2335ed0f041c05c0e3fdecf3f2667e1ce84edf7ff1046b4cf7d9b1500",
+        "report.json": "4c74c5238939c13edaa81dd16768dc06152ddb7ea7d71902bcc347471f847cdc"
+      }
+    },
+    {
+      "scenario": "A013",
+      "mode": "agent_tools",
+      "status": "failed",
+      "evidence_sha256": {
+        "attempt.json": "afa90ca16fb45a1da2b80a1bff1f59dbbb108455cf5426e92752fd60db52986c",
+        "call-01-attempt.json": "05332031f4a004c6ae2fcbec04b74a3725669c3b2b95392a16dfbcae35f64e12",
+        "call-01-result.json": "7a0fb8e71a0838a0f9aceb146d15e23319760a15a783a0a24743a8953704bc24",
+        "call-02-attempt.json": "4b1d0bc28c0cc898e5b725b6c890a7f689c72f486c06fb89bb13dbed846e027e",
+        "call-02-result.json": "fa7896da88dbcc49fdd5c205adc1208fd83a524ec40d8989c7f476d49d58fcac",
+        "report.json": "96b8ba8577eae3633f7edfff35b4d58d342ec646ad6a19f7c411e4a57ac3e4cc"
+      }
+    },
+    {
+      "scenario": "A014",
+      "mode": "direct_model",
+      "status": "failed",
+      "evidence_sha256": {
+        "attempt.json": "b0ad9e794b32e5313b4dd7bb477e6a4d65d4cbdf98a033f35e325901794f0dee",
+        "call-01-attempt.json": "666aedc3ad300bb5d26a69732d5c84afbf57faea0af7430c7610213d4f25f998",
+        "call-01-result.json": "7b018522ff865f6416d78342c955389bdaca8e744573db8bfbfe4e828aa04f0d",
+        "report.json": "f3792690771157427ff42481b65ac411245ccbc28c6fd1ee17bfea926610170a"
+      }
+    },
+    {
+      "scenario": "A014",
+      "mode": "direct_model",
+      "status": "failed",
+      "evidence_sha256": {
+        "attempt.json": "bff5621c4f25eaef7b2ffa07564059164ad51e61aa3f3e4f83e9dadc22bf5e88",
+        "call-01-attempt.json": "8f064f0e8e0206442e6f36cabdf7dfc0a286c23c6f8d6e65cbfe6c7aeb24be94",
+        "call-01-result.json": "cbd64ad539524677fe4d603e31ab808522c9b5671d0bad0572136db641ffec99",
+        "report.json": "3d7542521d0a336f6ad6794b6a9284480339b962e8836d7e9fcbc71efa3227b2"
+      }
+    },
+    {
+      "scenario": "A015",
+      "mode": "direct_model",
+      "status": "failed",
+      "evidence_sha256": {
+        "attempt.json": "b013448d96144aa9e82ec53a885193d972d285e53207ff93ac09e426f2eda877",
+        "call-01-attempt.json": "4de4ab97adacac22c95dbeac804a85af267c221c6be50c6e40bb4bdfbab6de0a",
+        "call-01-result.json": "3a69ae953d633842506d692ecece8bd23ad37c10f12a60266b8f9170277f320a",
+        "call-02-attempt.json": "b34cf91c89ba82a2478ab0029f88c032b5ed5cf2f167078c089d714cc1a15bd0",
+        "call-02-result.json": "c622cd2292edede86c9ac024e6b9a16dd55785bb8d8a8ca6ed34df2884c3c423",
+        "report.json": "2c912e2bacee0e8f9fd4df944ef1e4a6c97af75890dc1c37a38066379bb04dc5"
+      }
+    },
+    {
+      "scenario": "A015",
+      "mode": "direct_model",
+      "status": "failed",
+      "evidence_sha256": {
+        "attempt.json": "8d6493abfffca0dc7453697b90fa3d2d6e2fd7fdef2c2938bde2a902f2a8cdeb",
+        "call-01-attempt.json": "2286f5c7a40800e589bb56e2d9cb867ff6cc0dc4f45a13e2814845a32c177f24",
+        "call-01-result.json": "c088ac3132fbfb452fe5fbc79dae95a346d0715f2c56e1c410b17fd1d01052ea",
+        "call-02-attempt.json": "975d7d510a77ce3af75640ddc8599a701febc5af82a5fab922ab33d028edd50c",
+        "call-02-result.json": "9e89ed192767c10094398ca73633af89347b627e5c6c21848d01e7bc41213922",
+        "report.json": "0f5550f4c0d35007b36227aa575986e2891a145d47e5c5cccdd75dd28211e525"
+      }
+    },
+    {
+      "scenario": "A015",
+      "mode": "direct_model",
+      "status": "failed",
+      "evidence_sha256": {
+        "attempt.json": "01d92b38bd7edc6422b9b7690022e109c2a17a2d62fac6119a78789d08a51b02",
+        "call-01-attempt.json": "bcb65bfe204e130f24e25582c54f35a00d759fd5e7a0709fba9c1ad9341d33cc",
+        "call-01-result.json": "7c9ef300ed91acb96f19bab0d8c42b5647b8299b29126ffa520c3ce0b4899acf",
+        "call-02-attempt.json": "630408ce7fbbfc17cb6a19958fc080b8a9384ce84587be82577023cc25cb978a",
+        "call-02-result.json": "da6b77edd218f00658c840c2960f52122d6cb0cf11fa56391f0a3eaa8cc4f10c",
+        "report.json": "a94c3d874f03042eaf4b86c0dfaaa910cb78494fb92c23684624f6d7e587392f"
+      }
+    },
+    {
+      "scenario": "A016",
+      "mode": "agent_tools",
+      "status": "failed",
+      "evidence_sha256": {
+        "attempt.json": "5815269b206619a6c25a3ea3026c24c4390751ee78843808bde03647a5103e62",
+        "call-01-attempt.json": "107377f79e77ed561f74720f3a2c8178cd53ae47bdcc368b130f249bdb45f5f6",
+        "call-01-result.json": "8c77655a420c6e4ad046131b8cec63a92f9630f19c6a84ebdc26fea54f2f7b66",
+        "report.json": "d3a69ea00158dd80f5c4c88377c53d7d896d67b9af2d6e9ca9800e78c80e01ee"
+      }
+    },
+    {
+      "scenario": "A017",
+      "mode": "direct_model",
+      "status": "failed",
+      "evidence_sha256": {
+        "attempt.json": "b3d2cd0a02201bdf811771fb2462fb90d4ac417f2beb54a95ee3bfd1307332f1",
+        "call-01-attempt.json": "90d3e2eb3e7c1a3c2c8423fb23ebf58d229e85bb5583ee630b55429e9ea9bf81",
+        "call-01-result.json": "b0b5505b338a7a51f3db63418828515b726adf050a469f59870f8dcbb45af2de",
+        "report.json": "c67cbef941cfc97f7ab8340fbefb6c307cce5045c77b9468896517f06069aa82"
+      }
+    },
+    {
+      "scenario": "A017",
+      "mode": "direct_model",
+      "status": "failed",
+      "evidence_sha256": {
+        "attempt.json": "5f08f5fc6b2b6219ac24ee5c030f7335c68befbd52e7179dba7ba8a8b8e5f3e7",
+        "call-01-attempt.json": "53380b602d6d012a05bb385cc4778a92a3f29fea80567b433e6abfd489bc689d",
+        "call-01-result.json": "5842836df8bae7abf8ee674e5d9ad69b59eed4868425ec2f028f672b89fb77f9",
+        "report.json": "cd4a96a414d7de4a8a2ffd44865ba10695d22acbb40e680b0defe99c311e42d1"
+      }
+    }
+  ]
+}

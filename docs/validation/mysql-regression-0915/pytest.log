@@ -1,0 +1,45 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.13, pytest-9.1.1, pluggy-1.6.0 -- D:\Code\meal-manager\backend\.venv\Scripts\python.exe
+rootdir: D:\Code\meal-manager\backend
+configfile: pyproject.toml
+plugins: anyio-4.15.0
+collecting ... collected 25 items
+
+tests/test_agent_sessions.py::test_compaction_matches_history_data_not_json_key_order[reordered] PASSED [  4%]
+tests/test_agent_sessions.py::test_compaction_matches_history_data_not_json_key_order[different] PASSED [  8%]
+tests/test_agent_sessions.py::test_compaction_matches_history_data_not_json_key_order[malformed] PASSED [ 12%]
+tests/test_agent_sessions.py::test_compaction_matches_history_data_not_json_key_order[assistant] PASSED [ 16%]
+tests/test_agent_sessions.py::test_session_restore_constraints_and_owner PASSED [ 20%]
+tests/test_agent_sessions.py::test_compaction_drops_old_tool_outputs_preserves_constraints PASSED [ 24%]
+tests/test_agent_sessions.py::test_session_input_validation_and_new_conversation PASSED [ 28%]
+tests/test_agent_sessions.py::test_short_history_is_scoped_and_current_tool_results_survive PASSED [ 32%]
+tests/test_agent_sessions.py::test_mysql_concurrent_session_continuation PASSED [ 36%]
+tests/test_agent_sessions.py::test_equipment_only_feedback_preserves_saved_time_default PASSED [ 40%]
+tests/test_agent_sessions.py::test_empty_exclusions_exposes_effective_preference_and_exact_reasons PASSED [ 44%]
+tests/test_agent_sessions.py::test_followup_confirmation_cannot_override_saved_exclusions PASSED [ 48%]
+tests/test_identity.py::test_two_users_isolated_and_cannot_inject_identity PASSED [ 52%]
+tests/test_identity.py::test_password_and_session_storage_and_logout PASSED [ 56%]
+tests/test_identity.py::test_expired_missing_and_invalid_sessions PASSED [ 60%]
+tests/test_identity.py::test_duplicate_and_bad_credentials PASSED        [ 64%]
+tests/test_identity.py::test_validation_never_reflects_password PASSED   [ 68%]
+tests/test_identity.py::test_health PASSED                               [ 72%]
+tests/test_identity.py::test_readiness_requires_migrations PASSED        [ 76%]
+tests/test_optional.py::test_optional_default_and_explicit_consumption PASSED [ 80%]
+tests/test_optional.py::test_optional_exclusion_and_shortage PASSED      [ 84%]
+tests/test_optional.py::test_staple_is_not_infinite_and_is_owner_scoped PASSED [ 88%]
+tests/test_optional.py::test_plan_confirmation_preserves_optional_choice PASSED [ 92%]
+tests/test_optional.py::test_examples_are_idempotent_and_do_not_add_stock PASSED [ 96%]
+tests/test_optional.py::test_example_conflict_rolls_back_everything PASSED [100%]
+
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  D:\Code\meal-manager\backend\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+.venv\Lib\site-packages\starlette\testclient.py:53
+  D:\Code\meal-manager\backend\.venv\Lib\site-packages\starlette\testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: D:\Code\meal-manager\docs\validation\mysql-regression-0915\junit.xml -
+================= 25 passed, 2 warnings in 236.93s (0:03:56) ==================

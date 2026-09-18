@@ -1,0 +1,8 @@
+{
+  "ran_at": "2026-09-08T13:07:54.115302+00:00",
+  "prompt_version": "receipt-v1",
+  "model": null,
+  "status": "blocked",
+  "cases": [],
+  "reason": "Vision is disabled or model credentials are not configured"
+}

@@ -1,0 +1,162 @@
+{
+  "version": "purchase-contract-v2-audited",
+  "source_sha256": "34cc38809a8ccba55d0b37681be4caa5fcfaa3ba51d8102156233ae93cdeb35e",
+  "protocol_sha256": "def799b0dbd0ab6be360d3992ee66e5b8ec53b2c73eb97351c6d9c20fce21e33",
+  "system_sha256": "a9d52adb76ea222d213bddd56a6a9b38476d315e615e7c6a347438c22fa880a5",
+  "tools_sha256": "79ff5a75efb13aa1bd80013731e6e3f13536c3613d8dc9f4753d601e48bcd911",
+  "scope": "exposed_contract_diagnostic_not_blind_holdout",
+  "actual_requests": 8,
+  "usage": {
+    "prompt_tokens": 38254,
+    "completion_tokens": 1072,
+    "total_tokens": 39326
+  },
+  "cumulative_known_chat_requests": 1635,
+  "cumulative_visual_requests": 30,
+  "all_eight_input_hash_triplets_match": true,
+  "business_unchanged": true,
+  "unauthorized_business_dml": 0,
+  "http_statuses": [
+    200
+  ],
+  "missing_usage": 0,
+  "model_elapsed_seconds": [
+    7.586216899973806,
+    2.1087211999692954,
+    2.359837400028482,
+    2.52975940000033,
+    8.517387400032021,
+    1.687101099989377,
+    1.99913040001411,
+    3.2392880999832414
+  ],
+  "batch_wall_seconds_from_completion_file_mtime": 34.480834007263184,
+  "estimated_not_billing": {
+    "requests": [
+      8,
+      10
+    ],
+    "tokens": [
+      40000,
+      65000
+    ],
+    "wall_minutes": [
+      1,
+      3
+    ]
+  },
+  "scores": [
+    {
+      "scenario": "PURCHASE-CONTRACT-V2-01",
+      "mode": "fixed_workflow",
+      "objective_pass": true,
+      "semantic_pass": null,
+      "task_success": true,
+      "human_clarity": null,
+      "evidence_sha256": {
+        "attempt.json": "556f25dcb5fbf98e8966f9cc6e4fb2e38d36e55acfe84203baaac542619e87d1",
+        "report.json": "51407a9734b154964cf84ee2e972afb194cfa9036bd7d87fde6f2dce2308e99a"
+      }
+    },
+    {
+      "scenario": "PURCHASE-CONTRACT-V2-01",
+      "mode": "direct_model",
+      "objective_pass": null,
+      "semantic_pass": true,
+      "task_success": true,
+      "human_clarity": null,
+      "evidence_sha256": {
+        "attempt.json": "b9ff01b8bb739b1d29ce05c8fd98cf2891a6b335d16e9700e4bfe9898ca8d834",
+        "call-01-attempt.json": "934e8244bb5e11682d60a663630a1d8357ad401473c85d4cfb8c20f5a8d14ec3",
+        "call-01-input.json": "7dc4b5b73b07a374fab66a7559055b1e2a6b6053159b952ff47c9dee0a504b15",
+        "call-01-result.json": "cb4550f593007a0e64eb754bdc2565e2f405dcd9b24ef21a154c33e65ee6ac14",
+        "report.json": "f636f32fd052ee5b0c1c564dbfef0bcc2f267f6ab7b58016516b05867736eca9"
+      }
+    },
+    {
+      "scenario": "PURCHASE-CONTRACT-V2-01",
+      "mode": "agent_tools",
+      "objective_pass": true,
+      "semantic_pass": true,
+      "task_success": true,
+      "human_clarity": null,
+      "evidence_sha256": {
+        "attempt.json": "1e67bada4c9c09d3695653859c13f2a95036670a9a334b58e56e0f19a10f82c4",
+        "call-01-attempt.json": "743988a8efceef5e6aa658ec7bfe5409061f9fe03bc603d35ae3387db99d2ed6",
+        "call-01-input.json": "a0d00adda7094be623321a1d0920e3b561fc04b1c96d79c7f888f5f52a6092fa",
+        "call-01-result.json": "064c429b45a5b3c56f515692862f7a37f233f9bf06820d8dfc6a79aa548f4285",
+        "call-02-attempt.json": "30ccfc1224d3c48989ac5d83b6d0094d7fe4f5cf6aa9a41394c93d341b2b9aba",
+        "call-02-input.json": "76df925addabe2170ca6ac0a13d8bd07821eafcf3c08f3a1b890a738095d62d0",
+        "call-02-result.json": "01b28de7c985e6734167d9ec69ba0b569b761f1c7183feb33ccd8c948a872c3b",
+        "call-03-attempt.json": "3eb27160d3e3e501e47ebf671240086cad2ff74e494385acc2966b0243adf453",
+        "call-03-input.json": "e74b7a65f13e7d3a2d491898d0ba6927eef3d2f73933bac2cd749b853699a137",
+        "call-03-result.json": "5ac9fb73ffdf244ddf9b668434fc6358df02bdb2faede267123342f9c5d70418",
+        "report.json": "887ab655fc26ba0147ea411379727d7ce6d515fac41f191b06243ceda83a12ca"
+      }
+    },
+    {
+      "scenario": "PLANNING-CONTRACT-V2-01",
+      "mode": "fixed_workflow",
+      "objective_pass": true,
+      "semantic_pass": null,
+      "task_success": true,
+      "human_clarity": null,
+      "evidence_sha256": {
+        "attempt.json": "04fba0d0b7dffa9e22ce435fa38abed3503c8f5702c38bef81e0729f7b694fd7",
+        "report.json": "32f6057deb5259f3bec86cef31cb739aa6e7dc71f748af678bc3d06c5cb876b6"
+      }
+    },
+    {
+      "scenario": "PLANNING-CONTRACT-V2-01",
+      "mode": "direct_model",
+      "objective_pass": null,
+      "semantic_pass": true,
+      "task_success": true,
+      "human_clarity": null,
+      "evidence_sha256": {
+        "attempt.json": "bdc8fe9d1f307cdea681533d64f2127213459611d67f96bb359ab0ddcf9f0939",
+        "call-01-attempt.json": "87908c15d2f5f7755f4752de539e8b9c191ce50ae50a15bded3eb35780d5bc5c",
+        "call-01-input.json": "195003fc90d6e2d2170950551a8d48135179e44ebd300ade0955d898085215f0",
+        "call-01-result.json": "999b31e5b3c659efa4b078abeeb632b8117beef5fbc1ae8b8d7b3548ce6b01e8",
+        "report.json": "c35fc12e61b7dc7d0d37a3ea6704f0e2c783fa8db8798b909c33fae8a383c128"
+      }
+    },
+    {
+      "scenario": "PLANNING-CONTRACT-V2-01",
+      "mode": "agent_tools",
+      "objective_pass": true,
+      "semantic_pass": true,
+      "task_success": true,
+      "human_clarity": null,
+      "evidence_sha256": {
+        "attempt.json": "4da69f5b3500cc15d16765cb12ea61d8838b81d1f44c6bb19abb77112018cb60",
+        "call-01-attempt.json": "ffb5daacb8b88e3e52bcae0608ff5053c002b47459eb546c534d62051612f46f",
+        "call-01-input.json": "94c17a73e47ac38db81efa31216d245590335827675add0cef33cebe13f9d871",
+        "call-01-result.json": "6fdd477547d757be4d24e58d2b29f201b16352dfb46b572a452d7dae1ab673e1",
+        "call-02-attempt.json": "1677f66e319fc311c8d1780649cc1002ff8c8c6aef08af92d60fc3069d3bd696",
+        "call-02-input.json": "ef6096324e190d36fe8f6703b1782ea1870c7d504c00e005000427ea62b1df27",
+        "call-02-result.json": "de278167be24df0bce7403994f45e21282c400b9442aa032a4beb108b96f43fc",
+        "call-03-attempt.json": "334d1c9ef5358b8a0376d2595611d82159676864d7069af89ec15d5176b52e70",
+        "call-03-input.json": "9fc7c3588f6f1b38bba0e7d7400d30c936c768b4cab950eba2a4c3de603ce5de",
+        "call-03-result.json": "d85ee8670f83cad2946f2202654e522f24a72f6f2468b4dd8e2220b85fcf27eb",
+        "report.json": "a938538781af9c2da79e8766b3110d9e4ab85afe970824059d2695b273baf42a"
+      }
+    }
+  ],
+  "human_clarity": null,
+  "holdout": "48/60; failed; unchanged",
+  "private_artifact_sha256": {
+    "registration.json": "397c9435e530053b714e1f66523963a2fd20ab65f5b4ae6d61b23adcfd4cfbef",
+    "execution-complete.json": "ce0d246d059c63437c4cc56127900a0992eed291358a0cd738767de163e31811",
+    "review.json": "4636861d0fe6410e30a4118935156bda0477be72a14410ada87bc7a9d9d3f90c",
+    "scores.json": "eb04a18f0b2bf0580c9a3dd0082f1f4d8f8db56e1bddbab8137ca230e31329dd"
+  },
+  "raw_report_sha256": {
+    "PURCHASE-CONTRACT-V2-01-fixed_workflow": "51407a9734b154964cf84ee2e972afb194cfa9036bd7d87fde6f2dce2308e99a",
+    "PURCHASE-CONTRACT-V2-01-direct_model": "f636f32fd052ee5b0c1c564dbfef0bcc2f267f6ab7b58016516b05867736eca9",
+    "PURCHASE-CONTRACT-V2-01-agent_tools": "887ab655fc26ba0147ea411379727d7ce6d515fac41f191b06243ceda83a12ca",
+    "PLANNING-CONTRACT-V2-01-fixed_workflow": "32f6057deb5259f3bec86cef31cb739aa6e7dc71f748af678bc3d06c5cb876b6",
+    "PLANNING-CONTRACT-V2-01-direct_model": "c35fc12e61b7dc7d0d37a3ea6704f0e2c783fa8db8798b909c33fae8a383c128",
+    "PLANNING-CONTRACT-V2-01-agent_tools": "a938538781af9c2da79e8766b3110d9e4ab85afe970824059d2695b273baf42a"
+  }
+}

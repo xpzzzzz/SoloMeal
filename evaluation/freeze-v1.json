@@ -1,0 +1,9 @@
+{
+  "frozen_on": "2026-09-09",
+  "real_model_calls_before_freeze": 0,
+  "files": {
+    "scenarios-v1.json": "2aa39319b14a91242e0a0aa6c58625eb78f3da4efb505bc47b24d8a590bc3ae7",
+    "protocol-v1.json": "df0ee4c6171f026b6d520b93f8b0597f5e4beacb74505b45a499e2d20f7b4862",
+    "README.md": "d51ba3b1b9a48825b3b08fbe0548937ac3b969c944ffae17c08972b83dee0e14"
+  }
+}

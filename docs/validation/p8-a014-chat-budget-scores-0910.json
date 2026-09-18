@@ -1,0 +1,96 @@
+{
+  "version": "solomeal-review-v1",
+  "review_sha256": "81e69c1c392a78c9bd429fd3085100f6cd13ed8a7aed0cab8b78deeba3e012f3",
+  "reviewer_source_sha256": "b49b68221c534b0bfcfa0d39d82e36281edad6299b02d47a72852e422cd610ad",
+  "scope": "diagnostic_review_not_frozen_cohort",
+  "p8_gate": "incomplete",
+  "scheduled_trials": 1,
+  "trials": [
+    {
+      "scenario": "A014",
+      "mode": "agent_tools",
+      "evidence_sha256": {
+        "attempt.json": "2039e23bb9419e1c16ca0991289bee7faeafd25e9369cf65b9ac19db218702d0",
+        "call-01-attempt.json": "a732906b07eb9fd71407b91c5b1d6b66bf288d5da6b7c4a80ae1892c689d9e1e",
+        "call-01-result.json": "1903bc948f6239796f6bac6f3d4d1aaf5a3a99f2b79c984f4fa9570e14e0704b",
+        "report.json": "0794130a0ff6db42dbb957d1de77fe627041c76c249cf4534b2aa8461327bfb0"
+      },
+      "attempt_metadata": {
+        "scenario": "A014",
+        "mode": "agent_tools",
+        "dataset_sha256": "2aa39319b14a91242e0a0aa6c58625eb78f3da4efb505bc47b24d8a590bc3ae7",
+        "protocol_sha256": "df0ee4c6171f026b6d520b93f8b0597f5e4beacb74505b45a499e2d20f7b4862",
+        "commit": "a923d77c7c281f2fcd165a71ad062f1ec0d851bc",
+        "source_sha256": "ae9650a0918baa0d6716a9fc404f4c82d798a8a59ab836499375f7ee8e881961",
+        "prompt_version": "solomeal-agent-v8",
+        "tool_protocol": "json",
+        "max_completion_tokens": 3000,
+        "model_timeout_seconds": 30,
+        "confirmation_extension": "none",
+        "oracle_amendments_sha256": "5e5f9dfa11a2d8e3c427025410642edf61d5c07c1ba6ddf27380fb9f0054334e",
+        "budget_amendments_sha256": "e34e1e2d39a4e02a484e08a0aff2e473334cf8244aa7478c3468d233d889a3eb",
+        "system_sha256": "e2a899e6a03afffd3cceafd99cd8f65f06bd581bc0890082c37ccc4c8c5c6a75",
+        "tools_sha256": "5d53d1404d8c490a17fad9b91ad3be6e0dda6c5e26168b7a8ee3a37bead639df",
+        "repetitions": 1,
+        "scope": "diagnostic_subset",
+        "started_at": "2026-09-10T13:15:43.668358+00:00",
+        "p8_gate": "incomplete"
+      },
+      "objective_pass": false,
+      "semantic_pass": null,
+      "decision_success": false,
+      "task_applicable": true,
+      "task_success": false,
+      "status": "failed",
+      "missing_report": false,
+      "human_clarity": null,
+      "business_unchanged": true,
+      "invalid_calls": 0,
+      "elapsed_seconds": 31.31168140000227,
+      "actual_requests": 1,
+      "model_calls": [
+        {
+          "model": "qwen3.8-flash",
+          "transport": "httpx",
+          "transport_version": "0.28.1",
+          "messages_sha256": "7138d331b2f673858e3f1ace547894509a28919e29b3f4db7e791ca0cb358096",
+          "tools_sha256": "5d53d1404d8c490a17fad9b91ad3be6e0dda6c5e26168b7a8ee3a37bead639df",
+          "timeout_seconds": 30,
+          "max_completion_tokens": 3000,
+          "parallel_tool_calls": null,
+          "tool_protocol": "json",
+          "protocol_version": "json-tools-v2",
+          "response_format": "json_object",
+          "temperature": "provider_default_unknown",
+          "top_p": "provider_default_unknown",
+          "enable_thinking": "not_sent",
+          "request_sent": true,
+          "http_status": null,
+          "usage": {
+            "prompt_tokens": null,
+            "completion_tokens": null,
+            "total_tokens": null,
+            "reasoning_tokens": null
+          },
+          "diagnostic": "timeout",
+          "wire_messages_sha256": "8e4734057c556911a9d5a78988efd0d5921b655a915c86484c04a3214882f919",
+          "elapsed_seconds": 31.264172499999404
+        }
+      ],
+      "reviewer": {
+        "kind": null,
+        "name": null
+      },
+      "confirmation_extension": null,
+      "comparison_scope": "diagnostic_task"
+    }
+  ],
+  "counts": {
+    "passed": 0,
+    "failed": 1,
+    "unscored": 0,
+    "not_applicable": 0
+  },
+  "missing_reports": 0,
+  "pooled_success_rate": null
+}

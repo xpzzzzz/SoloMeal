@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="2" time="3.245" timestamp="2026-09-16T20:29:33.425660+08:00" hostname="zhangxiaopeng"><testcase classname="tests.test_recommendation_diagnostic" name="test_four_turn_fixture_keeps_two_answers_and_checks_real_stock" time="2.536"><failure message="AssertionError: assert '1' == '1.000'&#10;  &#10;  - 1.000&#10;  + 1">client = &lt;starlette.testclient.TestClient object at 0x000002D713A634D0&gt;
+tmp_path = WindowsPath('D:/Code/meal-manager/backend/.tmp-response-diagnostic-0916-01/test_four_turn_fixture_keeps_t0')
+
+    def test_four_turn_fixture_keeps_two_answers_and_checks_real_stock(client, tmp_path):
+        report = trial(client, tmp_path, OfflineModel())
+        assert report["objective_pass"] and report["requests"] == 8
+        assert report["writes"]["attempted_statements"] == 0
+        third = json.loads((tmp_path / "turn-3.json").read_text(encoding="utf-8"))["run"]
+        assert third["result"]["model_message"] == "故意错误：缺料也立即做饭。"
+        assert report["model_semantic_pass"] is None and report["product_semantic_pass"] is None
+        for mutation in ("enabled", "quantity", "source", "pending", "missing"):
+            bad = deepcopy(third)
+            if mutation == "enabled":
+                bad["result"]["next_actions"][0]["prepare_cooking"]["enabled"] = True
+            elif mutation == "quantity":
+                bad["events"][-1]["result"]["candidates"][0]["required_ingredients"][0]["quantity"] = "999"
+            elif mutation == "source":
+                bad["result"]["source_step"] = 0
+            elif mutation == "pending":
+                bad["pending"] = {"kind": "prepare_cooking"}
+            else:
+                bad["events"] = []
+            assert check_turn(bad, 2) is False
+        mutation = json.loads((tmp_path / "driver-stock-in.json").read_text(encoding="utf-8"))
+&gt;       assert mutation["response"]["quantity"] == "1.000"
+E       AssertionError: assert '1' == '1.000'
+E         
+E         - 1.000
+E         + 1
+
+tests\test_recommendation_diagnostic.py:44: AssertionError</failure></testcase><testcase classname="tests.test_recommendation_diagnostic" name="test_registration_refuses_existing_directory_and_freezes_protocol" time="0.074" /></testsuite></testsuites>

@@ -1,0 +1,978 @@
+{
+  "scenarios": [
+    {
+      "id": "E001",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 10.088
+    },
+    {
+      "id": "E002",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 6.229
+    },
+    {
+      "id": "E003",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 6.613
+    },
+    {
+      "id": "E004",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 6.315
+    },
+    {
+      "id": "E005",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 6.033
+    },
+    {
+      "id": "E006",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 6.754
+    },
+    {
+      "id": "E007",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 5.763
+    },
+    {
+      "id": "E008",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 6.168
+    },
+    {
+      "id": "E009",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 6.047
+    },
+    {
+      "id": "E010",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 5.823
+    },
+    {
+      "id": "E011",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 7.184
+    },
+    {
+      "id": "E012",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 2,
+      "instance_results": [
+        "passed",
+        "passed"
+      ],
+      "elapsed_seconds": 11.888
+    },
+    {
+      "id": "E013",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 6.65
+    },
+    {
+      "id": "E014",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 6.581
+    },
+    {
+      "id": "E015",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 7.031
+    },
+    {
+      "id": "E016",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 6.426
+    },
+    {
+      "id": "E017",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 5.918
+    },
+    {
+      "id": "E018",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 6.189
+    },
+    {
+      "id": "E019",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 6.627
+    },
+    {
+      "id": "E020",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 6.523
+    },
+    {
+      "id": "E021",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 6.207
+    },
+    {
+      "id": "E022",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 5.919
+    },
+    {
+      "id": "E023",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 6.62
+    },
+    {
+      "id": "E024",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 6.744
+    },
+    {
+      "id": "E025",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 6.271
+    },
+    {
+      "id": "E026",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 6.673
+    },
+    {
+      "id": "E027",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 7.635
+    },
+    {
+      "id": "E028",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 6.197
+    },
+    {
+      "id": "E029",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 6.761
+    },
+    {
+      "id": "E030",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 7.058
+    },
+    {
+      "id": "E031",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 6.476
+    },
+    {
+      "id": "E032",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 6.434
+    },
+    {
+      "id": "E033",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 9.747
+    },
+    {
+      "id": "E034",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 14.053
+    },
+    {
+      "id": "E035",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 14.102
+    },
+    {
+      "id": "E036",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 13.466
+    },
+    {
+      "id": "E037",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 2,
+      "instance_results": [
+        "passed",
+        "passed"
+      ],
+      "elapsed_seconds": 26.117
+    },
+    {
+      "id": "E038",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 12.867
+    },
+    {
+      "id": "E039",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 13.6
+    },
+    {
+      "id": "E040",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 13.231
+    },
+    {
+      "id": "E041",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 12.839
+    },
+    {
+      "id": "E042",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 12.737
+    },
+    {
+      "id": "E043",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 9,
+      "instance_results": [
+        "passed",
+        "passed",
+        "passed",
+        "passed",
+        "passed",
+        "passed",
+        "passed",
+        "passed",
+        "passed"
+      ],
+      "elapsed_seconds": 116.182
+    },
+    {
+      "id": "E044",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 12.466
+    },
+    {
+      "id": "E045",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 12.028
+    },
+    {
+      "id": "E046",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 4,
+      "instance_results": [
+        "passed",
+        "passed",
+        "passed",
+        "passed"
+      ],
+      "elapsed_seconds": 48.357
+    },
+    {
+      "id": "E047",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 12.647
+    },
+    {
+      "id": "E048",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 12.785
+    },
+    {
+      "id": "E049",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 12.247
+    },
+    {
+      "id": "E050",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 19.391
+    },
+    {
+      "id": "E051",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 12.31
+    },
+    {
+      "id": "E052",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 12.397
+    },
+    {
+      "id": "E053",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 12.549
+    },
+    {
+      "id": "E054",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 12.556
+    },
+    {
+      "id": "E055",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 12.255
+    },
+    {
+      "id": "E056",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 12.472
+    },
+    {
+      "id": "E057",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 13.208
+    },
+    {
+      "id": "E058",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 13.058
+    },
+    {
+      "id": "E059",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 12.128
+    },
+    {
+      "id": "E060",
+      "track": "engineering",
+      "split": "regression",
+      "status": "passed",
+      "instances": 1,
+      "instance_results": [
+        "passed"
+      ],
+      "elapsed_seconds": 12.123
+    },
+    {
+      "id": "A001",
+      "track": "agent",
+      "split": "debug",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A002",
+      "track": "agent",
+      "split": "debug",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A003",
+      "track": "agent",
+      "split": "debug",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A004",
+      "track": "agent",
+      "split": "debug",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A005",
+      "track": "agent",
+      "split": "debug",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A006",
+      "track": "agent",
+      "split": "debug",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A007",
+      "track": "agent",
+      "split": "debug",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A008",
+      "track": "agent",
+      "split": "debug",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A009",
+      "track": "agent",
+      "split": "debug",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A010",
+      "track": "agent",
+      "split": "debug",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A011",
+      "track": "agent",
+      "split": "debug",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A012",
+      "track": "agent",
+      "split": "debug",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A013",
+      "track": "agent",
+      "split": "debug",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A014",
+      "track": "agent",
+      "split": "debug",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A015",
+      "track": "agent",
+      "split": "debug",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A016",
+      "track": "agent",
+      "split": "debug",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A017",
+      "track": "agent",
+      "split": "debug",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A018",
+      "track": "agent",
+      "split": "debug",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A019",
+      "track": "agent",
+      "split": "debug",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A020",
+      "track": "agent",
+      "split": "debug",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A021",
+      "track": "agent",
+      "split": "holdout",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A022",
+      "track": "agent",
+      "split": "holdout",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A023",
+      "track": "agent",
+      "split": "holdout",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A024",
+      "track": "agent",
+      "split": "holdout",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A025",
+      "track": "agent",
+      "split": "holdout",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A026",
+      "track": "agent",
+      "split": "holdout",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A027",
+      "track": "agent",
+      "split": "holdout",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A028",
+      "track": "agent",
+      "split": "holdout",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A029",
+      "track": "agent",
+      "split": "holdout",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A030",
+      "track": "agent",
+      "split": "holdout",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A031",
+      "track": "agent",
+      "split": "holdout",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A032",
+      "track": "agent",
+      "split": "holdout",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A033",
+      "track": "agent",
+      "split": "holdout",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A034",
+      "track": "agent",
+      "split": "holdout",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A035",
+      "track": "agent",
+      "split": "holdout",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A036",
+      "track": "agent",
+      "split": "holdout",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A037",
+      "track": "agent",
+      "split": "holdout",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A038",
+      "track": "agent",
+      "split": "holdout",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A039",
+      "track": "agent",
+      "split": "holdout",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    },
+    {
+      "id": "A040",
+      "track": "agent",
+      "split": "holdout",
+      "status": "not_run",
+      "reason": "Real model comparison runner pending"
+    }
+  ],
+  "engineering_counts": {
+    "passed": 60,
+    "failed": 0,
+    "skipped": 0,
+    "not_run": 0
+  },
+  "engineering_gate": "passed",
+  "p8_gate": "incomplete",
+  "real_model_calls": 0,
+  "agent_metrics": null,
+  "cost": null,
+  "evidence": {
+    "junit.xml": "c715a6db86a8eff87f9321fd882d7e185a0c09da1bdca3aad632ea6c8cbc60c8",
+    "pytest.log": "18cd3b14a834e8baeea840a4d5e1edbfd756ea6184700e41b3bcdf738da1e701",
+    "report.json": "fd361559b5a540bfb791537444badc7f1c84cbd2a6d7fb188621c8bec1601b51"
+  },
+  "source_sha256": "1d129290b62f21d1fd6831dfcf3eb53e1b962f2f2fa47f9aa6e0e00248ddd50d",
+  "scope": "frozen_engineering_plus_four_mysql_tests",
+  "pytest_instances_passed": 77,
+  "mysql_exclusive_instances_passed": 16,
+  "development_unchanged": true
+}

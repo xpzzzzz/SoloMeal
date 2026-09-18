@@ -1,0 +1,45 @@
+{
+  "scope": "supplemental_android_trial_not_frozen_holdout",
+  "reviewer_alias": "human-reviewer-1",
+  "reviewed_at": "2026-09-17",
+  "device": {
+    "platform": "Android",
+    "model": "PKX110",
+    "os_version": "16",
+    "browser_version": "OnePlus Web Browser 40.10.22.1_7be55be_260910"
+  },
+  "clarity": [
+    {
+      "sample": 1,
+      "clarity_1_to_5": 5,
+      "understood_next_step": true,
+      "unclear_text": null
+    },
+    {
+      "sample": 2,
+      "clarity_1_to_5":5,
+      "understood_next_step": true,
+      "unclear_text": null
+    },
+    {
+      "sample": 3,
+      "clarity_1_to_5": 5,
+      "understood_next_step": true,
+      "unclear_text": null
+    },
+    {
+      "sample": 4,
+      "clarity_1_to_5": 5,
+      "understood_next_step": true,
+      "unclear_text": null
+    }
+  ],
+  "actual_device_checks": {
+    "login_inventory_recipe": true,
+    "receipt_manual_confirmation": true,
+    "cooking_undo": true,
+    "connection_loss_and_recovery": true,
+    "refresh_login_restore": true
+  },
+  "issues": []
+}

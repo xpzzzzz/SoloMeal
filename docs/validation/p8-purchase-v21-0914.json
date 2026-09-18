@@ -1,0 +1,105 @@
+{
+ "version": "v21-offline-boundary",
+ "date": "2026-09-14",
+ "scope": "offline boundary and harness work plus existing-evidence latency analysis; no scenario executed",
+ "new_model_requests": 0,
+ "cumulative_known_chat_requests": 1615,
+ "cumulative_visual_requests": 30,
+ "prompt_version": "solomeal-agent-v21",
+ "fingerprints": {
+  "source_sha256": "1674f8313e0cad9bd81598a2acdd1182c6b56b58b90c23be54eca9e25126473e",
+  "previous_v20_source_sha256": "33816f7d200409e991502829bc6a545241688ab331679935beac5cea0a77f8ad",
+  "system_sha256": "a9d52adb76ea222d213bddd56a6a9b38476d315e615e7c6a347438c22fa880a5",
+  "tools_sha256": "79ff5a75efb13aa1bd80013731e6e3f13536c3613d8dc9f4753d601e48bcd911",
+  "v20_tools_sha256": "not_recomputed_offline",
+  "note": "tools_sha256 changes because the whitelist grows to nine entries and two descriptions change; any real diagnosis on this source needs a fresh private registration"
+ },
+ "frozen_evaluation_verified": {
+  "against": "D:/SoloMeal-Acceptance/p8-recovery-v20-0914-registration.json frozen_files",
+  "all_match": true,
+  "sha256": {
+   "amendments-v1.1.json": "5e5f9dfa11a2d8e3c427025410642edf61d5c07c1ba6ddf27380fb9f0054334e",
+   "amendments-v1.2.json": "e34e1e2d39a4e02a484e08a0aff2e473334cf8244aa7478c3468d233d889a3eb",
+   "freeze-v1.1.json": "0e41e2667f31b3cbe2db142e4db80b0d2f4fccb8ebb18aed8be30bde2ee9b299",
+   "freeze-v1.2.json": "c424e6e47c11cda2c3e568910edbc9a9a8de30e2be25710640289d0102e112ac",
+   "freeze-v1.json": "a95b47646254b93a32a58022e7e09d71d0121436f6b99eb951391cd256126ba1",
+   "protocol-v1.json": "df0ee4c6171f026b6d520b93f8b0597f5e4beacb74505b45a499e2d20f7b4862",
+   "scenarios-v1.json": "2aa39319b14a91242e0a0aa6c58625eb78f3da4efb505bc47b24d8a590bc3ae7"
+  }
+ },
+ "price_facts_boundary": {
+  "agent_surface": ["AgentPlanningInput", "AgentPlanInput", "run.constraints"],
+  "quotes_field_on_agent_surface": false,
+  "rest_surface_keeps_quotes": ["/recommendations", "/plans"],
+  "rejection": {"code": "INVALID_TOOL_ARGUMENTS", "field_type": "extra_forbidden",
+                "location_last": "unknown_field", "id_recovery_offered": false,
+                "echoes_rejected_input": false},
+  "legacy_rows": "persisted run.constraints written before v21 carry quotes; _conditions() drops that key before it reaches the model context or a tool call",
+  "model_authored_provenance_laundering_closed": "model-authored source/observed_on can no longer be echoed back as a saved fact"
+ },
+ "estimate_purchase": {
+  "read_only": true,
+  "inputs": ["ingredient_id", "quantity", "unit", "budget"],
+  "price_source": "SavedQuote for that user and ingredient only",
+  "shared_math_with_recommend_meal": "purchase_fields",
+  "whitelist_size": 9,
+  "outputs": ["as_of", "ingredient", "requested_quantity", "requested_unit", "shortage_quantity",
+              "shortage_unit", "packages", "purchase_quantity", "estimated_cost", "source",
+              "observed_on", "price_status", "budget", "budget_status", "advisory_only", "scope"],
+  "reserves_inventory": false,
+  "covers_recipe_or_servings": false,
+  "error_paths": {"missing_quote": "price_status=unknown", "quote_over_30_days": "price_status=stale with provenance kept and no amount",
+                  "unit_mismatch": "UNIT_AMBIGUOUS", "foreign_or_unknown_id": "NOT_FOUND with get_inventory recovery"}
+ },
+ "required_query_observation": {
+  "measurements_version": "evaluation-measurements-v2",
+  "cohort_metrics_version": "solomeal-cohort-metrics-v5",
+  "declared_by_harness": {"A026": ["recommend_meal"], "A027": ["recommend_meal"]},
+  "counts_only_successful_read_only_tool_events": true,
+  "gated": false,
+  "value_field": null,
+  "v1_reports": "readable; treated as not measured",
+  "gates_changed": false,
+  "holdout_score_changed": false
+ },
+ "a035_latency": {
+  "evidence_file": "p8-a035-latency-0914.json",
+  "new_requests": 0,
+  "agent_tools_calls_in_evidence": 266,
+  "timeouts": 1,
+  "pearson_r_prompt_tokens_within_agent_tools": 0.237,
+  "same_input_repeat_groups": 39,
+  "same_input_divergent_outcomes": 0,
+  "limit_changed": false,
+  "root_cause": "unknown"
+ },
+ "regression": {
+  "full_backend_suite": {"exit_code": 0, "passed": 430, "skipped": 16, "total": 446,
+                         "errors": 0, "failures": 0,
+                         "skips": "MySQL-gated cases, Docker daemon not started and not started this session",
+                         "basetemp": "isolated --basetemp under the system temp directory, -p no:cacheprovider"},
+  "focused_agent_and_planning_subset": {"files": 13, "exit_code": 0, "passed": 306, "skipped": 5, "total": 311,
+                                        "note": "MySQL-gated duplicates of the touched areas"},
+  "ruff": {"selection": "F,B,I", "scope": "the 13 changed files", "result": "All checks passed!",
+           "whole_tree": "117 pre-existing findings outside this session's files, untouched per repo convention"},
+  "new_tests": ["price facts rejected on recommend_meal and propose_plan",
+                "purchase estimate prices a stated shortage in g and kg",
+                "purchase estimate reports stale/unknown gaps and rejects foreign ids",
+                "required_query separates no-query from a wrong answer",
+                "query observations count declared trials without gating",
+                "holdout query observation keeps the frozen objective as the decider"]
+ },
+ "retained_results": {
+  "v19_holdout_agent": "48/60",
+  "holdout_gate": "failed",
+  "v20_bounded_diagnosis": "6 passed / 3 failed",
+  "a026": "fabricated quote date failure kept; score not modified",
+  "a027": "answered-without-query failure kept; now separately observable",
+  "a035": "second-request timeout kept with null semantics",
+  "human_clarity": null
+ },
+ "untouched": [".env", "development database", "repository root data/", "original plugin",
+               "frontend", "alembic migrations", "frozen evaluation files", "git history (no commit, no push)"],
+ "p8_gate": "incomplete",
+ "p5_gate": "incomplete"
+}

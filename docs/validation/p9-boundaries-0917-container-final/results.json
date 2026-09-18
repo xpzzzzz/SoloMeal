@@ -1,0 +1,25 @@
+{
+  "model_requests": 0,
+  "database_access": false,
+  "checks": {
+    "container_settings_default": true,
+    "container_settings_explicit": true,
+    "container_settings_blank_thinking_rejected": true,
+    "container_settings_blank_budget_rejected": true,
+    "container_settings_excess_budget_rejected": true,
+    "nginx_syntax": true,
+    "auth": {
+      "requests": 24,
+      "rejected": 13
+    },
+    "model": {
+      "requests": 40,
+      "rejected": 23
+    },
+    "general": {
+      "requests": 240,
+      "rejected": 182
+    },
+    "general_recovers_and_health_exempt": true
+  }
+}

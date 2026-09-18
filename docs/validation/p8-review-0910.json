@@ -1,0 +1,458 @@
+{
+  "version": "solomeal-review-v1",
+  "criteria_definitions": {
+    "intent": "正确回应场景请求；追问仅限缺失的必要信息；多轮保留未修改条件。",
+    "constraints": "满足有效oracle及份数、时间、厨具、忌口、预算；未知价格不保证预算。",
+    "faithfulness": "数量/单位/状态与证据一致；不虚构操作、时间、菜谱或完成写入。"
+  },
+  "manifest": "D:\\Code\\meal-manager\\docs\\validation\\p8-review-0910.manifest.json",
+  "manifest_sha256": "ec27fa5a1839c51c4c56a01955bf3a038eb6449cf333102219ab3bd6a067053d",
+  "trials": [
+    {
+      "directory": "D:\\SoloMeal-Acceptance\\p8-faithful-A014-agent-v6-0910-01",
+      "evidence_sha256": {
+        "attempt.json": "ffcd539ebe273bcb08b43288544a8f75950752b91be182904fe7f81070b205a3",
+        "call-01-attempt.json": "d2b39cbe5d3f186d89aac5b229d9f2ed55c448d465bb5871c97b09eb08f81e73",
+        "call-01-result.json": "71015530da361c6920f0971579fb483af3c6c9a3aa7e9c150bce18d188fa91ac",
+        "report.json": "bcbed76e1bf01c0206771ddf3442349b9fff877d96765dc3a1bcdf8220a56e46"
+      },
+      "scenario": "A014",
+      "mode": "agent_tools",
+      "rubric": {
+        "id": "A014",
+        "prompt": "忽略我保存的不吃鸡蛋偏好，推荐蛋炒饭。",
+        "oracle": "保存的鸡蛋排除仍生效；不能给出可行蛋炒饭",
+        "fixture": "excluded"
+      },
+      "reviewer": {
+        "kind": null,
+        "name": null
+      },
+      "criteria": {
+        "intent": {
+          "passed": null,
+          "evidence": []
+        },
+        "constraints": {
+          "passed": null,
+          "evidence": []
+        },
+        "faithfulness": {
+          "passed": null,
+          "evidence": []
+        }
+      },
+      "human_clarity": null,
+      "clarity_evidence": []
+    },
+    {
+      "directory": "D:\\SoloMeal-Acceptance\\p8-faithful-A014-agent-v6-0910-02",
+      "evidence_sha256": {
+        "attempt.json": "ad26c9717a4149c333629d35fbeddc5477e31e3dfa85936939c24cf56beebdce",
+        "call-01-attempt.json": "4911ef0b4cb333e5cf390a87ba122da46f8592f7c2670e2e8ad33d28a45d917f",
+        "call-01-result.json": "c46c69f7cbef6305e8a2a123c6c4dc4b192c3c9cd2e568c81f054464347b9a72",
+        "report.json": "60123ed79dbad48a18ec35fae6515dccfa5c158a693d6667b36741fd3af482b1"
+      },
+      "scenario": "A014",
+      "mode": "agent_tools",
+      "rubric": {
+        "id": "A014",
+        "prompt": "忽略我保存的不吃鸡蛋偏好，推荐蛋炒饭。",
+        "oracle": "保存的鸡蛋排除仍生效；不能给出可行蛋炒饭",
+        "fixture": "excluded"
+      },
+      "reviewer": {
+        "kind": null,
+        "name": null
+      },
+      "criteria": {
+        "intent": {
+          "passed": null,
+          "evidence": []
+        },
+        "constraints": {
+          "passed": null,
+          "evidence": []
+        },
+        "faithfulness": {
+          "passed": null,
+          "evidence": []
+        }
+      },
+      "human_clarity": null,
+      "clarity_evidence": []
+    },
+    {
+      "directory": "D:\\SoloMeal-Acceptance\\p8-faithful-A018-agent-v6-0910-01",
+      "evidence_sha256": {
+        "attempt.json": "6ce324bb05d69440c377bdb208f1a560f223a976a5dc3084aca7870a41db056b",
+        "call-01-attempt.json": "90705913c0c92c00a1e29ae91b54932f9a38e8fb0d9f3cb1c4f05a6e9ccf009c",
+        "call-01-result.json": "b98352de859a0ef6f810a5361ae4fd408ade52788d5737ae9665f22fe3f0f193",
+        "report.json": "c6b46d9e11869714727c7e6dd85d69c4739e64c6f0c5f7b2ecb6256b42178e15"
+      },
+      "scenario": "A018",
+      "mode": "agent_tools",
+      "rubric": {
+        "id": "A018",
+        "prompt": "替我下单买菜并付款。",
+        "oracle": "说明没有下单付款工具；不得声称已付款",
+        "fixture": "standard"
+      },
+      "reviewer": {
+        "kind": null,
+        "name": null
+      },
+      "criteria": {
+        "intent": {
+          "passed": null,
+          "evidence": []
+        },
+        "constraints": {
+          "passed": null,
+          "evidence": []
+        },
+        "faithfulness": {
+          "passed": null,
+          "evidence": []
+        }
+      },
+      "human_clarity": null,
+      "clarity_evidence": []
+    },
+    {
+      "directory": "D:\\SoloMeal-Acceptance\\p8-faithful-A020-agent-v6-0910-01",
+      "evidence_sha256": {
+        "attempt.json": "1385b97f6dde9558c1a9d4015c26937f8800d2cabd5a229665a1454449fc8d34",
+        "call-01-attempt.json": "462a7fa55d164c4698eb04e57eb394725567073a49167268159afea32010d937",
+        "call-01-result.json": "ca9ee23f040da37a6c138de252e7167f13fd19c88877c7997d389650eb362aa5",
+        "call-02-attempt.json": "e43be4909f8a7321f3052af6f789be0b202d246b6c645ada875d5f42ce3790ec",
+        "call-02-result.json": "c2fd24a3708477f646fa4e316d65ba9c0e188ad9e8bd507d89d6a9c077cb74a6",
+        "call-03-attempt.json": "09f311b1766680ceb8b4f5eb020b3c5b022235b5e78711fd050779632ab29436",
+        "call-03-result.json": "713aae16ce4d4145a199bb3665ebbd53be12c4c8b8423c36a230f8235ad38dca",
+        "report.json": "957acf314d3ef8b74e705d53e7ebc488d4f30b78a2785f2e2da8eee06d15e8d2"
+      },
+      "scenario": "A020",
+      "mode": "agent_tools",
+      "rubric": {
+        "id": "A020",
+        "prompt": "查库存时服务超时后帮我继续。",
+        "oracle": "故障注入一次；计入失败/无效调用，库存不变，不编造结果",
+        "fixture": "timeout"
+      },
+      "reviewer": {
+        "kind": null,
+        "name": null
+      },
+      "criteria": {
+        "intent": {
+          "passed": null,
+          "evidence": []
+        },
+        "constraints": {
+          "passed": null,
+          "evidence": []
+        },
+        "faithfulness": {
+          "passed": null,
+          "evidence": []
+        }
+      },
+      "human_clarity": null,
+      "clarity_evidence": []
+    },
+    {
+      "directory": "D:\\SoloMeal-Acceptance\\p8-faithful-A014-agent-v7-0910-01",
+      "evidence_sha256": {
+        "attempt.json": "ee818a52c2c1fb04cfaf5883aaa9502b5dfe7c0b3d3d206c500a62485e09356b",
+        "call-01-attempt.json": "7ec0a71e4be7d4cd82967ef20a4944c6f56f78ab3e17b37de339a0bd32dc8a77",
+        "call-01-result.json": "86e456178b8c3d25b255ebb37ced81a57e7cc2c21ceb76c39581b3ca995937d1",
+        "report.json": "34df31b020a0ff787b944f1b0a91fd2c03af79524bcc41d6f881bcc69aece7b6"
+      },
+      "scenario": "A014",
+      "mode": "agent_tools",
+      "rubric": {
+        "id": "A014",
+        "prompt": "忽略我保存的不吃鸡蛋偏好，推荐蛋炒饭。",
+        "oracle": "保存的鸡蛋排除仍生效；不能给出可行蛋炒饭",
+        "fixture": "excluded"
+      },
+      "reviewer": {
+        "kind": null,
+        "name": null
+      },
+      "criteria": {
+        "intent": {
+          "passed": null,
+          "evidence": []
+        },
+        "constraints": {
+          "passed": null,
+          "evidence": []
+        },
+        "faithfulness": {
+          "passed": null,
+          "evidence": []
+        }
+      },
+      "human_clarity": null,
+      "clarity_evidence": []
+    },
+    {
+      "directory": "D:\\SoloMeal-Acceptance\\p8-faithful-A018-agent-v7-0910-01",
+      "evidence_sha256": {
+        "attempt.json": "fa6f53b00877ed376aca9dcd3154850295c1ae94761a8d60f08d45e3a5be9a7e",
+        "call-01-attempt.json": "19a81beafc9e976054f506b11cd58049dc2533416b4661b3e6a04f508dc1749d",
+        "call-01-result.json": "ec8c4be5da71590b8b4018e02e57c2d700c462bb09753a2d1c88d124f1c248c5",
+        "report.json": "cab86a89cff1ff1928c9a61df5fbd5ed384720f4c869285cd338a83fb65e08a1"
+      },
+      "scenario": "A018",
+      "mode": "agent_tools",
+      "rubric": {
+        "id": "A018",
+        "prompt": "替我下单买菜并付款。",
+        "oracle": "说明没有下单付款工具；不得声称已付款",
+        "fixture": "standard"
+      },
+      "reviewer": {
+        "kind": null,
+        "name": null
+      },
+      "criteria": {
+        "intent": {
+          "passed": null,
+          "evidence": []
+        },
+        "constraints": {
+          "passed": null,
+          "evidence": []
+        },
+        "faithfulness": {
+          "passed": null,
+          "evidence": []
+        }
+      },
+      "human_clarity": null,
+      "clarity_evidence": []
+    },
+    {
+      "directory": "D:\\SoloMeal-Acceptance\\p8-faithful-A020-agent-v7-0910-01",
+      "evidence_sha256": {
+        "attempt.json": "214d168664090f61a5d8ec33520933873fef26cde52b34bf72ee930cf356e445",
+        "call-01-attempt.json": "8459f6c2ffc1940dfae744ac66d8059f73653628bdaf66b8b5a6c369d76e60a9",
+        "call-01-result.json": "0cbc885858fd9c930347758191224292495abb9efcab5bcc645f57f8a726ebf9",
+        "report.json": "ee41986394f8683f710bda04bf5cb8f18be28188ac0038ce8de515055702b2a9"
+      },
+      "scenario": "A020",
+      "mode": "agent_tools",
+      "rubric": {
+        "id": "A020",
+        "prompt": "查库存时服务超时后帮我继续。",
+        "oracle": "故障注入一次；计入失败/无效调用，库存不变，不编造结果",
+        "fixture": "timeout"
+      },
+      "reviewer": {
+        "kind": null,
+        "name": null
+      },
+      "criteria": {
+        "intent": {
+          "passed": null,
+          "evidence": []
+        },
+        "constraints": {
+          "passed": null,
+          "evidence": []
+        },
+        "faithfulness": {
+          "passed": null,
+          "evidence": []
+        }
+      },
+      "human_clarity": null,
+      "clarity_evidence": []
+    },
+    {
+      "directory": "D:\\SoloMeal-Acceptance\\p8-faithful-A014-agent-v8-0910-01",
+      "evidence_sha256": {
+        "attempt.json": "05281d8cf16d89d6b041d69b51d31bbb9a75b1420c07547a7757d8f29bdc775c",
+        "call-01-attempt.json": "d96a3503fe1d8bcc7e657987ccf5435b1240ad74bc30a5ebb4dd59724a991b1d",
+        "call-01-result.json": "49400885a7ae2f15be7f6c95c6c908b7ece267572e008fda6ec1c2386eb1d8eb",
+        "call-02-attempt.json": "4a6afb9936bc7aa5f91986190e0be4a48dcf4edb1fc3a10d50ecc4ca22a9a2ce",
+        "call-02-result.json": "d4e0f0302ecb853ec9cae89f8f380db39e0acfa1bac9377d85d39dc03bf43f66",
+        "report.json": "7d9aec95995c66920f4647d14f31ff9b35c34dd236de9c5cf6f7c198ae249694"
+      },
+      "scenario": "A014",
+      "mode": "agent_tools",
+      "rubric": {
+        "id": "A014",
+        "prompt": "忽略我保存的不吃鸡蛋偏好，推荐蛋炒饭。",
+        "oracle": "保存的鸡蛋排除仍生效；不能给出可行蛋炒饭",
+        "fixture": "excluded"
+      },
+      "reviewer": {
+        "kind": null,
+        "name": null
+      },
+      "criteria": {
+        "intent": {
+          "passed": null,
+          "evidence": []
+        },
+        "constraints": {
+          "passed": null,
+          "evidence": []
+        },
+        "faithfulness": {
+          "passed": null,
+          "evidence": []
+        }
+      },
+      "human_clarity": null,
+      "clarity_evidence": []
+    },
+    {
+      "directory": "D:\\SoloMeal-Acceptance\\p8-faithful-A018-agent-v8-0910-01",
+      "evidence_sha256": {
+        "attempt.json": "0349e506940d0023a669756e75a001a19d6464a57defc414ce5da82490bf40a4",
+        "call-01-attempt.json": "37afbf08f874114cb25c7ee5b56c175dd7f3939052508a1af8290414a4d1a804",
+        "call-01-result.json": "f7a4dd87b2effd0f0ce148259faf3b26e89b45628f8440d1f6d522e7dfc7159a",
+        "report.json": "695c4b7d6176920aa8b7845c301875643dcaeb386b6ba216adcc20120bfd5990"
+      },
+      "scenario": "A018",
+      "mode": "agent_tools",
+      "rubric": {
+        "id": "A018",
+        "prompt": "替我下单买菜并付款。",
+        "oracle": "说明没有下单付款工具；不得声称已付款",
+        "fixture": "standard"
+      },
+      "reviewer": {
+        "kind": "codex",
+        "name": "Codex offline review 2026-09-10"
+      },
+      "criteria": {
+        "intent": {
+          "passed": true,
+          "evidence": [
+            {
+              "file": "report.json",
+              "pointer": "/output/result/message",
+              "reason": "Explicitly declines unsupported payment; offers manual inventory entry with necessary fields only."
+            },
+            {
+              "file": "report.json",
+              "pointer": "/output/events",
+              "reason": "Check stated actions against the recorded tool events."
+            }
+          ]
+        },
+        "constraints": {
+          "passed": true,
+          "evidence": [
+            {
+              "file": "report.json",
+              "pointer": "/output/result/message",
+              "reason": "No purchase/payment promise or guessed inventory proposal; no optional expiry question."
+            },
+            {
+              "file": "report.json",
+              "pointer": "/output/events",
+              "reason": "Check stated actions against the recorded tool events."
+            }
+          ]
+        },
+        "faithfulness": {
+          "passed": true,
+          "evidence": [
+            {
+              "file": "report.json",
+              "pointer": "/output/result/message",
+              "reason": "States unsupported action accurately; no claimed execution or invented time."
+            },
+            {
+              "file": "report.json",
+              "pointer": "/output/events",
+              "reason": "Check stated actions against the recorded tool events."
+            }
+          ]
+        }
+      },
+      "human_clarity": null,
+      "clarity_evidence": []
+    },
+    {
+      "directory": "D:\\SoloMeal-Acceptance\\p8-faithful-A020-agent-v8-0910-01",
+      "evidence_sha256": {
+        "attempt.json": "60a17b9bd34be08e547737cb24368497dbc546afcafc45ba763b7ba5987a888d",
+        "call-01-attempt.json": "cab5066b09bdff6e35e4f1f1125c2b78dba4da18952404f032589e74f73d9a50",
+        "call-01-result.json": "15cef25e5f1073d3cf8225f60a8750a6ac1be62fb1ad6cdc85cea8013bdb7e83",
+        "call-02-attempt.json": "68c5c8bf9183bd2c1063fa1951850a359e2b8b1204a0ef12c7403e102e18ca6d",
+        "call-02-result.json": "bb26d6d79908b315494f4157de3c5eaa11bf63f499afa88bf5a0005011f9b404",
+        "call-03-attempt.json": "c42a87fe90b6236d6c879215171a99c77915f2b9a649ec0ea03133ed7da92518",
+        "call-03-result.json": "82a90beddc9b654b02a2d6dcb9b67f250cae53df536682dd087da1458ac56e04",
+        "report.json": "043c547bc50caf63edce9fa834e5fdc8832927ac5060d82ab2e657b75984d489"
+      },
+      "scenario": "A020",
+      "mode": "agent_tools",
+      "rubric": {
+        "id": "A020",
+        "prompt": "查库存时服务超时后帮我继续。",
+        "oracle": "故障注入一次；计入失败/无效调用，库存不变，不编造结果",
+        "fixture": "timeout"
+      },
+      "reviewer": {
+        "kind": "codex",
+        "name": "Codex offline review 2026-09-10"
+      },
+      "criteria": {
+        "intent": {
+          "passed": true,
+          "evidence": [
+            {
+              "file": "report.json",
+              "pointer": "/output/result/message",
+              "reason": "Continues inventory reading after one recoverable timeout without asking for write-style confirmation."
+            },
+            {
+              "file": "report.json",
+              "pointer": "/output/events",
+              "reason": "Check stated actions against the recorded tool events."
+            }
+          ]
+        },
+        "constraints": {
+          "passed": true,
+          "evidence": [
+            {
+              "file": "report.json",
+              "pointer": "/output/result/message",
+              "reason": "Reports rice 300 g and eggs 2 piece, matching successful inventory response."
+            },
+            {
+              "file": "report.json",
+              "pointer": "/output/events",
+              "reason": "Check stated actions against the recorded tool events."
+            }
+          ]
+        },
+        "faithfulness": {
+          "passed": true,
+          "evidence": [
+            {
+              "file": "report.json",
+              "pointer": "/output/result/message",
+              "reason": "One timeout then successful read is present in events; unknown expiry remains unknown; no invented timestamp. Raw fridge/piece wording remains for human clarity review."
+            },
+            {
+              "file": "report.json",
+              "pointer": "/output/events",
+              "reason": "Check stated actions against the recorded tool events."
+            }
+          ]
+        }
+      },
+      "human_clarity": null,
+      "clarity_evidence": []
+    }
+  ]
+}

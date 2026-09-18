@@ -1,0 +1,1422 @@
+.EEEEEEEEEEEEEE.                                                         [100%]
+=================================== ERRORS ====================================
+______ ERROR at teardown of test_batch_conversion_aliases_and_isolation _______
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\pymysql\cursors.py:159: in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\cursors.py:330: in _query
+    conn.query(q)
+.venv\Lib\site-packages\pymysql\connections.py:582: in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:847: in _read_query_result
+    result.read()
+.venv\Lib\site-packages\pymysql\connections.py:1245: in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:803: in _read_packet
+    packet.raise_for_error()
+.venv\Lib\site-packages\pymysql\protocol.py:219: in raise_for_error
+    err.raise_mysql_exception(self._data)
+.venv\Lib\site-packages\pymysql\err.py:154: in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+E   pymysql.err.OperationalError: (1553, "Cannot drop index 'ix_inventory_events_user_id': needed in a foreign key constraint")
+
+The above exception was the direct cause of the following exception:
+tests\conftest.py:34: in client
+    command.downgrade(config, "base")
+.venv\Lib\site-packages\alembic\command.py:534: in downgrade
+    script.run_env()
+.venv\Lib\site-packages\alembic\script\base.py:550: in run_env
+    util.load_python_file(self.dir, "env.py")
+.venv\Lib\site-packages\alembic\util\pyfiles.py:114: in load_python_file
+    module = load_module_py(module_id, path)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\util\pyfiles.py:132: in load_module_py
+    spec.loader.exec_module(module)  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+migrations\env.py:18: in <module>
+    context.run_migrations()
+.venv\Lib\site-packages\alembic\runtime\environment.py:970: in run_migrations
+    self.get_context().run_migrations(**kw)
+.venv\Lib\site-packages\alembic\runtime\migration.py:621: in run_migrations
+    step.migration_fn(**kw)
+migrations\versions\9290b526fd6e_food_inventory.py:137: in downgrade
+    op.drop_index(op.f('ix_inventory_events_user_id'), table_name='inventory_events')
+.venv\Lib\site-packages\alembic\operations\ops.py:1133: in drop_index
+    return operations.invoke(op)
+           ^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\operations\base.py:448: in invoke
+    return fn(self, operation)
+           ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\operations\toimpl.py:126: in drop_index
+    operations.impl.drop_index(
+.venv\Lib\site-packages\alembic\ddl\impl.py:475: in drop_index
+    self._exec(schema.DropIndex(index, **kw))
+.venv\Lib\site-packages\alembic\ddl\impl.py:252: in _exec
+    return conn.execute(construct, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1421: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\ddl.py:188: in _execute_on_connection
+    return connection._execute_ddl(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1532: in _execute_ddl
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1848: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1988: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2365: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\pymysql\cursors.py:159: in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\cursors.py:330: in _query
+    conn.query(q)
+.venv\Lib\site-packages\pymysql\connections.py:582: in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:847: in _read_query_result
+    result.read()
+.venv\Lib\site-packages\pymysql\connections.py:1245: in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:803: in _read_packet
+    packet.raise_for_error()
+.venv\Lib\site-packages\pymysql\protocol.py:219: in raise_for_error
+    err.raise_mysql_exception(self._data)
+.venv\Lib\site-packages\pymysql\err.py:154: in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+E   sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1553, "Cannot drop index 'ix_inventory_events_user_id': needed in a foreign key constraint")
+E   [SQL: 
+E   DROP INDEX ix_inventory_events_user_id ON inventory_events]
+E   (Background on this error at: https://sqlalche.me/e/20/e3q8)
+__________ ERROR at setup of test_idempotency_and_adjustment_version __________
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\pymysql\cursors.py:159: in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\cursors.py:330: in _query
+    conn.query(q)
+.venv\Lib\site-packages\pymysql\connections.py:582: in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:847: in _read_query_result
+    result.read()
+.venv\Lib\site-packages\pymysql\connections.py:1245: in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:803: in _read_packet
+    packet.raise_for_error()
+.venv\Lib\site-packages\pymysql\protocol.py:219: in raise_for_error
+    err.raise_mysql_exception(self._data)
+.venv\Lib\site-packages\pymysql\err.py:154: in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+E   pymysql.err.OperationalError: (1553, "Cannot drop index 'ix_inventory_events_user_id': needed in a foreign key constraint")
+
+The above exception was the direct cause of the following exception:
+tests\conftest.py:27: in client
+    command.downgrade(config, "base")
+.venv\Lib\site-packages\alembic\command.py:534: in downgrade
+    script.run_env()
+.venv\Lib\site-packages\alembic\script\base.py:550: in run_env
+    util.load_python_file(self.dir, "env.py")
+.venv\Lib\site-packages\alembic\util\pyfiles.py:114: in load_python_file
+    module = load_module_py(module_id, path)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\util\pyfiles.py:132: in load_module_py
+    spec.loader.exec_module(module)  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+migrations\env.py:18: in <module>
+    context.run_migrations()
+.venv\Lib\site-packages\alembic\runtime\environment.py:970: in run_migrations
+    self.get_context().run_migrations(**kw)
+.venv\Lib\site-packages\alembic\runtime\migration.py:621: in run_migrations
+    step.migration_fn(**kw)
+migrations\versions\9290b526fd6e_food_inventory.py:137: in downgrade
+    op.drop_index(op.f('ix_inventory_events_user_id'), table_name='inventory_events')
+.venv\Lib\site-packages\alembic\operations\ops.py:1133: in drop_index
+    return operations.invoke(op)
+           ^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\operations\base.py:448: in invoke
+    return fn(self, operation)
+           ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\operations\toimpl.py:126: in drop_index
+    operations.impl.drop_index(
+.venv\Lib\site-packages\alembic\ddl\impl.py:475: in drop_index
+    self._exec(schema.DropIndex(index, **kw))
+.venv\Lib\site-packages\alembic\ddl\impl.py:252: in _exec
+    return conn.execute(construct, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1421: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\ddl.py:188: in _execute_on_connection
+    return connection._execute_ddl(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1532: in _execute_ddl
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1848: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1988: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2365: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\pymysql\cursors.py:159: in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\cursors.py:330: in _query
+    conn.query(q)
+.venv\Lib\site-packages\pymysql\connections.py:582: in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:847: in _read_query_result
+    result.read()
+.venv\Lib\site-packages\pymysql\connections.py:1245: in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:803: in _read_packet
+    packet.raise_for_error()
+.venv\Lib\site-packages\pymysql\protocol.py:219: in raise_for_error
+    err.raise_mysql_exception(self._data)
+.venv\Lib\site-packages\pymysql\err.py:154: in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+E   sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1553, "Cannot drop index 'ix_inventory_events_user_id': needed in a foreign key constraint")
+E   [SQL: 
+E   DROP INDEX ix_inventory_events_user_id ON inventory_events]
+E   (Background on this error at: https://sqlalche.me/e/20/e3q8)
+_____________ ERROR at setup of test_fefo_cook_and_repeated_undo ______________
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\pymysql\cursors.py:159: in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\cursors.py:330: in _query
+    conn.query(q)
+.venv\Lib\site-packages\pymysql\connections.py:582: in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:847: in _read_query_result
+    result.read()
+.venv\Lib\site-packages\pymysql\connections.py:1245: in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:803: in _read_packet
+    packet.raise_for_error()
+.venv\Lib\site-packages\pymysql\protocol.py:219: in raise_for_error
+    err.raise_mysql_exception(self._data)
+.venv\Lib\site-packages\pymysql\err.py:154: in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+E   pymysql.err.OperationalError: (1553, "Cannot drop index 'ix_inventory_events_user_id': needed in a foreign key constraint")
+
+The above exception was the direct cause of the following exception:
+tests\conftest.py:27: in client
+    command.downgrade(config, "base")
+.venv\Lib\site-packages\alembic\command.py:534: in downgrade
+    script.run_env()
+.venv\Lib\site-packages\alembic\script\base.py:550: in run_env
+    util.load_python_file(self.dir, "env.py")
+.venv\Lib\site-packages\alembic\util\pyfiles.py:114: in load_python_file
+    module = load_module_py(module_id, path)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\util\pyfiles.py:132: in load_module_py
+    spec.loader.exec_module(module)  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+migrations\env.py:18: in <module>
+    context.run_migrations()
+.venv\Lib\site-packages\alembic\runtime\environment.py:970: in run_migrations
+    self.get_context().run_migrations(**kw)
+.venv\Lib\site-packages\alembic\runtime\migration.py:621: in run_migrations
+    step.migration_fn(**kw)
+migrations\versions\9290b526fd6e_food_inventory.py:137: in downgrade
+    op.drop_index(op.f('ix_inventory_events_user_id'), table_name='inventory_events')
+.venv\Lib\site-packages\alembic\operations\ops.py:1133: in drop_index
+    return operations.invoke(op)
+           ^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\operations\base.py:448: in invoke
+    return fn(self, operation)
+           ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\operations\toimpl.py:126: in drop_index
+    operations.impl.drop_index(
+.venv\Lib\site-packages\alembic\ddl\impl.py:475: in drop_index
+    self._exec(schema.DropIndex(index, **kw))
+.venv\Lib\site-packages\alembic\ddl\impl.py:252: in _exec
+    return conn.execute(construct, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1421: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\ddl.py:188: in _execute_on_connection
+    return connection._execute_ddl(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1532: in _execute_ddl
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1848: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1988: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2365: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\pymysql\cursors.py:159: in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\cursors.py:330: in _query
+    conn.query(q)
+.venv\Lib\site-packages\pymysql\connections.py:582: in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:847: in _read_query_result
+    result.read()
+.venv\Lib\site-packages\pymysql\connections.py:1245: in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:803: in _read_packet
+    packet.raise_for_error()
+.venv\Lib\site-packages\pymysql\protocol.py:219: in raise_for_error
+    err.raise_mysql_exception(self._data)
+.venv\Lib\site-packages\pymysql\err.py:154: in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+E   sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1553, "Cannot drop index 'ix_inventory_events_user_id': needed in a foreign key constraint")
+E   [SQL: 
+E   DROP INDEX ix_inventory_events_user_id ON inventory_events]
+E   (Background on this error at: https://sqlalche.me/e/20/e3q8)
+________ ERROR at setup of test_insufficient_and_expired_do_not_mutate ________
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\pymysql\cursors.py:159: in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\cursors.py:330: in _query
+    conn.query(q)
+.venv\Lib\site-packages\pymysql\connections.py:582: in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:847: in _read_query_result
+    result.read()
+.venv\Lib\site-packages\pymysql\connections.py:1245: in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:803: in _read_packet
+    packet.raise_for_error()
+.venv\Lib\site-packages\pymysql\protocol.py:219: in raise_for_error
+    err.raise_mysql_exception(self._data)
+.venv\Lib\site-packages\pymysql\err.py:154: in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+E   pymysql.err.OperationalError: (1553, "Cannot drop index 'ix_inventory_events_user_id': needed in a foreign key constraint")
+
+The above exception was the direct cause of the following exception:
+tests\conftest.py:27: in client
+    command.downgrade(config, "base")
+.venv\Lib\site-packages\alembic\command.py:534: in downgrade
+    script.run_env()
+.venv\Lib\site-packages\alembic\script\base.py:550: in run_env
+    util.load_python_file(self.dir, "env.py")
+.venv\Lib\site-packages\alembic\util\pyfiles.py:114: in load_python_file
+    module = load_module_py(module_id, path)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\util\pyfiles.py:132: in load_module_py
+    spec.loader.exec_module(module)  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+migrations\env.py:18: in <module>
+    context.run_migrations()
+.venv\Lib\site-packages\alembic\runtime\environment.py:970: in run_migrations
+    self.get_context().run_migrations(**kw)
+.venv\Lib\site-packages\alembic\runtime\migration.py:621: in run_migrations
+    step.migration_fn(**kw)
+migrations\versions\9290b526fd6e_food_inventory.py:137: in downgrade
+    op.drop_index(op.f('ix_inventory_events_user_id'), table_name='inventory_events')
+.venv\Lib\site-packages\alembic\operations\ops.py:1133: in drop_index
+    return operations.invoke(op)
+           ^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\operations\base.py:448: in invoke
+    return fn(self, operation)
+           ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\operations\toimpl.py:126: in drop_index
+    operations.impl.drop_index(
+.venv\Lib\site-packages\alembic\ddl\impl.py:475: in drop_index
+    self._exec(schema.DropIndex(index, **kw))
+.venv\Lib\site-packages\alembic\ddl\impl.py:252: in _exec
+    return conn.execute(construct, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1421: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\ddl.py:188: in _execute_on_connection
+    return connection._execute_ddl(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1532: in _execute_ddl
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1848: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1988: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2365: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\pymysql\cursors.py:159: in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\cursors.py:330: in _query
+    conn.query(q)
+.venv\Lib\site-packages\pymysql\connections.py:582: in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:847: in _read_query_result
+    result.read()
+.venv\Lib\site-packages\pymysql\connections.py:1245: in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:803: in _read_packet
+    packet.raise_for_error()
+.venv\Lib\site-packages\pymysql\protocol.py:219: in raise_for_error
+    err.raise_mysql_exception(self._data)
+.venv\Lib\site-packages\pymysql\err.py:154: in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+E   sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1553, "Cannot drop index 'ix_inventory_events_user_id': needed in a foreign key constraint")
+E   [SQL: 
+E   DROP INDEX ix_inventory_events_user_id ON inventory_events]
+E   (Background on this error at: https://sqlalche.me/e/20/e3q8)
+________ ERROR at setup of test_failure_after_record_insert_rolls_back ________
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\pymysql\cursors.py:159: in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\cursors.py:330: in _query
+    conn.query(q)
+.venv\Lib\site-packages\pymysql\connections.py:582: in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:847: in _read_query_result
+    result.read()
+.venv\Lib\site-packages\pymysql\connections.py:1245: in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:803: in _read_packet
+    packet.raise_for_error()
+.venv\Lib\site-packages\pymysql\protocol.py:219: in raise_for_error
+    err.raise_mysql_exception(self._data)
+.venv\Lib\site-packages\pymysql\err.py:154: in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+E   pymysql.err.OperationalError: (1553, "Cannot drop index 'ix_inventory_events_user_id': needed in a foreign key constraint")
+
+The above exception was the direct cause of the following exception:
+tests\conftest.py:27: in client
+    command.downgrade(config, "base")
+.venv\Lib\site-packages\alembic\command.py:534: in downgrade
+    script.run_env()
+.venv\Lib\site-packages\alembic\script\base.py:550: in run_env
+    util.load_python_file(self.dir, "env.py")
+.venv\Lib\site-packages\alembic\util\pyfiles.py:114: in load_python_file
+    module = load_module_py(module_id, path)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\util\pyfiles.py:132: in load_module_py
+    spec.loader.exec_module(module)  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+migrations\env.py:18: in <module>
+    context.run_migrations()
+.venv\Lib\site-packages\alembic\runtime\environment.py:970: in run_migrations
+    self.get_context().run_migrations(**kw)
+.venv\Lib\site-packages\alembic\runtime\migration.py:621: in run_migrations
+    step.migration_fn(**kw)
+migrations\versions\9290b526fd6e_food_inventory.py:137: in downgrade
+    op.drop_index(op.f('ix_inventory_events_user_id'), table_name='inventory_events')
+.venv\Lib\site-packages\alembic\operations\ops.py:1133: in drop_index
+    return operations.invoke(op)
+           ^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\operations\base.py:448: in invoke
+    return fn(self, operation)
+           ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\operations\toimpl.py:126: in drop_index
+    operations.impl.drop_index(
+.venv\Lib\site-packages\alembic\ddl\impl.py:475: in drop_index
+    self._exec(schema.DropIndex(index, **kw))
+.venv\Lib\site-packages\alembic\ddl\impl.py:252: in _exec
+    return conn.execute(construct, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1421: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\ddl.py:188: in _execute_on_connection
+    return connection._execute_ddl(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1532: in _execute_ddl
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1848: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1988: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2365: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\pymysql\cursors.py:159: in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\cursors.py:330: in _query
+    conn.query(q)
+.venv\Lib\site-packages\pymysql\connections.py:582: in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:847: in _read_query_result
+    result.read()
+.venv\Lib\site-packages\pymysql\connections.py:1245: in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:803: in _read_packet
+    packet.raise_for_error()
+.venv\Lib\site-packages\pymysql\protocol.py:219: in raise_for_error
+    err.raise_mysql_exception(self._data)
+.venv\Lib\site-packages\pymysql\err.py:154: in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+E   sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1553, "Cannot drop index 'ix_inventory_events_user_id': needed in a foreign key constraint")
+E   [SQL: 
+E   DROP INDEX ix_inventory_events_user_id ON inventory_events]
+E   (Background on this error at: https://sqlalche.me/e/20/e3q8)
+__ ERROR at setup of test_composite_foreign_key_rejects_cross_user_reference __
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\pymysql\cursors.py:159: in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\cursors.py:330: in _query
+    conn.query(q)
+.venv\Lib\site-packages\pymysql\connections.py:582: in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:847: in _read_query_result
+    result.read()
+.venv\Lib\site-packages\pymysql\connections.py:1245: in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:803: in _read_packet
+    packet.raise_for_error()
+.venv\Lib\site-packages\pymysql\protocol.py:219: in raise_for_error
+    err.raise_mysql_exception(self._data)
+.venv\Lib\site-packages\pymysql\err.py:154: in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+E   pymysql.err.OperationalError: (1553, "Cannot drop index 'ix_inventory_events_user_id': needed in a foreign key constraint")
+
+The above exception was the direct cause of the following exception:
+tests\conftest.py:27: in client
+    command.downgrade(config, "base")
+.venv\Lib\site-packages\alembic\command.py:534: in downgrade
+    script.run_env()
+.venv\Lib\site-packages\alembic\script\base.py:550: in run_env
+    util.load_python_file(self.dir, "env.py")
+.venv\Lib\site-packages\alembic\util\pyfiles.py:114: in load_python_file
+    module = load_module_py(module_id, path)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\util\pyfiles.py:132: in load_module_py
+    spec.loader.exec_module(module)  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+migrations\env.py:18: in <module>
+    context.run_migrations()
+.venv\Lib\site-packages\alembic\runtime\environment.py:970: in run_migrations
+    self.get_context().run_migrations(**kw)
+.venv\Lib\site-packages\alembic\runtime\migration.py:621: in run_migrations
+    step.migration_fn(**kw)
+migrations\versions\9290b526fd6e_food_inventory.py:137: in downgrade
+    op.drop_index(op.f('ix_inventory_events_user_id'), table_name='inventory_events')
+.venv\Lib\site-packages\alembic\operations\ops.py:1133: in drop_index
+    return operations.invoke(op)
+           ^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\operations\base.py:448: in invoke
+    return fn(self, operation)
+           ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\operations\toimpl.py:126: in drop_index
+    operations.impl.drop_index(
+.venv\Lib\site-packages\alembic\ddl\impl.py:475: in drop_index
+    self._exec(schema.DropIndex(index, **kw))
+.venv\Lib\site-packages\alembic\ddl\impl.py:252: in _exec
+    return conn.execute(construct, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1421: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\ddl.py:188: in _execute_on_connection
+    return connection._execute_ddl(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1532: in _execute_ddl
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1848: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1988: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2365: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\pymysql\cursors.py:159: in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\cursors.py:330: in _query
+    conn.query(q)
+.venv\Lib\site-packages\pymysql\connections.py:582: in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:847: in _read_query_result
+    result.read()
+.venv\Lib\site-packages\pymysql\connections.py:1245: in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:803: in _read_packet
+    packet.raise_for_error()
+.venv\Lib\site-packages\pymysql\protocol.py:219: in raise_for_error
+    err.raise_mysql_exception(self._data)
+.venv\Lib\site-packages\pymysql\err.py:154: in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+E   sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1553, "Cannot drop index 'ix_inventory_events_user_id': needed in a foreign key constraint")
+E   [SQL: 
+E   DROP INDEX ix_inventory_events_user_id ON inventory_events]
+E   (Background on this error at: https://sqlalche.me/e/20/e3q8)
+___________ ERROR at setup of test_mysql_concurrent_cooking[False] ____________
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\pymysql\cursors.py:159: in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\cursors.py:330: in _query
+    conn.query(q)
+.venv\Lib\site-packages\pymysql\connections.py:582: in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:847: in _read_query_result
+    result.read()
+.venv\Lib\site-packages\pymysql\connections.py:1245: in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:803: in _read_packet
+    packet.raise_for_error()
+.venv\Lib\site-packages\pymysql\protocol.py:219: in raise_for_error
+    err.raise_mysql_exception(self._data)
+.venv\Lib\site-packages\pymysql\err.py:154: in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+E   pymysql.err.OperationalError: (1553, "Cannot drop index 'ix_inventory_events_user_id': needed in a foreign key constraint")
+
+The above exception was the direct cause of the following exception:
+tests\conftest.py:27: in client
+    command.downgrade(config, "base")
+.venv\Lib\site-packages\alembic\command.py:534: in downgrade
+    script.run_env()
+.venv\Lib\site-packages\alembic\script\base.py:550: in run_env
+    util.load_python_file(self.dir, "env.py")
+.venv\Lib\site-packages\alembic\util\pyfiles.py:114: in load_python_file
+    module = load_module_py(module_id, path)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\util\pyfiles.py:132: in load_module_py
+    spec.loader.exec_module(module)  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+migrations\env.py:18: in <module>
+    context.run_migrations()
+.venv\Lib\site-packages\alembic\runtime\environment.py:970: in run_migrations
+    self.get_context().run_migrations(**kw)
+.venv\Lib\site-packages\alembic\runtime\migration.py:621: in run_migrations
+    step.migration_fn(**kw)
+migrations\versions\9290b526fd6e_food_inventory.py:137: in downgrade
+    op.drop_index(op.f('ix_inventory_events_user_id'), table_name='inventory_events')
+.venv\Lib\site-packages\alembic\operations\ops.py:1133: in drop_index
+    return operations.invoke(op)
+           ^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\operations\base.py:448: in invoke
+    return fn(self, operation)
+           ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\operations\toimpl.py:126: in drop_index
+    operations.impl.drop_index(
+.venv\Lib\site-packages\alembic\ddl\impl.py:475: in drop_index
+    self._exec(schema.DropIndex(index, **kw))
+.venv\Lib\site-packages\alembic\ddl\impl.py:252: in _exec
+    return conn.execute(construct, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1421: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\ddl.py:188: in _execute_on_connection
+    return connection._execute_ddl(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1532: in _execute_ddl
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1848: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1988: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2365: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\pymysql\cursors.py:159: in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\cursors.py:330: in _query
+    conn.query(q)
+.venv\Lib\site-packages\pymysql\connections.py:582: in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:847: in _read_query_result
+    result.read()
+.venv\Lib\site-packages\pymysql\connections.py:1245: in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:803: in _read_packet
+    packet.raise_for_error()
+.venv\Lib\site-packages\pymysql\protocol.py:219: in raise_for_error
+    err.raise_mysql_exception(self._data)
+.venv\Lib\site-packages\pymysql\err.py:154: in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+E   sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1553, "Cannot drop index 'ix_inventory_events_user_id': needed in a foreign key constraint")
+E   [SQL: 
+E   DROP INDEX ix_inventory_events_user_id ON inventory_events]
+E   (Background on this error at: https://sqlalche.me/e/20/e3q8)
+____________ ERROR at setup of test_mysql_concurrent_cooking[True] ____________
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\pymysql\cursors.py:159: in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\cursors.py:330: in _query
+    conn.query(q)
+.venv\Lib\site-packages\pymysql\connections.py:582: in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:847: in _read_query_result
+    result.read()
+.venv\Lib\site-packages\pymysql\connections.py:1245: in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:803: in _read_packet
+    packet.raise_for_error()
+.venv\Lib\site-packages\pymysql\protocol.py:219: in raise_for_error
+    err.raise_mysql_exception(self._data)
+.venv\Lib\site-packages\pymysql\err.py:154: in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+E   pymysql.err.OperationalError: (1553, "Cannot drop index 'ix_inventory_events_user_id': needed in a foreign key constraint")
+
+The above exception was the direct cause of the following exception:
+tests\conftest.py:27: in client
+    command.downgrade(config, "base")
+.venv\Lib\site-packages\alembic\command.py:534: in downgrade
+    script.run_env()
+.venv\Lib\site-packages\alembic\script\base.py:550: in run_env
+    util.load_python_file(self.dir, "env.py")
+.venv\Lib\site-packages\alembic\util\pyfiles.py:114: in load_python_file
+    module = load_module_py(module_id, path)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\util\pyfiles.py:132: in load_module_py
+    spec.loader.exec_module(module)  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+migrations\env.py:18: in <module>
+    context.run_migrations()
+.venv\Lib\site-packages\alembic\runtime\environment.py:970: in run_migrations
+    self.get_context().run_migrations(**kw)
+.venv\Lib\site-packages\alembic\runtime\migration.py:621: in run_migrations
+    step.migration_fn(**kw)
+migrations\versions\9290b526fd6e_food_inventory.py:137: in downgrade
+    op.drop_index(op.f('ix_inventory_events_user_id'), table_name='inventory_events')
+.venv\Lib\site-packages\alembic\operations\ops.py:1133: in drop_index
+    return operations.invoke(op)
+           ^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\operations\base.py:448: in invoke
+    return fn(self, operation)
+           ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\operations\toimpl.py:126: in drop_index
+    operations.impl.drop_index(
+.venv\Lib\site-packages\alembic\ddl\impl.py:475: in drop_index
+    self._exec(schema.DropIndex(index, **kw))
+.venv\Lib\site-packages\alembic\ddl\impl.py:252: in _exec
+    return conn.execute(construct, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1421: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\ddl.py:188: in _execute_on_connection
+    return connection._execute_ddl(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1532: in _execute_ddl
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1848: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1988: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2365: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\pymysql\cursors.py:159: in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\cursors.py:330: in _query
+    conn.query(q)
+.venv\Lib\site-packages\pymysql\connections.py:582: in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:847: in _read_query_result
+    result.read()
+.venv\Lib\site-packages\pymysql\connections.py:1245: in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:803: in _read_packet
+    packet.raise_for_error()
+.venv\Lib\site-packages\pymysql\protocol.py:219: in raise_for_error
+    err.raise_mysql_exception(self._data)
+.venv\Lib\site-packages\pymysql\err.py:154: in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+E   sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1553, "Cannot drop index 'ix_inventory_events_user_id': needed in a foreign key constraint")
+E   [SQL: 
+E   DROP INDEX ix_inventory_events_user_id ON inventory_events]
+E   (Background on this error at: https://sqlalche.me/e/20/e3q8)
+____ ERROR at setup of test_two_users_isolated_and_cannot_inject_identity _____
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\pymysql\cursors.py:159: in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\cursors.py:330: in _query
+    conn.query(q)
+.venv\Lib\site-packages\pymysql\connections.py:582: in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:847: in _read_query_result
+    result.read()
+.venv\Lib\site-packages\pymysql\connections.py:1245: in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:803: in _read_packet
+    packet.raise_for_error()
+.venv\Lib\site-packages\pymysql\protocol.py:219: in raise_for_error
+    err.raise_mysql_exception(self._data)
+.venv\Lib\site-packages\pymysql\err.py:154: in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+E   pymysql.err.OperationalError: (1553, "Cannot drop index 'ix_inventory_events_user_id': needed in a foreign key constraint")
+
+The above exception was the direct cause of the following exception:
+tests\conftest.py:27: in client
+    command.downgrade(config, "base")
+.venv\Lib\site-packages\alembic\command.py:534: in downgrade
+    script.run_env()
+.venv\Lib\site-packages\alembic\script\base.py:550: in run_env
+    util.load_python_file(self.dir, "env.py")
+.venv\Lib\site-packages\alembic\util\pyfiles.py:114: in load_python_file
+    module = load_module_py(module_id, path)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\util\pyfiles.py:132: in load_module_py
+    spec.loader.exec_module(module)  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+migrations\env.py:18: in <module>
+    context.run_migrations()
+.venv\Lib\site-packages\alembic\runtime\environment.py:970: in run_migrations
+    self.get_context().run_migrations(**kw)
+.venv\Lib\site-packages\alembic\runtime\migration.py:621: in run_migrations
+    step.migration_fn(**kw)
+migrations\versions\9290b526fd6e_food_inventory.py:137: in downgrade
+    op.drop_index(op.f('ix_inventory_events_user_id'), table_name='inventory_events')
+.venv\Lib\site-packages\alembic\operations\ops.py:1133: in drop_index
+    return operations.invoke(op)
+           ^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\operations\base.py:448: in invoke
+    return fn(self, operation)
+           ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\operations\toimpl.py:126: in drop_index
+    operations.impl.drop_index(
+.venv\Lib\site-packages\alembic\ddl\impl.py:475: in drop_index
+    self._exec(schema.DropIndex(index, **kw))
+.venv\Lib\site-packages\alembic\ddl\impl.py:252: in _exec
+    return conn.execute(construct, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1421: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\ddl.py:188: in _execute_on_connection
+    return connection._execute_ddl(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1532: in _execute_ddl
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1848: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1988: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2365: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\pymysql\cursors.py:159: in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\cursors.py:330: in _query
+    conn.query(q)
+.venv\Lib\site-packages\pymysql\connections.py:582: in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:847: in _read_query_result
+    result.read()
+.venv\Lib\site-packages\pymysql\connections.py:1245: in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:803: in _read_packet
+    packet.raise_for_error()
+.venv\Lib\site-packages\pymysql\protocol.py:219: in raise_for_error
+    err.raise_mysql_exception(self._data)
+.venv\Lib\site-packages\pymysql\err.py:154: in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+E   sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1553, "Cannot drop index 'ix_inventory_events_user_id': needed in a foreign key constraint")
+E   [SQL: 
+E   DROP INDEX ix_inventory_events_user_id ON inventory_events]
+E   (Background on this error at: https://sqlalche.me/e/20/e3q8)
+_______ ERROR at setup of test_password_and_session_storage_and_logout ________
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\pymysql\cursors.py:159: in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\cursors.py:330: in _query
+    conn.query(q)
+.venv\Lib\site-packages\pymysql\connections.py:582: in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:847: in _read_query_result
+    result.read()
+.venv\Lib\site-packages\pymysql\connections.py:1245: in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:803: in _read_packet
+    packet.raise_for_error()
+.venv\Lib\site-packages\pymysql\protocol.py:219: in raise_for_error
+    err.raise_mysql_exception(self._data)
+.venv\Lib\site-packages\pymysql\err.py:154: in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+E   pymysql.err.OperationalError: (1553, "Cannot drop index 'ix_inventory_events_user_id': needed in a foreign key constraint")
+
+The above exception was the direct cause of the following exception:
+tests\conftest.py:27: in client
+    command.downgrade(config, "base")
+.venv\Lib\site-packages\alembic\command.py:534: in downgrade
+    script.run_env()
+.venv\Lib\site-packages\alembic\script\base.py:550: in run_env
+    util.load_python_file(self.dir, "env.py")
+.venv\Lib\site-packages\alembic\util\pyfiles.py:114: in load_python_file
+    module = load_module_py(module_id, path)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\util\pyfiles.py:132: in load_module_py
+    spec.loader.exec_module(module)  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+migrations\env.py:18: in <module>
+    context.run_migrations()
+.venv\Lib\site-packages\alembic\runtime\environment.py:970: in run_migrations
+    self.get_context().run_migrations(**kw)
+.venv\Lib\site-packages\alembic\runtime\migration.py:621: in run_migrations
+    step.migration_fn(**kw)
+migrations\versions\9290b526fd6e_food_inventory.py:137: in downgrade
+    op.drop_index(op.f('ix_inventory_events_user_id'), table_name='inventory_events')
+.venv\Lib\site-packages\alembic\operations\ops.py:1133: in drop_index
+    return operations.invoke(op)
+           ^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\operations\base.py:448: in invoke
+    return fn(self, operation)
+           ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\operations\toimpl.py:126: in drop_index
+    operations.impl.drop_index(
+.venv\Lib\site-packages\alembic\ddl\impl.py:475: in drop_index
+    self._exec(schema.DropIndex(index, **kw))
+.venv\Lib\site-packages\alembic\ddl\impl.py:252: in _exec
+    return conn.execute(construct, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1421: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\ddl.py:188: in _execute_on_connection
+    return connection._execute_ddl(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1532: in _execute_ddl
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1848: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1988: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2365: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\pymysql\cursors.py:159: in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\cursors.py:330: in _query
+    conn.query(q)
+.venv\Lib\site-packages\pymysql\connections.py:582: in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:847: in _read_query_result
+    result.read()
+.venv\Lib\site-packages\pymysql\connections.py:1245: in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:803: in _read_packet
+    packet.raise_for_error()
+.venv\Lib\site-packages\pymysql\protocol.py:219: in raise_for_error
+    err.raise_mysql_exception(self._data)
+.venv\Lib\site-packages\pymysql\err.py:154: in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+E   sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1553, "Cannot drop index 'ix_inventory_events_user_id': needed in a foreign key constraint")
+E   [SQL: 
+E   DROP INDEX ix_inventory_events_user_id ON inventory_events]
+E   (Background on this error at: https://sqlalche.me/e/20/e3q8)
+_________ ERROR at setup of test_expired_missing_and_invalid_sessions _________
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\pymysql\cursors.py:159: in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\cursors.py:330: in _query
+    conn.query(q)
+.venv\Lib\site-packages\pymysql\connections.py:582: in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:847: in _read_query_result
+    result.read()
+.venv\Lib\site-packages\pymysql\connections.py:1245: in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:803: in _read_packet
+    packet.raise_for_error()
+.venv\Lib\site-packages\pymysql\protocol.py:219: in raise_for_error
+    err.raise_mysql_exception(self._data)
+.venv\Lib\site-packages\pymysql\err.py:154: in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+E   pymysql.err.OperationalError: (1553, "Cannot drop index 'ix_inventory_events_user_id': needed in a foreign key constraint")
+
+The above exception was the direct cause of the following exception:
+tests\conftest.py:27: in client
+    command.downgrade(config, "base")
+.venv\Lib\site-packages\alembic\command.py:534: in downgrade
+    script.run_env()
+.venv\Lib\site-packages\alembic\script\base.py:550: in run_env
+    util.load_python_file(self.dir, "env.py")
+.venv\Lib\site-packages\alembic\util\pyfiles.py:114: in load_python_file
+    module = load_module_py(module_id, path)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\util\pyfiles.py:132: in load_module_py
+    spec.loader.exec_module(module)  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+migrations\env.py:18: in <module>
+    context.run_migrations()
+.venv\Lib\site-packages\alembic\runtime\environment.py:970: in run_migrations
+    self.get_context().run_migrations(**kw)
+.venv\Lib\site-packages\alembic\runtime\migration.py:621: in run_migrations
+    step.migration_fn(**kw)
+migrations\versions\9290b526fd6e_food_inventory.py:137: in downgrade
+    op.drop_index(op.f('ix_inventory_events_user_id'), table_name='inventory_events')
+.venv\Lib\site-packages\alembic\operations\ops.py:1133: in drop_index
+    return operations.invoke(op)
+           ^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\operations\base.py:448: in invoke
+    return fn(self, operation)
+           ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\operations\toimpl.py:126: in drop_index
+    operations.impl.drop_index(
+.venv\Lib\site-packages\alembic\ddl\impl.py:475: in drop_index
+    self._exec(schema.DropIndex(index, **kw))
+.venv\Lib\site-packages\alembic\ddl\impl.py:252: in _exec
+    return conn.execute(construct, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1421: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\ddl.py:188: in _execute_on_connection
+    return connection._execute_ddl(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1532: in _execute_ddl
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1848: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1988: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2365: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\pymysql\cursors.py:159: in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\cursors.py:330: in _query
+    conn.query(q)
+.venv\Lib\site-packages\pymysql\connections.py:582: in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:847: in _read_query_result
+    result.read()
+.venv\Lib\site-packages\pymysql\connections.py:1245: in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:803: in _read_packet
+    packet.raise_for_error()
+.venv\Lib\site-packages\pymysql\protocol.py:219: in raise_for_error
+    err.raise_mysql_exception(self._data)
+.venv\Lib\site-packages\pymysql\err.py:154: in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+E   sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1553, "Cannot drop index 'ix_inventory_events_user_id': needed in a foreign key constraint")
+E   [SQL: 
+E   DROP INDEX ix_inventory_events_user_id ON inventory_events]
+E   (Background on this error at: https://sqlalche.me/e/20/e3q8)
+____________ ERROR at setup of test_duplicate_and_bad_credentials _____________
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\pymysql\cursors.py:159: in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\cursors.py:330: in _query
+    conn.query(q)
+.venv\Lib\site-packages\pymysql\connections.py:582: in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:847: in _read_query_result
+    result.read()
+.venv\Lib\site-packages\pymysql\connections.py:1245: in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:803: in _read_packet
+    packet.raise_for_error()
+.venv\Lib\site-packages\pymysql\protocol.py:219: in raise_for_error
+    err.raise_mysql_exception(self._data)
+.venv\Lib\site-packages\pymysql\err.py:154: in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+E   pymysql.err.OperationalError: (1553, "Cannot drop index 'ix_inventory_events_user_id': needed in a foreign key constraint")
+
+The above exception was the direct cause of the following exception:
+tests\conftest.py:27: in client
+    command.downgrade(config, "base")
+.venv\Lib\site-packages\alembic\command.py:534: in downgrade
+    script.run_env()
+.venv\Lib\site-packages\alembic\script\base.py:550: in run_env
+    util.load_python_file(self.dir, "env.py")
+.venv\Lib\site-packages\alembic\util\pyfiles.py:114: in load_python_file
+    module = load_module_py(module_id, path)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\util\pyfiles.py:132: in load_module_py
+    spec.loader.exec_module(module)  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+migrations\env.py:18: in <module>
+    context.run_migrations()
+.venv\Lib\site-packages\alembic\runtime\environment.py:970: in run_migrations
+    self.get_context().run_migrations(**kw)
+.venv\Lib\site-packages\alembic\runtime\migration.py:621: in run_migrations
+    step.migration_fn(**kw)
+migrations\versions\9290b526fd6e_food_inventory.py:137: in downgrade
+    op.drop_index(op.f('ix_inventory_events_user_id'), table_name='inventory_events')
+.venv\Lib\site-packages\alembic\operations\ops.py:1133: in drop_index
+    return operations.invoke(op)
+           ^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\operations\base.py:448: in invoke
+    return fn(self, operation)
+           ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\operations\toimpl.py:126: in drop_index
+    operations.impl.drop_index(
+.venv\Lib\site-packages\alembic\ddl\impl.py:475: in drop_index
+    self._exec(schema.DropIndex(index, **kw))
+.venv\Lib\site-packages\alembic\ddl\impl.py:252: in _exec
+    return conn.execute(construct, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1421: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\ddl.py:188: in _execute_on_connection
+    return connection._execute_ddl(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1532: in _execute_ddl
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1848: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1988: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2365: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\pymysql\cursors.py:159: in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\cursors.py:330: in _query
+    conn.query(q)
+.venv\Lib\site-packages\pymysql\connections.py:582: in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:847: in _read_query_result
+    result.read()
+.venv\Lib\site-packages\pymysql\connections.py:1245: in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:803: in _read_packet
+    packet.raise_for_error()
+.venv\Lib\site-packages\pymysql\protocol.py:219: in raise_for_error
+    err.raise_mysql_exception(self._data)
+.venv\Lib\site-packages\pymysql\err.py:154: in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+E   sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1553, "Cannot drop index 'ix_inventory_events_user_id': needed in a foreign key constraint")
+E   [SQL: 
+E   DROP INDEX ix_inventory_events_user_id ON inventory_events]
+E   (Background on this error at: https://sqlalche.me/e/20/e3q8)
+__________ ERROR at setup of test_validation_never_reflects_password __________
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\pymysql\cursors.py:159: in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\cursors.py:330: in _query
+    conn.query(q)
+.venv\Lib\site-packages\pymysql\connections.py:582: in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:847: in _read_query_result
+    result.read()
+.venv\Lib\site-packages\pymysql\connections.py:1245: in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:803: in _read_packet
+    packet.raise_for_error()
+.venv\Lib\site-packages\pymysql\protocol.py:219: in raise_for_error
+    err.raise_mysql_exception(self._data)
+.venv\Lib\site-packages\pymysql\err.py:154: in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+E   pymysql.err.OperationalError: (1553, "Cannot drop index 'ix_inventory_events_user_id': needed in a foreign key constraint")
+
+The above exception was the direct cause of the following exception:
+tests\conftest.py:27: in client
+    command.downgrade(config, "base")
+.venv\Lib\site-packages\alembic\command.py:534: in downgrade
+    script.run_env()
+.venv\Lib\site-packages\alembic\script\base.py:550: in run_env
+    util.load_python_file(self.dir, "env.py")
+.venv\Lib\site-packages\alembic\util\pyfiles.py:114: in load_python_file
+    module = load_module_py(module_id, path)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\util\pyfiles.py:132: in load_module_py
+    spec.loader.exec_module(module)  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+migrations\env.py:18: in <module>
+    context.run_migrations()
+.venv\Lib\site-packages\alembic\runtime\environment.py:970: in run_migrations
+    self.get_context().run_migrations(**kw)
+.venv\Lib\site-packages\alembic\runtime\migration.py:621: in run_migrations
+    step.migration_fn(**kw)
+migrations\versions\9290b526fd6e_food_inventory.py:137: in downgrade
+    op.drop_index(op.f('ix_inventory_events_user_id'), table_name='inventory_events')
+.venv\Lib\site-packages\alembic\operations\ops.py:1133: in drop_index
+    return operations.invoke(op)
+           ^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\operations\base.py:448: in invoke
+    return fn(self, operation)
+           ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\operations\toimpl.py:126: in drop_index
+    operations.impl.drop_index(
+.venv\Lib\site-packages\alembic\ddl\impl.py:475: in drop_index
+    self._exec(schema.DropIndex(index, **kw))
+.venv\Lib\site-packages\alembic\ddl\impl.py:252: in _exec
+    return conn.execute(construct, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1421: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\ddl.py:188: in _execute_on_connection
+    return connection._execute_ddl(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1532: in _execute_ddl
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1848: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1988: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2365: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\pymysql\cursors.py:159: in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\cursors.py:330: in _query
+    conn.query(q)
+.venv\Lib\site-packages\pymysql\connections.py:582: in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:847: in _read_query_result
+    result.read()
+.venv\Lib\site-packages\pymysql\connections.py:1245: in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:803: in _read_packet
+    packet.raise_for_error()
+.venv\Lib\site-packages\pymysql\protocol.py:219: in raise_for_error
+    err.raise_mysql_exception(self._data)
+.venv\Lib\site-packages\pymysql\err.py:154: in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+E   sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1553, "Cannot drop index 'ix_inventory_events_user_id': needed in a foreign key constraint")
+E   [SQL: 
+E   DROP INDEX ix_inventory_events_user_id ON inventory_events]
+E   (Background on this error at: https://sqlalche.me/e/20/e3q8)
+________________________ ERROR at setup of test_health ________________________
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\pymysql\cursors.py:159: in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\cursors.py:330: in _query
+    conn.query(q)
+.venv\Lib\site-packages\pymysql\connections.py:582: in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:847: in _read_query_result
+    result.read()
+.venv\Lib\site-packages\pymysql\connections.py:1245: in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:803: in _read_packet
+    packet.raise_for_error()
+.venv\Lib\site-packages\pymysql\protocol.py:219: in raise_for_error
+    err.raise_mysql_exception(self._data)
+.venv\Lib\site-packages\pymysql\err.py:154: in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+E   pymysql.err.OperationalError: (1553, "Cannot drop index 'ix_inventory_events_user_id': needed in a foreign key constraint")
+
+The above exception was the direct cause of the following exception:
+tests\conftest.py:27: in client
+    command.downgrade(config, "base")
+.venv\Lib\site-packages\alembic\command.py:534: in downgrade
+    script.run_env()
+.venv\Lib\site-packages\alembic\script\base.py:550: in run_env
+    util.load_python_file(self.dir, "env.py")
+.venv\Lib\site-packages\alembic\util\pyfiles.py:114: in load_python_file
+    module = load_module_py(module_id, path)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\util\pyfiles.py:132: in load_module_py
+    spec.loader.exec_module(module)  # type: ignore
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+migrations\env.py:18: in <module>
+    context.run_migrations()
+.venv\Lib\site-packages\alembic\runtime\environment.py:970: in run_migrations
+    self.get_context().run_migrations(**kw)
+.venv\Lib\site-packages\alembic\runtime\migration.py:621: in run_migrations
+    step.migration_fn(**kw)
+migrations\versions\9290b526fd6e_food_inventory.py:137: in downgrade
+    op.drop_index(op.f('ix_inventory_events_user_id'), table_name='inventory_events')
+.venv\Lib\site-packages\alembic\operations\ops.py:1133: in drop_index
+    return operations.invoke(op)
+           ^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\operations\base.py:448: in invoke
+    return fn(self, operation)
+           ^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\alembic\operations\toimpl.py:126: in drop_index
+    operations.impl.drop_index(
+.venv\Lib\site-packages\alembic\ddl\impl.py:475: in drop_index
+    self._exec(schema.DropIndex(index, **kw))
+.venv\Lib\site-packages\alembic\ddl\impl.py:252: in _exec
+    return conn.execute(construct, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1421: in execute
+    return meth(
+.venv\Lib\site-packages\sqlalchemy\sql\ddl.py:188: in _execute_on_connection
+    return connection._execute_ddl(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1532: in _execute_ddl
+    ret = self._execute_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1848: in _execute_context
+    return self._exec_single_context(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1988: in _exec_single_context
+    self._handle_dbapi_exception(
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:2365: in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+.venv\Lib\site-packages\sqlalchemy\engine\base.py:1969: in _exec_single_context
+    self.dialect.do_execute(
+.venv\Lib\site-packages\sqlalchemy\engine\default.py:952: in do_execute
+    cursor.execute(statement, parameters)
+.venv\Lib\site-packages\pymysql\cursors.py:159: in execute
+    result = self._query(query)
+             ^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\cursors.py:330: in _query
+    conn.query(q)
+.venv\Lib\site-packages\pymysql\connections.py:582: in query
+    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:847: in _read_query_result
+    result.read()
+.venv\Lib\site-packages\pymysql\connections.py:1245: in read
+    first_packet = self.connection._read_packet()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\pymysql\connections.py:803: in _read_packet
+    packet.raise_for_error()
+.venv\Lib\site-packages\pymysql\protocol.py:219: in raise_for_error
+    err.raise_mysql_exception(self._data)
+.venv\Lib\site-packages\pymysql\err.py:154: in raise_mysql_exception
+    raise errorclass(errno, errval, sqlstate=sqlstate)
+E   sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1553, "Cannot drop index 'ix_inventory_events_user_id': needed in a foreign key constraint")
+E   [SQL: 
+E   DROP INDEX ix_inventory_events_user_id ON inventory_events]
+E   (Background on this error at: https://sqlalche.me/e/20/e3q8)
+============================== warnings summary ===============================
+.venv\Lib\site-packages\fastapi\testclient.py:1
+  D:\Code\meal-manager\backend\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+.venv\Lib\site-packages\starlette\testclient.py:53
+  D:\Code\meal-manager\backend\.venv\Lib\site-packages\starlette\testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+.venv\Lib\site-packages\_pytest\cacheprovider.py:469
+  D:\Code\meal-manager\backend\.venv\Lib\site-packages\_pytest\cacheprovider.py:469: PytestCacheWarning: could not create cache path D:\Code\meal-manager\backend\.pytest_cache\v\cache\nodeids: [WinError 5] �ܾ����ʡ�: 'D:\\Code\\meal-manager\\backend\\.pytest_cache\\v\\cache'
+    config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
+
+.venv\Lib\site-packages\_pytest\cacheprovider.py:423
+  D:\Code\meal-manager\backend\.venv\Lib\site-packages\_pytest\cacheprovider.py:423: PytestCacheWarning: could not create cache path D:\Code\meal-manager\backend\.pytest_cache\v\cache\lastfailed: [WinError 5] �ܾ����ʡ�: 'D:\\Code\\meal-manager\\backend\\.pytest_cache\\v\\cache'
+    config.cache.set("cache/lastfailed", self.lastfailed)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+ERROR tests/test_food.py::test_batch_conversion_aliases_and_isolation - sqlal...
+ERROR tests/test_food.py::test_idempotency_and_adjustment_version - sqlalchem...
+ERROR tests/test_food.py::test_fefo_cook_and_repeated_undo - sqlalchemy.exc.O...
+ERROR tests/test_food.py::test_insufficient_and_expired_do_not_mutate - sqlal...
+ERROR tests/test_food.py::test_failure_after_record_insert_rolls_back - sqlal...
+ERROR tests/test_food.py::test_composite_foreign_key_rejects_cross_user_reference
+ERROR tests/test_food.py::test_mysql_concurrent_cooking[False] - sqlalchemy.e...
+ERROR tests/test_food.py::test_mysql_concurrent_cooking[True] - sqlalchemy.ex...
+ERROR tests/test_identity.py::test_two_users_isolated_and_cannot_inject_identity
+ERROR tests/test_identity.py::test_password_and_session_storage_and_logout - ...
+ERROR tests/test_identity.py::test_expired_missing_and_invalid_sessions - sql...
+ERROR tests/test_identity.py::test_duplicate_and_bad_credentials - sqlalchemy...
+ERROR tests/test_identity.py::test_validation_never_reflects_password - sqlal...
+ERROR tests/test_identity.py::test_health - sqlalchemy.exc.OperationalError: ...
+2 passed, 4 warnings, 14 errors in 7.01s

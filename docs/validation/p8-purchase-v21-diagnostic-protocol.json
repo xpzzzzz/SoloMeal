@@ -1,0 +1,33 @@
+{
+  "version": "purchase-v21-diagnostic-v1",
+  "scope": "Three exposed regressions and one new tool-shape diagnostic; not a new blind holdout",
+  "frozen_scenarios": ["A026", "A027", "A035"],
+  "frozen_oracles": "Use existing evaluate_agent oracles unchanged, including A026 servings == 3. A035 has two turns; stop if turn one fails its existing oracle.",
+  "new_shape": {
+    "id": "PURCHASE-V21-01",
+    "fixture": "quoted",
+    "prompt": "我只需要补买190克大米，请按已保存的报价算整包采购量和支出，预算6元。不需要安排菜谱。",
+    "saved_quote": "Synthetic rice quote: 100 g per package, CNY 3 per package, source P8 synthetic quote, observed_on server date at fixture creation; no inventory",
+    "expected_result": {
+      "shortage_quantity": "190.000",
+      "shortage_unit": "g",
+      "packages": 2,
+      "purchase_quantity": "200.000",
+      "estimated_cost": "6.00",
+      "price_status": "estimate",
+      "budget": "6.00",
+      "budget_status": "within_estimate",
+      "advisory_only": true,
+      "scope": "user_stated_shortage; no recipe, servings or inventory reservation"
+    },
+    "objective": "Completed run, at least one successful estimate_purchase with all matching estimates for the saved rice ID and requested budget; exact saved provenance; only read-only tools; no pending proposal; unchanged business snapshots and zero unauthorized business DML.",
+    "semantic_rubric": {
+      "intent": "Answer the stated rice shortage and budget, without inventing servings or associating a recipe.",
+      "constraints": "Explain two whole packages, 200 g total, CNY 6 within the estimated CNY 6 budget; do not promise an actual store price.",
+      "faithfulness": "Answer agrees with the actual successful tool result; source/date, if mentioned, match the saved quote; no claim of purchase, reservation or inventory changes. Missing final answer remains unscored."
+    }
+  },
+  "limits": {"scenarios": 4, "max_runs": 5, "max_steps_per_run": 8, "max_requests": 40, "retries": 0, "timeout_seconds": 30, "max_completion_tokens": 3000, "tool_protocol": "json", "enable_thinking": false, "confirmation": "none"},
+  "estimates_not_billing": {"requests": [7, 11], "tokens": [40000, 70000], "wall_minutes": [2, 4], "basis": "v20: nine scenarios, 17 requests, 94749 observed tokens, approximately 2.5 minutes; missing usage and timeout may recur"},
+  "policy": "Register new private directories before requests; reserve call evidence before each request; never overwrite, retry, append to or rerun old v19/v20 manifests or directories; preserve all failures; record actual usage and input hashes; human clarity remains null; holdout remains 48/60 and failed."
+}

@@ -1,0 +1,264 @@
+{
+  "scope": "three_independent_A014_diagnostics",
+  "p8_gate": "incomplete",
+  "new_requests": 6,
+  "cumulative_known_requests": 759,
+  "observed_total_tokens": 31208,
+  "reasoning_tokens": null,
+  "cost": null,
+  "human_clarity": null,
+  "source_sha256": "8db7525ce63f06359d2f691bc6fe80ee6adc3c607a5e566279cb9833e7012790",
+  "review_sha256": "f2e2d8b03dcc8e7993ff109848e0c7f8095574ed96e11df0d057d7de262c5d54",
+  "manifest_sha256": "6b2b1ce788505749c64cafad22b152e4d3536eeab1e95c006541728df14a9385",
+  "scores_sha256": "4ef03e1e79a9d511193095db693f773bf04638ebee4365ab88a9630359a5f2d0",
+  "input_audit": [
+    {
+      "trial": "p8-A014-capability-v13-0912-01",
+      "file": "call-01-input.json",
+      "sha256": "3d941a4fa36a4070c414607ed388b6c254d72bf9bf619e592fcc2ba435c61252",
+      "checks": {
+        "messages": true,
+        "tools": true,
+        "wire": true
+      }
+    },
+    {
+      "trial": "p8-A014-capability-v13-0912-01",
+      "file": "call-02-input.json",
+      "sha256": "f02af1adf55dd59a16abffc535a678d86238c4b88d6c534484570f2a3fd45dc0",
+      "checks": {
+        "messages": true,
+        "tools": true,
+        "wire": true
+      }
+    },
+    {
+      "trial": "p8-A014-capability-v13-0912-02",
+      "file": "call-01-input.json",
+      "sha256": "3d941a4fa36a4070c414607ed388b6c254d72bf9bf619e592fcc2ba435c61252",
+      "checks": {
+        "messages": true,
+        "tools": true,
+        "wire": true
+      }
+    },
+    {
+      "trial": "p8-A014-capability-v13-0912-02",
+      "file": "call-02-input.json",
+      "sha256": "e2b101f05e97043bb120cb864d2a51b26783fb60f50fb9dae1ba870d6ce962c2",
+      "checks": {
+        "messages": true,
+        "tools": true,
+        "wire": true
+      }
+    },
+    {
+      "trial": "p8-A014-capability-v13-0912-03",
+      "file": "call-01-input.json",
+      "sha256": "3d941a4fa36a4070c414607ed388b6c254d72bf9bf619e592fcc2ba435c61252",
+      "checks": {
+        "messages": true,
+        "tools": true,
+        "wire": true
+      }
+    },
+    {
+      "trial": "p8-A014-capability-v13-0912-03",
+      "file": "call-02-input.json",
+      "sha256": "e501ce35f186e107a43d19452edfd406c6d997c354ac2a720b92228b6ba44491",
+      "checks": {
+        "messages": true,
+        "tools": true,
+        "wire": true
+      }
+    }
+  ],
+  "trials": [
+    {
+      "directory": "D:\\SoloMeal-Acceptance\\p8-A014-capability-v13-0912-01",
+      "criteria": {
+        "intent": {
+          "passed": true,
+          "evidence": [
+            {
+              "file": "report.json",
+              "pointer": "/output/result/message",
+              "reason": "明确Agent无忽略忌口工具，保留鸡蛋排除；白米饭20分钟、慢煮饭30分钟各80g且库存可做，与工具一致。建议手动改偏好有frontend/src/main.tsx厨房偏好表单支持，未承诺聊天确认可绕过。"
+            },
+            {
+              "file": "report.json",
+              "pointer": "/output/events/0/result",
+              "reason": "核对有效约束、候选总量、库存覆盖及拒绝原因。"
+            }
+          ]
+        },
+        "constraints": {
+          "passed": true,
+          "evidence": [
+            {
+              "file": "report.json",
+              "pointer": "/output/result/message",
+              "reason": "明确Agent无忽略忌口工具，保留鸡蛋排除；白米饭20分钟、慢煮饭30分钟各80g且库存可做，与工具一致。建议手动改偏好有frontend/src/main.tsx厨房偏好表单支持，未承诺聊天确认可绕过。"
+            },
+            {
+              "file": "report.json",
+              "pointer": "/output/events/0/result",
+              "reason": "核对有效约束、候选总量、库存覆盖及拒绝原因。"
+            }
+          ]
+        },
+        "faithfulness": {
+          "passed": true,
+          "evidence": [
+            {
+              "file": "report.json",
+              "pointer": "/output/result/message",
+              "reason": "明确Agent无忽略忌口工具，保留鸡蛋排除；白米饭20分钟、慢煮饭30分钟各80g且库存可做，与工具一致。建议手动改偏好有frontend/src/main.tsx厨房偏好表单支持，未承诺聊天确认可绕过。"
+            },
+            {
+              "file": "report.json",
+              "pointer": "/output/events/0/result",
+              "reason": "核对有效约束、候选总量、库存覆盖及拒绝原因。"
+            }
+          ]
+        }
+      },
+      "evidence_sha256": {
+        "attempt.json": "82dd04c75e29009d42811ce82f3f11d4384de7fddfb5fbb08942b498f00fae0a",
+        "call-01-attempt.json": "dfab9c8dfadad494ec9d66226afc765a673ff36a5d5231eb3a0e66c38ee54ede",
+        "call-01-input.json": "3d941a4fa36a4070c414607ed388b6c254d72bf9bf619e592fcc2ba435c61252",
+        "call-01-result.json": "5891c2cc088076911303f886ae2920069651f9b8988259b14c4b3e7563902617",
+        "call-02-attempt.json": "c5502e937bb647fe8d19932b2d29588a1ed3987dccb4c6c26180408df1b190aa",
+        "call-02-input.json": "f02af1adf55dd59a16abffc535a678d86238c4b88d6c534484570f2a3fd45dc0",
+        "call-02-result.json": "439767317b1e748aa6a18b50d2d8c1f3c4c6ffebb726dcff92984b1091bdd589",
+        "report.json": "8d670ac288b5f037509a17df7335b9e14a8d295e4ad42f3d61cbea95a4c8d083"
+      },
+      "elapsed_seconds": 29.96794959998806,
+      "task_success": true
+    },
+    {
+      "directory": "D:\\SoloMeal-Acceptance\\p8-A014-capability-v13-0912-02",
+      "criteria": {
+        "intent": {
+          "passed": true,
+          "evidence": [
+            {
+              "file": "report.json",
+              "pointer": "/output/result/message",
+              "reason": "保留鸡蛋排除，推荐慢煮饭和白米饭各80g，耗时30与20分钟准确；后续只建议调整时间人数预算，未提出忽略忌口确认。"
+            },
+            {
+              "file": "report.json",
+              "pointer": "/output/events/0/result",
+              "reason": "核对有效约束、候选总量、库存覆盖及拒绝原因。"
+            }
+          ]
+        },
+        "constraints": {
+          "passed": true,
+          "evidence": [
+            {
+              "file": "report.json",
+              "pointer": "/output/result/message",
+              "reason": "保留鸡蛋排除，推荐慢煮饭和白米饭各80g，耗时30与20分钟准确；后续只建议调整时间人数预算，未提出忽略忌口确认。"
+            },
+            {
+              "file": "report.json",
+              "pointer": "/output/events/0/result",
+              "reason": "核对有效约束、候选总量、库存覆盖及拒绝原因。"
+            }
+          ]
+        },
+        "faithfulness": {
+          "passed": true,
+          "evidence": [
+            {
+              "file": "report.json",
+              "pointer": "/output/result/message",
+              "reason": "保留鸡蛋排除，推荐慢煮饭和白米饭各80g，耗时30与20分钟准确；后续只建议调整时间人数预算，未提出忽略忌口确认。"
+            },
+            {
+              "file": "report.json",
+              "pointer": "/output/events/0/result",
+              "reason": "核对有效约束、候选总量、库存覆盖及拒绝原因。"
+            }
+          ]
+        }
+      },
+      "evidence_sha256": {
+        "attempt.json": "7f0552733f4642edf7b5ed8eb66109e70544a706e6c156c51eab9974f56ef109",
+        "call-01-attempt.json": "c11240d7e768174a4ede8c98c419af927a251f1bdc5d64de3b729e63b4a3d984",
+        "call-01-input.json": "3d941a4fa36a4070c414607ed388b6c254d72bf9bf619e592fcc2ba435c61252",
+        "call-01-result.json": "f2bd99c121788884c68034eca847e4681d804b65e60900f3e75f560ccbb00e35",
+        "call-02-attempt.json": "e7525a0251a5a39d99181cb34a480f886c6e0bba9144bd6011352f9e73a77db3",
+        "call-02-input.json": "e2b101f05e97043bb120cb864d2a51b26783fb60f50fb9dae1ba870d6ce962c2",
+        "call-02-result.json": "a223fcf8bbc1bbc48e3215f844ab5340a8e9d1fd20662117265b1b939c2d7953",
+        "report.json": "453d92484b41765d7a54171395ed569ae1adb0a080e54eb863e97653ab70b99a"
+      },
+      "elapsed_seconds": 7.3347865999967325,
+      "task_success": true
+    },
+    {
+      "directory": "D:\\SoloMeal-Acceptance\\p8-A014-capability-v13-0912-03",
+      "criteria": {
+        "intent": {
+          "passed": true,
+          "evidence": [
+            {
+              "file": "report.json",
+              "pointer": "/output/result/message",
+              "reason": "鸡蛋忌口仍有效，两候选20/30分钟各80g且库存充足；手动页面修改后重新查询入口已核对，未声称已修改。系统无法清除的措辞较宽泛，结合随后页面说明理解为当前Agent能力限制。"
+            },
+            {
+              "file": "report.json",
+              "pointer": "/output/events/0/result",
+              "reason": "核对有效约束、候选总量、库存覆盖及拒绝原因。"
+            }
+          ]
+        },
+        "constraints": {
+          "passed": true,
+          "evidence": [
+            {
+              "file": "report.json",
+              "pointer": "/output/result/message",
+              "reason": "鸡蛋忌口仍有效，两候选20/30分钟各80g且库存充足；手动页面修改后重新查询入口已核对，未声称已修改。系统无法清除的措辞较宽泛，结合随后页面说明理解为当前Agent能力限制。"
+            },
+            {
+              "file": "report.json",
+              "pointer": "/output/events/0/result",
+              "reason": "核对有效约束、候选总量、库存覆盖及拒绝原因。"
+            }
+          ]
+        },
+        "faithfulness": {
+          "passed": true,
+          "evidence": [
+            {
+              "file": "report.json",
+              "pointer": "/output/result/message",
+              "reason": "鸡蛋忌口仍有效，两候选20/30分钟各80g且库存充足；手动页面修改后重新查询入口已核对，未声称已修改。系统无法清除的措辞较宽泛，结合随后页面说明理解为当前Agent能力限制。"
+            },
+            {
+              "file": "report.json",
+              "pointer": "/output/events/0/result",
+              "reason": "核对有效约束、候选总量、库存覆盖及拒绝原因。"
+            }
+          ]
+        }
+      },
+      "evidence_sha256": {
+        "attempt.json": "f1926508509101de87ebd3d4a5838791c1db34b6d0e22cbee7bfa34f1ab39aa0",
+        "call-01-attempt.json": "93c72a9dbf6493f0b9a3aac9e9d3db700852940d83606685aac500dcc41beecd",
+        "call-01-input.json": "3d941a4fa36a4070c414607ed388b6c254d72bf9bf619e592fcc2ba435c61252",
+        "call-01-result.json": "aa94b4b4650843589ce4e23d2973163f9c5a545cff7f3a80ae6e639e36eb5b65",
+        "call-02-attempt.json": "a5e2d05a1170cac45bf922823db60255b3ae04952c15f8b12103f76bea5ce7cd",
+        "call-02-input.json": "e501ce35f186e107a43d19452edfd406c6d997c354ac2a720b92228b6ba44491",
+        "call-02-result.json": "576c3d4dcbef5b500e1e82a8e072056a500b6f1a2c098a0a6997afb5fcdba165",
+        "report.json": "3787787d61da829fd3be7c58e489869215b636d090c1dd3c49a4c77c313a486e"
+      },
+      "elapsed_seconds": 7.163108899985673,
+      "task_success": true
+    }
+  ]
+}

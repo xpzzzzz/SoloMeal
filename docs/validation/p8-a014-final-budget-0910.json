@@ -1,0 +1,78 @@
+{
+  "version": "a014-final-budget-v1",
+  "date": "2026-09-10",
+  "scope": "diagnostic_no_business_execution",
+  "private_directory": "D:\\SoloMeal-Acceptance\\p8-A014-final-budget-v1-0910-01",
+  "files_sha256": {
+    "probe.json": "0bb50f6c0e503b411714f4442a6ad6263d0c5447b67cb1adb59fc8adf88bbd9f",
+    "replay-attempt.json": "710b8a3ab0cf85bbe5071ad919aa469b9e9a1bd9f394beb7a0582d29b1badd94",
+    "replay-result.json": "d12b812283736e7df9bed1d1252679429b9f503ad5c17b28ef0f2ff02201b795",
+    "report.json": "ca195694a2c3d4162843a6fd777bf2e122c0d46ab8394b7c00a7b292f3908f53"
+  },
+  "input_hashes_verified": [
+    "messages_sha256",
+    "tools_sha256",
+    "wire_messages_sha256"
+  ],
+  "baseline_payload_verified": true,
+  "source_files_sha256": {
+    "source_report": "7d9aec95995c66920f4647d14f31ff9b35c34dd236de9c5cf6f7c198ae249694",
+    "baseline_attempt": "9d1dd160b394233dfbaf0feb03376faba18b469aea2cadde400f241d11d6cc52",
+    "script": "d54bcf8cd6558db76084e712b2060943e65a40ad40df1988e54664d822afc4fa",
+    "reconstruction_transport": "3b7a3be0aea99d0a77c415996e4239556d3a3cd1c3b5cd231e7df6652d5c22ff"
+  },
+  "replay": {
+    "valid_final": true,
+    "diagnostic": null,
+    "elapsed_seconds": 26.39473309999812,
+    "http_status": 200,
+    "finish_reason": "stop",
+    "usage": {
+      "prompt_tokens": 4863,
+      "completion_tokens": 915,
+      "total_tokens": 5778,
+      "reasoning_tokens": 735
+    }
+  },
+  "max_completion_tokens": 3000,
+  "timeout_seconds": 60,
+  "enable_thinking": "not_sent",
+  "within_production_timeout": true,
+  "actual_requests": 1,
+  "usage_records": 1,
+  "observed_total_tokens": 5778,
+  "vision_requests": 0,
+  "cost": null,
+  "a014_task_success": null,
+  "human_clarity": null,
+  "semantic_review": {
+    "reviewer": {
+      "kind": "codex",
+      "name": "Codex"
+    },
+    "constraints_match": true,
+    "quantities_match": true,
+    "no_fabricated_operations": true,
+    "evidence": [
+      {
+        "file": "replay-result.json",
+        "pointer": "/decoded/content"
+      },
+      {
+        "directory": "D:\\SoloMeal-Acceptance\\p8-faithful-A014-agent-v8-0910-01",
+        "file": "report.json",
+        "pointer": "/output/messages"
+      }
+    ],
+    "limitations": "Single replay only; not independent human clarity or end-to-end execution."
+  },
+  "full_a014_run": {
+    "status": "approval_rejected_before_start",
+    "actual_requests": 0,
+    "planned_directory": "D:/SoloMeal-Acceptance/p8-A014-chat-budget-v1-0910-01"
+  },
+  "tests_unique_passed": 129,
+  "tests_note": "128 passed/1 failed initially; corrected env parsing and all 29 transport tests passed. Counts are unique, not added runs.",
+  "ruff": "passed",
+  "p8_gate": "incomplete"
+}

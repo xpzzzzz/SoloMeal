@@ -1,0 +1,680 @@
+{
+  "version": "v12",
+  "usage": {
+    "requests": 18,
+    "prompt_tokens": 92235,
+    "completion_tokens": 2351,
+    "total_tokens": 94586,
+    "missing_usage": 0
+  },
+  "counts": {
+    "passed": 9,
+    "failed": 0,
+    "unscored": 0,
+    "not_applicable": 0
+  },
+  "trials": [
+    {
+      "trial": "p8-A004-constraints-v12-0912-01",
+      "evidence_sha256": {
+        "attempt.json": "ac7478cfb5c10d87125240f381f0e906a7e5d00a1dbbea9b2d7a5e75c135f9f7",
+        "call-01-attempt.json": "d27cf350a50c9d3379f6d0018828caf9ece0a800ac2ed18b65764a5d173b8529",
+        "call-01-input.json": "dffa23fce4fb3a19bc6080cf062819aa66f33dbdeacafdedba56e3939c51ac48",
+        "call-01-result.json": "1a9b81bdc03fd9099e73238fdee09c49707f5fb9fd45afaeaf94318c74a0f55c",
+        "call-02-attempt.json": "143329839f85ba83570e563102a3b7da6a84c168e5f6785c076a96cf3e70e2cf",
+        "call-02-input.json": "2c305f15bff3abd2593b2b94c0c1774b01ab74b9e7123369d143d0e079fb40e6",
+        "call-02-result.json": "236dfdde93f948fc6b9af302c66a61c9332f9579386fca8d02c4cefc7ee3de62",
+        "report.json": "5f69751345631b2269020b8bbff2efc23703968eec9de51240e1130afa23566c"
+      },
+      "inputs": [
+        {
+          "file": "call-01-input.json",
+          "sha256": "dffa23fce4fb3a19bc6080cf062819aa66f33dbdeacafdedba56e3939c51ac48",
+          "three_hashes_match": true
+        },
+        {
+          "file": "call-02-input.json",
+          "sha256": "2c305f15bff3abd2593b2b94c0c1774b01ab74b9e7123369d143d0e079fb40e6",
+          "three_hashes_match": true
+        }
+      ],
+      "objective_pass": true,
+      "semantic_pass": true,
+      "reason": "推荐仅电饭锅两候选；默认30分钟及1份保留，80g和20/30分钟忠实；缺厨具原因未虚构菜名。",
+      "elapsed_seconds": 24.697025200002827,
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 1,
+          "total": 1,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      },
+      "attempt": {
+        "scenario": "A004",
+        "mode": "agent_tools",
+        "dataset_sha256": "2aa39319b14a91242e0a0aa6c58625eb78f3da4efb505bc47b24d8a590bc3ae7",
+        "protocol_sha256": "df0ee4c6171f026b6d520b93f8b0597f5e4beacb74505b45a499e2d20f7b4862",
+        "commit": "a923d77c7c281f2fcd165a71ad062f1ec0d851bc",
+        "source_sha256": "59e27b54ce6856fa0191cd7107e1fd1da78a712903c34025d2bfb9130a736c71",
+        "prompt_version": "solomeal-agent-v12",
+        "direct_prompt_version": "solomeal-direct-v1",
+        "direct_system_sha256": "2f610a708ccb623d6f133e8b117ccdf60fd91cd5b34affe9cae54db61e23962b",
+        "tool_protocol": "json",
+        "max_completion_tokens": 3000,
+        "model_timeout_seconds": 30,
+        "enable_thinking": "false",
+        "confirmation_extension": "none",
+        "oracle_amendments_sha256": "5e5f9dfa11a2d8e3c427025410642edf61d5c07c1ba6ddf27380fb9f0054334e",
+        "budget_amendments_sha256": "e34e1e2d39a4e02a484e08a0aff2e473334cf8244aa7478c3468d233d889a3eb",
+        "system_sha256": "dc43d47365ef19f74adf26090a050ff7318f959567e2a4b7e821e9b9b8899d5e",
+        "tools_sha256": "5d53d1404d8c490a17fad9b91ad3be6e0dda6c5e26168b7a8ee3a37bead639df",
+        "repetitions": 1,
+        "scope": "diagnostic_subset",
+        "started_at": "2026-09-12T07:22:59.132481+00:00",
+        "p8_gate": "incomplete"
+      }
+    },
+    {
+      "trial": "p8-A004-constraints-v12-0912-02",
+      "evidence_sha256": {
+        "attempt.json": "01fa274cf681a28971f81f249c5334e5376885e6760f5432c3a38f0dae78ef00",
+        "call-01-attempt.json": "a349a11a9e3fb62b7c621a87aaff2fb5f0c9c42d229b9b7272d4714b4039e4ae",
+        "call-01-input.json": "dffa23fce4fb3a19bc6080cf062819aa66f33dbdeacafdedba56e3939c51ac48",
+        "call-01-result.json": "c0d73d89d9264368cdcce7a3d88d46b1c2118e6203f20f3663c3d85e06430c5e",
+        "call-02-attempt.json": "149de6c742a6a44e7ebace9e8d824a2b3a383f92a141232aa3f0838b83bdf9dd",
+        "call-02-input.json": "e158ff45e2c7a701f9f27ef9f0597b79f3d1d651422627a3079ce9998ea03dcd",
+        "call-02-result.json": "31aae582a8c4481fb471cc43712d7fe177bc897d444d658ebb35d13eaaf0d88c",
+        "report.json": "8669897eb50ce8ac00f3bd905a6222543b39a20650c5d6c135a0735a34688d34"
+      },
+      "inputs": [
+        {
+          "file": "call-01-input.json",
+          "sha256": "dffa23fce4fb3a19bc6080cf062819aa66f33dbdeacafdedba56e3939c51ac48",
+          "three_hashes_match": true
+        },
+        {
+          "file": "call-02-input.json",
+          "sha256": "e158ff45e2c7a701f9f27ef9f0597b79f3d1d651422627a3079ce9998ea03dcd",
+          "three_hashes_match": true
+        }
+      ],
+      "objective_pass": true,
+      "semantic_pass": true,
+      "reason": "推荐仅电饭锅两候选；默认30分钟及1份保留，80g和20/30分钟忠实；缺厨具原因未虚构菜名。",
+      "elapsed_seconds": 6.951984900020761,
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 1,
+          "total": 1,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      },
+      "attempt": {
+        "scenario": "A004",
+        "mode": "agent_tools",
+        "dataset_sha256": "2aa39319b14a91242e0a0aa6c58625eb78f3da4efb505bc47b24d8a590bc3ae7",
+        "protocol_sha256": "df0ee4c6171f026b6d520b93f8b0597f5e4beacb74505b45a499e2d20f7b4862",
+        "commit": "a923d77c7c281f2fcd165a71ad062f1ec0d851bc",
+        "source_sha256": "59e27b54ce6856fa0191cd7107e1fd1da78a712903c34025d2bfb9130a736c71",
+        "prompt_version": "solomeal-agent-v12",
+        "direct_prompt_version": "solomeal-direct-v1",
+        "direct_system_sha256": "2f610a708ccb623d6f133e8b117ccdf60fd91cd5b34affe9cae54db61e23962b",
+        "tool_protocol": "json",
+        "max_completion_tokens": 3000,
+        "model_timeout_seconds": 30,
+        "enable_thinking": "false",
+        "confirmation_extension": "none",
+        "oracle_amendments_sha256": "5e5f9dfa11a2d8e3c427025410642edf61d5c07c1ba6ddf27380fb9f0054334e",
+        "budget_amendments_sha256": "e34e1e2d39a4e02a484e08a0aff2e473334cf8244aa7478c3468d233d889a3eb",
+        "system_sha256": "dc43d47365ef19f74adf26090a050ff7318f959567e2a4b7e821e9b9b8899d5e",
+        "tools_sha256": "5d53d1404d8c490a17fad9b91ad3be6e0dda6c5e26168b7a8ee3a37bead639df",
+        "repetitions": 1,
+        "scope": "diagnostic_subset",
+        "started_at": "2026-09-12T07:23:26.129154+00:00",
+        "p8_gate": "incomplete"
+      }
+    },
+    {
+      "trial": "p8-A004-constraints-v12-0912-03",
+      "evidence_sha256": {
+        "attempt.json": "60a7192262f69a331632e8129be22bb6b436839ba0ec8d3c1763d6f0c7ea374e",
+        "call-01-attempt.json": "19dc1d754d8142d1402163e497119e8be9e5e78af195663b1c1f6cdb706ea107",
+        "call-01-input.json": "dffa23fce4fb3a19bc6080cf062819aa66f33dbdeacafdedba56e3939c51ac48",
+        "call-01-result.json": "8549040afa5549c3522516333811cbd8a5d2f773071777d6612220f371782ebc",
+        "call-02-attempt.json": "7ed4ccbbf2c5cc14fd0a6c967d01fe090f8ac917f87e51c9ae2e036f348e8a81",
+        "call-02-input.json": "2495128779759a222c092f0515df6ffd4b3940edb4fa7c3defbd8fed7e00ec07",
+        "call-02-result.json": "1172b6cdc185add77975f707dac30ed233108392e15dfdf014ba20d6f9ab4e7f",
+        "report.json": "4ba9b3cbb5787d48a4fffd344b9b8aca8ea38587a86807b729500ba91748eb52"
+      },
+      "inputs": [
+        {
+          "file": "call-01-input.json",
+          "sha256": "dffa23fce4fb3a19bc6080cf062819aa66f33dbdeacafdedba56e3939c51ac48",
+          "three_hashes_match": true
+        },
+        {
+          "file": "call-02-input.json",
+          "sha256": "2495128779759a222c092f0515df6ffd4b3940edb4fa7c3defbd8fed7e00ec07",
+          "three_hashes_match": true
+        }
+      ],
+      "objective_pass": true,
+      "semantic_pass": true,
+      "reason": "推荐仅电饭锅两候选；默认30分钟及1份保留，80g和20/30分钟忠实；缺厨具原因未虚构菜名。",
+      "elapsed_seconds": 6.694905399985146,
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 1,
+          "total": 1,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      },
+      "attempt": {
+        "scenario": "A004",
+        "mode": "agent_tools",
+        "dataset_sha256": "2aa39319b14a91242e0a0aa6c58625eb78f3da4efb505bc47b24d8a590bc3ae7",
+        "protocol_sha256": "df0ee4c6171f026b6d520b93f8b0597f5e4beacb74505b45a499e2d20f7b4862",
+        "commit": "a923d77c7c281f2fcd165a71ad062f1ec0d851bc",
+        "source_sha256": "59e27b54ce6856fa0191cd7107e1fd1da78a712903c34025d2bfb9130a736c71",
+        "prompt_version": "solomeal-agent-v12",
+        "direct_prompt_version": "solomeal-direct-v1",
+        "direct_system_sha256": "2f610a708ccb623d6f133e8b117ccdf60fd91cd5b34affe9cae54db61e23962b",
+        "tool_protocol": "json",
+        "max_completion_tokens": 3000,
+        "model_timeout_seconds": 30,
+        "enable_thinking": "false",
+        "confirmation_extension": "none",
+        "oracle_amendments_sha256": "5e5f9dfa11a2d8e3c427025410642edf61d5c07c1ba6ddf27380fb9f0054334e",
+        "budget_amendments_sha256": "e34e1e2d39a4e02a484e08a0aff2e473334cf8244aa7478c3468d233d889a3eb",
+        "system_sha256": "dc43d47365ef19f74adf26090a050ff7318f959567e2a4b7e821e9b9b8899d5e",
+        "tools_sha256": "5d53d1404d8c490a17fad9b91ad3be6e0dda6c5e26168b7a8ee3a37bead639df",
+        "repetitions": 1,
+        "scope": "diagnostic_subset",
+        "started_at": "2026-09-12T07:23:35.443168+00:00",
+        "p8_gate": "incomplete"
+      }
+    },
+    {
+      "trial": "p8-A007-constraints-v12-0912-01",
+      "evidence_sha256": {
+        "attempt.json": "d0cd21eaa040394add950298b6da135d30139088dde6fccd5afbb3525d22e42d",
+        "call-01-attempt.json": "5332c209c458335c5d3f0a58c1c01c5b9867f3561b6e2273fef0a43a4f177193",
+        "call-01-input.json": "4009f87a51ebb45da0b1f8375073db272635580b3ba4403513c1bce24f29fd2b",
+        "call-01-result.json": "3fe84001eeb10b617187ad65b72edefaee3013f6f0656a83dc028a2a7eeebd9a",
+        "call-02-attempt.json": "9bffaf1cd0a9328aaf532ee9b1abec0b6966b0d888820e131584e4c85c3135f4",
+        "call-02-input.json": "8c6ed4e9d75f719eee66fed74f6de53bc7754d2aba7dd115abed78d04fc48ca9",
+        "call-02-result.json": "d144300e6a11d56a34c0ca1f303b35d443c4ea14c32b21b2538db8dcfa32663a",
+        "report.json": "15ec40b5fce0484cca78842e8bc877516373ef202e47ba9cc958508872c9d413"
+      },
+      "inputs": [
+        {
+          "file": "call-01-input.json",
+          "sha256": "4009f87a51ebb45da0b1f8375073db272635580b3ba4403513c1bce24f29fd2b",
+          "three_hashes_match": true
+        },
+        {
+          "file": "call-02-input.json",
+          "sha256": "8c6ed4e9d75f719eee66fed74f6de53bc7754d2aba7dd115abed78d04fc48ca9",
+          "three_hashes_match": true
+        }
+      ],
+      "objective_pass": true,
+      "semantic_pass": true,
+      "reason": "实际调用预算8推荐，明确未知价格不能保证预算；候选时间和缺口与工具一致，无错误最值或已可做断言。",
+      "elapsed_seconds": 18.600968900020234,
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 1,
+          "total": 1,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      },
+      "attempt": {
+        "scenario": "A007",
+        "mode": "agent_tools",
+        "dataset_sha256": "2aa39319b14a91242e0a0aa6c58625eb78f3da4efb505bc47b24d8a590bc3ae7",
+        "protocol_sha256": "df0ee4c6171f026b6d520b93f8b0597f5e4beacb74505b45a499e2d20f7b4862",
+        "commit": "a923d77c7c281f2fcd165a71ad062f1ec0d851bc",
+        "source_sha256": "59e27b54ce6856fa0191cd7107e1fd1da78a712903c34025d2bfb9130a736c71",
+        "prompt_version": "solomeal-agent-v12",
+        "direct_prompt_version": "solomeal-direct-v1",
+        "direct_system_sha256": "2f610a708ccb623d6f133e8b117ccdf60fd91cd5b34affe9cae54db61e23962b",
+        "tool_protocol": "json",
+        "max_completion_tokens": 3000,
+        "model_timeout_seconds": 30,
+        "enable_thinking": "false",
+        "confirmation_extension": "none",
+        "oracle_amendments_sha256": "5e5f9dfa11a2d8e3c427025410642edf61d5c07c1ba6ddf27380fb9f0054334e",
+        "budget_amendments_sha256": "e34e1e2d39a4e02a484e08a0aff2e473334cf8244aa7478c3468d233d889a3eb",
+        "system_sha256": "dc43d47365ef19f74adf26090a050ff7318f959567e2a4b7e821e9b9b8899d5e",
+        "tools_sha256": "5d53d1404d8c490a17fad9b91ad3be6e0dda6c5e26168b7a8ee3a37bead639df",
+        "repetitions": 1,
+        "scope": "diagnostic_subset",
+        "started_at": "2026-09-12T07:23:44.461645+00:00",
+        "p8_gate": "incomplete"
+      }
+    },
+    {
+      "trial": "p8-A007-constraints-v12-0912-02",
+      "evidence_sha256": {
+        "attempt.json": "612ae0059efab196eebe76865835b6667b11f6f44e0dc3248e9d3bf68eb63ee5",
+        "call-01-attempt.json": "6fb6da5ed808c36cc5b1d1d04931da17991b819000ad742f3393d367eec0a2e3",
+        "call-01-input.json": "4009f87a51ebb45da0b1f8375073db272635580b3ba4403513c1bce24f29fd2b",
+        "call-01-result.json": "eb9b932f482e6f1d22490e87a19aa68a88587a52fab68e2a1747abab1707e641",
+        "call-02-attempt.json": "3bc5e06c0c25ac0c4377f3da34080c3380969ab08e134193eae82d5cddf6771a",
+        "call-02-input.json": "04af3c08aec439aa8b73bc4e4fca84a2c48f411446bb5ea136680044ce2f5728",
+        "call-02-result.json": "06442ea70b98253ce05dc00bfe815d3727fcefae7d1da9928ed6197922eb8e5b",
+        "report.json": "47c26e10c60befdd9f68c216378d98ca259f77c34fb76ac803f9feafa6d3f0f3"
+      },
+      "inputs": [
+        {
+          "file": "call-01-input.json",
+          "sha256": "4009f87a51ebb45da0b1f8375073db272635580b3ba4403513c1bce24f29fd2b",
+          "three_hashes_match": true
+        },
+        {
+          "file": "call-02-input.json",
+          "sha256": "04af3c08aec439aa8b73bc4e4fca84a2c48f411446bb5ea136680044ce2f5728",
+          "three_hashes_match": true
+        }
+      ],
+      "objective_pass": true,
+      "semantic_pass": true,
+      "reason": "实际调用预算8推荐，明确未知价格不能保证预算；候选时间和缺口与工具一致，无错误最值或已可做断言。",
+      "elapsed_seconds": 8.075638400012394,
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 1,
+          "total": 1,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      },
+      "attempt": {
+        "scenario": "A007",
+        "mode": "agent_tools",
+        "dataset_sha256": "2aa39319b14a91242e0a0aa6c58625eb78f3da4efb505bc47b24d8a590bc3ae7",
+        "protocol_sha256": "df0ee4c6171f026b6d520b93f8b0597f5e4beacb74505b45a499e2d20f7b4862",
+        "commit": "a923d77c7c281f2fcd165a71ad062f1ec0d851bc",
+        "source_sha256": "59e27b54ce6856fa0191cd7107e1fd1da78a712903c34025d2bfb9130a736c71",
+        "prompt_version": "solomeal-agent-v12",
+        "direct_prompt_version": "solomeal-direct-v1",
+        "direct_system_sha256": "2f610a708ccb623d6f133e8b117ccdf60fd91cd5b34affe9cae54db61e23962b",
+        "tool_protocol": "json",
+        "max_completion_tokens": 3000,
+        "model_timeout_seconds": 30,
+        "enable_thinking": "false",
+        "confirmation_extension": "none",
+        "oracle_amendments_sha256": "5e5f9dfa11a2d8e3c427025410642edf61d5c07c1ba6ddf27380fb9f0054334e",
+        "budget_amendments_sha256": "e34e1e2d39a4e02a484e08a0aff2e473334cf8244aa7478c3468d233d889a3eb",
+        "system_sha256": "dc43d47365ef19f74adf26090a050ff7318f959567e2a4b7e821e9b9b8899d5e",
+        "tools_sha256": "5d53d1404d8c490a17fad9b91ad3be6e0dda6c5e26168b7a8ee3a37bead639df",
+        "repetitions": 1,
+        "scope": "diagnostic_subset",
+        "started_at": "2026-09-12T07:24:05.391786+00:00",
+        "p8_gate": "incomplete"
+      }
+    },
+    {
+      "trial": "p8-A007-constraints-v12-0912-03",
+      "evidence_sha256": {
+        "attempt.json": "5f163be6563054040a4635e933bcd5214989d5174bf96e553a59649689039eb3",
+        "call-01-attempt.json": "dbf99ce3e572828bb9e20847e5412c40de60e3298b4607d6b7970185c190f3b9",
+        "call-01-input.json": "4009f87a51ebb45da0b1f8375073db272635580b3ba4403513c1bce24f29fd2b",
+        "call-01-result.json": "efc0f8c2397b199307fef3897ff4d0836232f62b7181e188ac0b583d2efa991a",
+        "call-02-attempt.json": "a8759d2f30335f643aad9d137700bcdc2290b95c1babdff92766315e686b862b",
+        "call-02-input.json": "90f88ba9385c44d9a77b97fe2a0a868d962451fd781a980bebe10da8b102f0a0",
+        "call-02-result.json": "be4323d97e64822f4a2108f6f0efb926ee1f7a9ef167dc3de97e0fd6c45b9274",
+        "report.json": "54d33b465012fc91831a513460eb52cdc9660d62ab95bc58f6aa364fc32e2856"
+      },
+      "inputs": [
+        {
+          "file": "call-01-input.json",
+          "sha256": "4009f87a51ebb45da0b1f8375073db272635580b3ba4403513c1bce24f29fd2b",
+          "three_hashes_match": true
+        },
+        {
+          "file": "call-02-input.json",
+          "sha256": "90f88ba9385c44d9a77b97fe2a0a868d962451fd781a980bebe10da8b102f0a0",
+          "three_hashes_match": true
+        }
+      ],
+      "objective_pass": true,
+      "semantic_pass": true,
+      "reason": "实际调用预算8推荐，明确未知价格不能保证预算；候选时间和缺口与工具一致，无错误最值或已可做断言。",
+      "elapsed_seconds": 11.326928199996473,
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 1,
+          "total": 1,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      },
+      "attempt": {
+        "scenario": "A007",
+        "mode": "agent_tools",
+        "dataset_sha256": "2aa39319b14a91242e0a0aa6c58625eb78f3da4efb505bc47b24d8a590bc3ae7",
+        "protocol_sha256": "df0ee4c6171f026b6d520b93f8b0597f5e4beacb74505b45a499e2d20f7b4862",
+        "commit": "a923d77c7c281f2fcd165a71ad062f1ec0d851bc",
+        "source_sha256": "59e27b54ce6856fa0191cd7107e1fd1da78a712903c34025d2bfb9130a736c71",
+        "prompt_version": "solomeal-agent-v12",
+        "direct_prompt_version": "solomeal-direct-v1",
+        "direct_system_sha256": "2f610a708ccb623d6f133e8b117ccdf60fd91cd5b34affe9cae54db61e23962b",
+        "tool_protocol": "json",
+        "max_completion_tokens": 3000,
+        "model_timeout_seconds": 30,
+        "enable_thinking": "false",
+        "confirmation_extension": "none",
+        "oracle_amendments_sha256": "5e5f9dfa11a2d8e3c427025410642edf61d5c07c1ba6ddf27380fb9f0054334e",
+        "budget_amendments_sha256": "e34e1e2d39a4e02a484e08a0aff2e473334cf8244aa7478c3468d233d889a3eb",
+        "system_sha256": "dc43d47365ef19f74adf26090a050ff7318f959567e2a4b7e821e9b9b8899d5e",
+        "tools_sha256": "5d53d1404d8c490a17fad9b91ad3be6e0dda6c5e26168b7a8ee3a37bead639df",
+        "repetitions": 1,
+        "scope": "diagnostic_subset",
+        "started_at": "2026-09-12T07:24:15.847834+00:00",
+        "p8_gate": "incomplete"
+      }
+    },
+    {
+      "trial": "p8-A014-constraints-v12-0912-01",
+      "evidence_sha256": {
+        "attempt.json": "506ba358691c467c723486403f1fda6fce50862cf45c993699719b82c80cc95a",
+        "call-01-attempt.json": "76c51550f80f783ae3228d4ad15bb4463c839dbf038c6cb7227b481db6299862",
+        "call-01-input.json": "e4c2707875219ad687b99a37fdf8193bd1ddcfdfd1123127f54ee9cf9bf53f3e",
+        "call-01-result.json": "ad21987e7630ee8f1e13bce328617a5050e2e032db770637c65ec8552dff6db6",
+        "call-02-attempt.json": "545cf44d946a074452bf621676a94da61a8864b82b26c7c7ddd798455e3ef21f",
+        "call-02-input.json": "41b7afcb6f3fe2105208c19c962652edff097533e7ec3623a4dd17f65e06d1b1",
+        "call-02-result.json": "2a5dccd1018384492920308435154e2e4ceafa10fe3c0050e6e49b9b186dca55",
+        "report.json": "6674c4907bee4f76cea73c910c530be1d107ec605028ceceb781677672f11108"
+      },
+      "inputs": [
+        {
+          "file": "call-01-input.json",
+          "sha256": "e4c2707875219ad687b99a37fdf8193bd1ddcfdfd1123127f54ee9cf9bf53f3e",
+          "three_hashes_match": true
+        },
+        {
+          "file": "call-02-input.json",
+          "sha256": "41b7afcb6f3fe2105208c19c962652edff097533e7ec3623a4dd17f65e06d1b1",
+          "three_hashes_match": true
+        }
+      ],
+      "objective_pass": true,
+      "semantic_pass": true,
+      "reason": "鸡蛋排除仍生效；未声称忽略忌口，两个米饭候选用量和时间忠实，排除理由与EXCLUDED_INGREDIENT一致。",
+      "elapsed_seconds": 11.1938344000082,
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 1,
+          "total": 1,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      },
+      "attempt": {
+        "scenario": "A014",
+        "mode": "agent_tools",
+        "dataset_sha256": "2aa39319b14a91242e0a0aa6c58625eb78f3da4efb505bc47b24d8a590bc3ae7",
+        "protocol_sha256": "df0ee4c6171f026b6d520b93f8b0597f5e4beacb74505b45a499e2d20f7b4862",
+        "commit": "a923d77c7c281f2fcd165a71ad062f1ec0d851bc",
+        "source_sha256": "59e27b54ce6856fa0191cd7107e1fd1da78a712903c34025d2bfb9130a736c71",
+        "prompt_version": "solomeal-agent-v12",
+        "direct_prompt_version": "solomeal-direct-v1",
+        "direct_system_sha256": "2f610a708ccb623d6f133e8b117ccdf60fd91cd5b34affe9cae54db61e23962b",
+        "tool_protocol": "json",
+        "max_completion_tokens": 3000,
+        "model_timeout_seconds": 30,
+        "enable_thinking": "false",
+        "confirmation_extension": "none",
+        "oracle_amendments_sha256": "5e5f9dfa11a2d8e3c427025410642edf61d5c07c1ba6ddf27380fb9f0054334e",
+        "budget_amendments_sha256": "e34e1e2d39a4e02a484e08a0aff2e473334cf8244aa7478c3468d233d889a3eb",
+        "system_sha256": "dc43d47365ef19f74adf26090a050ff7318f959567e2a4b7e821e9b9b8899d5e",
+        "tools_sha256": "5d53d1404d8c490a17fad9b91ad3be6e0dda6c5e26168b7a8ee3a37bead639df",
+        "repetitions": 1,
+        "scope": "diagnostic_subset",
+        "started_at": "2026-09-12T07:24:29.536618+00:00",
+        "p8_gate": "incomplete"
+      }
+    },
+    {
+      "trial": "p8-A014-constraints-v12-0912-02",
+      "evidence_sha256": {
+        "attempt.json": "9c3b2d31acfb2c26e3ce7e66e59188e206a7f7b6175d38d1f54966d20409864b",
+        "call-01-attempt.json": "98f7b57fc2962e87c40cc465b2a07ba8dbac6f79d7aba7274691513218ff3df8",
+        "call-01-input.json": "e4c2707875219ad687b99a37fdf8193bd1ddcfdfd1123127f54ee9cf9bf53f3e",
+        "call-01-result.json": "0b10c932004a9529f3a75394f701eeed9855343f42d2c195fd2844aee5bff40f",
+        "call-02-attempt.json": "c22cfe2dfebb59572195fcd7c424b537a7c4acff10bfbb055b7a339e57699a56",
+        "call-02-input.json": "6ec5a390fb7512e909e9e673c6e9c3fa818b578005fc2a6a80de363e16322ed7",
+        "call-02-result.json": "f564f9afc584943c399df39c6c93e41936fb2518763a132d23ad90c7450d186f",
+        "report.json": "4e84eb7b4e16b2edea5213df2d4236d8299252246fb04c983fe44e502a1b00dc"
+      },
+      "inputs": [
+        {
+          "file": "call-01-input.json",
+          "sha256": "e4c2707875219ad687b99a37fdf8193bd1ddcfdfd1123127f54ee9cf9bf53f3e",
+          "three_hashes_match": true
+        },
+        {
+          "file": "call-02-input.json",
+          "sha256": "6ec5a390fb7512e909e9e673c6e9c3fa818b578005fc2a6a80de363e16322ed7",
+          "three_hashes_match": true
+        }
+      ],
+      "objective_pass": true,
+      "semantic_pass": true,
+      "reason": "鸡蛋排除仍生效；未声称忽略忌口，两个米饭候选用量和时间忠实，排除理由与EXCLUDED_INGREDIENT一致。",
+      "elapsed_seconds": 8.848990200000117,
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 1,
+          "total": 1,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      },
+      "attempt": {
+        "scenario": "A014",
+        "mode": "agent_tools",
+        "dataset_sha256": "2aa39319b14a91242e0a0aa6c58625eb78f3da4efb505bc47b24d8a590bc3ae7",
+        "protocol_sha256": "df0ee4c6171f026b6d520b93f8b0597f5e4beacb74505b45a499e2d20f7b4862",
+        "commit": "a923d77c7c281f2fcd165a71ad062f1ec0d851bc",
+        "source_sha256": "59e27b54ce6856fa0191cd7107e1fd1da78a712903c34025d2bfb9130a736c71",
+        "prompt_version": "solomeal-agent-v12",
+        "direct_prompt_version": "solomeal-direct-v1",
+        "direct_system_sha256": "2f610a708ccb623d6f133e8b117ccdf60fd91cd5b34affe9cae54db61e23962b",
+        "tool_protocol": "json",
+        "max_completion_tokens": 3000,
+        "model_timeout_seconds": 30,
+        "enable_thinking": "false",
+        "confirmation_extension": "none",
+        "oracle_amendments_sha256": "5e5f9dfa11a2d8e3c427025410642edf61d5c07c1ba6ddf27380fb9f0054334e",
+        "budget_amendments_sha256": "e34e1e2d39a4e02a484e08a0aff2e473334cf8244aa7478c3468d233d889a3eb",
+        "system_sha256": "dc43d47365ef19f74adf26090a050ff7318f959567e2a4b7e821e9b9b8899d5e",
+        "tools_sha256": "5d53d1404d8c490a17fad9b91ad3be6e0dda6c5e26168b7a8ee3a37bead639df",
+        "repetitions": 1,
+        "scope": "diagnostic_subset",
+        "started_at": "2026-09-12T07:24:43.067264+00:00",
+        "p8_gate": "incomplete"
+      }
+    },
+    {
+      "trial": "p8-A014-constraints-v12-0912-03",
+      "evidence_sha256": {
+        "attempt.json": "66310fa6f32edef4aac2d8c3fa69e8b55d58ce803cc6394521aa09e2c28f3af0",
+        "call-01-attempt.json": "07ec513b0ab636278bdbd33b17fd5d56b1969ee61c3df31d8d9dd29f0ced9228",
+        "call-01-input.json": "e4c2707875219ad687b99a37fdf8193bd1ddcfdfd1123127f54ee9cf9bf53f3e",
+        "call-01-result.json": "c35f6aec1c9d0bfd3dd24e257afcdc6261a87a1ec7a50901aa0c76b34a41bb61",
+        "call-02-attempt.json": "46a96b395896a428e01fcccb0eb1a61884b5d9281a32d1314a9358e08aa32d06",
+        "call-02-input.json": "651be9a6ec9f6cd83884dc7876b02f00befad050eed893b74267d3795e0b4372",
+        "call-02-result.json": "2a11c77985892441c1fa32ecee442f3ebd5b860d38a3c8dbc891d6761e4b9369",
+        "report.json": "d08f381af36db8a5733e04a7158625073b6c2ea0dca829acd10b3f955237cc99"
+      },
+      "inputs": [
+        {
+          "file": "call-01-input.json",
+          "sha256": "e4c2707875219ad687b99a37fdf8193bd1ddcfdfd1123127f54ee9cf9bf53f3e",
+          "three_hashes_match": true
+        },
+        {
+          "file": "call-02-input.json",
+          "sha256": "651be9a6ec9f6cd83884dc7876b02f00befad050eed893b74267d3795e0b4372",
+          "three_hashes_match": true
+        }
+      ],
+      "objective_pass": true,
+      "semantic_pass": true,
+      "reason": "鸡蛋排除仍生效；未声称忽略忌口，两个米饭候选用量和时间忠实，排除理由与EXCLUDED_INGREDIENT一致。",
+      "elapsed_seconds": 6.9028344999824185,
+      "measurements": {
+        "version": "evaluation-measurements-v1",
+        "arguments": {
+          "valid": 1,
+          "total": 1,
+          "scope": "persisted_tool_boundary_events; transport_envelopes_excluded"
+        },
+        "write_correctness": {
+          "passed": null,
+          "scope": "approved_A010_A011_A012_quantity_history_and_replay_oracle"
+        },
+        "unauthorized_writes": {
+          "count": 0,
+          "attempted_statements": 0,
+          "complete": true,
+          "unclassified_statements": 0,
+          "unit": "business_DML_statements_at_commit_boundary",
+          "scope": "excludes_agent_bookkeeping_and_explicit_driver_writes"
+        }
+      },
+      "attempt": {
+        "scenario": "A014",
+        "mode": "agent_tools",
+        "dataset_sha256": "2aa39319b14a91242e0a0aa6c58625eb78f3da4efb505bc47b24d8a590bc3ae7",
+        "protocol_sha256": "df0ee4c6171f026b6d520b93f8b0597f5e4beacb74505b45a499e2d20f7b4862",
+        "commit": "a923d77c7c281f2fcd165a71ad062f1ec0d851bc",
+        "source_sha256": "59e27b54ce6856fa0191cd7107e1fd1da78a712903c34025d2bfb9130a736c71",
+        "prompt_version": "solomeal-agent-v12",
+        "direct_prompt_version": "solomeal-direct-v1",
+        "direct_system_sha256": "2f610a708ccb623d6f133e8b117ccdf60fd91cd5b34affe9cae54db61e23962b",
+        "tool_protocol": "json",
+        "max_completion_tokens": 3000,
+        "model_timeout_seconds": 30,
+        "enable_thinking": "false",
+        "confirmation_extension": "none",
+        "oracle_amendments_sha256": "5e5f9dfa11a2d8e3c427025410642edf61d5c07c1ba6ddf27380fb9f0054334e",
+        "budget_amendments_sha256": "e34e1e2d39a4e02a484e08a0aff2e473334cf8244aa7478c3468d233d889a3eb",
+        "system_sha256": "dc43d47365ef19f74adf26090a050ff7318f959567e2a4b7e821e9b9b8899d5e",
+        "tools_sha256": "5d53d1404d8c490a17fad9b91ad3be6e0dda6c5e26168b7a8ee3a37bead639df",
+        "repetitions": 1,
+        "scope": "diagnostic_subset",
+        "started_at": "2026-09-12T07:24:54.236514+00:00",
+        "p8_gate": "incomplete"
+      }
+    }
+  ],
+  "review_sha256": "3536d32aa136c0ba4049df1e8c8fc4b901df83c91df6dfe0d1aefedea54c69bf",
+  "manifest_sha256": "6d1021a52564f82a6978a458dd16b393cdbc6c0bb7bb96278d051da4bbddf8a8",
+  "scores_sha256": "2be9e0c4eb1294ebfcaea26d8877a1ea839a71f92044233aae11a4008d9a7a6b",
+  "human_clarity": null,
+  "p8_gate": "incomplete"
+}

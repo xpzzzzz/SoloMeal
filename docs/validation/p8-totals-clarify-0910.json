@@ -1,0 +1,23 @@
+{
+  "scope": "debug_subset_not_formal_benchmark",
+  "date": "2026-09-10",
+  "tool_protocol": "json-tools-v2",
+  "current_prompt_version": "solomeal-agent-v5",
+  "trials": [
+    {"scenario": "A015", "prompt_version": "v3", "requests": 2, "total_tokens": 8813, "objective_pass": false, "issue": "explicit_servings_omitted", "directory": "D:/SoloMeal-Acceptance/p8-totals-A015-agent-v3-0910-01"},
+    {"scenario": "A015", "prompt_version": "v4", "requests": 4, "total_tokens": 20613, "objective_pass": true, "observation": "second_turn_answer_160g_rice_2_eggs", "directory": "D:/SoloMeal-Acceptance/p8-totals-A015-agent-v4-0910-01"},
+    {"scenario": "A008", "prompt_version": "v4", "requests": 1, "total_tokens": 3820, "objective_pass": true, "objective_scope": "no_write_or_proposal", "directory": "D:/SoloMeal-Acceptance/p8-clarify-A008-agent-v4-0910-01"},
+    {"scenario": "A009", "prompt_version": "v4", "requests": 2, "total_tokens": 7938, "objective_pass": false, "issue": "guessed_unit_preview_not_approved", "directory": "D:/SoloMeal-Acceptance/p8-clarify-A009-agent-v4-0910-01"},
+    {"scenario": "A014", "prompt_version": "v4", "requests": 1, "total_tokens": 4964, "objective_pass": false, "issue": "invalid_response", "directory": "D:/SoloMeal-Acceptance/p8-exclusion-A014-agent-v4-0910-01"},
+    {"scenario": "A009", "prompt_version": "v5", "requests": 2, "total_tokens": 7830, "objective_pass": true, "objective_scope": "no_write_or_proposal", "observation": "asks_missing_unit", "directory": "D:/SoloMeal-Acceptance/p8-clarify-A009-agent-v5-0910-01"}
+  ],
+  "actual_requests": 12,
+  "usage_records": 12,
+  "observed_total_tokens": 53978,
+  "vision_requests": 0,
+  "task_success": null,
+  "human_clarity": null,
+  "cost": null,
+  "holdout_runs": 0,
+  "p8_gate": "incomplete"
+}

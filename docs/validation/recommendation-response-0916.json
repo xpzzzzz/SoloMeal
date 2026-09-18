@@ -1,0 +1,37 @@
+{
+  "version": "recommendation-response-v1",
+  "date": "2026-09-16",
+  "source_sha256": "36a57a3945116bd0e4d0e1b04f7c45afa8456a631a2a7b2087b79845bd2e0092",
+  "source_files": 64,
+  "model_requests_added": 0,
+  "known_chat_requests": 1655,
+  "vision_requests": 30,
+  "tests": {
+    "backend_unique_passed": 149,
+    "backend_mysql_skipped": 1,
+    "frontend_passed": 21,
+    "build": "passed",
+    "browser_scripted_passed": 1
+  },
+  "limitations": [
+    "Only final answers immediately following a successful recommend_meal are rendered deterministically.",
+    "Other tools and failed final queries retain model answers.",
+    "No real-model, MySQL, full backend or full browser suite run this session.",
+    "Raw model_message must be assessed separately from product message in future evaluations."
+  ],
+  "files": {
+    "evaluation/amendments-v1.1.json": "5e5f9dfa11a2d8e3c427025410642edf61d5c07c1ba6ddf27380fb9f0054334e",
+    "evaluation/amendments-v1.2.json": "e34e1e2d39a4e02a484e08a0aff2e473334cf8244aa7478c3468d233d889a3eb",
+    "evaluation/freeze-v1.1.json": "0e41e2667f31b3cbe2db142e4db80b0d2f4fccb8ebb18aed8be30bde2ee9b299",
+    "evaluation/freeze-v1.2.json": "c424e6e47c11cda2c3e568910edbc9a9a8de30e2be25710640289d0102e112ac",
+    "evaluation/freeze-v1.json": "a95b47646254b93a32a58022e7e09d71d0121436f6b99eb951391cd256126ba1",
+    "evaluation/protocol-v1.json": "df0ee4c6171f026b6d520b93f8b0597f5e4beacb74505b45a499e2d20f7b4862",
+    "evaluation/scenarios-v1.json": "2aa39319b14a91242e0a0aa6c58625eb78f3da4efb505bc47b24d8a590bc3ae7",
+    "backend/app/services/agent.py": "98a9e6a86cdc8b67978f9ac18f90f5c88e04702469763d0b555d0d2c1085b400",
+    "backend/app/services/recommendation_response.py": "6449152f1563662136ed06269117c4e76077663ed99f3bdd6285cdf1e7fca7a6",
+    "frontend/src/AgentPanel.tsx": "2564188d311ecb0f7090b225db10b4d842983881d62c2cbfa2c13cb86a991fd9",
+    "frontend/src/agentMessages.ts": "bc8d4c981c99a3a5f4ab7c09c42f73d6e36cc6fe3d0f44bd1307ebc30c010df4",
+    "docs/validation/recommendation-response-0916-tests.xml": "64eadba39a71acd8fbb25247f95368042d9f0267eab58de984cd3e7a06360267",
+    "docs/validation/recommendation-response-prices-0916-tests.xml": "48d4c4c6c39aca2fde4306cd4a47083b8de80dbac3d9375efd6d8a4280081f32"
+  }
+}

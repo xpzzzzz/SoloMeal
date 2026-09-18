@@ -1,0 +1,464 @@
+
+-- list_fridge --
+  PASS  returns the in_stock/out_of_stock shape
+  PASS  no expiry recorded for the seeded legacy file
+  PASS  contains seeded items
+  PASS  has exactly 2 items
+  PASS  legacy list seeded one portion each
+  PASS  nothing out of stock yet
+
+-- fridge (legacy list migrates to counts) --
+  PASS  legacy list loads as a dict
+  PASS  each legacy name becomes one portion
+
+-- get_missing_for_dish --
+  PASS  reports the dish
+  PASS  pollo is missing
+  PASS  pimientos is a missing optional
+  PASS  not cookable
+  PASS  unknown dish errors
+
+-- update_fridge_inventory (add) --
+  PASS  returns success string
+  PASS  pollo added
+  PASS  huevos added
+  PASS  originals preserved
+
+-- update_fridge_inventory (add duplicate) --
+  PASS  returns success string
+  PASS  adding again accumulates portions
+  PASS  set restores one portion
+
+-- update_fridge_inventory (remove ignores portion counts) --
+  PASS  removal with an out-of-range count succeeds
+  PASS  entry actually gone
+  PASS  removal with a null count succeeds
+  PASS  add still rejects out-of-range counts
+
+-- update_fridge_inventory (remove) --
+  PASS  returns success string
+  PASS  huevos removed
+  PASS  remove deletes outright rather than zeroing
+
+-- get_meal_suggestions --
+  PASS  returns a list
+  PASS  arroz con pollo suggested
+  PASS  tortilla not suggested (missing huevos)
+
+-- get_quick_shopping_list --
+  PASS  returns a list
+  PASS  huevos unlocks tortilla
+
+-- get_quick_shopping_list (max_missing) --
+  PASS  returns a list
+  PASS  rows carry the new fields
+  PASS  rejects out-of-range threshold
+  PASS  rejects non-integer threshold
+
+-- register_cooked_meal --
+  PASS  success message
+  PASS  consumes essentials from fridge
+  PASS  drained essentials are remembered as out of stock
+
+-- register_cooked_meal (nonexistent dish) --
+  PASS  returns error
+  PASS  LookupError message survives sanitization
+
+-- register_cooked_meal (rollback) --
+  PASS  returns error on fridge failure
+  PASS  history restored after failure
+
+-- delete_history_entry --
+  PASS  success message
+  PASS  dish leaves the projection
+  PASS  the retracted event survives in the log
+
+-- delete_history_entry (nonexistent) --
+  PASS  returns error
+
+-- add_dish (dict ingredients) --
+  PASS  success message
+
+-- add_dish (list ingredients) --
+  PASS  success message
+
+-- add_dish (duplicate) --
+  PASS  returns error for duplicate
+
+-- add_dish (invalid inputs) --
+  PASS  rejects blank name
+  PASS  rejects non-boolean ingredient values
+
+-- edit_dish --
+  PASS  success message
+
+-- edit_dish (nonexistent) --
+  PASS  returns error
+
+-- delete_dish --
+  PASS  success message
+
+-- delete_dish (nonexistent) --
+  PASS  returns error
+
+-- add_dishes_batch --
+  PASS  returns dict with added/skipped
+  PASS  added 2 dishes
+  PASS  skipped 1 duplicate
+
+-- clear_fridge --
+  PASS  success message
+  PASS  fridge is empty
+
+-- clear_fridge (already empty) --
+  PASS  already empty message
+
+-- fridge (counts, staples, set) --
+  PASS  count is stored
+  PASS  add accumulates
+  PASS  set overwrites
+  PASS  null marks a staple
+  PASS  adding to a staple is a no-op
+  PASS  rejects negative counts
+
+-- register_cooked_meal (decrements) --
+  PASS  essential is decremented, not deleted
+  PASS  staple is untouched
+  PASS  still cookable after one cook
+  PASS  count floors at zero
+  PASS  zero-count entry is not available
+
+-- register_cooked_meal (backdated) --
+  PASS  backdated cook succeeds
+  PASS  history records the given date
+  PASS  fridge is still consumed
+  PASS  future date rejected
+  PASS  malformed date rejected
+
+-- register_cooked_meal (backdating keeps the newer entry) --
+  PASS  today's cook recorded
+  PASS  backdated cook still succeeds
+  PASS  newer history entry preserved
+  PASS  response explains the entry was kept
+  PASS  fridge still consumed for the backdated meal
+  PASS  dish stays gated by the cooldown
+  PASS  same-day re-register is fine
+
+-- DII: full lifecycle --
+  PASS  session created
+  PASS  3 essentials pre-selected
+  PASS  current suggestion is albahaca
+  PASS  queue has 2 remaining
+  PASS  albahaca added to optionals
+  PASS  next suggestion is aceite de oliva
+  PASS  aceite skipped, not in any list
+  PASS  next suggestion is oregano
+  PASS  queue exhausted
+  PASS  no current suggestion
+  PASS  jamon added to optionals
+  PASS  mozzarella removed
+  PASS  recalculation_needed
+  PASS  pending_recalculation
+  PASS  recalc reuses same session_id
+  PASS  queso de cabra pre-selected
+  PASS  recalculation flag cleared after re-init
+  PASS  finalized
+  PASS  committed to dish
+  PASS  committed to fridge
+  PASS  harina in fridge after finalize
+  PASS  tomate in fridge after finalize
+  PASS  queso de cabra in fridge after finalize
+
+-- DII: clear_all --
+  PASS  has ingredients before clear
+  PASS  all cleared
+  PASS  recalculation needed after clear
+
+-- DII: expired/invalid session --
+  PASS  error for bad session_id
+
+-- DII: finalize idempotent --
+  PASS  first finalize commits
+  PASS  second finalize is idempotent with a warning
+
+-- DII: finalize with commit options --
+  PASS  committed to fridge
+  PASS  did not commit to dish
+
+-- DII: finalize rollback --
+  PASS  returns error on dish failure
+  PASS  fridge rolled back after failure
+
+-- DII: dii_get_state --
+  PASS  returns session_id
+  PASS  returns dish_name
+  PASS  returns essentials
+  PASS  returns current_suggestion
+  PASS  returns next_actions
+  PASS  not finalized
+  PASS  error for bad session_id
+
+-- DII: add_manual empty ingredient --
+  PASS  error for empty ingredient
+
+-- validation: missing required arg yields a clear message --
+  PASS  missing 'ingredients' reported clearly
+  PASS  missing 'dish_name' reported clearly
+
+-- validation: unknown arguments are rejected --
+  PASS  unknown argument returns an error envelope
+  PASS  no-argument tool also rejects unknown keys
+  PASS  unknown key rejected before the handler runs
+  PASS  valid empty arguments still succeed
+
+-- register_cooked_meal writes a v2 event log --
+  PASS  file uses schema_version 2
+  PASS  exactly one event recorded
+  PASS  today's cook is not marked backfilled
+  PASS  recorded_at is timezone-aware
+  PASS  backdated cook appends a second event
+  PASS  backdated cook is marked backfilled
+  PASS  the older event does not move the projection
+
+-- register_cooked_meal rollback leaves no trace --
+  PASS  returns an error envelope
+  PASS  no event for the failed cook remains
+  PASS  the rest of the log is untouched
+
+-- delete_history_entry releases the recency cooldown --
+  PASS  a dish cooked today is gated out
+  PASS  retracting the cook makes it suggestible again
+
+-- list_cooking_history --
+  PASS  empty history returns no rows
+  PASS  both cooks listed
+  PASS  newest first
+  PASS  rows carry a derived status
+  PASS  dish_name filters and normalizes its input
+  PASS  limit truncates
+  PASS  truncation is reported
+  PASS  an exact-fit limit is not reported as truncated
+  PASS  retracted events are shown by default
+  PASS  include_retracted=False hides them
+
+-- list_cooking_history (validation) --
+  PASS  limit=0 rejected
+  PASS  limit=1001 rejected
+  PASS  limit=-5 rejected
+  PASS  limit=true rejected as a non-integer
+  PASS  string limit rejected
+  PASS  non-boolean include_retracted rejected
+  PASS  unknown argument rejected
+
+-- list_cooking_history (corrupt storage) --
+  PASS  corrupt history surfaces as an error, not an empty log
+
+-- set_dish_instructions / get_dish_recipe --
+  PASS  set reports the stored text
+  PASS  set reports cleared=False
+  PASS  recipe returns the instructions
+  PASS  recipe splits essential/optional
+  PASS  null clears
+  PASS  recipe reports None after clearing
+
+-- edit_dish preserves instructions --
+  PASS  instructions survive an ingredient edit
+  PASS  ingredients actually changed
+
+-- set_dish_instructions / get_dish_recipe (errors) --
+  PASS  unknown dish returns an error envelope
+  PASS  get_dish_recipe on unknown dish errors
+  PASS  missing 'instructions' is required, not defaulted
+  PASS  non-string instructions rejected
+
+-- add_dish (instructions argument) --
+  PASS  instructions stored at creation time
+  PASS  dish without instructions omits the key on disk
+
+-- add_dishes_batch: partial failure keeps valid dishes --
+  PASS  valid dishes added despite a bad entry
+  PASS  bad entry surfaced in 'failed'
+
+-- DII: removing an optional does not trigger recalculation --
+  PASS  optional pre-selected
+  PASS  optional removed
+  PASS  no recalculation for optional removal
+  PASS  no pending recalculation
+  PASS  recalculation for essential removal
+
+-- edit_dish: empty ingredient set rejected (no silent wipe) --
+  PASS  empty edit returns an error
+  PASS  recipe not wiped by empty edit
+
+-- DII: finalize with empty selection does not wipe a recipe --
+  PASS  empty finalize did not commit the dish
+  PASS  empty finalize surfaces a warning
+  PASS  recipe preserved after empty finalize
+
+-- DII store: TTL expiry, crash recovery, traversal guard --
+  PASS  crash-recovery reloads a live session
+  PASS  expired session not served
+  PASS  expired backup deleted
+  PASS  traversal id rejected
+
+-- DII store: per-session lock survives a concurrent cleanup --
+  PASS  no two threads inside the critical section
+  PASS  lock map self-prunes when idle
+
+-- DII: finalize reports commit vs. how much changed --
+  PASS  commit reported as done even with nothing to add
+  PASS  items-added count carries the 'what changed' signal
+  PASS  existing count untouched
+  PASS  fresh ingredient counted
+
+-- online weight tuning --
+  PASS  tuning.json created
+  PASS  observations recorded
+  PASS  deployed match weight within band
+  PASS  suggestions keep {dish, score} shape
+  PASS  tuning state reports weights
+  PASS  weights sum to ~1.0
+  PASS  reports candidate grid
+
+-- update_fridge_inventory / list_fridge (expiry) --
+  PASS  expiry dates are reported
+  PASS  expiring_soon is collected
+  PASS  expired is collected
+  PASS  a far-off date is fresh
+  PASS  an entry with no date is absent from expiry
+  PASS  expired items are still in stock
+  PASS  expired items are still usable
+  PASS  restocking preserves the recorded date
+  PASS  restocking still increments the count
+  PASS  an explicit null clears the date
+  PASS  no-expiry entries stay bare scalars on disk
+  PASS  expiry entries are stored as objects
+
+-- update_fridge_inventory (expiry validation) --
+  PASS  malformed expires_on returns an error envelope
+  PASS  unknown field inside the object rejected
+  PASS  nothing was written for the rejected input
+
+-- merge_ingredient_alias (catalog only) --
+  PASS  reports the dish it rewrote
+  PASS  fridge untouched
+  PASS  recipe now uses the canonical name
+  PASS  alias is recorded
+
+-- merge_ingredient_alias (fridge counts) --
+  PASS  counts are summed
+  PASS  fridge merge reported
+  PASS  the retired key is gone
+  PASS  staple wins over a count
+  PASS  stored as a staple
+  PASS  summed count is clamped at MAX_PORTION_COUNT
+  PASS  a plain rename keeps the count
+  PASS  canonical key now holds it
+
+-- merge_ingredient_alias (expiry survives the merge) --
+  PASS  a rename carries the date over
+  PASS  the date is reported back
+  PASS  the earlier of two dates wins
+  PASS  a known date beats an absent one
+
+-- merge_ingredient_alias (essential wins) --
+  PASS  merging an optional into an essential keeps it essential
+  PASS  essential wins in the other direction too
+
+-- merge_ingredient_alias (boundary canonicalizes later input) --
+  PASS  the old name writes through to the canonical key
+  PASS  no entry is created under the old name
+
+-- merge_ingredient_alias (unlocks a previously uncookable dish) --
+  PASS  dish is not cookable while the spellings are split
+  PASS  merging makes the dish cookable
+
+-- merge_ingredient_alias (errors) --
+  PASS  merging a name onto itself errors
+  PASS  re-merging an already-merged pair errors
+  PASS  missing to_name reported clearly
+  PASS  blank name rejected
+
+-- DII init canonicalizes ingredient names --
+  PASS  session stores the canonical spelling
+  PASS  catalog receives the canonical name
+  PASS  fridge receives the canonical name
+
+-- DII remove canonicalizes ingredient names --
+  PASS  add_manual canonicalizes
+  PASS  remove by the retired spelling still removes it
+  PASS  removal is not reported as a no-op
+
+-- DII survives a malformed session backup file --
+  PASS  DII still works with a malformed backup present
+  PASS  reads still work
+  PASS  the malformed backup is swept away
+
+-- update_fridge_inventory add respects the portion ceiling --
+  PASS  a running total cannot exceed MAX_PORTION_COUNT
+
+-- update_fridge_inventory distinguishes new from zero --
+  PASS  a first-time entry is not reported as having been 0
+  PASS  setting a count to zero still reports the number
+  PASS  a known-zero entry reports the real previous count
+
+-- update_fridge_inventory records an expiry on a pantry staple --
+  PASS  the date is stored rather than discarded
+  PASS  it stays a staple
+  PASS  the message reports the expiry
+  PASS  a plain add onto a staple is still a no-op
+
+-- merge_ingredient_alias clamps a passthrough count --
+  PASS  the merged count is clamped
+
+-- init_ingredient_session validates pre_select_top_n --
+  PASS  pre_select_top_n='garbage' rejected
+  PASS  pre_select_top_n=3.9 rejected
+  PASS  pre_select_top_n=True rejected
+  PASS  a valid value is still honoured
+  PASS  an omitted value still defaults to 3
+
+-- unreadable history.json: suggestions degrade, reporting errors --
+  PASS  history permission test skipped (running as root)
+
+-- iter_tools (auto-discovery) --
+  PASS  one tool per public handler module
+  PASS  every NAME is a non-empty string
+  PASS  every NAME is unique
+  PASS  module names match tool names
+  PASS  every SCHEMA is a dict
+  PASS  every SCHEMA has a non-empty description
+  PASS  every HANDLER is callable
+  PASS  iteration order is alphabetical
+
+-- plugin.yaml / iter_tools sync --
+  PASS  the tools list was actually parsed
+  PASS  plugin.yaml declares exactly the registered tools
+  PASS  no duplicate entries in plugin.yaml
+
+-- register() (plugin entry point) --
+  PASS  one register_tool call per discovered tool
+  PASS  every registration names the plugin
+  PASS  schemas and handlers are passed through
+  PASS  skill.md was injected exactly once
+  PASS  the injected text is skill.md
+  PASS  data_dir redirected the dish repository
+  PASS  data_dir redirected the DII session directory
+  PASS  configuration restored for the tests that follow
+
+-- security: session_id path traversal cannot touch other files --
+  PASS  traversing session_id returns an error
+  PASS  catalog file untouched by traversal read
+  PASS  traversing session_id on init rejected
+  PASS  no file written outside sessions/
+
+-- data integrity: unparseable dish entry preserved across writes --
+  PASS  deleted the targeted dish
+  PASS  unrelated unparseable entry preserved
+  PASS  valid untargeted dish preserved
+  PASS  targeted dish removed
+  PASS  no duplicate-named ghost after re-adding the name
+
+========================================
+  298 passed, 0 failed
+========================================
