@@ -31,3 +31,16 @@ htmlcov/
 # OS
 .DS_Store
 Thumbs.db
+
+# SoloMeal application local artifacts
+.env
+.env.*
+!.env.example
+.pytest_cache/
+*.db
+*.sqlite*
+node_modules/
+dist/
+
+frontend/.test-build/
+backend/private_uploads/

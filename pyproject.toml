@@ -10,7 +10,7 @@ warn_unused_ignores = true
 warn_redundant_casts = true
 # Anchored on a path separator as well as the string start: mypy matches this
 # against the full path it discovered, which is absolute under the -p shim.
-exclude = ['(^|/)test_[^/]*\.py$']
+exclude = ['(^|/)(test_[^/]*\.py$|backend/|frontend/)']
 
 [tool.ruff]
 line-length = 100

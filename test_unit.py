@@ -1756,7 +1756,10 @@ def test_data_lock_is_reentrant():
             check("depth unwinds to 1", lock._depth == 1)
         check("depth unwinds to 0", lock._depth == 0)
         check("file descriptor released", lock._fd is None)
-        check("lock file was created", (tmp / ".lock").exists())
+        if _filelock_mod.fcntl is not None:
+            check("lock file was created", (tmp / ".lock").exists())
+        else:
+            check("fallback does not create a file lock", not (tmp / ".lock").exists())
     finally:
         _shutil.rmtree(tmp, ignore_errors=True)
 
@@ -2032,18 +2035,25 @@ def test_atomic_write_preserves_file_mode():
         path = tmp / "data.json"
         path.write_text("{}")
         os.chmod(path, 0o644)
+        initial_mode = _stat.S_IMODE(path.stat().st_mode)
         _src_mod.atomic_write_json(path, {"a": 1})
         # mkstemp creates 0600 and os.replace carries that onto the target, so
         # every write through here used to silently narrow the file.
         check("existing mode survives the replace",
-              _stat.S_IMODE(path.stat().st_mode) == 0o644,
+              _stat.S_IMODE(path.stat().st_mode) == initial_mode,
               f"got {oct(_stat.S_IMODE(path.stat().st_mode))}")
 
         fresh = tmp / "fresh.json"
         _src_mod.atomic_write_json(fresh, {"b": 2})
-        check("a brand-new file is not owner-only",
-              _stat.S_IMODE(fresh.stat().st_mode) == 0o644,
-              f"got {oct(_stat.S_IMODE(fresh.stat().st_mode))}")
+        if os.name == "posix":
+            check("a brand-new file is not owner-only",
+                  _stat.S_IMODE(fresh.stat().st_mode) == 0o644,
+                  f"got {oct(_stat.S_IMODE(fresh.stat().st_mode))}")
+        else:
+            # Windows exposes read/write flags rather than POSIX permission bits.
+            check("new JSON file is readable", json.loads(fresh.read_text()) == {"b": 2})
+            _src_mod.atomic_write_json(fresh, {"b": 3})
+            check("new JSON file remains writable", json.loads(fresh.read_text()) == {"b": 3})
     finally:
         import shutil as _shutil
         _shutil.rmtree(tmp, ignore_errors=True)

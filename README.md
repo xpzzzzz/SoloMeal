@@ -1,5 +1,26 @@
 # Meal Manager
 
+2026-09-17第90节：新增[最终验收清单](docs/validation/final-acceptance-checklist-0917.md)，把第1～89节成果按「已收口／部分完成／未通过／已移出范围」四类收口并逐行链接证据报告，状态表已同步更正（P9 由 TODO 改为 IN_PROGRESS 等）。合成留出 48/60＝80% 未达 85% 门槛、独立人工清晰度与新小票留出、远程 CI 与新物理主机部署、未提交推送仍为缺口；本轮仅文档，未重跑测试或调用模型。
+
+2026-09-17：P9补充请求限流、列表分页与容器配置验证；三分钟演示、技术问答和新主机交付清单见[交付手册](docs/delivery.md)，验证范围见[P9边界报告](docs/validation/p9-boundaries-0917.md)。P5/P8/P9整体仍未完成，当前进度以[STATUS](SOLOMEAL_STATUS.md)为准。下方日期条目是历史记录。
+
+2026-09-14第71节：v20补通用ID查询/结构化只读恢复反馈及澄清、报价查询规则；194回归通过/1 MySQL跳过、ruff通过。9个已暴露场景诊断6通过3失败（A026编造报价日期、A027不查询、A035首轮回答超时），原失败保留。新增17请求/已观察94749token/1缺usage，累计1615；17输入三哈希匹配，源码33816f7d…；P8/P5未完成。 [本轮报告](docs/validation/p8-recovery-v20-0914.md)。下一步先离线处理报价事实来源/任意缺口计算工具边界与必要查询完成状态，分析A035既有超时证据；不要仅继续堆提示。v20九目录及v19旧manifest禁止重跑/追加；回归不冒充新盲测，原留出48/60不变。
+
+## SoloMeal independent application (in development)
+
+`backend/` and `frontend/` contain the independent FastAPI/MySQL/React application:
+quantitative inventory, versioned meal plans, saved package quotes, editable shopping
+drafts with atomic purchase confirmation, cooking/undo, and a single-agent runtime.
+Private receipt uploads, editable drafts and atomic confirmation are implemented.
+P7 acceptance passed on three real receipts with the documented Qwen configuration;
+broader model evaluation and release acceptance remain unfinished. Local Compose
+startup and a MySQL/private-upload joint restore are verified; see the
+[deployment guide](deploy/README.md) and [Android trial steps](docs/android-trial.md). See the
+[acceptance report and limitations](docs/validation/receipt-v5-acceptance-0909.md),
+[backend setup](backend/README.md), [current status](SOLOMEAL_STATUS.md) and
+[next session](NEXT_SESSION.md). The original Hermes plugin below and its GPL-3.0
+attribution are preserved; its dependency and storage rules apply to the plugin.
+
 An intelligent meal planning and fridge inventory management system structured as an official Hermes plugin. It helps users decide what to cook for dinner and what to buy at the grocery store by analyzing their current fridge contents, recipe catalog, and cooking history.
 
 An AI assistant invokes the twenty-six tool handlers registered via `__init__.py:register(ctx)` to deliver personalized dinner suggestions, generate optimized shopping lists, manage fridge inventory, manage the recipe catalog, track cooked meals, and interactively build ingredient lists via the Dynamic Ingredient Interface (DII) — all with zero external dependencies.

@@ -106,9 +106,85 @@ jobs:
       # against rounding.
       - name: Measure coverage
         run: |
-          coverage run --source=src,. --omit="test_*,*/__pycache__/*" test_unit.py
-          coverage run --append --source=src,. --omit="test_*,*/__pycache__/*" test_integration.py
+          coverage run --source=src,. --omit="test_*,*/__pycache__/*,*/backend/*" test_unit.py
+          coverage run --append --source=src,. --omit="test_*,*/__pycache__/*,*/backend/*" test_integration.py
           coverage report --sort=cover --fail-under=91
+
+  backend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: solomeal_test
+          MYSQL_ROOT_PASSWORD: solomeal_ci_only
+          MYSQL_ROOT_HOST: "%"
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 --silent"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+      - name: Install independent backend dependencies
+        run: pip install -r backend/requirements.lock
+      - name: Test on real isolated MySQL
+        working-directory: backend
+        env:
+          SOLOMEAL_TEST_DATABASE_URL: mysql+pymysql://root:solomeal_ci_only@127.0.0.1:3306/solomeal_test?charset=utf8mb4
+        run: python -m pytest
+      - name: Check SQLite fallback
+        working-directory: backend
+        run: python -m pytest
+
+  frontend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Install locked frontend dependencies
+        run: npm ci --prefix frontend
+      - name: Test network and session boundaries
+        run: npm test --prefix frontend
+      - name: Typecheck and build
+        run: npm run build --prefix frontend
+
+  browser-e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      SOLOMEAL_PYTHON: python
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Install locked application dependencies
+        run: |
+          pip install -r backend/requirements.lock
+          npm ci --prefix frontend
+      - name: Install Chromium and Linux browser dependencies
+        working-directory: frontend
+        run: npx --no-install playwright install --with-deps chromium
+      - name: Run isolated scripted browser scenarios
+        working-directory: frontend
+        run: npm run e2e
 
   ci-complete:
     # One stable check name for the branch ruleset to require. Matrix legs come and go, so
@@ -116,7 +192,7 @@ jobs:
     # that never reports again — and an unsatisfiable required check blocks every merge.
     # This job depends on the ones that must pass and fails unless all of them succeeded.
     if: always()
-    needs: [tests, types, coverage]
+    needs: [tests, types, coverage, backend, frontend, browser-e2e]
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
