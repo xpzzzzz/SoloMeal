@@ -10,7 +10,11 @@ warn_unused_ignores = true
 warn_redundant_casts = true
 # Anchored on a path separator as well as the string start: mypy matches this
 # against the full path it discovered, which is absolute under the -p shim.
-exclude = ['(^|/)(test_[^/]*\.py$|backend/|frontend/)']
+# deploy/ and docs/validation/ hold standalone acceptance drivers and evidence
+# scripts. They are reachable from the package root, so `-p meal_manager` walks
+# into them, but they are not plugin code and were never in its type-checked
+# surface. They are still held to ruff (F, B, I) from the config below.
+exclude = ['(^|/)(test_[^/]*\.py$|backend/|frontend/|deploy/|docs/)']
 
 [tool.ruff]
 line-length = 100
