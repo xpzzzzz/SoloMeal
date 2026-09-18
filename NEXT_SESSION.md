@@ -1,3 +1,19 @@
+# SoloMeal 接手（2026-09-18，第95节发布准备收口：推送至自有私有仓库、远程 ci-complete 全绿、哈希冻结）
+
+第95节（用户授权完整执行）：420 文件安全盘点无真实凭据；本地离线套件全绿（插件 372+298、前端 36/build `index-BTAvzu0t.js`/e2e 18、后端 530 通过/16 MySQL 跳过）；分组提交 `9a060b0`/`f9fbcf8`/`5eb512f`/`0935c99`/`39ab68f`，修 CI 的 `1882669`/`f3f9c7b`，pre-commit 钩子逐次实跑、无 `--no-verify`；索引以单次 `-c core.autocrlf=input` 保持 LF、仅 31 个摘要钉住路径按原字节入库（未改 git 全局配置）。**初稿的推送 403 结论前提有误已更正**：`sergiparpal/meal-manager` 只是 `docs/upstream.md:4` 记录的只读上游、用户与其无关联，不存在待恢复的写权限；推送目标改为用户自有私有仓库 `https://github.com/xpzzzzz/SoloMeal`（`origin`），`upstream` push URL 置 `DISABLED`。**远程 CI 首次全绿**：run `35319166877`（push @ `f3f9c7b`）九作业含 `ci-complete` 全 success（`07:34:33Z`）；backend 内 MySQL 轮 546 通过、SQLite 回退轮 530 通过/16 跳过。三类失败根因均在本地以 Linux 等价检出复现后修复：冻结摘要按原始 CRLF 字节记录而被 LF 规范化打破（`.gitattributes -text` + 逐字节回钉 31 路径，零内容改动）、`mypy -p meal_manager` 误纳 `deploy/`+`docs/`（exclude 收口）、backend 作业 15 分钟上限与缺 `frontend/dist`（加 `npm ci && npm run build`、预算 20 分钟、断言未放宽）。冻结量：提交 `f3f9c7b…`、tree `d0d02354…`、后端源码聚合 `c3161b9b…`（67 文件，同第84/91节值即后端零改动）、API 镜像 `sha256:908cf165568b…`、web 镜像 `sha256:f2928999404b…`、前端源码 `4285ae31…`（15 文件，自订补充口径）。**哈希口径限制**：源码聚合按工作区字节算，跨平台换行不同即不同值，发布以 commit SHA＋tree＋镜像 digest 为准。工作区限定：已跟踪文件除本轮文档外无未提交改动；根下 **5 个**（初稿误记 6 个）ACL 锁死的 `.pytest-*`/`.test-tmp-crud-0906` 证据目录未跟踪未 ignore 且不可读，`git status --porcelain` 打权限警告但**退出码 0**（初稿误记 2），勿删除勿改权限。详见[发布准备报告](docs/validation/release-prep-0918.md)与 SOLOMEAL_STATUS 第95节。
+
+下一步（严格顺序，均须前置就绪）：
+1. CI 绿只了结「远程流水线未跑」这一条。**P9-04 的新物理主机验收与 v1.0 发布仍是独立条件**，不得并入完成宣称；P5/P8/P9 整体、旧 48/60、`holdout_gate=failed`、真人清晰度 null 全部保持。
+2. v1.0 发布（Release/Tag 与镜像 digest 绑定）须用户另行授权；本轮仅推送到私有 `origin`，未建任何 tag/release。Dependabot PR #1（`setup-node` 升版）仍 open、head 早于本轮两提交，处置（rebase/关闭）待用户决定。
+3. 可选小改动：源 18080 是否重部署新前端（现线上验证版本 `review-fixes-0917`/`index-BTAvzu0t.js`）待用户决定；409 即时本地化的真实断线路径可在下次模型 weaknet 演练顺带补测。
+4. 需授权/需资源，先给有界估算再由用户决定：独立人工清晰度包与新小票留出、新源码完整留出复验、新物理主机部署、主机断电与 MySQL 数据盘写满。
+
+保留原样不改写：合成留出 Agent 48/60＝80%、`holdout_gate=failed`、独立人工清晰度 null、旧各批失败与超时样本；后续修复与小批诊断属已暴露回归，不冒充新盲测、不改旧分数。旧私有目录与各模型批次禁止重跑或追加，第82节五项真机反馈不重复索取，源 18080 用户试用环境不作故障目标。
+
+环境与保护：18082 项目现含 2 个空的演示外洪泛账号（第91节 `ratelimit429941349`、第94节 `ratelimit429469801`），记入证据 scope；证据与凭据在私有 `D:/SoloMeal-Acceptance/p9-combined-0917-01/demo-evidence/`（含 credentials.json、deployed-429-*、deployed-errtext-* 与 review-fixes-0917-* 的 JSON/PNG），禁止打印或提交、禁止重跑。第94节以 `combined-429-v2.override.yaml`（web=solomeal-web:review-fixes-0917）启动后已 stop、卷保留；不带叠加文件启动会回到 p9-boundaries-0917。`verify_deployment.py` auth-flood 会耗尽登录配额须最后跑，且本项目今日已多次消耗配额需等回滚。演练项目卷不 down -v。
+
+以下为历史快照。
+
 # SoloMeal 接手（2026-09-17，第91节复核三处问题已全部修复并在真实堆栈补验通过，进入发布准备）
 
 第93节（仅离线）按用户二次复核把 429 恢复判定补严：每次点击收集本轮全部 5 类 api GET、要求全 200，并以刷新按钮 busy 禁用窗口闭合界定本轮结束。第94节（用户授权）构建 `solomeal-web:review-fixes-0917`（f2928999404b）重启 18082 后实跑两脚本全部通过：**429 恢复成立，真实耗时 3.6 秒/2 次点击（取代作废的 0.2 秒），final_refresh_responses 逐条 200 留证**；本地化验证在 POST 前零模型保护下全 409、failed 页面精确中文正文。补验中另修复两个驱动缺陷（列表投影无 result 使旧版正文断言从未生效；本 Playwright 的 `locator.waitFor` 不支持 enabled/disabled），应用代码零改动。见 docs/validation/p9-review-live-verify-0917.md。
