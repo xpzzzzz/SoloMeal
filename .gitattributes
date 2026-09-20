@@ -35,3 +35,10 @@
 /evaluation/scenarios-v1.json -text
 /frontend/src/AgentPanel.tsx -text
 /frontend/src/main.tsx -text
+#
+# The section 99 stress archive is pinned for the same reason: docs/validation/
+# e2e-stress-0918.md records every file's exact byte length and sha256, and the
+# archive exists so those numbers can be recomputed offline from the original
+# bytes. sampler-masked.csv is CRLF-native PowerShell output, so converting it would
+# change its length and silently invalidate the record.
+/docs/validation/e2e-stress-0918/* -text

@@ -1,0 +1,59 @@
+
+> solomeal-web@0.1.0 e2e
+> npm run build && node --test --test-concurrency=1 --test-timeout=180000 e2e/*.test.mjs
+
+
+> solomeal-web@0.1.0 build
+> tsc --noEmit && vite build
+
+[36mvite v7.3.6 [32mbuilding client environment for production...[36m[39m
+transforming...
+[32m✓[39m 37 modules transformed.
+rendering chunks...
+computing gzip size...
+[2mdist/[22m[32mindex.html                 [39m[1m[2m  0.48 kB[22m[1m[22m[2m │ gzip:  0.40 kB[22m
+[2mdist/[22m[35massets/index-D3-HS2CT.css  [39m[1m[2m  6.43 kB[22m[1m[22m[2m │ gzip:  2.17 kB[22m
+[2mdist/[22m[36massets/index-xzzr0Hjd.js   [39m[1m[2m255.04 kB[22m[1m[22m[2m │ gzip: 80.15 kB[22m
+[32m✓ built in 1.04s[39m
+✔ 第二个账号看不到第一个账号的厨房，换账号后页面缓存也会清空 (8204.505ms)
+✔ Python 不存在时明确失败并清理临时数据库目录 (695.3986ms)
+✔ 夹具提前退出时明确失败并清理临时数据库目录 (708.5239ms)
+✔ 盘点归档恢复、菜谱编辑和方案版本取消在刷新后与服务端一致 (6627.1259ms)
+✔ 手机纯键盘可以建号、录库存、保存偏好与包装报价，重登后偏好仍在 (9555.3958ms)
+✔ 手机上可以从报价走到采购入库、做饭与撤销 (2756.4964ms)
+✔ 一个运行中的助手请求遇到断网，只会在恢复后继续，不会重复执行工具 (29392.4632ms)
+✔ 离线横幅即时出现，恢复网络后无需点击就同步服务端的新数据 (1722.0892ms)
+✔ 一个标签页离线时的取消不会生效，另一标签页确认后落后页面收敛 (9269.4531ms)
+✔ 跨页库存完整显示，429 有等待提示且可手动恢复 (8178.6783ms)
+✔ 无可行菜谱、未知补购预算和旧方案确认均在页面解释且不扣库存 (7946.669ms)
+✔ 慢响应落地不会清掉用户已输入的厨具 (6779.9114ms)
+✔ 挂载 GET 迟到不得重挂载清空已输入的报价 (7469.7582ms)
+✔ 脚本识别需先同意发送，匹配后仍须人工核对且图片文字不执行 (4194.9047ms)
+✔ 小票私有上传、未知字段、丢包重试与重登录恢复，核对后整单入库 (29648.1409ms)
+✔ 取消小票后刷新仍为终态且不能入库 (1829.4ms)
+✔ 窄屏小票显示单位冲突和确认失败，修正后只入库一次 (3645.0796ms)
+✔ 缺料推荐由工具结果展示，错误模型建议不显示，重登可恢复 (4412.6239ms)
+✔ 保存回复丢失时页面可重试，同一次采购只入库一批 (28751.0344ms)
+✖ 离线时报价与采购按钮给出可读原因，恢复后同样的修改可以保存 (30386.426ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 19
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 209662.9849
+
+✖ failing tests:
+
+test at e2e\shopping.test.mjs:83:1
+✖ 离线时报价与采购按钮给出可读原因，恢复后同样的修改可以保存 (30386.426ms)
+  page.goto: Timeout 30000ms exceeded.
+  Call log:
+  [2m  - navigating to "http://127.0.0.1:54377/", waiting until "domcontentloaded"[22m
+  
+      at openPage (D:\Code\meal-manager\frontend\e2e\support.mjs:95:13)
+      at async TestContext.<anonymous> (D:\Code\meal-manager\frontend\e2e\shopping.test.mjs:87:13) {
+    name: 'TimeoutError',
+    log: [ '  - navigating to "http://127.0.0.1:54377/", waiting until "domcontentloaded"' ]
+  }
