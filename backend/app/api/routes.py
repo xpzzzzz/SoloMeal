@@ -10,7 +10,7 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from ..core.errors import AppError
 from ..schemas.identity import Credentials, Preferences, SessionView, UserView
-from ..services import identity
+from ..services import identity, personalization
 
 router = APIRouter()
 bearer = HTTPBearer(auto_error=False)
@@ -79,3 +79,9 @@ def preferences(current=Depends(get_identity), db=Depends(get_db)):
 @router.put("/api/v1/me/preferences", response_model=Preferences)
 def set_preferences(body: Preferences, current=Depends(get_identity), db=Depends(get_db)):
     return identity.update_preferences(db, current[0].id, body)
+
+
+@router.get("/api/v1/me/personalization")
+def personalization_summary(current=Depends(get_identity), db=Depends(get_db)):
+    preferences = identity.get_preferences(db, current[0].id)
+    return personalization.summary(db, current[0].id, enabled=bool(preferences.personalization_enabled))

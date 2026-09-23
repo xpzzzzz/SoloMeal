@@ -5,7 +5,7 @@ from uuid import UUID
 
 from pydantic import Field, model_validator
 
-from .food import BatchInput, VersionInput
+from .food import BatchInput, Input, VersionInput
 from .planning import PriceQuote
 
 
@@ -22,6 +22,32 @@ class SaveQuoteInput(PriceQuote):
 
 class ShoppingCreateInput(VersionInput):
     plan_id: UUID
+
+
+class CombinationRecipe(Input):
+    recipe_id: UUID
+    version: int = Field(ge=1, strict=True)
+    servings: int = Field(ge=1, le=10, strict=True)
+    include_optional: bool = Field(default=False, strict=True)
+
+
+class CombinedPreviewInput(Input):
+    recipes: list[CombinationRecipe] = Field(min_length=1, max_length=10)
+    budget: Decimal | None = Field(default=None, ge=0, max_digits=8, decimal_places=2)
+
+    @model_validator(mode="after")
+    def unique_recipes(self):
+        if len({r.recipe_id for r in self.recipes}) != len(self.recipes):
+            raise ValueError("Duplicate recipe")
+        return self
+
+
+class CombinedCreateInput(CombinedPreviewInput):
+    signature: str = Field(pattern=r"^[a-f0-9]{64}$")
+
+
+class ShoppingCheckedInput(VersionInput):
+    checked_ingredient_ids: list[UUID] = Field(max_length=100)
 
 
 class PurchaseItem(BatchInput):

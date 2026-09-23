@@ -8,8 +8,11 @@ from sqlalchemy import select
 from ..models.food import CookingRecord, Ingredient, IngredientAlias, InventoryBatch, Recipe
 from ..models.identity import UserPreference
 from ..models.shopping import SavedQuote
-from ..schemas.planning import PriceQuote
-from .food import convert, normalize, owned, recipe_view
+from ..schemas.planning import PriceQuote, ScoreWeights
+from .food import convert, feedback_map, normalize, owned, recipe_view
+from .personal_time import duration_samples, estimate
+from .personalization import history as preference_history
+from .personalization import score_candidate
 from .quantities import required_quantities, selected_lines
 
 
@@ -53,6 +56,22 @@ def recommend(db, user_id, body):
     preferences = db.get(UserPreference, user_id)
     servings = body.servings or preferences.default_servings
     minutes = body.max_minutes or preferences.max_minutes
+    if body.scenario != "custom":
+        presets = {
+            "default": (60, 40, 10), "clear_fridge": (40, 80, 10),
+            "quick": (60, 40, 10), "less_shopping": (100, 20, 10),
+            "variety": (60, 40, 30),
+        }
+        inventory, expiry, repetition = presets[body.scenario]
+        body = body.model_copy(update={"score_weights": ScoreWeights(
+            inventory=inventory, expiry=expiry, repetition=repetition)})
+        if body.scenario == "quick":
+            minutes = min(minutes, 20)
+    # One read for every candidate's history; the estimate never costs a query per recipe.
+    samples = duration_samples(db, user_id, servings)
+    personal_time_enabled = bool(preferences.personal_time_enabled)
+    personalization_enabled = bool(preferences.personalization_enabled)
+    preference_rows, preference_staples, preference_now = preference_history(db, user_id)
     equipment = {
         normalize(x)
         for x in (body.equipment if body.equipment is not None else preferences.equipment)
@@ -105,12 +124,16 @@ def recommend(db, user_id, body):
         repeats[rid] = repeats.get(rid, 0) + 1
     candidates, rejected = [], []
     ids = db.scalars(select(Recipe.id).where(Recipe.user_id == user_id).order_by(Recipe.id)).all()
+    feedbacks = feedback_map(db, user_id, [str(recipe_id) for recipe_id in ids])
     for recipe_id in ids:
         recipe = recipe_view(db, user_id, recipe_id)
+        time_estimate = estimate(recipe, servings,
+                                 samples.get((str(recipe_id), recipe["version"]), []),
+                                 personal_time_enabled=personal_time_enabled)
         lines = selected_lines(recipe, body.include_optional)
         quantities = required_quantities(recipe, servings, body.include_optional)
         reasons = []
-        if recipe["minutes"] > minutes:
+        if time_estimate["estimated_minutes"] > minutes:
             reasons.append("TIME_LIMIT")
         if not {normalize(x) for x in recipe["equipment"]} <= equipment:
             reasons.append("MISSING_EQUIPMENT")
@@ -159,13 +182,21 @@ def recommend(db, user_id, body):
             "recent_repetitions": repeats.get(recipe_id, 0),
             "purchase_cost": float(cost) if not unknown else None,
         }
+        personalization = score_candidate(
+            recipe, feedbacks.get(str(recipe_id)), preference_rows, preference_staples,
+            candidate_ingredients={str(x["ingredient_id"]) for x in lines
+                                   if not x.get("is_staple", False)},
+            candidate_methods=recipe.get("cooking_methods", []),
+            enabled=personalization_enabled, now=preference_now,
+        )
         weights = body.score_weights
-        score = (
+        base_score = (
             weights.inventory * components["inventory_coverage"]
             + weights.expiry * components["expiry_coverage"]
             - weights.repetition * components["recent_repetitions"]
             - weights.purchase_cost * (components["purchase_cost"] or 0)
         )
+        score = base_score + personalization["preference_points"]
         candidates.append(
             {
                 "recipe": recipe,
@@ -176,18 +207,22 @@ def recommend(db, user_id, body):
                     if x.get("optional") and not body.include_optional
                 ],
                 "servings": servings,
+                "time_estimate": time_estimate,
                 "required_ingredients": [
                     {"ingredient_id": line["ingredient_id"], "name": line["name"],
                      "unit": line["unit"], "quantity": str(quantities[line["ingredient_id"]])}
                     for line in sorted(lines, key=lambda x: x["ingredient_id"])
                 ],
                 "shopping": shopping,
+                "missing_ingredient_count": len(shopping),
                 "known_purchase_cost": str(cost),
                 "price_complete": not unknown,
                 "budget_status": budget_status,
                 "can_cook_now": not shopping,
                 "score": round(score, 6),
                 "score_components": components,
+                "personalization": personalization,
+                "base_score": round(base_score, 6),
                 "score_weights": weights.model_dump(),
             }
         )
@@ -195,6 +230,7 @@ def recommend(db, user_id, body):
         key=lambda c: (
             c["budget_status"] == "unknown",
             body.score_weights.purchase_cost > 0 and not c["price_complete"],
+            c["missing_ingredient_count"] if body.scenario == "less_shopping" else 0,
             -c["score"],
             not c["price_complete"],
             Decimal(c["known_purchase_cost"]) if c["price_complete"] else Decimal(0),
@@ -204,6 +240,7 @@ def recommend(db, user_id, body):
     return {
         "as_of": today.isoformat(),
         "constraints": {
+            "scenario": body.scenario,
             "include_optional": body.include_optional,
             "servings": servings,
             "max_minutes": minutes,
@@ -213,10 +250,19 @@ def recommend(db, user_id, body):
         },
         "candidates": candidates,
         "rejected": rejected,
+        "rejection_counts": {
+            reason: sum(reason in row["reasons"] for row in rejected)
+            for reason in ("TIME_LIMIT", "MISSING_EQUIPMENT", "EXCLUDED_INGREDIENT", "BUDGET_EXCEEDED")
+        },
         "budget_feasible": any(
             c["budget_status"] in ("within_estimate", "not_requested") for c in candidates
         ),
         "advisory_only": True,
+        "personalization": {
+            "enabled": personalization_enabled,
+            "history_count": len(preference_rows),
+            "window_days": 90,
+        },
     }
 
 

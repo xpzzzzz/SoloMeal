@@ -1,10 +1,11 @@
 from datetime import date
 from decimal import Decimal
+from typing import Literal
 from uuid import UUID
 
 from pydantic import Field, model_validator
 
-from .food import Input, Label, Quantity
+from .food import DurationInput, Input, Label, Quantity
 
 
 class PriceQuote(Input):
@@ -47,6 +48,7 @@ class AgentPlanningInput(Input):
 
 
 class PlanningInput(AgentPlanningInput):
+    scenario: Literal['default', 'clear_fridge', 'quick', 'less_shopping', 'variety', 'custom'] = 'custom'
     quotes: list[PriceQuote] = Field(default_factory=list, max_length=100)
 
     @model_validator(mode="after")
@@ -73,5 +75,5 @@ class RevisePlanInput(PlanInput):
     expected_version: int = Field(ge=1, strict=True)
 
 
-class ConfirmPlanInput(Input):
+class ConfirmPlanInput(DurationInput):
     expected_version: int = Field(ge=1, strict=True)

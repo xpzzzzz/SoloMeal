@@ -7,11 +7,12 @@ from ..models.food import InventoryBatch
 from ..models.identity import UserPreference
 from ..models.plans import MealPlan, PlanRevision
 from ..schemas.planning import PlanningInput
+from . import personal_time
 from .food import owned, recipe_view, run_operation
 from .planning import freeze_quotes, quote_snapshot, recommend
 
 
-def state(db, user_id, recipe):
+def state(db, user_id, recipe, time_estimate):
     ids = [i["ingredient_id"] for i in recipe["ingredients"]]
     rows = db.scalars(
         select(InventoryBatch)
@@ -36,7 +37,12 @@ def state(db, user_id, recipe):
             "excluded_ingredients": preference.excluded_ingredients,
             "default_servings": preference.default_servings,
             "max_minutes": preference.max_minutes,
+            "personal_time_enabled": preference.personal_time_enabled,
+            "personalization_enabled": preference.personalization_enabled,
         },
+        # The effective estimate belongs here: recording a duration between preview and
+        # confirm must not let the old preview through on a now different number.
+        "time_estimate": time_estimate,
         "recipe": recipe,
     }
 
@@ -103,7 +109,7 @@ def save(db, user_id, key, body, plan_id=None, *, within_operation=False):
             "request": quote_snapshot(constraints, candidate["recipe"]).model_dump(mode="json"),
             "constraints": result["constraints"],
             "candidate": candidate,
-            "state": state(db, user_id, candidate["recipe"]),
+            "state": state(db, user_id, candidate["recipe"], candidate["time_estimate"]),
         }
         db.add(
             PlanRevision(plan_id=plan.id, user_id=user_id, version=plan.version, snapshot=snapshot)
@@ -139,7 +145,8 @@ def validate_confirmation(db, user_id, body):
         if exc.code == "NOT_FOUND":
             raise AppError(409, "PLAN_STALE", "Recipe was deleted; create a new plan") from exc
         raise
-    if snapshot["state"] != state(db, user_id, current_recipe):
+    if snapshot["state"] != state(db, user_id, current_recipe, personal_time.effective(
+            db, user_id, current_recipe, candidate["servings"])):
         raise AppError(
             409, "PLAN_STALE", "Inventory, recipe, date or preferences changed; revise plan"
         )

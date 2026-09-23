@@ -10,7 +10,7 @@ export class NetworkError extends Error {
 
 export const browserOnline=()=>typeof navigator==='undefined'||navigator.onLine!==false;
 
-const lists=new Set(['/ingredients','/inventory','/inventory/events','/recipes','/cooking','/plans','/quotes','/shopping','/receipts','/agent/runs','/agent/sessions']);
+const lists=new Set(['/ingredients','/inventory','/inventory/events','/recipes','/cooking','/plans','/quotes','/shopping','/receipts','/agent/runs','/agent/sessions','/recipe-drafts','/recipe-discoveries']);
 
 // Existing panels need complete lists for selectors and totals. Read bounded pages,
 // and fail visibly instead of silently presenting a truncated list as complete.

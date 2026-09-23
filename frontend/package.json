@@ -7,7 +7,7 @@
     "dev": "vite --host 127.0.0.1",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --host 127.0.0.1",
-    "test": "tsc src/sse.ts src/session.ts src/agentMessages.ts src/receiptValidation.ts src/errorText.ts --target ES2022 --module ES2022 --moduleResolution bundler --lib ES2022,DOM --skipLibCheck --outDir .test-build && node --test tests/*.test.mjs",
+    "test": "tsc src/sse.ts src/session.ts src/agentMessages.ts src/receiptValidation.ts src/draftValidation.ts src/cookingMethods.ts src/cookingTimer.ts src/errorText.ts src/personalTime.ts src/homeText.ts --target ES2022 --module ES2022 --moduleResolution bundler --lib ES2022,DOM --skipLibCheck --outDir .test-build && node --test tests/*.test.mjs",
     "e2e": "npm run build && node --test --test-concurrency=1 --test-timeout=180000 e2e/*.test.mjs"
   },
   "dependencies": {

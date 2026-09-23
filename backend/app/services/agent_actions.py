@@ -36,7 +36,7 @@ def preview(db, user_id, name, body, constraints=None):
             raise AppError(409, "BUDGET_UNKNOWN", "Budget cannot be verified")
         if body.plan_id:
             plans.validate_confirmation(db, user_id, body)
-        state = plans.state(db, user_id, recipe)
+        state = plans.state(db, user_id, recipe, candidate["time_estimate"])
         needed = required_quantities(recipe, body.servings, body.include_optional)
         available = {}
         for batch in food.list_batches(db, user_id):

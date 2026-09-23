@@ -11,7 +11,7 @@ from ..models.plans import MealPlan
 from ..models.shopping import SavedQuote, ShoppingList
 from ..schemas.food import BatchInput
 from ..schemas.shopping import PurchaseItem
-from . import food, plans
+from . import food, personal_time, plans
 
 
 def quote_view(db, row):
@@ -44,7 +44,8 @@ def save_quote(db, user_id, key, body):
 
 def view(row):
     return {"id": row.id, "version": row.version, "status": row.status, "origin": row.origin,
-            "items": row.items, "result": row.result, "created_at": row.created_at}
+            "items": row.items, "checked_ingredient_ids": row.checked_ingredient_ids,
+            "result": row.result, "created_at": row.created_at}
 
 
 def create(db, user_id, key, body):
@@ -53,13 +54,16 @@ def create(db, user_id, key, body):
         if plan.status != "pending" or plan.version != body.expected_version:
             raise AppError(409, "PLAN_CONFLICT", "Plan changed; refresh before preparing shopping")
         for existing in db.scalars(select(ShoppingList).where(ShoppingList.user_id == user_id)):
-            if existing.origin["plan_id"] == plan.id and existing.origin["plan_version"] == plan.version:
+            if (existing.origin.get("kind", "single_plan") == "single_plan"
+                    and existing.origin.get("plan_id") == plan.id
+                    and existing.origin.get("plan_version") == plan.version):
                 return view(existing)
         snapshot = plans.revision(db, plan).snapshot
-        if snapshot["state"] != plans.state(db, user_id, food.recipe_view(
-                db, user_id, snapshot["candidate"]["recipe"]["id"])):
-            raise AppError(409, "PLAN_STALE", "Revise the plan before preparing shopping")
         candidate = snapshot["candidate"]
+        current_recipe = food.recipe_view(db, user_id, candidate["recipe"]["id"])
+        if snapshot["state"] != plans.state(db, user_id, current_recipe, personal_time.effective(
+                db, user_id, current_recipe, candidate["servings"])):
+            raise AppError(409, "PLAN_STALE", "Revise the plan before preparing shopping")
         if not candidate["shopping"]:
             raise AppError(409, "NO_SHOPPING_NEEDED", "This plan has no missing ingredients")
         items = [{"ingredient_id": line["ingredient_id"], "name": line["name"],
@@ -73,7 +77,7 @@ def create(db, user_id, key, body):
         except ValidationError as exc:
             raise AppError(422, "QUANTITY_TOO_LARGE", "Suggested purchase exceeds input capacity; reduce servings") from exc
         row = ShoppingList(user_id=user_id, items=items, origin={
-            "plan_id": plan.id, "plan_version": plan.version, "recipe_name": candidate["recipe"]["name"],
+            "kind": "single_plan", "plan_id": plan.id, "plan_version": plan.version, "recipe_name": candidate["recipe"]["name"],
             "budget": snapshot["constraints"]["budget"], "shopping": candidate["shopping"]})
         db.add(row)
         db.flush()
@@ -93,9 +97,21 @@ def change(db, user_id, key, list_id, body, kind):
                 food.convert(line.quantity, line.unit, item.unit)
                 result.append({**line.model_dump(mode="json"), "name": item.name})
             row.items = result
+            row.checked_ingredient_ids = [iid for iid in row.checked_ingredient_ids
+                                          if iid in {x["ingredient_id"] for x in result}]
+        elif kind == "check":
+            ids = {str(iid) for iid in body.checked_ingredient_ids}
+            if not ids <= {x["ingredient_id"] for x in row.items}:
+                raise AppError(422, "INVALID_SHOPPING_CHECK", "Only current shopping items can be checked")
+            row.checked_ingredient_ids = sorted(ids)
+        elif kind == "close":
+            row.status = "closed"
         elif kind == "cancel":
             row.status = "cancelled"
         else:
+            if (row.origin.get("kind") == "recipe_combination"
+                    and set(row.checked_ingredient_ids) != {x["ingredient_id"] for x in row.items}):
+                raise AppError(409, "SHOPPING_UNCHECKED", "Check all purchased items before confirming")
             lines = [PurchaseItem.model_validate({k: v for k, v in line.items() if k != "name"})
                      for line in row.items]
             budget = row.origin.get("budget")

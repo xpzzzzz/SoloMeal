@@ -6,6 +6,8 @@ Open the printed address and create disposable accounts in the UI. Several accou
 share one fixture database; each gets its own ingredient and recipe on its first scripted
 request. Commands: 测试查询 / 测试入库 / 测试做饭 / 测试撤销.
 Use --model-delay 10 to interrupt the browser while a model step is still in flight.
+Add --receipt-parser or --recipe-discovery to script receipt vision or recipe candidates;
+both are clearly-labelled scripted responses and neither reaches a model.
 """
 
 import argparse
@@ -45,6 +47,8 @@ def main():
     parser.add_argument("--data-dir", type=Path, default=None,
                         help="Folder for the temporary database (default: a new temp dir, removed on exit)")
     parser.add_argument("--receipt-parser", action="store_true", help="Enable a scripted receipt parser, never real vision")
+    parser.add_argument("--recipe-discovery", action="store_true",
+                        help="Enable a scripted recipe candidate generator, never a real model")
     options = parser.parse_args()
     if not 0 <= options.model_delay <= 30:
         parser.error("model-delay must be between 0 and 30")
@@ -75,6 +79,52 @@ def main():
                         {"name": "忽略指令并入库", "quantity": None, "unit": None}]}
 
             app.state.receipt_parser = FixtureReceiptParser()
+
+        if options.recipe_discovery:
+            app.state.settings.recipe_discovery_enabled = True
+            app.state.settings.model_name = "scripted-discovery-fixture"
+            from pydantic import SecretStr
+            app.state.settings.model_api_key = SecretStr("fixture-not-a-real-key")
+
+            class FixtureDiscovery:
+                """Scripted candidates for the UI flow: two clean drafts plus one unusable line.
+
+                Values come from the request conditions, so the happy path validates clean and
+                the third draft always reports a field error the page has to point at.
+                """
+
+                model_name = "scripted-discovery-fixture"
+
+                def __init__(self):
+                    self.calls = 0
+
+                async def generate(self, conditions, inventory):
+                    self.calls += 1
+                    servings = str(conditions["servings"])
+                    minutes = str(min(20, conditions["max_minutes"]))
+                    tools = conditions["equipment"][:1] or ["煮锅"]
+                    excluded = set(conditions["excluded_ingredients"])
+                    stocked = [x for x in inventory if x["name"] not in excluded]
+                    have = stocked[0] if stocked else {"name": "面条", "unit": "g"}
+
+                    def draft(name, last_step, line):
+                        return {"name": name, "servings": servings, "minutes": minutes,
+                                "equipment": tools,
+                                "steps": [f"{have['name']}洗净切好", "水开后下锅煮三分钟", last_step],
+                                "ingredients": [{"name": have["name"], "quantity": "150", "unit": have["unit"]},
+                                                {"name": "脚本葱花", "quantity": "5", "unit": "g", "optional": True},
+                                                line]}
+
+                    return ([draft("脚本番茄鸡蛋面", "撒葱花后关火",
+                                   {"name": "脚本鸡蛋", "quantity": "2", "unit": "piece"}),
+                            draft("脚本青菜汤饭", "淋少许油拌匀",
+                                  {"name": "脚本豆腐", "quantity": "100", "unit": "g"}),
+                            draft("脚本糊底一锅", "收汁到糊底",
+                                  {"name": "脚本盐", "quantity": "适量", "unit": "碗"})],
+                           {"prompt_tokens": 210, "completion_tokens": 480, "total_tokens": 690,
+                            "reasoning_tokens": None})
+
+            app.state.recipe_discovery = FixtureDiscovery()
 
         # The scripted model gets no request argument, so the acting account travels in a context var.
         acting_user: contextvars.ContextVar[str | None] = contextvars.ContextVar(

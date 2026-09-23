@@ -6,7 +6,9 @@ from fastapi.responses import JSONResponse
 from sqlalchemy.exc import SQLAlchemyError
 
 from .api.agent import router as agent_router
+from .api.discovery import router as discovery_router
 from .api.food import router as food_router
+from .api.home import router as home_router
 from .api.planning import router as planning_router
 from .api.receipts import router as receipts_router
 from .api.routes import router
@@ -16,6 +18,7 @@ from .core.config import Settings
 from .core.database import build_engine, build_session_factory
 from .core.errors import AppError
 from .services.receipt_parser import VisionReceiptParser
+from .services.recipe_discovery import ModelDiscoveryProvider
 
 
 def create_app(settings: Settings | None = None):
@@ -32,6 +35,7 @@ def create_app(settings: Settings | None = None):
     app.state.engine = engine
     app.state.sessions = build_session_factory(engine)
     app.state.receipt_parser = VisionReceiptParser(settings)
+    app.state.recipe_discovery = ModelDiscoveryProvider(settings)
 
     @app.exception_handler(AppError)
     async def application_error(request: Request, exc: AppError):
@@ -65,5 +69,7 @@ def create_app(settings: Settings | None = None):
     app.include_router(run_events_router)
     app.include_router(planning_router)
     app.include_router(shopping_router)
+    app.include_router(home_router)
     app.include_router(receipts_router)
+    app.include_router(discovery_router)
     return app

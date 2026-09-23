@@ -1,6 +1,6 @@
 import test,{before,after} from 'node:test';
 import assert from 'node:assert/strict';
-import {desktopContext,launchBrowser,makeApi,openPage,signIn,startFixture,waitForRows,waitText,shot} from './support.mjs';
+import {desktopContext,launchBrowser,makeApi,openPage,signIn,startFixture,useTab,waitForRows,waitText,shot} from './support.mjs';
 
 let server,browser;
 before(async()=>{server=await startFixture(0);browser=await launchBrowser();});
@@ -20,6 +20,7 @@ test('跨页库存完整显示，429 有等待提示且可手动恢复',async()=
  const pages=[];
  page.on('request',request=>{if(request.url().includes('/inventory?'))pages.push(request.url());});
  await signIn(page,'pagination_user',password);
+ await useTab(page,'食材库存');
  await waitForRows(page,205);
  assert.equal(await page.locator('table tbody tr').count(),205);
  assert.ok(pages.some(url=>url.includes('offset=200')));

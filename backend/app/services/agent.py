@@ -11,7 +11,7 @@ from ..models.food import CookingRecord, Ingredient, Recipe
 from ..models.identity import User
 from ..schemas.agent import EmptyInput, PurchaseEstimateInput
 from ..schemas.planning import AgentPlanInput, AgentPlanningInput, PlanInput
-from . import agent_actions, food, plans, recommendation_response
+from . import agent_actions, food, personal_time, plans, recommendation_response
 from .planning import estimate_purchase, freeze_quotes, quote_snapshot, recommend
 from .run_events import record
 
@@ -331,7 +331,7 @@ def dispatch(db, user_id, name, args, constraints=None):
         return {"requires_confirmation": True, "candidate": candidate}, {
             "request": {**body.model_dump(mode="json"), "constraints":
                         quote_snapshot(constraints, candidate["recipe"]).model_dump(mode="json")},
-            "state": plans.state(db, user_id, candidate["recipe"]),
+            "state": plans.state(db, user_id, candidate["recipe"], candidate["time_estimate"]),
             "expires_at": int(time.time()) + 900,
         }
     except ValidationError as exc:
@@ -551,8 +551,14 @@ def transition(db, user_id, key, run_id, action_name):
                 db.flush()
                 return view(db, run)
             proposal = PlanInput.model_validate(run.pending["request"])
+            current_recipe = food.recipe_view(db, user_id, proposal.recipe_id)
+            # The proposal was built for one serving count, and that is the count the new sample
+            # set has to be read against; a run prepared before this estimate existed falls back.
+            servings = run.pending["state"].get("time_estimate", {}).get(
+                "servings", current_recipe["servings"])
             if run.pending["state"] != plans.state(
-                db, user_id, food.recipe_view(db, user_id, proposal.recipe_id)
+                db, user_id, current_recipe,
+                personal_time.effective(db, user_id, current_recipe, servings)
             ):
                 raise AppError(
                     409, "PLAN_STALE", "Proposal changed; cancel and request a new proposal"

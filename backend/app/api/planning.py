@@ -67,6 +67,8 @@ def confirm_plan(
         servings=candidate["servings"],
         plan_id=plan_id,
         expected_plan_version=body.expected_version,
+        actual_minutes=body.actual_minutes,
+        duration_source=body.duration_source,
         include_optional=candidate.get("include_optional", False),
     )
     return food.cook(db, current[0].id, key, request)

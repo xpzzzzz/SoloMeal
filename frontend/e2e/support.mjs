@@ -31,13 +31,13 @@ function freePort(){
 }
 
 // The scripted fixture is the only service these tests talk to: temporary SQLite, never a real model.
-export async function startFixture(modelDelay,{receiptParser=false}={}){
+export async function startFixture(modelDelay,{receiptParser=false,recipeDiscovery=false}={}){
  await assert.doesNotReject(access(path.join(FRONTEND,'dist','index.html')),'frontend/dist is missing; run npm run build first');
  const port=await freePort();
  const url=`http://127.0.0.1:${port}`;
  await mkdir(SHOTS,{recursive:true});
  const dataDir=await mkdtemp(path.join(SHOTS,'db-'));
- const child=spawn(PYTHON,[FIXTURE,'--port',String(port),'--model-delay',String(modelDelay),'--data-dir',dataDir,...(receiptParser?['--receipt-parser']:[])],
+ const child=spawn(PYTHON,[FIXTURE,'--port',String(port),'--model-delay',String(modelDelay),'--data-dir',dataDir,...(receiptParser?['--receipt-parser']:[]),...(recipeDiscovery?['--recipe-discovery']:[])],
   {cwd:path.join(ROOT,'backend'),stdio:['ignore','pipe','pipe'],windowsHide:true});
  let log='',spawnError,closed=false;
  const done=new Promise(resolve=>child.once('close',()=>{closed=true;resolve();}));

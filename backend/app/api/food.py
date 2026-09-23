@@ -12,9 +12,11 @@ from ..schemas.food import (
     BatchInput,
     CookingInput,
     IngredientInput,
+    RecipeFeedbackInput,
     RecipeInput,
     RecipeUpdateInput,
     StapleInput,
+    UpdateDurationInput,
     VersionInput,
 )
 from ..services import food
@@ -132,12 +134,29 @@ def recipes(page: Page = Depends(), current=Depends(get_identity), db=Depends(ge
     ids = db.scalars(
         select(Recipe.id).where(Recipe.user_id == current[0].id).order_by(Recipe.name, Recipe.id).limit(page.limit).offset(page.offset)
     ).all()
-    return [food.recipe_view(db, current[0].id, i) for i in ids]
+    views = [food.recipe_view(db, current[0].id, i) for i in ids]
+    stored = food.feedback_map(db, current[0].id, list(ids))
+    for view in views:
+        view["feedback"] = stored.get(view["id"], food.empty_feedback(view["id"]))
+    return views
 
 
 @router.get("/recipes/{recipe_id}")
 def recipe(recipe_id: UUID, current=Depends(get_identity), db=Depends(get_db)):
-    return food.recipe_view(db, current[0].id, recipe_id)
+    view = food.recipe_view(db, current[0].id, recipe_id)
+    view["feedback"] = food.get_feedback(db, current[0].id, recipe_id)
+    return view
+
+
+@router.get("/recipes/{recipe_id}/feedback")
+def get_recipe_feedback(recipe_id: UUID, current=Depends(get_identity), db=Depends(get_db)):
+    return food.get_feedback(db, current[0].id, recipe_id)
+
+
+@router.put("/recipes/{recipe_id}/feedback")
+def set_recipe_feedback(recipe_id: UUID, body: RecipeFeedbackInput, key: Key,
+                        current=Depends(get_identity), db=Depends(get_db)):
+    return food.set_feedback(db, current[0].id, key, recipe_id, body)
 
 
 @router.post("/cooking", status_code=201)
@@ -148,6 +167,12 @@ def cook(body: CookingInput, key: Key, current=Depends(get_identity), db=Depends
 @router.post("/cooking/{cooking_id}/undo")
 def undo(cooking_id: UUID, key: Key, current=Depends(get_identity), db=Depends(get_db)):
     return food.undo(db, current[0].id, key, cooking_id)
+
+
+@router.put("/cooking/{cooking_id}/duration")
+def update_duration(cooking_id: UUID, body: UpdateDurationInput, key: Key,
+                    current=Depends(get_identity), db=Depends(get_db)):
+    return food.update_duration(db, current[0].id, key, cooking_id, body)
 
 
 @router.get("/cooking")
@@ -164,6 +189,9 @@ def history(page: Page = Depends(), current=Depends(get_identity), db=Depends(ge
             "servings": c.servings,
             "status": c.status,
             "created_at": c.created_at,
+            "actual_minutes": c.actual_minutes,
+            "duration_source": c.duration_source,
+            "feedback_version": c.feedback_version,
         }
         for c in rows
     ]
