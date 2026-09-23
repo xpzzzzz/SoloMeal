@@ -467,7 +467,9 @@ def set_feedback(db, user_id, key, recipe_id, body):
         row.favorite = body.favorite
         row.rating = body.rating
         row.version += 1
-        row.updated_at = utcnow()
+        # MySQL's default DATETIME precision is seconds. Match the immediate
+        # response to what a later read (or an idempotent replay) will return.
+        row.updated_at = utcnow().replace(microsecond=0)
         db.flush()
         return feedback_view(row)
 

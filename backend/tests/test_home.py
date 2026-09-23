@@ -41,7 +41,7 @@ def meal(user_id, recipe_id, created_at, name="rice bowl", minutes=None, status=
                          status=status, created_at=created_at)
 
 
-def draft_list(user_id, ingredient_id, checked=()):
+def draft_list(user_id, ingredient_id, checked=(), created_at=None):
     return ShoppingList(
         user_id=user_id,
         origin={"kind": "single_plan", "plan_id": "p", "recipe_name": "rice bowl", "budget": None,
@@ -49,7 +49,7 @@ def draft_list(user_id, ingredient_id, checked=()):
         items=[{"ingredient_id": ingredient_id, "name": "rice", "quantity": "10", "unit": "g",
                 "actual_cost": None, "currency": "CNY", "expires_on": None, "expiry_source": "unknown",
                 "location": "fridge"}],
-        checked_ingredient_ids=list(checked))
+        checked_ingredient_ids=list(checked), created_at=created_at)
 
 
 def test_home_clock_rules_do_not_depend_on_the_host_timezone():
@@ -119,7 +119,11 @@ def test_home_aggregates_every_row_rather_than_the_first_page(client):
     rice = create_ingredient(client, h, "rice", "g")
     rid = recipe(client, h, rice)
     bulk(user_id, [batch(user_id, rice, date.fromisoformat(on(n % 4))) for n in range(150)], client)
-    bulk(user_id, [draft_list(user_id, rice, () if n % 2 else (rice,)) for n in range(120)], client)
+    # MySQL DATETIME stores whole seconds here. Give every row a distinct timestamp
+    # so the first three displayed lists have a predictable checked state.
+    bulk(user_id, [draft_list(user_id, rice, () if n % 2 else (rice,),
+                              datetime(2026, 5, 1) + timedelta(seconds=n))
+                   for n in range(120)], client)
     bulk(user_id, [meal(user_id, rid, datetime(2026, 5, n % 28 + 1, 1)) for n in range(120)], client)
 
     got = sections(client, h)[0]
