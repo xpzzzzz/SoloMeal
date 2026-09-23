@@ -56,8 +56,7 @@ def upgrade():
 def downgrade():
     op.drop_column("recipes", "source_ref")
     op.drop_column("recipes", "source_type")
-    op.drop_index("ix_recipe_drafts_batch_id", table_name="recipe_drafts")
-    op.drop_index("ix_recipe_drafts_user_id", table_name="recipe_drafts")
+    # MySQL uses the owner index for the foreign key until the table is removed.
+    # Dropping the table removes its indexes as well.
     op.drop_table("recipe_drafts")
-    op.drop_index("ix_recipe_discovery_batches_user_id", table_name="recipe_discovery_batches")
     op.drop_table("recipe_discovery_batches")
