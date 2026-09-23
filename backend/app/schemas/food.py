@@ -1,12 +1,18 @@
 from datetime import date
 from decimal import Decimal
-from typing import Annotated, Literal
+from typing import Annotated, Literal, get_args
 from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field, StringConstraints, model_validator
 
 Label = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=80)]
 Quantity = Annotated[Decimal, Field(gt=0, max_digits=11, decimal_places=3)]
+# The only cooking method tags the app understands. Draft text is checked against this list,
+# so deriving it from the type keeps the two paths from disagreeing.
+CookingMethod = Literal["stir_fry", "steam", "boil", "stew", "bake", "pan_fry", "cold", "other"]
+COOKING_METHODS: tuple[str, ...] = get_args(CookingMethod)
+MAX_COOKING_METHODS = 3
+Rating = Literal["neutral", "like", "dislike"]
 
 
 class Input(BaseModel):
@@ -94,6 +100,9 @@ class RecipeInput(Input):
     ] = Field(min_length=1, max_length=30)
     source: Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=500)]
     ingredients: list[RecipeItem] = Field(min_length=1, max_length=40)
+    cooking_methods: list[CookingMethod] = Field(
+        default_factory=list, max_length=MAX_COOKING_METHODS
+    )
 
     @model_validator(mode="after")
     def required_item(self):
@@ -101,12 +110,44 @@ class RecipeInput(Input):
             raise ValueError("At least one required ingredient is needed")
         return self
 
+    @model_validator(mode="after")
+    def unique_methods(self):
+        # A repeat is reported instead of merged, the way colliding ingredient lines are.
+        if len(set(self.cooking_methods)) != len(self.cooking_methods):
+            raise ValueError("Cooking methods must not repeat")
+        return self
+
 
 class RecipeUpdateInput(RecipeInput):
     expected_version: int = Field(ge=1, strict=True)
 
 
-class CookingInput(Input):
+class RecipeFeedbackInput(Input):
+    """Full state each time: saving never patches a field the caller left out."""
+
+    favorite: bool = Field(strict=True)
+    rating: Rating
+    # Version 0 means this recipe has no feedback row yet, so the first save starts the counter.
+    expected_version: int = Field(ge=0, strict=True)
+
+
+class DurationInput(Input):
+    actual_minutes: int | None = Field(default=None, ge=1, le=480, strict=True)
+    duration_source: Literal["timer", "manual"] | None = None
+
+    @model_validator(mode="after")
+    def duration_pair(self):
+        if (self.actual_minutes is None) != (self.duration_source is None):
+            raise ValueError("Duration and source must be supplied together")
+        return self
+
+
+class UpdateDurationInput(DurationInput):
+    expected_version: int = Field(ge=1, strict=True)
+
+
+class CookingInput(DurationInput):
+    expected_recipe_version: int | None = Field(default=None, ge=1, strict=True)
     include_optional: bool = Field(default=False, strict=True)
     recipe_id: UUID
     servings: int = Field(ge=1, le=10, strict=True)

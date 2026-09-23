@@ -17,7 +17,9 @@ from ..models.food import (
     InventoryEvent,
     Operation,
     Recipe,
+    RecipeFeedback,
     RecipeIngredient,
+    utcnow,
 )
 from ..models.identity import User
 from .quantities import required_quantities
@@ -251,42 +253,54 @@ def adjust_batch(db, user_id, key, batch_id, body):
     )
 
 
-def add_recipe(db, user_id, body):
+def add_recipe(db, user_id, body, *, source_type="manual", source_ref=None):
     db.scalar(select(User).where(User.id == user_id).with_for_update())
-    ids = [str(i.ingredient_id) for i in body.ingredients]
-    if len(ids) != len(set(ids)):
-        raise AppError(422, "DUPLICATE_INGREDIENT", "Recipe ingredients must be unique")
     try:
-        lines = []
-        for line in body.ingredients:
-            item = owned(db, Ingredient, line.ingredient_id, user_id)
-            lines.append((item.id, convert(line.quantity, line.unit, item.unit), line.optional))
-        recipe = Recipe(
-            user_id=user_id,
-            name=body.name,
-            servings=body.servings,
-            minutes=body.minutes,
-            equipment=body.equipment,
-            steps=body.steps,
-            source=body.source,
+        recipe_id = insert_recipe(
+            db, user_id, body, source_type=source_type, source_ref=source_ref
         )
-        db.add(recipe)
-        db.flush()
-        for item_id, qty, optional in lines:
-            db.add(
-                RecipeIngredient(
-                    user_id=user_id,
-                    recipe_id=recipe.id,
-                    ingredient_id=item_id,
-                    quantity=qty,
-                    optional=optional,
-                )
-            )
         db.commit()
-        return recipe_view(db, user_id, recipe.id)
+        return recipe_view(db, user_id, recipe_id)
     except Exception:
         db.rollback()
         raise
+
+
+def insert_recipe(db, user_id, body, *, source_type="manual", source_ref=None):
+    """Insert a recipe and its lines in the caller's transaction; commit stays outside."""
+    ids = [str(i.ingredient_id) for i in body.ingredients]
+    if len(ids) != len(set(ids)):
+        raise AppError(422, "DUPLICATE_INGREDIENT", "Recipe ingredients must be unique")
+    lines = []
+    for line in body.ingredients:
+        item = owned(db, Ingredient, line.ingredient_id, user_id)
+        lines.append((item.id, convert(line.quantity, line.unit, item.unit), line.optional))
+    recipe = Recipe(
+        user_id=user_id,
+        name=body.name,
+        servings=body.servings,
+        minutes=body.minutes,
+        equipment=body.equipment,
+        steps=body.steps,
+        source=body.source,
+        source_type=source_type,
+        source_ref=source_ref,
+        cooking_methods=list(body.cooking_methods),
+    )
+    db.add(recipe)
+    db.flush()
+    for item_id, qty, optional in lines:
+        db.add(
+            RecipeIngredient(
+                user_id=user_id,
+                recipe_id=recipe.id,
+                ingredient_id=item_id,
+                quantity=qty,
+                optional=optional,
+            )
+        )
+    db.flush()
+    return recipe.id
 
 
 def archive_batch(db, user_id, key, batch_id, body):
@@ -323,7 +337,8 @@ def update_recipe(db, user_id, key, recipe_id, body):
         db.execute(delete(RecipeIngredient).where(
             RecipeIngredient.recipe_id == recipe.id, RecipeIngredient.user_id == user_id,
         ))
-        for field in ("name", "servings", "minutes", "equipment", "steps", "source"):
+        for field in ("name", "servings", "minutes", "equipment", "steps", "source",
+                      "cooking_methods"):
             setattr(recipe, field, getattr(body, field))
         recipe.version += 1
         for item_id, qty, optional in lines:
@@ -344,6 +359,10 @@ def delete_recipe(db, user_id, key, recipe_id, body):
         # Plans and cooking records retain immutable JSON snapshots, not recipe foreign keys.
         db.execute(delete(RecipeIngredient).where(
             RecipeIngredient.recipe_id == recipe.id, RecipeIngredient.user_id == user_id,
+        ))
+        # Feedback is state about this row only, so it goes with it; snapshots above do not.
+        db.execute(delete(RecipeFeedback).where(
+            RecipeFeedback.recipe_id == recipe.id, RecipeFeedback.user_id == user_id,
         ))
         db.delete(recipe)
         return {"id": str(recipe_id), "status": "deleted"}
@@ -368,6 +387,9 @@ def recipe_view(db, user_id, recipe_id):
         "equipment": recipe.equipment,
         "steps": recipe.steps,
         "source": recipe.source,
+        "source_type": recipe.source_type,
+        "source_ref": recipe.source_ref,
+        "cooking_methods": list(recipe.cooking_methods or []),
         "version": recipe.version,
         "ingredients": [
             {
@@ -383,12 +405,92 @@ def recipe_view(db, user_id, recipe_id):
     }
 
 
+def empty_feedback(recipe_id):
+    """What a recipe with no row reads as: not favorite, no rating, ready for version 0."""
+    return {
+        "recipe_id": str(recipe_id),
+        "favorite": False,
+        "rating": "neutral",
+        "version": 0,
+        "updated_at": None,
+    }
+
+
+def feedback_view(row):
+    return {
+        "recipe_id": row.recipe_id,
+        "favorite": row.favorite,
+        "rating": row.rating,
+        "version": row.version,
+        "updated_at": row.updated_at,
+    }
+
+
+def get_feedback(db, user_id, recipe_id):
+    owned(db, Recipe, recipe_id, user_id)
+    row = db.scalar(
+        select(RecipeFeedback).where(
+            RecipeFeedback.user_id == user_id, RecipeFeedback.recipe_id == str(recipe_id)
+        )
+    )
+    return feedback_view(row) if row else empty_feedback(recipe_id)
+
+
+def feedback_map(db, user_id, recipe_ids):
+    """One read for a whole list, so the page never asks per recipe."""
+    if not recipe_ids:
+        return {}
+    rows = db.scalars(
+        select(RecipeFeedback).where(
+            RecipeFeedback.user_id == user_id, RecipeFeedback.recipe_id.in_(recipe_ids)
+        )
+    )
+    return {row.recipe_id: feedback_view(row) for row in rows}
+
+
+def set_feedback(db, user_id, key, recipe_id, body):
+    def action(op):
+        owned(db, Recipe, recipe_id, user_id)
+        row = db.scalar(
+            select(RecipeFeedback).where(
+                RecipeFeedback.user_id == user_id, RecipeFeedback.recipe_id == str(recipe_id)
+            )
+        )
+        if row is None:
+            if body.expected_version != 0:
+                raise AppError(409, "VERSION_CONFLICT", "Feedback changed; refresh before saving")
+            row = RecipeFeedback(user_id=user_id, recipe_id=str(recipe_id), version=0)
+            db.add(row)
+        elif row.version != body.expected_version:
+            raise AppError(409, "VERSION_CONFLICT", "Feedback changed; refresh before saving")
+        # The whole state is written every time, so switching replaces instead of adding.
+        row.favorite = body.favorite
+        row.rating = body.rating
+        row.version += 1
+        # MySQL's default DATETIME precision is seconds. Match the immediate
+        # response to what a later read (or an idempotent replay) will return.
+        row.updated_at = utcnow().replace(microsecond=0)
+        db.flush()
+        return feedback_view(row)
+
+    return run_operation(
+        db,
+        user_id,
+        key,
+        "recipe_feedback",
+        {"recipe_id": str(recipe_id), **body.model_dump()},
+        action,
+    )
+
+
 def cook(db, user_id, key, body, *, operation=None):
     def action(op):
         from .plans import validate_confirmation
 
         plan = validate_confirmation(db, user_id, body) if body.plan_id else None
         snapshot = recipe_view(db, user_id, body.recipe_id)
+        if body.expected_recipe_version is not None and snapshot["version"] != body.expected_recipe_version:
+            raise AppError(409, "VERSION_CONFLICT", "Recipe changed since cooking started")
         needed = required_quantities(snapshot, body.servings, body.include_optional)
         snapshot["include_optional"] = body.include_optional
         # Stable locking order across every write path; FEFO allocation follows after locks.
@@ -418,7 +520,8 @@ def cook(db, user_id, key, body, *, operation=None):
                 raise AppError(
                     409, "INSUFFICIENT_STOCK", "Not enough usable inventory; refresh the plan"
                 )
-        record = CookingRecord(user_id=user_id, recipe_snapshot=snapshot, servings=body.servings)
+        record = CookingRecord(user_id=user_id, recipe_snapshot=snapshot, servings=body.servings,
+                               actual_minutes=body.actual_minutes, duration_source=body.duration_source)
         db.add(record)
         db.flush()
         for batch, taken in consumption:
@@ -447,11 +550,30 @@ def cook(db, user_id, key, body, *, operation=None):
             "status": "completed",
             "recipe": snapshot,
             "servings": body.servings,
+            "actual_minutes": record.actual_minutes,
+            "duration_source": record.duration_source,
+            "feedback_version": record.feedback_version,
         }
 
     if operation is not None:
         return action(operation)
     return run_operation(db, user_id, key, "cook", body.model_dump(mode="json"), action)
+
+
+def update_duration(db, user_id, key, cooking_id, body):
+    def action(op):
+        record = owned(db, CookingRecord, cooking_id, user_id, lock=True)
+        if record.status != "completed":
+            raise AppError(409, "COOKING_RETRACTED", "Retracted cooking cannot be edited")
+        if record.feedback_version != body.expected_version:
+            raise AppError(409, "VERSION_CONFLICT", "Duration feedback changed")
+        record.actual_minutes = body.actual_minutes
+        record.duration_source = body.duration_source
+        record.feedback_version += 1
+        return {"id": record.id, "actual_minutes": record.actual_minutes,
+                "duration_source": record.duration_source, "feedback_version": record.feedback_version}
+    return run_operation(db, user_id, key, "cooking_duration",
+                         {"cooking_id": str(cooking_id), **body.model_dump()}, action)
 
 
 def undo(db, user_id, key, cooking_id, *, operation=None):

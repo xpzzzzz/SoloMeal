@@ -113,9 +113,9 @@ jobs:
   backend:
     runs-on: ubuntu-latest
     # Two full pytest runs (MySQL, then the SQLite fallback) plus the frontend
-    # build the registration test needs. The PR run measured 7m02s for the two
-    # suites alone; 15 minutes cut the dispatch run off mid-suite.
-    timeout-minutes: 20
+    # build the registration test needs. With F1-F8, the MySQL run can take
+    # over 25 minutes on CI; leave time for the full SQLite fallback suite.
+    timeout-minutes: 45
     services:
       mysql:
         image: mysql:8.0

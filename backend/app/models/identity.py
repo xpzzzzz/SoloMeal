@@ -1,6 +1,6 @@
 from uuid import uuid4
 
-from sqlalchemy import JSON, ForeignKey, Integer, String
+from sqlalchemy import JSON, Boolean, ForeignKey, Integer, String
 from sqlalchemy.orm import Mapped, mapped_column
 
 from ..core.database import Base
@@ -24,6 +24,9 @@ class UserPreference(Base):
     excluded_ingredients: Mapped[list[str]] = mapped_column(JSON, default=list)
     default_servings: Mapped[int] = mapped_column(Integer, default=1)
     max_minutes: Mapped[int] = mapped_column(Integer, default=30)
+    # Stored on the server, not in the browser, so another device cannot silently re-open it.
+    personal_time_enabled: Mapped[bool] = mapped_column(Boolean, default=True, server_default="1")
+    personalization_enabled: Mapped[bool] = mapped_column(Boolean, default=True, server_default="1")
 
 
 class AuthSession(Base):

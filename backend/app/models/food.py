@@ -116,6 +116,12 @@ class Recipe(Base):
     steps: Mapped[list] = mapped_column(JSON)
     source: Mapped[str] = mapped_column(String(500))
     version: Mapped[int] = mapped_column(Integer, default=1, server_default="1")
+    # Legacy `source` stays the human-readable note; these record how the row was produced.
+    source_type: Mapped[str] = mapped_column(String(16), default="manual", server_default="manual")
+    source_ref: Mapped[str | None] = mapped_column(String(500), nullable=True)
+    # Nullable because rows written before tags exist must read as "no tags" rather than
+    # inherit a guess; MySQL cannot add a NOT NULL JSON column with a default.
+    cooking_methods: Mapped[list | None] = mapped_column(JSON, nullable=True)
 
 
 class RecipeIngredient(Base):
@@ -136,6 +142,23 @@ class RecipeIngredient(Base):
     optional: Mapped[bool] = mapped_column(Boolean, default=False, server_default="0")
 
 
+class RecipeFeedback(Base):
+    __tablename__ = "recipe_feedback"
+    __table_args__ = (
+        ForeignKeyConstraint(["recipe_id", "user_id"], ["recipes.id", "recipes.user_id"]),
+        UniqueConstraint("user_id", "recipe_id", name="uq_feedback_recipe"),
+        CheckConstraint("rating IN ('neutral', 'like', 'dislike')", name="ck_feedback_rating"),
+    )
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=new_id)
+    user_id: Mapped[str] = mapped_column(ForeignKey("users.id"), index=True)
+    recipe_id: Mapped[str] = mapped_column(String(36))
+    # Wanting to keep a recipe is not the same as liking it, so the two stay independent.
+    favorite: Mapped[bool] = mapped_column(Boolean, default=False, server_default="0")
+    rating: Mapped[str] = mapped_column(String(8), default="neutral", server_default="neutral")
+    version: Mapped[int] = mapped_column(Integer, default=1, server_default="1")
+    updated_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+
 class CookingRecord(Base):
     __tablename__ = "cooking_records"
     __table_args__ = (UniqueConstraint("id", "user_id", name="uq_cook_owner"),)
@@ -143,6 +166,9 @@ class CookingRecord(Base):
     user_id: Mapped[str] = mapped_column(ForeignKey("users.id"), index=True)
     recipe_snapshot: Mapped[dict] = mapped_column(JSON)
     servings: Mapped[int] = mapped_column(Integer)
+    actual_minutes: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    duration_source: Mapped[str | None] = mapped_column(String(8), nullable=True)
+    feedback_version: Mapped[int] = mapped_column(Integer, default=1, server_default="1")
     status: Mapped[str] = mapped_column(String(16), default="completed")
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
 

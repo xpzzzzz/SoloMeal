@@ -45,5 +45,6 @@ class ShoppingList(Base):
     # Immutable provenance and validated decimal strings; items are edited as one version.
     origin: Mapped[dict] = mapped_column(JSON)
     items: Mapped[list] = mapped_column(JSON)
+    checked_ingredient_ids: Mapped[list] = mapped_column(JSON, default=list)
     result: Mapped[dict] = mapped_column(JSON, default=dict)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)

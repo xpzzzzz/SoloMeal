@@ -38,7 +38,7 @@ test('无可行菜谱、未知补购预算和旧方案确认均在页面解释�
   await useTab(page,'我的菜谱');
   await page.getByLabel('本次补购预算（元，可留空）').fill('10');
   await page.getByRole('button',{name:'生成本餐推荐'}).click();
-  await waitText(page,/补购价格未知/);
+  await waitText(page,/价格未知 \/ 估价不完整/);
   await page.getByRole('button',{name:'保存这餐方案'}).click();
   await waitText(page,/已保存方案/);
   await page.getByRole('button',{name:'确认做完',exact:true}).click();

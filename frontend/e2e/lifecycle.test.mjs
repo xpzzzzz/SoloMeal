@@ -32,6 +32,7 @@ test('盘点归档恢复、菜谱编辑和方案版本取消在刷新后与服�
   assert.deepEqual((await api.call(token,'/inventory')).data,[]);
   await page.reload();
   await signIn(page,'ui_lifecycle_0914','lifecycle-fixture-1');
+  await useTab(page,'食材库存');
   await waitText(page,/暂无未归档的库存批次/);
   await editor.locator('summary').click();
   await editor.getByRole('button',{name:'查看归档批次',exact:true}).click();

@@ -32,7 +32,7 @@ class Settings(BaseSettings):
 
     model_max_completion_tokens: int = Field(default=1500, ge=1, le=3000, strict=True)
 
-    @field_validator("model_max_completion_tokens", mode="before")
+    @field_validator("model_max_completion_tokens", "discovery_max_output_tokens", mode="before")
     @classmethod
     def parse_chat_budget(cls, value):
         # Environment variables arrive as strings; keep bools and fractions invalid.
@@ -41,6 +41,11 @@ class Settings(BaseSettings):
         return value
 
     model_api_key: SecretStr | None = None
+    # Recipe discovery reuses the chat endpoint but has its own switch and output budget,
+    # so enabling it cannot silently change the existing Agent's limits.
+    recipe_discovery_enabled: bool = False
+    discovery_max_output_tokens: int = Field(default=3000, ge=1, le=3000, strict=True)
+    discovery_timeout_seconds: float = Field(default=30, gt=0, le=60)
     receipt_storage_dir: Path = Path(__file__).resolve().parents[2] / "private_uploads"
     receipt_parser_timeout_seconds: float = Field(default=30, gt=0, le=60)
     receipt_vision_enabled: bool = False

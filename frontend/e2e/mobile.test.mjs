@@ -7,7 +7,7 @@ import {
 
 let server,browser,api;
 const PASSWORD='mobile-fixture-1';
-const TABS=['一人食助手','食材库存','我的菜谱','报价与采购','小票录入','用餐记录','厨房偏好'];
+const TABS=['今天','一人食助手','食材库存','我的菜谱','发现菜谱','报价与采购','小票录入','用餐记录','厨房偏好'];
 
 before(async()=>{
  server=await startFixture(0);
@@ -145,7 +145,7 @@ test('手机上可以从报价走到采购入库、做饭与撤销',async()=>{
  await waitText(page,/测试煮鸡蛋/);
 
  await page.getByRole('button',{name:'生成本餐推荐'}).tap();
- await waitText(page,/缺 鸡蛋/);
+ await waitText(page,/需采购1种食材：鸡蛋/);
  await page.getByRole('button',{name:'保存这餐方案'}).first().tap();
  await waitText(page,/已保存方案/);
  await page.evaluate(()=>window.scrollTo(0,document.body.scrollHeight));

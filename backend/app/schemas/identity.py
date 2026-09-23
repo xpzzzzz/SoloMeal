@@ -34,3 +34,5 @@ class Preferences(BaseModel):
     excluded_ingredients: list[Label] = Field(default_factory=list, max_length=100)
     default_servings: int = Field(default=1, ge=1, le=10, strict=True)
     max_minutes: int = Field(default=30, ge=1, le=480, strict=True)
+    personal_time_enabled: bool = Field(default=True, strict=True)
+    personalization_enabled: bool = Field(default=True, strict=True)
