@@ -142,7 +142,8 @@ def test_home_aggregates_every_row_rather_than_the_first_page(client):
 def test_home_recent_counts_only_completed_meals(client):
     h, item, rid = planning_setup(client)
     stock(client, h, item, "200", key="home-two-cooks")
-    assert cook(client, h, rid, "home-cook-1").status_code == 201
+    first = cook(client, h, rid, "home-cook-1")
+    assert first.status_code == 201
     done = cook(client, h, rid, "home-cook-2").json()
     assert client.post("/api/v1/cooking/" + done["id"] + "/undo",
                        headers={**h, "Idempotency-Key": "home-undo"}).status_code == 200
@@ -150,8 +151,8 @@ def test_home_recent_counts_only_completed_meals(client):
     assert recent["completed_count"] == 1 and recent["truncated"] is False
     assert done["id"] not in {x["id"] for x in recent["items"]}
     assert recent["items"][0]["actual_minutes"] is None
-    assert [r["status"] for r in client.get("/api/v1/cooking", headers=h).json()] == [
-        "completed", "retracted"]
+    assert {r["id"]: r["status"] for r in client.get("/api/v1/cooking", headers=h).json()} == {
+        first.json()["id"]: "completed", done["id"]: "retracted"}
 
 
 def test_home_recent_displays_the_shanghai_day_of_a_utc_record(client):
