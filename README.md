@@ -1,474 +1,162 @@
-# Meal Manager
+# SoloMeal
 
-## SoloMeal 当前版本（2026-09-23）
+面向一人食场景的智能厨房管理应用，把「家里有什么、这顿吃什么、缺什么、做完后还剩什么」串成一个可追踪的闭环。
 
-当前本机使用入口：**http://127.0.0.1:18088**，沿用 `solomeal-features-0921` 项目及其持久化数据。用户已选择继续使用该入口。
+SoloMeal 使用 React、FastAPI 和 MySQL 构建独立 Web 应用。模型负责理解自然语言、提取小票和生成菜谱草稿；规则引擎负责推荐与计算；数据库事务负责真实的库存变化。用餐记录、实际用时和用户评价继续影响下一次推荐。
 
-F1～F8 已实现并审查通过：菜谱发现与草稿确认、收藏与评价、做饭步骤和计时、个人耗时估计、可解释个性化排序、场景推荐与换一道、多菜合并采购、今天首页。模型生成能力需按部署配置启用；首页与规则推荐不调用模型。F9 日历统计暂缓。
+> 当前已交付库存、推荐、采购、做饭、撤销和反馈流程，以及 F1～F8 功能扩展。模型能力按配置启用；功能审查与模型效果评测分别记录。本文按「业务问题 → 技术选型 → 具体方案 → 验证结果」介绍项目。
 
-详细范围、各阶段测试与限制见[功能执行记录](docs/feature-expansion-progress.md)。这些功能审查不改写历史 Agent 评测或整体验收结论。下方日期条目保留为历史记录。
+## 1. 业务问题：让一次吃饭决策真正落到厨房里
 
+对独自做饭的人来说，困难往往贯穿整顿饭，而不只是在找一道菜。
 
-2026-09-17第90节：新增[最终验收清单](docs/validation/final-acceptance-checklist-0917.md)，把第1～89节成果按「已收口／部分完成／未通过／已移出范围」四类收口并逐行链接证据报告，状态表已同步更正（P9 由 TODO 改为 IN_PROGRESS 等）。合成留出 48/60＝80% 未达 85% 门槛、独立人工清晰度与新小票留出、远程 CI 与新物理主机部署、未提交推送仍为缺口；本轮仅文档，未重跑测试或调用模型。
+| 业务问题 | 系统需要做到什么 |
+| --- | --- |
+| 买完菜后忘了家里还有什么，小票又需要逐项录入 | 汇集手动录入和小票信息，保留批次、数量、位置与到期提醒 |
+| 菜谱看起来合适，实际却缺材料、厨具或时间 | 结合库存、忌口、厨具、可用时间与补购预算筛选，解释推荐原因 |
+| 缺一点食材却要买一整包，预算容易算错 | 按真实缺口与包装报价计算采购量，区分已知费用和未知报价 |
+| 做完饭后库存没有变化，点错或重试又可能重复扣减 | 确认做完才记账；库存与用餐记录一起提交，支持按实际消耗撤销 |
+| 每次推荐都从零开始，忽略做饭速度和口味反馈 | 用历史用时、收藏、喜欢／不喜欢和近期用餐记录调整后续推荐 |
 
-2026-09-17：P9补充请求限流、列表分页与容器配置验证；三分钟演示、技术问答和新主机交付清单见[交付手册](docs/delivery.md)，验证范围见[P9边界报告](docs/validation/p9-boundaries-0917.md)。P5/P8/P9整体仍未完成，当前进度以[STATUS](SOLOMEAL_STATUS.md)为准。下方日期条目是历史记录。
+项目目标是让一餐从「决定吃什么」走到「库存和历史正确更新」，并积累下一餐可以使用的数据。节省录入时间、减少浪费是产品目标，目前尚无大规模真实用户数据量化这些收益。
 
-2026-09-14第71节：v20补通用ID查询/结构化只读恢复反馈及澄清、报价查询规则；194回归通过/1 MySQL跳过、ruff通过。9个已暴露场景诊断6通过3失败（A026编造报价日期、A027不查询、A035首轮回答超时），原失败保留。新增17请求/已观察94749token/1缺usage，累计1615；17输入三哈希匹配，源码33816f7d…；P8/P5未完成。 [本轮报告](docs/validation/p8-recovery-v20-0914.md)。下一步先离线处理报价事实来源/任意缺口计算工具边界与必要查询完成状态，分析A035既有超时证据；不要仅继续堆提示。v20九目录及v19旧manifest禁止重跑/追加；回归不冒充新盲测，原留出48/60不变。
+## 2. 技术选型：为业务约束与可靠执行服务
 
-## SoloMeal independent application (in development)
+| 技术选择 | 对应问题与选择理由 |
+| --- | --- |
+| **React + TypeScript + Vite** | 将库存、可编辑草稿、推荐、采购和做饭步骤组织成可操作页面；用类型检查约束前后端数据交互 |
+| **FastAPI + Pydantic** | 将数量、单位、份数、约束和工具参数定义成明确契约；模型输出与用户输入都必须经过校验 |
+| **MySQL + SQLAlchemy + Alembic** | 保存多用户业务数据、方案版本和执行状态；通过事务与锁处理库存扣减，使用迁移管理结构演进 |
+| **确定性推荐与统计规则** | 让库存覆盖、临期优先、重复惩罚、包装费用和个性化分数可以解释、复算和测试 |
+| **可配置的聊天／视觉模型** | 处理自然语言意图、小票字段提取和菜谱生成；支持 native／JSON 工具协议，结构化结果交给服务端校验 |
+| **显式单 Agent 状态机** | 保存执行轮次、待确认动作、租约和终态，使暂停、取消、冲突与恢复都有明确边界 |
+| **持久化事件 + SSE** | 将运行状态同步到页面；断线后通过事件游标补收，避免旧状态覆盖新状态 |
+| **Docker Compose + Nginx** | 统一 Web、API、数据库与迁移的启动顺序；提供同源入口、分组限流和独立持久化卷 |
+| **pytest + Node Test + Playwright + GitHub Actions** | 分别验证服务端规则、前端状态处理、完整用户流程和真实 MySQL 行为 |
 
-`backend/` and `frontend/` contain the independent FastAPI/MySQL/React application:
-quantitative inventory, versioned meal plans, saved package quotes, editable shopping
-drafts with atomic purchase confirmation, cooking/undo, and a single-agent runtime.
-Private receipt uploads, editable drafts and atomic confirmation are implemented.
-P7 acceptance passed on three real receipts with the documented Qwen configuration;
-broader model evaluation and release acceptance remain unfinished. Local Compose
-startup and a MySQL/private-upload joint restore are verified; see the
-[deployment guide](deploy/README.md) and [Android trial steps](docs/android-trial.md). See the
-[acceptance report and limitations](docs/validation/receipt-v5-acceptance-0909.md),
-[backend setup](backend/README.md), [current status](SOLOMEAL_STATUS.md) and
-[next session](NEXT_SESSION.md). The original Hermes plugin below and its GPL-3.0
-attribution are preserved; its dependency and storage rules apply to the plugin.
+独立应用的数据库是业务事实来源。模型调用期间不持有数据库锁，库存修改由短事务完成；模型不能直接访问数据库、执行任意 Shell 或绕过工具白名单。
 
-An intelligent meal planning and fridge inventory management system structured as an official Hermes plugin. It helps users decide what to cook for dinner and what to buy at the grocery store by analyzing their current fridge contents, recipe catalog, and cooking history.
+架构与决策细节见 [架构说明](docs/architecture.md)、[Agent 运行机制](docs/agent.md)和[推荐与方案契约](docs/planning.md)。
 
-An AI assistant invokes the twenty-six tool handlers registered via `__init__.py:register(ctx)` to deliver personalized dinner suggestions, generate optimized shopping lists, manage fridge inventory, manage the recipe catalog, track cooked meals, and interactively build ingredient lists via the Dynamic Ingredient Interface (DII) — all with zero external dependencies.
+## 3. 具体方案：从输入到执行，再让数据回到推荐
 
----
+### 3.1 一餐的业务闭环
 
-## Design Philosophy: A Deterministic Core with a Conversational Shell
+```mermaid
+flowchart TD
+    Input[手动录入 / 小票草稿] --> Review[核对并确认入库]
+    Review --> Inventory[(库存与批次)]
+    Inventory --> Recommend[结合约束生成推荐]
+    Recommend --> Shopping[缺料时生成采购清单]
+    Shopping --> Purchase[勾选已买并确认入库]
+    Purchase --> Inventory
+    Recommend --> Cook[按菜谱步骤做饭]
+    Cook --> Confirm[确认做完：扣库存并记用餐]
+    Confirm --> Inventory
+    Confirm --> Feedback[记录实际用时与口味评价]
+    Feedback --> Personal[更新个人用时估计与偏好分数]
+    Personal --> Recommend
+```
 
-Traditional meal-planning apps fail in two ways. Some turn the user into a data-entry clerk, demanding constant manual input until the user abandons the system. Others hand so much control to an AI that behavior becomes unpredictable — suggestions change meaning between sessions, state drifts quietly, and users lose the trust that makes the tool useful.
+| 环节 | 已实现的行为 |
+| --- | --- |
+| **录入与库存** | 手动管理食材、批次与别名；小票图片生成可编辑草稿，逐行核对后整单入库；不明确的量保留为待确认信息 |
+| **菜谱与发现** | 手工维护菜谱；用户触发模型生成候选，编辑并校验草稿后加入个人菜谱；可显式导入三道原创示例菜谱 |
+| **推荐与选择** | 先检查忌口、厨具、时间和预算条件，再按库存、临期、近期重复和偏好排序；支持清库存、快速做、少采购、换口味等场景及「换一道」 |
+| **报价与采购** | 使用用户保存的包装报价，按缺口向上取整；支持多菜合并采购、已买勾选、整单确认入库与关闭清单 |
+| **做饭与撤销** | 展示步骤、提供计时、记录实际用时；确认做完后一次性扣库存并写历史，撤销按批次消耗明细恢复 |
+| **反馈与首页** | 收藏与喜欢／不喜欢分别保存；「今天」汇集优先处理、今天推荐、待采购、最近做过四块内容，支持局部失败和重试 |
 
-meal-manager resolves this by separating concerns cleanly. The LLM acts as a **semantic translator** at the boundary: it interprets natural-language intent ("we had carbonara tonight", "add lasagna to my recipes") and maps it onto a typed, validated tool call. The plugin's core is a **deterministic state machine** — scoring, inventory updates, recipe storage, DII session transitions, and persistence are all pure, testable Python code with explicit constants and no model round-trips.
+推荐、草稿、计时和「已买」勾选都有各自的状态：推荐不会预扣库存，小票与菜谱草稿需要确认，采购勾选也要经过整单确认才入库。
 
-The result is a system that offers the user the freedom of conversation while guaranteeing the consistency of code. Ambiguity is resolved once, at the edge. Every decision past that edge is reproducible, auditable, and cheap.
+### 3.2 「智能」如何产生，并回到下一次决策
 
-**The LLM is a Translator, Not a Judge.** The model interprets user intent and maps it onto a tool schema. It does not rank meals, decide whether an ingredient is essential, or track session state — those belong to deterministic Python modules. This line stays fixed when the underlying model changes, the prompt drifts, or the user rephrases the same request two different ways.
+**自然语言入口。** Agent 查询用户的真实库存、菜谱、报价与用餐记录，再调用受控工具给出建议。新增库存、确认做饭和撤销等业务写入先生成预览，用户确认后由同一业务服务执行。
 
-**Ambiguity Stops at the Schema.** Free-text input is welcome in conversation; past the tool boundary, every argument is typed, normalized, and explicit. Schemas refuse fuzzy values — the LLM must commit to a concrete `dish_name`, a concrete `action` enum, a concrete `is_essential` boolean. The cost of interpretation is paid once, at parse time, and never re-paid by downstream logic. The database stays clean by construction, not by convention.
+**可解释的推荐。** 推荐返回约束、缺料、分项评分、报价来源和原因。未知或过期报价会标记为未知，不会被当成「预算已满足」。首页加载与规则推荐均不调用模型。
 
-**Reproducibility as User Trust.** Given identical fridge contents, recipe catalog, cooking history, and tuning state, the plugin always produces identical suggestions in identical order. The scoring model itself — essentials act as a gate (a dish is either cookable or it is not), and the ingredient signal is the count of optional ingredients in stock capped at `OPTIONAL_CAP` — along with the 2-day cooldown and the 14-day recency cap, are explicit constants and control flow in source, not emergent model output. The match/recency blend starts at 60/40 and self-adjusts *slowly and deterministically* as meals are cooked: a bounded online learner (`src/tuning.py`) nudges the availability weight one small, hysteresis-gated step per cook, never randomly and always within a fixed band. Suggestions therefore remain reproducible **given the state files** — the learned weight lives in `data/tuning.json` alongside the rest, every state transition can be replayed, and the current blend is inspectable at any time via `get_tuning_state`.
+**数据反馈。** 实际用时按相同菜谱版本、相同份数取近期样本，用中位数与标准用时加权估计；偏好排序结合收藏、喜欢／不喜欢，以及近期做过的食材和烹饪方式。样本窗口、权重和分数上限由固定规则定义，可以关闭并复算。
 
-**Tokens Are a Cost, Not a Feature.** Work the code can do does not belong in the prompt. Ranking, session state, ingredient normalization, and persistence run in microseconds without a model round-trip. The result is a plugin that is cheap to run, fast to respond, testable without mocking an LLM, and structurally incapable of hallucinating itself into an inconsistent state.
+这里已经形成基于业务记录的推荐反馈闭环。当前个性化使用统计与规则，尚未进行模型训练；自动化外部数据采集与定期汇总仍是后续方向。
 
----
+### 3.3 将可靠性落实到具体动作
 
-## Features
+- **事务与幂等：** 做饭、撤销和采购确认绑定用户、请求与幂等键。服务端已提交但响应丢失时，同键重试返回原结果，防止重复扣减或入库。
+- **版本与新鲜度：** 方案保存约束和数据快照；库存、菜谱或相关条件变化后，旧方案不能直接确认，需要重新计算和复核。
+- **身份与文件边界：** 用户身份取自服务端认证，跨用户对象访问被拒绝；小票图片保存在私有卷，经鉴权访问，密钥留在后端配置中。
+- **执行状态恢复：** Agent 保存状态与事件序号，SSE 按游标补收；已取消或已过期的动作不能再确认，页面按事件顺序同步状态。
+- **页面恢复：** 未决采购请求在切页后保留原请求和幂等键；首页首次加载失败提供明确重试入口；慢响应不会覆盖已编辑条件或较新的请求结果。
 
-- **Smart Meal Suggestions** — Ranks every dish in the catalog using a weighted scoring algorithm that combines ingredient availability with cooking recency (starting at a 60/40 blend). Availability is measured over *optional* ingredients only: essentials are a gate, since a dish missing one is not offered at all. Dishes cooked fewer than 2 days ago are automatically excluded.
-- **Adaptive Suggestion Weights** — The availability/recency blend self-adjusts with use. Each cooked meal feeds a bounded, deterministic online learner (no background job, no randomness) that nudges the weighting toward whatever has been ranking your actual choices best. The current blend and learning status are inspectable at any time via `get_tuning_state`, and a fresh install behaves exactly like the classic 60/40 blend until enough meals accumulate.
-- **Unlock-Ranked Shopping List** — Identifies ingredients that, once purchased, unlock entirely new dishes, ranked by the size of the smallest basket that actually gets you to a meal, then by how many dishes each ingredient reaches at that size, then by projected score. Every field on a row describes the same basket, so a row never advertises a meal its own basket cannot buy. Defaults to single-ingredient unlocks; raise `max_missing` to 2-3 when the fridge is nearly empty and no one-item unlock exists.
-- **What a Dish Still Needs** — `get_missing_for_dish` answers "can I make this tonight?" for a named dish, splitting what is missing into blocking essentials and score-only optionals.
-- **Fridge Inventory Management** — Add, remove, or set ingredients as you shop or cook, tracked as approximate portion counts rather than an all-or-nothing list. Pantry staples (salt, oil, spices) are marked unlimited and never run out. Ingredient and dish names are normalized to lowercase for consistent matching.
-- **Cooking History Tracking** — Logs cooked meals with ISO dates, including backdated ones, as an append-only event log. The one-date-per-dish view the suggestion engine uses is computed from that log, so backdating cannot rewind the cooldown on something you made this morning — recording a forgotten meal from last month simply adds an older event that the projection ignores. `list_cooking_history` answers "when did I last cook this?" and "how often do I make it?", and taking an entry back retracts it rather than destroying it, so the record of what you actually cooked stays intact. History keys are normalized to lowercase on load, so comparisons are case-insensitive.
-- **Portion Accounting on Cook** — When a meal is registered as cooked, one portion of each essential ingredient is consumed from the fridge. An ingredient you had plenty of stays available; one that runs out is remembered as out of stock rather than silently deleted.
-- **Essential vs. Optional Ingredients** — Recipes distinguish between must-have ingredients (required to cook) and nice-to-have ingredients (boost the suggestion score but are not blocking).
-- **Cooking Instructions** — Recipes can carry free-form cooking steps alongside their ingredients. `set_dish_instructions` records or clears them, `get_dish_recipe` reads the whole recipe back, and editing a dish's ingredients leaves the steps untouched.
-- **Ingredient Aliases** — "tomato", "tomatoes" and "roma tomato" stop being three different things. `merge_ingredient_alias` rewrites the catalog and fridge once to use a single canonical name, then remembers the alias so anything you type later canonicalizes itself. Where a recipe listed both spellings, essential wins over optional; where the fridge held both, the counts add up under the same per-ingredient ceiling any other update respects, and the earlier of the two expiry dates carries over — a date you recorded is never lost to a merge.
-- **Expiry Awareness** — Fridge entries can carry a `expires_on` date. `list_fridge` reports what is expiring within three days and what has already passed. Expired items are flagged, never removed — the date is your estimate, not ground truth, and deleting your food is not a call the tool gets to make.
-- **Dynamic Ingredient Interface (DII)** — Interactive, stateful ingredient selection via plain text conversation. A "probability funnel" reveals ranked ingredient suggestions one at a time. The agent interprets free-text user responses (e.g. "yes", "skip", "add X") to drive add/skip/remove/manual-add controls. Removing an essential ingredient triggers a recalculation signal so the agent can re-evaluate suggestions.
+### 3.4 本地运行
 
----
-
-## Tech Stack
-
-| Layer | Technology |
-|---|---|
-| Language | Python 3.12+ |
-| Runtime dependencies | None (standard library only) |
-| Development tooling | `mypy`, `ruff`, `coverage` — CI only, never imported by plugin code |
-| Data Storage | Local JSON files (`data/`) |
-| Architecture | Official Hermes plugin (`plugin.yaml` + `register(ctx)`) |
-| Data Modeling | Python `dataclasses` |
-
----
-
-## Getting Started
-
-### Prerequisites
-
-- **Python 3.12** or newer installed on your system.
-- No package manager or virtual environment is required to *run* the plugin — it has zero external runtime dependencies. (Contributors who want to run the type, lint, or coverage checks locally do need a virtualenv for those tools; see the CI section.)
-
-### Installation
+需要 **Docker Engine、Docker Compose 和 Python 3.12+**。以下示例创建独立项目，配置文件放在仓库外，使用端口 `18090`：
 
 ```bash
-hermes plugins install sergiparpal/meal-manager --enable
+git clone https://github.com/xpzzzzz/SoloMeal.git
+cd SoloMeal
+python deploy/manage.py init --env-file ../solomeal-private/local.env --port 18090
+docker compose --env-file ../solomeal-private/local.env -p solomeal-local up -d --build --wait --wait-timeout 180
 ```
 
-That is the whole setup. Hermes fetches the plugin, reads `plugin.yaml`, registers the twenty-six tools, and injects `skill.md` into the agent context. There is no build step, no dependency installation, and no configuration — the plugin is standard library only, and no credentials or API keys are involved. Data files under `data/` are created lazily by the tools when first needed, so a fresh install starts with an empty fridge, an empty catalog, and the classic 60/40 suggestion blend.
+访问 `http://127.0.0.1:18090`，注册账号后可录入库存、导入示例菜谱并体验业务流程。初始化脚本生成数据库密码且拒绝覆盖已有配置文件；数据库与私有图片分别保存在项目持久化卷中。
 
-Then just talk to the agent: *"what should I cook tonight?"*
+模型能力默认关闭，手动流程仍可使用。启用模型时配置 `SOLOMEAL_MODEL_BASE_URL`、`SOLOMEAL_MODEL_NAME`、`SOLOMEAL_MODEL_API_KEY` 与工具协议，并按需开启：
 
-### Working from a local checkout
+| 开关 | 能力 |
+| --- | --- |
+| `SOLOMEAL_AGENT_ENABLED` | 模型对话与工具执行 |
+| `SOLOMEAL_RECEIPT_VISION_ENABLED` | 小票视觉解析 |
+| `SOLOMEAL_RECIPE_DISCOVERY_ENABLED` | 菜谱候选生成 |
 
-To hack on the plugin itself — or to try a change before it lands — clone the repository:
+完整部署、模型参数、联合备份与恢复步骤见 [部署指南](deploy/README.md)。开发环境见 [后端说明](backend/README.md)；前端可在 `frontend/` 下运行 `npm ci`、`npm test` 和 `npm run e2e`。新克隆可执行 `git config core.hooksPath .githooks` 启用提交钩子。
 
-```bash
-git clone https://github.com/sergiparpal/meal-manager.git
-```
+## 4. 验证结果：逐项对应方案，保留适用范围
 
-Verify your interpreter is in range (`python3 --version` should report 3.12+), then run both suites to confirm the checkout is healthy:
+### 4.1 工程与用户流程验证
 
-```bash
-python3 test_unit.py
-```
+以下是已有验证记录，各行保留对应批次与范围，不将不同阶段的测试数量相加。功能阶段 F1～F8 已完成审查；完整记录见 [功能执行记录](docs/feature-expansion-progress.md)。
 
-```bash
-python3 test_integration.py
-```
+| 验证对象 | 结果 | 证明范围与证据 |
+| --- | --- | --- |
+| 后端规则与接口 | 2026-09-23 F8 批次 **645 通过、16 MySQL 专属测试跳过** | 本地全量后端结果；不能将跳过项算为真实 MySQL 通过。见 [F8 验证记录](docs/feature-expansion-progress.md#f8-今天首页2026-09-23开发-agent) |
+| 前端状态与完整流程 | 同批次 **68/68 单测**、TypeScript/Vite 构建通过、**38/38 浏览器夹具流程** | 覆盖网络、会话和业务操作；夹具采用脚本模型，不代表真实模型效果。见 [功能执行记录](docs/feature-expansion-progress.md) |
+| 首页错误恢复 | F8 R1 本地三条流程 **3/3**；真实预览首次断连恢复 **1/1**、推荐条件保护 **1/1** | 验证失败后可恢复四栏，并保留已编辑推荐条件。见 [F8 R1 记录](docs/feature-expansion-progress.md#f8-r1-修复与主审查结论2026-09-23) |
+| 真实小票到库存 | receipt-v5 下三张真实调试小票字段与页面核对通过，人工修正、整单确认、同键丢包重试通过 | 特定 Qwen 配置、特定样本的验证；三张已用于调试，不是独立留出或通用 OCR 准确率。见 [小票验收报告](docs/validation/receipt-v5-acceptance-0909.md) |
+| 业务写入断线恢复 | 做饭提交后丢响应，同键重试库存保持 **220g**；撤销丢响应再重试保持 **300g**，均只应用一次 | 在真实 Compose 堆栈注入请求断连，验证库存与事件一致性。见 [受控弱网报告](docs/validation/p9-weaknet-0917.md) |
+| Agent 状态同步 | 真实模型 API/SSE 与浏览器断线场景完成恢复验证 | 覆盖记录中的执行与事件补收路径，尚非所有异常场景。见 [API/SSE 报告](docs/validation/p9-agent-weaknet-0917.md)、[浏览器报告](docs/validation/p9-agent-ui-weaknet-0917.md) |
+| 数据与私有图片恢复 | 独立本地 MySQL 环境完成 SQL 与私有图片联合恢复，核对业务快照、原图字节和幂等重放 | 同一物理主机上的独立项目验证。见 [联合恢复报告](docs/validation/deployment-restore-0916.md) |
+| GitHub CI | 应用基线 **`3d9ee1e`** 的 **9 个作业全部成功**，含真实 MySQL、SQLite 回退、前端、浏览器和 `ci-complete` | 结果绑定该提交。见 [对应 Actions 运行](https://github.com/xpzzzzz/SoloMeal/actions/runs/35881468133) |
 
-Neither suite touches the real `data/` directory — see [Running the Integration Test](#running-the-integration-test).
+### 4.2 Agent 是否比直接聊天更能完成任务
 
-To install your working copy into Hermes, point the installer at the checkout with a `file://` URL. It is cloned like any other Git remote (after a local-scheme warning), so commit your changes first — the working tree itself is not copied:
+历史 v19 配置的合成评测，比较了工具 Agent、固定流程与直接模型。对 Agent 和直接模型都适用的 **14 个场景、每场景 3 次，共 42 次配对运行**：
 
-```bash
-hermes plugins install file:///absolute/path/to/meal-manager --enable
-```
+| 模式 | 任务完成次数 | 成功率 |
+| --- | --- | --- |
+| 工具 Agent | 32/42 | 76.2% |
+| 直接模型 | 26/42 | 61.9% |
 
----
+在这组给定配置和合成任务中，工具 Agent 的任务成功率高 **14.3 个百分点**。任务完成包含客观检查与 Codex 语义评审，三次重复共享同题，不是 42 个独立场景。计算口径、配对结果与限制见 [离线复算报告](docs/validation/resume-agent-comparison-0923.md)。
 
-## Usage
+同一历史批次的全部 **20 个场景 × 3 次**，Agent 为 **48/60＝80%**，**未达 85% 验收门槛**；独立人工清晰度为 `null`。后续对已暴露场景的修复回归不替换该分数。这组结果不能外推为当前 F1～F8 的整体效果或真实用户成功率。见 [原始合成留出报告](docs/validation/p8-cohort-v19-holdout-0914.md)。
 
-### As a Hermes Agent User
+### 4.3 当前边界与下一步
 
-Once the plugin is installed in your Hermes agent, you never invoke any tool yourself. You talk to the agent in natural language and it translates your intent into the right tool calls. There are no commands to memorize — say what you mean and the agent will handle the bookkeeping.
+- 历史浏览器压力复验中，9 轮共 180 次场景运行有 **4 次首导航超时失败**，原 30 秒停顿根因尚未闭合；单轮全绿不能证明套件没有偶发失败。见 [压力复验与证据复算](docs/validation/e2e-stress-0918.md)。
+- 已验证本地部署与选定恢复路径；全新物理主机、公网部署及完整发布验收仍有独立工作，当前不宣称生产上线。见 [验收清单](docs/validation/final-acceptance-checklist-0917.md)。
+- 当前库存仍使用结构化数量与单位；菜谱发现为用户触发的候选生成，基础示例有三道。更连贯的 UI、约数表达、更丰富的菜谱与图片、自动化数据采集和周期汇总属于后续方向；F9 日历统计暂缓。
 
-Example phrases and what the agent will do behind the scenes:
+## 代码与文档
 
-**Deciding what to cook**
+| 目录／文档 | 内容 |
+| --- | --- |
+| [`backend/`](backend/) | FastAPI 服务、业务规则、模型适配与数据库迁移 |
+| [`frontend/`](frontend/) | React 界面、前端测试与 Playwright 流程 |
+| [`deploy/`](deploy/) | Compose、Nginx、部署与联合备份恢复工具 |
+| [`evaluation/`](evaluation/) | 评测协议、执行与指标工具 |
+| [功能执行记录](docs/feature-expansion-progress.md) | F1～F8 实现、修复、审查及验证范围 |
+| [项目状态](SOLOMEAL_STATUS.md) | 历史阶段状态与证据索引 |
 
-- *"What should I cook tonight?"* — ranks your cookable dishes and proposes the best one.
-- *"We had carbonara."* — records the meal, applies the 2-day cooldown, and removes its essential ingredients from the fridge automatically.
+SoloMeal 基于 [sergiparpal/meal-manager](https://github.com/sergiparpal/meal-manager) 演进。原 Hermes 插件保留在 `src/`、`__init__.py` 和 `plugin.yaml` 中，其标准库／JSON 存储与独立 Web 应用分别维护；插件使用说明见 [skill.md](skill.md)，复用边界见 [上游审查与复用矩阵](docs/upstream.md)。
 
-**Shopping**
-
-- *"I'm heading to the grocery store, what should I buy?"* — lists the ingredients that unlock new dishes, cheapest real unlock first.
-- *"I bought onions, peppers, and chicken."* — updates the fridge and proposes new meal ideas with what you have now.
-- *"We ran out of milk."* — marks it out of stock in the fridge inventory.
-- *"Can I make lasagne tonight?"* — reports exactly what that dish is still missing.
-
-**Managing the fridge**
-
-- *"What do I have in the fridge?"* — returns the current inventory.
-- *"Empty the fridge, I'm going on vacation."* — clears all fridge contents.
-
-**Teaching new recipes**
-
-- *"I usually make potato omelette."* — the agent infers ingredients from culinary knowledge, shows them for your confirmation, then saves the recipe.
-- *"Add lasagna, cannelloni, and paella to my recipes."* — adds several dishes in a single pass.
-- *"Carbonara doesn't carry cream, fix the recipe."* — replaces the ingredient list of an existing dish.
-- *"Delete the chicken curry recipe."* — removes it from the catalog.
-
-**Correcting mistakes**
-
-- *"I didn't actually cook that yesterday."* — removes the meal from history so it can be suggested again without waiting for the cooldown.
-
-**Interactive ingredient picking (DII)**
-
-When you add a new dish without listing its ingredients, the agent starts a step-by-step session. It proposes one ingredient at a time and you reply in plain text:
-
-> **Agent:** I suggest **parmesan cheese** (optional). Add it, skip it, or something else?
->
-> **You:** skip — add pepper instead
->
-> **Agent:** Added pepper. Next suggestion: **garlic** (optional)…
-
-Reply naturally — *"yes"*, *"skip"*, *"remove X"*, *"also add Y"*, or *"done"* when finished. There's no menu to navigate.
-
-**First time?** If your catalog is empty or has fewer than five dishes, the agent will proactively offer to help populate it — just tell it what you usually cook and it will infer ingredients, confirm them with you, and save everything in one batch.
-
-### As a Hermes Plugin
-
-The plugin is loaded by a Hermes agent via the `register(ctx)` entry point in `__init__.py`. It registers twenty-six tools:
-
-| Tool | Purpose |
-|---|---|
-| `get_meal_suggestions` | Returns a ranked list of dishes you can cook right now |
-| `get_quick_shopping_list` | Returns purchases that unlock new dishes, cheapest real unlock first |
-| `get_missing_for_dish` | Reports what one named dish is still missing, split into essentials and optionals |
-| `get_tuning_state` | Reports the current self-adjusted availability/recency blend and learning status |
-| `update_fridge_inventory` | Adds, removes, or sets fridge ingredients and their portion counts |
-| `register_cooked_meal` | Logs a dish as cooked (today or a given date) and consumes one portion of each essential |
-| `delete_history_entry` | Undo for `register_cooked_meal` — retracts the most recent cook of a dish |
-| `list_cooking_history` | Lists recorded cook events, newest first — "when did I last cook X?" |
-| `list_fridge` | Returns the current fridge contents with portion counts, expiry dates, and what needs using up |
-| `add_dish` | Adds a new recipe to the catalog |
-| `add_dishes_batch` | Adds multiple recipes in a single call |
-| `delete_dish` | Removes a recipe from the catalog |
-| `edit_dish` | Replaces the ingredients of an existing dish |
-| `set_dish_instructions` | Sets or clears the cooking steps for a dish |
-| `get_dish_recipe` | Returns a dish's full recipe: essentials, optionals, and instructions |
-| `merge_ingredient_alias` | Merges two spellings of one ingredient across the catalog and fridge |
-| `list_ingredient_aliases` | Lists the alias mappings recorded so far |
-| `clear_fridge` | Empties the fridge completely |
-| `init_ingredient_session` | Start a DII session with ranked ingredient suggestions |
-| `dii_add_suggested` | Accept the current ingredient suggestion and reveal the next |
-| `dii_skip_suggested` | Skip the current suggestion and reveal the next |
-| `dii_remove_ingredient` | Remove an ingredient (signals recalculation if essential) |
-| `dii_add_manual` | Manually add a user-typed ingredient |
-| `dii_clear_all` | Clear all selected ingredients from the session |
-| `finalize_ingredient_session` | Commit session results to fridge and/or dish catalog |
-| `dii_get_state` | Get current DII session state without modifying it |
-
-All handlers follow the signature `def handler(args: dict, **kwargs) -> str` and return JSON strings.
-
-See [`skill.md`](skill.md) for detailed instructions on when and how an AI assistant should invoke each tool.
-
-### Interactive Examples
-
-Each tool lives in its own module under `src/handlers/` and exposes a `HANDLER` callable. Since the package uses relative imports, standalone invocation requires bootstrapping it via `importlib`:
-
-```bash
-# Get dinner suggestions based on current fridge contents
-python3 -c "
-import sys, importlib, pathlib
-sys.path.insert(0, str(pathlib.Path('.').resolve().parent))
-m = importlib.import_module('.src.handlers.get_meal_suggestions', pathlib.Path('.').resolve().name)
-print(m.HANDLER({}))
-"
-```
-
-Swap `get_meal_suggestions` for any other module under `src/handlers/`, for example:
-
-- `update_fridge_inventory.HANDLER({'action': 'add', 'ingredients': ['chicken', 'rice']})`
-- `update_fridge_inventory.HANDLER({'action': 'set', 'ingredients': {'milk': {'count': 2, 'expires_on': '2026-08-01'}}})`
-- `get_quick_shopping_list.HANDLER({})`
-- `register_cooked_meal.HANDLER({'dish_name': 'rice with chicken'})`
-- `set_dish_instructions.HANDLER({'dish_name': 'rice with chicken', 'instructions': 'Brown the chicken, add rice, simmer 20 min.'})`
-- `get_dish_recipe.HANDLER({'dish_name': 'rice with chicken'})`
-- `list_cooking_history.HANDLER({'dish_name': 'rice with chicken'})`
-- `merge_ingredient_alias.HANDLER({'from_name': 'tomatoes', 'to_name': 'tomato'})`
-
-### Running the Integration Test
-
-```bash
-python3 test_integration.py
-```
-
-This script creates a throw-away temp directory, points the repositories and DII session store at it via `configure()`, seeds its own fixtures, and exercises all twenty-six tools end-to-end. The real `data/` files are never touched — the temp directory is deleted on teardown.
-
-For the fastest feedback on pure domain logic, run `python3 test_unit.py`. It covers the dataclass, scoring, shopping, weight-tuning, cooking-event, alias, expiry, and ingredient-normalization helpers without touching `data/`.
-
-### Continuous Integration
-
-Both scripts also run in GitHub Actions ([`.github/workflows/tests.yml`](.github/workflows/tests.yml)) on every push to `main`, on every pull request, and on manual dispatch. The `tests` job runs on `ubuntu-latest` across a Python **3.12, 3.13, and 3.14** matrix — the project declares 3.12+, so the whole supported range is tested rather than just the floor, which is free to do with no runtime dependencies to install. Each leg runs `test_unit.py` followed by `test_integration.py`, and `fail-fast` is off so one failing version does not hide the others.
-
-Two further jobs run alongside it, both using development-only tools that the plugin itself never imports:
-
-- **`types`** — `mypy` over the whole package. The repository directory name contains a hyphen, which is not a valid Python package name, so the job symlinks the workspace under a valid one and points `MYPYPATH` at it.
-- **`coverage`** — both suites under `coverage`, gated at `--fail-under=91`. This is a ratchet against silent decay, not a target: raise it when coverage rises, never lower it to make a build pass.
-
-All three feed `ci-complete`, the single required status check — so any job added later must join its `needs:` list or it will not actually gate anything.
-
-The `tests` job ends by checking that the suites left the checkout exactly as they found it: no `data/` under the repo root, and a clean `git status`. Both are needed. `data/` is gitignored, so `git status` stays quiet if a suite creates it, and a fresh checkout has none — its mere existence is the failure. The porcelain check then catches a suite writing anywhere else. The invariant was already stated in `AGENTS.md`; this is what makes it fail loudly instead of quietly eating a contributor's own `data/`.
-
-### The pre-commit hook
-
-The same two scripts also run before every commit, in about a second. The hook is versioned, but git only picks it up once you point it there — once per clone:
-
-```bash
-git config core.hooksPath .githooks
-```
-
-[`.githooks/pre-commit`](.githooks/pre-commit) runs `test_unit.py` and `test_integration.py`, stays quiet unless one fails, and needs no virtualenv. It deliberately does **not** run `mypy` or `coverage`: those are pinned development tools a fresh checkout does not have, and a hook that fails on a clean clone is a hook people turn off. They stay in CI, which is where the gate is.
-
-Skip it with `git commit --no-verify` — reasonable for a docs-only commit, and not a way past a red suite: `main` requires `ci-complete`, so the commit still cannot merge.
-
-A handful of checks in `test_unit.py` keep both nets honest: that the hook exists and is executable, that it runs both suites and needs nothing installed, that CI runs both suites and covers the declared Python floor, that every action is pinned to a full SHA, and that every job feeds `ci-complete`. None of those failures announce themselves — a hook without its executable bit is skipped in silence, and a job left outside the gate simply never blocks anything.
-
----
-
-## Project Structure
-
-```
-meal-manager/
-├── src/
-│   ├── __init__.py            # Package marker + atomic_write_json helper
-│   ├── filelock.py            # Cross-process advisory lock over the whole data directory
-│   ├── dish.py                # Dish dataclass — recipe model (essential/optional ingredients)
-│   ├── suggestion.py          # Scoring engine — ranks dishes by availability + recency
-│   ├── shopping.py            # Shopping suggestions — near-miss unlock logic, cheapest basket first
-│   ├── tuning.py              # Online learner — self-adjusts the availability/recency blend
-│   ├── history_event.py       # CookingEvent dataclass — one recorded cook, pure data
-│   ├── handlers/              # One module per registered tool (NAME, SCHEMA, HANDLER)
-│   │   ├── __init__.py                     # iter_tools() walks the package and yields each triple
-│   │   ├── _common.py                      # Shared helpers (tool_handler decorator, normalization, input limits)
-│   │   ├── get_meal_suggestions.py         # Rank cookable dishes by availability and recency
-│   │   ├── get_quick_shopping_list.py      # Purchases that unlock new dishes, cheapest basket first
-│   │   ├── get_missing_for_dish.py         # What one named dish is still missing
-│   │   ├── get_tuning_state.py             # Read-only report of the self-adjusted suggestion weights
-│   │   ├── update_fridge_inventory.py      # Add, remove, or set fridge ingredients and portion counts
-│   │   ├── register_cooked_meal.py         # Log a dish as cooked and consume one portion of each essential
-│   │   ├── delete_history_entry.py         # Retract the most recent cook of a dish
-│   │   ├── list_cooking_history.py         # List recorded cook events, newest first
-│   │   ├── list_fridge.py                  # Return the current fridge contents with portion counts
-│   │   ├── add_dish.py                     # Add a new recipe to the catalog
-│   │   ├── add_dishes_batch.py             # Add multiple recipes in a single call
-│   │   ├── delete_dish.py                  # Remove a recipe from the catalog
-│   │   ├── edit_dish.py                    # Replace the ingredient list of an existing recipe
-│   │   ├── set_dish_instructions.py        # Set or clear a dish's cooking steps
-│   │   ├── get_dish_recipe.py              # Return one dish's essentials, optionals, and steps
-│   │   ├── merge_ingredient_alias.py       # Merge two spellings of one ingredient
-│   │   ├── list_ingredient_aliases.py      # List the alias mappings recorded so far
-│   │   ├── clear_fridge.py                 # Empty the fridge inventory
-│   │   ├── init_ingredient_session.py      # Start a DII session with ranked suggestions
-│   │   ├── dii_add_suggested.py            # Accept the current DII suggestion and reveal the next
-│   │   ├── dii_skip_suggested.py           # Skip the current DII suggestion and reveal the next
-│   │   ├── dii_remove_ingredient.py        # Remove a DII ingredient (flags recalc if essential)
-│   │   ├── dii_add_manual.py               # Add a user-typed ingredient to the DII session
-│   │   ├── dii_clear_all.py                # Clear all selected ingredients in the DII session
-│   │   ├── dii_get_state.py                # Read-only DII session state query
-│   │   └── finalize_ingredient_session.py  # Commit the DII session to fridge and/or dish catalog
-│   ├── repositories/          # Persistence layer behind Protocol seams
-│   │   ├── __init__.py        # Singletons + configure(data_dir)
-│   │   ├── base.py            # Dish / Fridge / History / Alias / Tuning repository Protocols
-│   │   ├── json_dish.py       # Recipe catalog persistence (data/dishes.json)
-│   │   ├── json_fridge.py     # Fridge inventory persistence (data/fridge.json)
-│   │   ├── json_history.py    # Cooking-event log persistence (data/history.json)
-│   │   ├── json_alias.py      # Ingredient alias map persistence (data/aliases.json)
-│   │   └── json_tuning.py     # Online-learner state persistence (data/tuning.json)
-│   └── dii/                   # Dynamic Ingredient Interface
-│       ├── __init__.py        # Public API + configure(session_dir)
-│       ├── session.py         # DIISession dataclass + serialization
-│       ├── store.py           # In-memory map mirrored to data/sessions/ with TTL
-│       ├── engine.py          # Pure mutations on a DIISession
-│       ├── presenter.py       # LLM-facing response shape
-│       └── finalizer.py       # Commits a session via injected repositories
-├── data/
-│   ├── dishes.json            # Recipe catalog (dishes with ingredients and optional instructions)
-│   ├── fridge.json            # Fridge inventory (ingredient → portion count or {count, expires_on})
-│   ├── history.json           # Cooking history (append-only log of cook events)
-│   ├── aliases.json           # (created lazily) Ingredient aliases (alias → canonical)
-│   ├── tuning.json            # (created lazily) Online-learner state for the suggestion blend
-│   ├── sessions/              # (created lazily) DII session backups for crash recovery
-│   └── .lock                  # (created lazily) Advisory cross-process lock for the whole data directory
-├── .github/
-│   └── workflows/
-│       └── tests.yml          # CI — tests, types (mypy), and coverage jobs behind a ci-complete gate
-├── plugin.yaml                # Hermes plugin manifest (name, version, provided tools)
-├── pyproject.toml             # Tool configuration only (mypy, ruff, coverage) — no [project] table
-├── __init__.py                # Plugin entry point — register(ctx, *, data_dir=None)
-├── test_unit.py               # Unit tests for domain logic modules
-├── test_integration.py        # Integration smoke test
-├── skill.md                   # Prompt instructions defining when/how to call each tool
-├── AGENTS.md                  # Repository guidance for agentic coding work
-├── CLAUDE.md                  # Development guidelines for Claude Code
-├── LICENSE                    # GPLv3 license text
-└── README.md                  # This file — project overview and usage guide
-```
-
-### Data Format Reference
-
-**`data/dishes.json`** — Recipe catalog:
-
-```json
-{
-  "dishes": [
-    {
-      "name": "rice with chicken",
-      "ingredients": {
-        "rice": true,
-        "chicken": true,
-        "peppers": false
-      },
-      "instructions": "Brown the chicken, add the rice, simmer 20 minutes."
-    }
-  ]
-}
-```
-
-- `true` = essential ingredient (must be in the fridge to cook the dish). Essentials are a gate, not a score: a dish missing one is never suggested, so they contribute nothing to the ranking of the dishes that *are* offered.
-- `false` = optional ingredient. Each optional you actually have in the fridge raises the dish's score, up to `OPTIONAL_CAP` (3) of them; declaring an optional you lack costs nothing. Describing a recipe more thoroughly can therefore only help it, never hurt it.
-- `instructions` is optional free-form text, capped at 20,000 characters. The key is written only when instructions are actually set, so a catalog without them round-trips byte-identically. Clearing them (passing `null` or a blank string) removes the key rather than storing an empty string.
-- Legacy `prep_time` fields are ignored on load and are not written back.
-
-**`data/fridge.json`** — Fridge inventory, as ingredient name → portion count:
-
-```json
-{"potatoes": 2, "eggs": 6, "olive oil": null, "rice": 0,
- "milk": {"count": 2, "expires_on": "2026-08-01"}}
-```
-
-- `n > 0` = approximately `n` dishes' worth on hand. Cooking a dish consumes one portion of each of its essentials.
-- `null` = pantry staple: unlimited, never decremented (salt, oil, spices).
-- `0` = known to be out of stock. Kept deliberately — "ran out" is more informative than "never had it", and `list_fridge` reports these separately under `out_of_stock`.
-- An entry may instead be an object carrying an expiry date alongside the count. Entries with no expiry stay bare scalars, so adding this feature does not rewrite files that do not use it. An unreadable date costs the date, not the ingredient.
-- A stored count is capped at `MAX_PORTION_COUNT` (99). The ceiling bounds the stored total rather than the number sent in one call, so repeated restocking clamps at 99 instead of walking past it, and an out-of-band count in a hand-edited file is normalized the next time it is merged.
-
-> **Format change.** `fridge.json` was previously a flat array of names (`["potatoes", "eggs", "rice"]`). Existing files are migrated automatically the first time they are loaded — each name becomes one portion — and rewritten in the new shape on the next save. No manual migration step is required, and every shape is accepted indefinitely.
-
-**`data/history.json`** — Cooking history, as an append-only event log:
-
-```json
-{
-  "schema_version": 2,
-  "events": [
-    {
-      "id": "cook_9f2c1e...",
-      "dish_name": "rice with chicken",
-      "cooked_on": "2026-04-02",
-      "recorded_at": "2026-04-02T19:14:03+00:00",
-      "backfilled": false,
-      "retracted_at": null
-    }
-  ]
-}
-```
-
-- The one-date-per-dish view the suggestion engine consumes is a *projection*: the latest `cooked_on` per dish, with retracted events excluded. Because it takes a maximum, an older event can never displace a newer one.
-- `backfilled` marks a cook recorded after the fact. Backdated cooks still consume from the fridge but skip the learning update, since the decision they replay never happened.
-- `retracted_at` marks an entry the user took back. The row survives and stays visible through `list_cooking_history`; it just stops counting. Only a rolled-back cook — one whose fridge consumption failed — is hard-deleted, because it never happened at all.
-
-> **Format change.** `history.json` was previously a flat `{"dish name": "2026-04-02"}` object. Existing files are migrated in memory on load (one event per entry, with ids derived deterministically so re-migrating never duplicates a row) and rewritten in the new shape on the next write.
-
-**`data/aliases.json`** — Ingredient aliases (created lazily on the first merge):
-
-```json
-{"tomatoes": "tomato", "roma tomato": "tomato"}
-```
-
-- A flat `alias → canonical` map, consulted at the tool boundary so input spelled the old way lands on the canonical name. No alias ever points at another alias, so resolution is a single hop.
-
-**`data/tuning.json`** — Online-learner state for the availability/recency blend (created lazily on the first learning event):
-
-```json
-{
-  "version": 2,
-  "candidates": [0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80],
-  "S": {"0.60": 6.0, "...": "discounted reward sum per candidate"},
-  "C": {"0.60": 10.0, "...": "discounted observation count per candidate"},
-  "observations": 0,
-  "deployed_match_weight": 0.60,
-  "deployed_time_weight": 0.40
-}
-```
-
-- `deployed_match_weight` / `deployed_time_weight` are the currently deployed availability/recency weights (they sum to 1.0).
-- A missing or corrupt file falls back to a fresh initialized state, reproducing the classic 60/40 blend.
-- The state carries a `version`. When the scoring geometry changes, the version is bumped and any file written under the old geometry is discarded on load — accumulated reward mass from a different score model is not comparable. The learner simply restarts from the 60/40 anchor.
-
----
-
-## Contributing
-
-Contributions are welcome. To get started:
-
-1. Fork the repository.
-2. Create a feature branch (`git checkout -b feature/my-feature`).
-3. Point git at the versioned hooks once, so both suites run before every commit: `git config core.hooksPath .githooks`.
-4. Make your changes and verify them with `python3 test_unit.py` and `python3 test_integration.py`.
-5. Commit your changes and open a Pull Request. CI runs both scripts on the pull request automatically.
-
-Please ensure all ingredient and dish names follow the lowercase/stripped normalization convention used throughout the codebase.
-
----
-
-## License
-
-This project is licensed under the **GNU General Public License v3.0**.
-
-You may copy, distribute and modify the software as long as you track changes/dates in source files. Any modifications to or software including (via compiler) GPL-licensed code must also be made available under the GPL along with build & install instructions.
-
-See the [LICENSE](LICENSE) file for the full license text.
+项目保留 **GPL-3.0** 许可，见 [LICENSE](LICENSE)。
