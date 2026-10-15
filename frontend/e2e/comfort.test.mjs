@@ -61,8 +61,10 @@ for(const mobile of [false,true])test(`简洁界面保留录入、菜谱反馈�
   await page.getByLabel('评价筛选').selectOption('all');
   await card.getByRole('button',{name:'不喜欢',exact:true}).click();
   await waitText(page,/评价已保存/);
+  const favoriteSaved=page.waitForResponse(r=>r.url().endsWith('/feedback')&&r.request().method()==='PUT');
   await card.getByRole('button',{name:'收藏',exact:true}).click();
-  await waitText(page,/评价已保存/);
+  assert.equal((await favoriteSaved).status(),200);
+  await card.getByRole('button',{name:'已收藏',exact:true}).waitFor();
   await page.getByLabel('只看收藏').check();
   assert.equal(await page.locator('.recipe').count(),1);
   await page.getByLabel('只看收藏').uncheck();
