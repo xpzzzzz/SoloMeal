@@ -12,7 +12,15 @@
 | M3 | 已完成 | [正常链路报告](validation/receipt-async/m3-normal-workflow-1015.md)：真实MQ/Worker、页面两轮通过；MySQL85/85，SQLite78通过/7跳过 |
 | M4 | 已完成 | [可靠性报告](validation/receipt-async/m4-reliability-1015.md)：真实Worker/Broker故障、双Worker、确认丢失、浏览器丢响应均通过 |
 | M4.5 | 已完成 | [OCR报告](validation/ocr/m45-hybrid-1015.md)：18模式实测、8真实MQ场景、2浏览器流程；真实模型0 |
-| M5 | 执行中 | 正式CPU Worker镜像、模型初始化、CI集成、干净部署与最终回归/文档 |
+| M5 | 已完成 | [十作业CI全成功](https://github.com/xpzzzzz/SoloMeal/actions/runs/38676874837)，MySQL692/SQLite676+16跳过、正式CPU构建、三模式与26表/图片/outbox联合恢复；[交付说明](backend-engineering-delivery-1015.md) |
+
+## 2026-10-15：M5完成，交付草稿PR
+
+- 已依序完成M0～M5，未提前开发OCR。代码提交03880fc的[CI run 38676874837](https://github.com/xpzzzzz/SoloMeal/actions/runs/38676874837)十个作业全部成功，包含ci-complete；[机器证据](validation/backend-m5-1015-01/ci-r2-complete.json)。
+- MySQL692全部通过（690.15秒），SQLite676通过/16跳过（208.54秒），前端68、浏览器41通过/4条件跳过；Linux插件378＋300、Python3.12/3.13/3.14、mypy50文件、覆盖率92%、F/E9/编译和三项性能工具保护通过。
+- 正式API/CPU Worker/Web从干净环境构建启动、空模型卷固定权重、模型关闭核心流程、三模式/冲突/失败、人工确认、采购/做饭/撤销、Broker/Worker重启通过。新项目恢复26表/7条任务及私有图片；全表摘要/图片字节相同，空Broker恢复未发布任务后只执行1次，库存不变。
+- 首轮两类失败与修复保留，不将历史全量中断算通过。付费模型0，默认vlm_only/OCR关闭；合成样本和Oracle Mock不证明真实准确率或成本。
+- 已获准推送[草稿PR #3](https://github.com/xpzzzzz/SoloMeal/pull/3)，未合并、不替换18080/18088。原HEAD 7ccb597/索引不变；最终18088 live/ready200。宿主Docker控制检查仍超时、C盘约0.73GiB，本轮不清理磁盘或继续本机大规模部署；云端验收与该保留限制分开记录。
 
 ## 2026-10-15：获准发布草稿PR，处理首轮CI
 
@@ -20,7 +28,7 @@
 - [首轮CI](https://github.com/xpzzzzz/SoloMeal/actions/runs/38675670822)正式API/CPU Worker/Web干净构建、启动和空权重卷初始化通过。前端68、Linux插件378＋300、mypy50文件、覆盖率92%通过。
 - 首轮浏览器39通过/2失败/4条件跳过：两处同为界面测试在requestAnimationFrame展开前即时断言，现等待实际open属性再断言；原首导航超时问题未改动。本地桌面/手机2/2复验通过。
 - 三模式集成首个注册遇502：API切换Mock配置重建后，仍运行的Nginx缓存旧地址；改为Docker DNS动态upstream，并在写入夹具前重新检查实时代理就绪。Nginx1.30.5配置语法检查通过；不重试变更请求掩盖失败。[失败与修复证据](validation/backend-m5-1015-01/ci-first-failures.json)。
-- 首轮完整MySQL步骤已通过；修复后的整轮CI尚待执行，M5尚未完成。真实模型0；原18080/18088不替换。
+- 首轮完整MySQL692项全部通过，685.38秒；修复后的整轮CI尚待执行，M5尚未完成。真实模型0；原18080/18088不替换。
 
 ## 2026-10-14：M0 项目基线审计
 

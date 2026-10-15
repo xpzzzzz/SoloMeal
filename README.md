@@ -141,7 +141,7 @@ flowchart LR
 
 真实Broker停机、Worker SIGKILL、重复投递、双Worker、超时重试、取消/编辑及浏览器响应丢失已有验证。单节点RabbitMQ没有集群高可用保证；外部解析可能执行多次，不能承诺外部调用恰好一次。见[M3链路](docs/validation/receipt-async/m3-normal-workflow-1015.md)、[M4故障报告](docs/validation/receipt-async/m4-reliability-1015.md)。
 
-API镜像保留轻量依赖，CPU OCR包只进入Worker镜像。权重通过独立命令从官方源取得并校验固定SHA256，Worker只读私有图片卷与模型卷；数据库和Broker没有宿主机端口。配置、故障降级、干净部署和备份恢复见[部署指南](deploy/README.md)。本轮CI/最终回归进度见[增强执行记录](docs/backend-engineering-enhancement-progress.md)，历史远程CI成功不能替代本轮未提交源码的验证。
+API镜像保留轻量依赖，CPU OCR包只进入Worker镜像。权重通过独立命令从官方源取得并校验固定SHA256，Worker只读私有图片卷与模型卷；数据库和Broker没有宿主机端口。配置、故障降级、干净部署和备份恢复见[部署指南](deploy/README.md)。M0～M5已完成，[本轮CI十作业全成功](https://github.com/xpzzzzz/SoloMeal/actions/runs/38676874837)：MySQL692、SQLite676通过/16跳过、正式CPU和26表/私有图片/outbox联合恢复。完整证据与限制见[增强执行记录](docs/backend-engineering-enhancement-progress.md)，历史远程CI成功不能替代本轮未提交源码的验证。
 
 ## 4. 验证结果：逐项对应方案，保留适用范围
 

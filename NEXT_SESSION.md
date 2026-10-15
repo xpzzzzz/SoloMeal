@@ -1,3 +1,7 @@
+> 2026-10-15 15:10 后端工程增强M0～M5已依序完成。[草稿PR #3](https://github.com/xpzzzzz/SoloMeal/pull/3)，代码03880fc的[CI十作业成功](https://github.com/xpzzzzz/SoloMeal/actions/runs/38676874837)：MySQL692、SQLite676通过/16跳过、前端68、浏览器41通过/4条件跳过、Linux插件378＋300/覆盖率92%；正式CPU三模式和26表/私有图片/outbox联合恢复通过。付费模型0，默认vlm_only/OCR关闭；不合并、不替换18080/18088，源HEAD/索引保留。最终18088 live/ready200；宿主Docker控制仍超时、C盘约0.73GiB，未清理磁盘。见[交付说明](docs/backend-engineering-delivery-1015.md)与[执行记录](docs/backend-engineering-enhancement-progress.md)。
+
+> 2026-10-15 11:35 后端增强：M0～M4.5完成，M5仍在CI收口。已获完整快照发布授权，独立分支codex/backend-engineering-m5-1015已推送，[草稿PR #3](https://github.com/xpzzzzz/SoloMeal/pull/3)。首轮真实MySQL692通过（685.38秒）；首轮页面即时断言和API重建后Nginx地址缓存两处失败已修复，第二轮[CI](https://github.com/xpzzzzz/SoloMeal/actions/runs/38676874837)执行中。未合并、不替换18080/18088、付费模型0；原工作区HEAD/索引保留。见[执行记录](docs/backend-engineering-enhancement-progress.md)。
+
 > 2026-10-15 11:10 后端增强交接：M0～M4.5完成，M5尚未收口，用户已明确批准独立分支、草稿PR及CI，现执行发布验证。本地SQLite674通过/16跳过、前端68、浏览器41通过/4条件跳过、真实CPU/MQ六场景和联合备份通过；完整MySQL被Docker虚拟盘I/O故障中断，不记通过。引擎与原18088已恢复（health200、镜像未替换），本轮验证项目停止且保留卷。源工作区与未提交改动保留；隔离交审分支codex/backend-engineering-m5-1015尚未提交/推送。禁止付费模型；见 [交审范围](docs/backend-engineering-review-1015.md) / [执行记录](docs/backend-engineering-enhancement-progress.md)。
 
 > 2026-10-15 后端增强最新状态：M0～M4.5已完成，M5收口验证中。OCR三模式18次实测、8真实MQ场景、2页面流程通过；最终SQLite674通过/16跳过、浏览器41通过/4条件跳过。正式CPU镜像/干净模型卷、完整MySQL及远程CI尚未全部收口，不能标M5完成。见 [执行记录](docs/backend-engineering-enhancement-progress.md) / [交付说明](docs/backend-engineering-delivery-1015.md)。真实模型0、原18080/18088未替换、未提交推送。

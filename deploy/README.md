@@ -130,3 +130,5 @@ verify使用原合成账号重新登录，比较全部演示业务快照、旧Ag
 `docker compose --env-file 私有env -p 项目名 stop`只停服务、保留卷；再次up恢复。不要对含用户数据的项目执行down -v。本次验收保留源演示环境18080，恢复环境18081验证后停止，命名卷和证据保留。
 
 安卓试用见[真机步骤](../docs/android-trial.md)，当前默认回环绑定不修改防火墙或开放公网。正式交付还需HTTPS/访问策略、资源与并发配额、大列表及嵌套历史边界、主机断电/MySQL数据盘写满演练、依赖更新与全新主机验收，见PLAN P9及STATUS。本轮边界变更尚未更新源18080的运行服务。
+
+2026-10-15正式干净构建与联合恢复的[实际CI](https://github.com/xpzzzzz/SoloMeal/actions/runs/38676874837)已通过；[26表/图片/未发布任务摘要](../docs/validation/backend-m5-1015-01/ci-r2-pipeline.json)。Nginx通过Docker内置DNS动态解析API，配置重建导致API地址更换后会刷新；部署检查重新读取实时就绪接口，不能仅依赖旧容器缓存的healthy状态。宿主机磁盘及Docker控制超时的保留限制见[最终交付](../docs/backend-engineering-delivery-1015.md)，本轮未替换18080/18088。

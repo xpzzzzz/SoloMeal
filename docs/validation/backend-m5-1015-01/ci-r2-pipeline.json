@@ -1,0 +1,144 @@
+{
+  "run_id": 38676874837,
+  "run_url": "https://github.com/xpzzzzz/SoloMeal/actions/runs/38676874837",
+  "code_commit": "03880fc516f41fb448d2ebe4bc7db73143f3e714",
+  "job_id": 116232475876,
+  "job_conclusion": "success",
+  "formal_clean_build": true,
+  "model_disabled_core_flow": true,
+  "broker_and_worker_restart_passed": true,
+  "provider": "Closed synthetic Mock; no external model endpoint",
+  "records": [
+    {
+      "ocr_models": "verified",
+      "model_count": 2
+    },
+    {
+      "scenarios": [
+        {
+          "mode": "ocr_only",
+          "fault": null,
+          "status": "parsed",
+          "states": [
+            "queued",
+            "parsing",
+            "parsed"
+          ],
+          "seconds": 3.3041656589999775,
+          "task_id": "3da781d8-7554-4659-a02b-45045b5f9587",
+          "ocr_line_count": 1,
+          "last_attempt_mock_vlm_calls": 0,
+          "conflicts": 0,
+          "inventory_before_review": 0
+        },
+        {
+          "mode": "vlm_only",
+          "fault": null,
+          "status": "parsed",
+          "states": [
+            "queued",
+            "parsed"
+          ],
+          "seconds": 0.44390224900007524,
+          "task_id": "bdb0ae3b-7e5c-4182-af53-707f9966f9e8",
+          "ocr_line_count": 0,
+          "last_attempt_mock_vlm_calls": 1,
+          "conflicts": 0,
+          "inventory_before_review": 0
+        },
+        {
+          "mode": "hybrid",
+          "fault": null,
+          "status": "parsed",
+          "states": [
+            "queued",
+            "parsing",
+            "parsed"
+          ],
+          "seconds": 0.8892566650000617,
+          "task_id": "49d30a9f-468b-49b9-b2e0-ffbcad170526",
+          "ocr_line_count": 1,
+          "last_attempt_mock_vlm_calls": 1,
+          "conflicts": 0,
+          "inventory_before_review": 0
+        },
+        {
+          "mode": "hybrid",
+          "fault": "conflict",
+          "status": "parsed",
+          "states": [
+            "queued",
+            "parsed"
+          ],
+          "seconds": 0.8483376579999913,
+          "task_id": "f32d2c0a-9d56-448b-9bb3-b88346e1dd60",
+          "ocr_line_count": 1,
+          "last_attempt_mock_vlm_calls": 1,
+          "conflicts": 1,
+          "inventory_before_review": 0
+        },
+        {
+          "mode": "hybrid",
+          "fault": "ocr_failed",
+          "status": "parsed",
+          "states": [
+            "queued",
+            "parsing",
+            "parsed"
+          ],
+          "seconds": 0.8508558449999555,
+          "task_id": "179df8d7-daaf-4e55-8385-5fc96e16e96a",
+          "ocr_line_count": 0,
+          "last_attempt_mock_vlm_calls": 1,
+          "conflicts": 0,
+          "inventory_before_review": 0
+        },
+        {
+          "mode": "hybrid",
+          "fault": "failed",
+          "status": "failed",
+          "states": [
+            "queued",
+            "parsing",
+            "retrying",
+            "parsing",
+            "failed"
+          ],
+          "seconds": 3.2929786559999457,
+          "task_id": "c38f8c52-4c97-4dec-8ef4-d351b95d6108",
+          "ocr_line_count": 0,
+          "last_attempt_mock_vlm_calls": 1,
+          "conflicts": 0,
+          "inventory_before_review": 0
+        }
+      ],
+      "confirmed_once": true,
+      "inventory_after_receipt_review": 1,
+      "shopping_confirmed_once": true,
+      "cooking_and_undo_replayed_once": true,
+      "final_quantity_g": "700",
+      "real_model_calls": 0,
+      "mock_usage_is_fixture_only": true,
+      "source_image_sha256": "478431d4c7dc59ef7719f31c21ef348844ff42ba7a6ee1464c1012da2caf6fce"
+    },
+    {
+      "source_project": "solomeal-ci",
+      "target_project": "solomeal-ci-restore",
+      "task_id": "13f2743f-74d0-40be-905f-e13ee083485e",
+      "receipt_id": "244db285-ceda-4b34-ab9f-ff78e52c7709",
+      "source_unpublished_attempts": 0,
+      "full_database_snapshot_equal_before_worker_start": true,
+      "table_count": 26,
+      "receipt_task_count_in_backup": 7,
+      "target_execution_attempts": 1,
+      "target_parse_status": "parsed",
+      "inventory_unchanged": true,
+      "private_image_bytes_equal": true,
+      "weights_downloaded_into_fresh_target_volume": true,
+      "restore_worker_start_to_parsed_seconds": 14.261616476999961,
+      "schema_revision": "f1b7d9e31015",
+      "real_model_calls": 0
+    }
+  ],
+  "real_model_calls": 0
+}
