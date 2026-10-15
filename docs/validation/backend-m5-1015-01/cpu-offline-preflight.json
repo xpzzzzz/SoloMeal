@@ -1,0 +1,11 @@
+{
+  "python": "3.13.15",
+  "paddle": "3.3.1",
+  "opencv": "4.10.0",
+  "numpy": "2.3.5",
+  "cuda_compiled": false,
+  "ocr_line_count": 3,
+  "pinned_model_hashes_verified": true,
+  "network": "none",
+  "real_model_calls": 0
+}

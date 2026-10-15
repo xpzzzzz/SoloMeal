@@ -1,4 +1,4 @@
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta, timezone
 from decimal import Decimal
 
 import pytest
@@ -30,7 +30,8 @@ def setup_combination(client):
     for iid, qty, unit in ((egg, "3", "piece"), (rice, "150", "g")):
         assert post(client, h, "/inventory", {"ingredient_id": iid, "quantity": qty, "unit": unit}, iid).status_code == 201
     assert post(client, h, "/inventory", {"ingredient_id": egg, "quantity": "99", "unit": "piece",
-        "expires_on": (date.today()-timedelta(days=1)).isoformat(), "expiry_source": "user"}, "expired").status_code == 201
+        # Expired under both the native host calendar and the service's UTC calendar.
+        "expires_on": (min(date.today(), datetime.now(timezone.utc).date())-timedelta(days=1)).isoformat(), "expiry_source": "user"}, "expired").status_code == 201
     assert post(client, h, "/quotes", quote(egg, package_quantity="6", package_price="6"), "quote").status_code == 200
     return h, egg, rice, milk, {"recipes": recipes}
 

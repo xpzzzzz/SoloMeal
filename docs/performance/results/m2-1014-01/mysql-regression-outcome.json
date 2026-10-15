@@ -1,0 +1,6 @@
+{
+  "exit_code": 0,
+  "dedicated_schema": "solomeal_test",
+  "fixture_volume": "solomeal-perf-m1-1014-01",
+  "models_disabled": true
+}

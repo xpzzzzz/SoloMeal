@@ -1,0 +1,11 @@
+# Deliberately shorter bounds for the isolated M4 fault suite; production defaults unchanged.
+services:
+  api:
+    environment: &fault-bounds
+      SOLOMEAL_RECEIPT_TASK_DEADLINE_SECONDS: "180"
+      SOLOMEAL_RECEIPT_TASK_LEASE_SECONDS: "25"
+      SOLOMEAL_RECEIPT_WORKER_HARD_LIMIT_SECONDS: "15"
+      SOLOMEAL_RECEIPT_RETRY_SECONDS: "0.5"
+      SOLOMEAL_RECEIPT_DISPATCH_INTERVAL_SECONDS: "0.5"
+  worker:
+    environment: *fault-bounds

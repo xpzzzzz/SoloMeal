@@ -379,6 +379,31 @@ def recipe_view(db, user_id, recipe_id):
         .where(RecipeIngredient.recipe_id == recipe.id, RecipeIngredient.user_id == user_id)
         .order_by(Ingredient.id)
     )
+    return _recipe_view(recipe, lines)
+
+
+def recipe_views(db, user_id, recipe_ids):
+    """Two owned reads for a collection, preserving the caller's order and 404s."""
+    ids = [str(value) for value in recipe_ids]
+    if not ids:
+        return []
+    recipes = {r.id: r for r in db.scalars(
+        select(Recipe).where(Recipe.user_id == user_id, Recipe.id.in_(ids))
+    )}
+    if any(value not in recipes for value in ids):
+        raise AppError(404, "NOT_FOUND", "Object not found")
+    grouped = {value: [] for value in ids}
+    for line, ingredient in db.execute(
+        select(RecipeIngredient, Ingredient)
+        .join(Ingredient, RecipeIngredient.ingredient_id == Ingredient.id)
+        .where(RecipeIngredient.user_id == user_id, RecipeIngredient.recipe_id.in_(ids))
+        .order_by(RecipeIngredient.recipe_id, Ingredient.id)
+    ):
+        grouped[line.recipe_id].append((line, ingredient))
+    return [_recipe_view(recipes[value], grouped[value]) for value in ids]
+
+
+def _recipe_view(recipe, lines):
     return {
         "id": recipe.id,
         "name": recipe.name,

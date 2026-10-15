@@ -1,0 +1,22 @@
+# Explicit opt-in, isolated validation only. No public model endpoint or credentials.
+services:
+  mock-vlm:
+    image: solomeal-api:${IMAGE_TAG:-local}
+    command: [python, /ci/mock_vlm.py]
+    volumes:
+      - ./deploy/ci:/ci:ro
+    restart: "no"
+  api:
+    environment: &mock-environment
+      SOLOMEAL_RECEIPT_VISION_ENABLED: "true"
+      SOLOMEAL_RECEIPT_OCR_ENABLED: "true"
+      SOLOMEAL_MODEL_BASE_URL: http://mock-vlm:8010/v1
+      SOLOMEAL_MODEL_NAME: synthetic-ci-oracle
+      SOLOMEAL_MODEL_API_KEY: ci-only-not-a-provider-key
+      SOLOMEAL_RECEIPT_DISPATCH_INTERVAL_SECONDS: "0.5"
+      SOLOMEAL_RECEIPT_RETRY_SECONDS: "0.5"
+  worker:
+    environment: *mock-environment
+    depends_on:
+      mock-vlm:
+        condition: service_started

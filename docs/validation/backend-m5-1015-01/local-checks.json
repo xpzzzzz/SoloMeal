@@ -1,0 +1,69 @@
+{
+  "frontend_unit": {
+    "passed": 68,
+    "failed": 0
+  },
+  "frontend_build": {
+    "passed": true,
+    "host_js": "index-Dt3AhHZB.js"
+  },
+  "browser_fixture": {
+    "total": 45,
+    "passed": 41,
+    "skipped": 4,
+    "failed": 0,
+    "seconds": 285.8971508
+  },
+  "plugin_windows": {
+    "unit_passed": 375,
+    "integration_passed": 298,
+    "failed": 0
+  },
+  "performance_tool_isolation": {
+    "passed": 3,
+    "failed": 0
+  },
+  "backend_static": {
+    "ruff_select": [
+      "F",
+      "E9"
+    ],
+    "passed": true,
+    "compileall_passed": true
+  },
+  "workflow_structure": {
+    "job_definitions": 8,
+    "all_feed_ci_complete": true,
+    "remote_run": null
+  },
+  "sqlite_full": {
+    "total": 690,
+    "passed": 674,
+    "skipped": 16,
+    "failed": 0,
+    "seconds": 820.22
+  },
+  "models_backup": {
+    "passed": 28,
+    "failed": 0
+  },
+  "clean_models_disabled_core": {
+    "mode": "seed",
+    "passed": true,
+    "model_calls": 0,
+    "receipt_bytes_equal": true,
+    "private_download_requires_auth": true,
+    "restored_snapshots_and_idempotent_replay": false,
+    "port": 18120
+  },
+  "plugin_coverage_windows": {
+    "percent": 91,
+    "threshold": 91,
+    "passed": true
+  },
+  "plugin_mypy": {
+    "windows_native_posix_symbol_errors": 6,
+    "linux_target_passed": true,
+    "source_files": 50
+  }
+}

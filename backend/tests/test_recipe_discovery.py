@@ -450,6 +450,7 @@ def test_the_production_provider_separates_an_empty_answer_from_a_broken_one(cli
 
     settings = client.app.state.settings
     settings.recipe_discovery_enabled = True
+    settings.model_enable_thinking = False
     settings.model_name, settings.model_api_key = "mock-discovery-model", SecretStr("not-a-real-key")
     client.app.state.recipe_discovery = ModelDiscoveryProvider(settings,
                                                               transport=httpx.MockTransport(handler))
@@ -468,7 +469,28 @@ def test_the_production_provider_separates_an_empty_answer_from_a_broken_one(cli
         assert batch["usage"] is None
     # Nothing retries on its own: the recorded claim is replayed, so one click is one request.
     assert len(calls) == 1
+    assert json.loads(calls[0].content)["enable_thinking"] is False
     assert rows(client, Recipe) == 0
+
+
+def test_production_provider_reports_a_timeout_as_model_timeout(client):
+    headers, _ = setup(client)
+
+    def timeout(request):
+        raise httpx.ReadTimeout("private transport details", request=request)
+
+    settings = client.app.state.settings
+    settings.recipe_discovery_enabled = True
+    settings.model_name, settings.model_api_key = "mock-discovery-model", SecretStr("not-a-real-key")
+    client.app.state.recipe_discovery = ModelDiscoveryProvider(
+        settings, transport=httpx.MockTransport(timeout))
+    response = generate(client, headers, key="discover-timeout")
+    batch = client.get("/api/v1/recipe-discoveries", headers=headers).json()[0]
+    assert response.status_code == 504
+    assert response.json()["error"]["code"] == "MODEL_TIMEOUT"
+    assert "private transport details" not in response.text
+    assert batch["status"] == "failed" and batch["error_code"] == "MODEL_TIMEOUT"
+    assert batch["usage"] is None and batch["drafts"] == []
 
 
 def test_a_foreign_ingredient_id_in_a_draft_is_rejected_not_resolved(client):

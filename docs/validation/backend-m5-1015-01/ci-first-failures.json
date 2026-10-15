@@ -1,0 +1,41 @@
+{
+  "run_id": 38675670822,
+  "url": "https://github.com/xpzzzzz/SoloMeal/actions/runs/38675670822",
+  "commit": "0fdb4bc68cee96d23a758ce629365aa91b1854e6",
+  "failures": [
+    {
+      "job_id": 116228587146,
+      "name": "browser-e2e",
+      "passed": 39,
+      "failed": 2,
+      "skipped": 4,
+      "location": "frontend/e2e/comfort.test.mjs:22",
+      "message": "Expected true but observed false for inventory-entry.open",
+      "cause": "Assertion read before openSection's requestAnimationFrame callback; no page.goto timeout occurred",
+      "fix": "Wait for actual details[open] after the click; retain collapsed/default and expanded assertions"
+    },
+    {
+      "job_id": 116228587128,
+      "name": "receipt-pipeline",
+      "step": "Real MySQL RabbitMQ Celery CPU OCR and three-mode integration",
+      "message": "Unexpected HTTP 502 on POST /auth/register",
+      "completed": [
+        "Formal pinned API/CPU Worker/Web build",
+        "Clean migrated deployment and model-disabled core checks",
+        "Pinned public weights in empty volume",
+        "Recreate API/Worker with closed local Mock configuration"
+      ],
+      "cause": "API recreated while existing Nginx retained its startup DNS address; source has static proxy_pass api:8000",
+      "fix": "Shared resolving upstream, Docker DNS refreshed every second; check fresh live proxy readiness before writing fixtures"
+    }
+  ],
+  "local_fix_validation": {
+    "nginx_1_30_5_config_test": true,
+    "comfort_desktop_and_mobile": {
+      "passed": 2,
+      "failed": 0,
+      "seconds": 14.5906555
+    }
+  },
+  "paid_model_calls": 0
+}

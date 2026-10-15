@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "receipt_id": "f0762ced-d157-4988-8258-98fd71bf0552",
+  "task_id": "f4b4b175-b397-4994-8536-e5ebda7e389d",
+  "server_accepted_before_abort": true,
+  "original_key_reused": true,
+  "receipt_version": 2,
+  "relogin_restored": true,
+  "inventory_count": 0,
+  "real_model_calls": 0
+}

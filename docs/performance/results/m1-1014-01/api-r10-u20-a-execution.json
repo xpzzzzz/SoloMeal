@@ -1,0 +1,9 @@
+{
+  "run": "api-r10-u20-a",
+  "scale": 10,
+  "users": 20,
+  "entry": "api",
+  "planned_measured_seconds": 45,
+  "locust_exit_code": 0,
+  "elapsed_wall_seconds": 54.09768557548523
+}

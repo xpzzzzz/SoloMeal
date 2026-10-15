@@ -1,0 +1,9 @@
+{
+  "run": "nginx-r10-u20-a",
+  "scale": 10,
+  "users": 20,
+  "entry": "nginx",
+  "planned_measured_seconds": 45,
+  "locust_exit_code": 0,
+  "elapsed_wall_seconds": 53.61831569671631
+}

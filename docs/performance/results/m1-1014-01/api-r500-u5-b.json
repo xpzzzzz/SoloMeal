@@ -1,0 +1,98 @@
+{
+  "run": "api-r500-u5-b",
+  "scale": 500,
+  "mode": "mixed",
+  "host": "http://api:8000",
+  "warmup_http_status_counts": {
+    "200": 10
+  },
+  "measured_seconds_including_drain": 60.243895922001684,
+  "warmup_seconds_after_spawn": 5,
+  "http_status_counts": {
+    "200": 7
+  },
+  "total": {
+    "method": "",
+    "name": "Aggregated",
+    "requests": 7,
+    "failures": 0,
+    "rps": 0.1158933181236911,
+    "raw_requests": 7,
+    "window_rps": 0.11619434455339614,
+    "p50_exact_ms": 46403.29567299341,
+    "p95_exact_ms": 46892.83567899838,
+    "p50_ms": 46000,
+    "p95_ms": 47000,
+    "average_ms": 37994.25865585675,
+    "max_ms": 46892.83567899838,
+    "response_bytes_mean": 1423322.0
+  },
+  "endpoints": [
+    {
+      "method": "GET",
+      "name": "/api/v1/inventory",
+      "requests": 0,
+      "failures": 0,
+      "rps": 0.0,
+      "raw_requests": 0,
+      "window_rps": 0.0,
+      "p50_exact_ms": null,
+      "p95_exact_ms": null,
+      "p50_ms": 0,
+      "p95_ms": 0,
+      "average_ms": 0.0,
+      "max_ms": 0,
+      "response_bytes_mean": 0
+    },
+    {
+      "method": "GET",
+      "name": "/api/v1/recipes",
+      "requests": 0,
+      "failures": 0,
+      "rps": 0.0,
+      "raw_requests": 0,
+      "window_rps": 0.0,
+      "p50_exact_ms": null,
+      "p95_exact_ms": null,
+      "p50_ms": 0,
+      "p95_ms": 0,
+      "average_ms": 0.0,
+      "max_ms": 0,
+      "response_bytes_mean": 0
+    },
+    {
+      "method": "GET",
+      "name": "/api/v1/home",
+      "requests": 5,
+      "failures": 0,
+      "rps": 0.08278094151692221,
+      "raw_requests": 5,
+      "window_rps": 0.08299596039528295,
+      "p50_exact_ms": 46782.01814099884,
+      "p95_exact_ms": 46892.83567899838,
+      "p50_ms": 47000,
+      "p95_ms": 47000,
+      "average_ms": 46246.97596959886,
+      "max_ms": 46892.83567899838,
+      "response_bytes_mean": 1431941.8
+    },
+    {
+      "method": "POST",
+      "name": "/api/v1/recommendations",
+      "requests": 2,
+      "failures": 0,
+      "rps": 0.033112376606768884,
+      "raw_requests": 2,
+      "window_rps": 0.03319838415811318,
+      "p50_exact_ms": 16224.210458996822,
+      "p95_exact_ms": 18500.720284006093,
+      "p50_ms": 19000,
+      "p95_ms": 19000,
+      "average_ms": 17362.465371501457,
+      "max_ms": 18500.720284006093,
+      "response_bytes_mean": 1401772.5
+    }
+  ],
+  "percentiles": "Locust histogram buckets; not exact raw quantiles",
+  "user_count_at_quit": 0
+}

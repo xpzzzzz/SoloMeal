@@ -20,11 +20,17 @@ services:
     build:
       context: .
       dockerfile: deploy/backend.Dockerfile
+      target: api
     environment: &api-environment
       SOLOMEAL_DATABASE_URL: mysql+pymysql://solomeal:${DB_PASSWORD}@db:3306/solomeal?charset=utf8mb4
       SOLOMEAL_RECEIPT_STORAGE_DIR: /var/lib/solomeal/uploads
+      SOLOMEAL_RECEIPT_BROKER_URL: amqp://solomeal:${RABBITMQ_PASSWORD:?Generate a deployment env file first}@rabbitmq:5672//
       SOLOMEAL_AGENT_ENABLED: ${SOLOMEAL_AGENT_ENABLED:-false}
       SOLOMEAL_RECEIPT_VISION_ENABLED: ${SOLOMEAL_RECEIPT_VISION_ENABLED:-false}
+      SOLOMEAL_RECEIPT_OCR_ENABLED: ${SOLOMEAL_RECEIPT_OCR_ENABLED:-false}
+      SOLOMEAL_RECEIPT_RECOGNITION_MODE: ${SOLOMEAL_RECEIPT_RECOGNITION_MODE:-vlm_only}
+      SOLOMEAL_RECEIPT_OCR_MODEL_DIR: /var/lib/solomeal/ocr-models
+      SOLOMEAL_RECEIPT_OCR_MIN_CONFIDENCE: ${SOLOMEAL_RECEIPT_OCR_MIN_CONFIDENCE:-0.85}
       SOLOMEAL_MODEL_BASE_URL: ${SOLOMEAL_MODEL_BASE_URL:-https://api.openai.com/v1}
       SOLOMEAL_MODEL_NAME: ${SOLOMEAL_MODEL_NAME:-}
       SOLOMEAL_MODEL_API_KEY: ${SOLOMEAL_MODEL_API_KEY:-}
@@ -47,6 +53,7 @@ services:
     build:
       context: .
       dockerfile: deploy/backend.Dockerfile
+      target: api
     environment: *api-environment
     volumes:
       - uploads:/var/lib/solomeal/uploads
@@ -76,6 +83,65 @@ services:
       timeout: 5s
       retries: 20
     restart: unless-stopped
+  rabbitmq:
+    image: rabbitmq:4.2.7@sha256:fc77225daf7063fee5b9ea4377b5244ce73dc6b59c2240517dad28630063079e
+    hostname: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: solomeal
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:?Generate a deployment env file first}
+      RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: "+S 2:2"
+    volumes:
+      - broker_data:/var/lib/rabbitmq
+      - ./deploy/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
+    cpus: 1.0
+    mem_limit: 512m
+    healthcheck:
+      test: [CMD, rabbitmq-diagnostics, -q, ping]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 20s
+    restart: unless-stopped
+  worker:
+    image: solomeal-worker:${IMAGE_TAG:-local}
+    build:
+      context: .
+      dockerfile: deploy/backend.Dockerfile
+      target: worker
+    environment: *api-environment
+    command: [python, -m, app.jobs.supervise]
+    volumes:
+      - uploads:/var/lib/solomeal/uploads:ro
+      - ocr_models:/var/lib/solomeal/ocr-models:ro
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      rabbitmq:
+        condition: service_healthy
+    cpus: 2.0
+    mem_limit: 2g
+    stop_grace_period: 120s
+    healthcheck:
+      test: [CMD, python, -c, 'import os,time; from pathlib import Path; os.kill(int(Path("/tmp/receipt-worker.pid").read_text()),0); assert time.time()-Path("/tmp/receipt-dispatch.heartbeat").stat().st_mtime<90']
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    restart: unless-stopped
+  ocr-models:
+    profiles: [ocr-setup]
+    image: solomeal-worker:${IMAGE_TAG:-local}
+    build:
+      context: .
+      dockerfile: deploy/backend.Dockerfile
+      target: worker
+    environment: *api-environment
+    command: [python, -m, app.jobs.ocr_models]
+    volumes:
+      - ocr_models:/var/lib/solomeal/ocr-models
+    restart: "no"
 volumes:
   database:
   uploads:
+  broker_data:
+  ocr_models:

@@ -1,0 +1,44 @@
+{
+  "distributions": 102,
+  "checked_files": 13076,
+  "mismatched_files": 101,
+  "metadata_errors": [
+    {
+      "package": "paddlex",
+      "error": "Error"
+    }
+  ],
+  "by_package": {
+    "future": 10,
+    "PyYAML": 18,
+    "paddleocr": 71,
+    "paddlepaddle": 2
+  },
+  "sample": [
+    {
+      "package": "future",
+      "file": "past/__init__.py",
+      "reason": "hash"
+    },
+    {
+      "package": "future",
+      "file": "past/builtins/__init__.py",
+      "reason": "hash"
+    },
+    {
+      "package": "future",
+      "file": "past/builtins/misc.py",
+      "reason": "hash"
+    },
+    {
+      "package": "future",
+      "file": "past/builtins/noniterators.py",
+      "reason": "hash"
+    },
+    {
+      "package": "future",
+      "file": "past/translation/__init__.py",
+      "reason": "hash"
+    }
+  ]
+}

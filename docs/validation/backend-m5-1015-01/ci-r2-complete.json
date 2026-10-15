@@ -1,0 +1,101 @@
+{
+  "run_id": 38676874837,
+  "run_url": "https://github.com/xpzzzzz/SoloMeal/actions/runs/38676874837",
+  "head_sha": "03880fc516f41fb448d2ebe4bc7db73143f3e714",
+  "workflow_conclusion": "success",
+  "jobs": [
+    {
+      "id": 116232475771,
+      "name": "browser-e2e",
+      "conclusion": "success"
+    },
+    {
+      "id": 116232475876,
+      "name": "receipt-pipeline",
+      "conclusion": "success"
+    },
+    {
+      "id": 116232475888,
+      "name": "coverage",
+      "conclusion": "success"
+    },
+    {
+      "id": 116232475893,
+      "name": "tests (3.12)",
+      "conclusion": "success"
+    },
+    {
+      "id": 116232475931,
+      "name": "tests (3.13)",
+      "conclusion": "success"
+    },
+    {
+      "id": 116232475947,
+      "name": "tests (3.14)",
+      "conclusion": "success"
+    },
+    {
+      "id": 116232475967,
+      "name": "backend",
+      "conclusion": "success"
+    },
+    {
+      "id": 116232476005,
+      "name": "types",
+      "conclusion": "success"
+    },
+    {
+      "id": 116232476028,
+      "name": "frontend",
+      "conclusion": "success"
+    },
+    {
+      "id": 116236783326,
+      "name": "ci-complete",
+      "conclusion": "success"
+    }
+  ],
+  "mysql": {
+    "passed": 692,
+    "failed": 0,
+    "seconds": 690.15
+  },
+  "sqlite": {
+    "passed": 676,
+    "skipped": 16,
+    "failed": 0,
+    "seconds": 208.54
+  },
+  "frontend": {
+    "passed": 68,
+    "failed": 0
+  },
+  "browser": {
+    "passed": 41,
+    "skipped": 4,
+    "failed": 0,
+    "seconds": 183.295103835,
+    "skips": "Four live-environment conditions; earlier real MQ/browser evidence remains separately reported"
+  },
+  "plugin_linux": {
+    "unit": 378,
+    "integration": 300,
+    "python_versions": [
+      "3.12",
+      "3.13",
+      "3.14"
+    ],
+    "coverage_percent": 92,
+    "mypy_source_files": 50
+  },
+  "performance_tool_guards": 3,
+  "cpu_pipeline": "ci-r2-pipeline.json",
+  "paid_model_calls": 0,
+  "previous_failures": "ci-first-failures.json",
+  "limitations": [
+    "Synthetic OCR set and oracle Mock do not establish real VLM accuracy or cost improvement",
+    "Default vlm_only and OCR disabled retained",
+    "Native Windows OCR inference not tested",
+    "Cloud clean deployment passed; local Docker control timeouts and low C-drive space remain"
+  ]
+}

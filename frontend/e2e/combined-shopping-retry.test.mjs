@@ -1,3 +1,4 @@
+import {clickAction} from './support.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {desktopContext,launchBrowser,makeApi,openPage,signUp,startFixture,useTab} from './support.mjs';
@@ -16,7 +17,7 @@ test('F7 keeps the exact unresolved creation across navigation, then permits a n
   const keys=[];
   for(const mode of ['direct','navigate','inflight']){
    await useTab(page,'我的菜谱');
-   await page.locator('.recipe-grid').getByRole('button',{name:'加入采购组合'}).click();
+   await clickAction(page.locator('.recipe-grid'),'加入采购组合');
    await page.getByLabel('组合预算（元，可留空）').fill('12.50');
    await page.getByRole('button',{name:'计算采购',exact:true}).click();await page.locator('.combined-preview').waitFor();
    let firstBody,firstKey,firstId,release,committed;
@@ -51,12 +52,12 @@ test('F7 keeps the exact unresolved creation across navigation, then permits a n
    const after=await call('/shopping');assert.equal(after.length,before.length);
    assert.equal((await recovered.json()).id,firstId);
    assert.ok(!keys.includes(firstKey));keys.push(firstKey);
-   await page.getByRole('heading',{name:'买好需要的，记入厨房',exact:true}).waitFor();
+   await page.getByRole('heading',{name:'采购清单',exact:true}).waitFor();
    assert.equal(await page.locator('.combination-row').count(),0);
    assert.equal(await page.getByRole('button',{name:'重试保存组合清单',exact:true}).count(),0);
   }
   // Explicit session change discards the old user's pending state.
-  await useTab(page,'我的菜谱');await page.locator('.recipe-grid').getByRole('button',{name:'加入采购组合'}).click();
+  await useTab(page,'我的菜谱');await clickAction(page.locator('.recipe-grid'),'加入采购组合');
   await page.getByRole('button',{name:'计算采购',exact:true}).click();await page.locator('.combined-preview').waitFor();
   await page.route('**/api/v1/shopping/combined',route=>route.abort('failed'));
   await page.getByRole('button',{name:'保存组合采购清单',exact:true}).click();

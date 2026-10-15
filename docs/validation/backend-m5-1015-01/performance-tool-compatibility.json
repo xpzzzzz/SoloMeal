@@ -1,0 +1,13 @@
+{
+  "api_build_target": "api",
+  "worker_and_broker_excluded_by_default": true,
+  "ocr_enabled": false,
+  "models_off_guard_passed": true,
+  "services": [
+    "api",
+    "db",
+    "diagnostic",
+    "migrate",
+    "web"
+  ]
+}
