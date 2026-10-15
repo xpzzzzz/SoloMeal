@@ -14,6 +14,14 @@
 | M4.5 | 已完成 | [OCR报告](validation/ocr/m45-hybrid-1015.md)：18模式实测、8真实MQ场景、2浏览器流程；真实模型0 |
 | M5 | 执行中 | 正式CPU Worker镜像、模型初始化、CI集成、干净部署与最终回归/文档 |
 
+## 2026-10-15：获准发布草稿PR，处理首轮CI
+
+- 用户明确批准包含原有前端精简改动的完整快照；独立分支提交`0fdb4bc`，已推送并创建[草稿PR #3](https://github.com/xpzzzzz/SoloMeal/pull/3)，未合并，原工作区HEAD/索引保留。
+- [首轮CI](https://github.com/xpzzzzz/SoloMeal/actions/runs/38675670822)正式API/CPU Worker/Web干净构建、启动和空权重卷初始化通过。前端68、Linux插件378＋300、mypy50文件、覆盖率92%通过。
+- 首轮浏览器39通过/2失败/4条件跳过：两处同为界面测试在requestAnimationFrame展开前即时断言，现等待实际open属性再断言；原首导航超时问题未改动。本地桌面/手机2/2复验通过。
+- 三模式集成首个注册遇502：API切换Mock配置重建后，仍运行的Nginx缓存旧地址；改为Docker DNS动态upstream，并在写入夹具前重新检查实时代理就绪。Nginx1.30.5配置语法检查通过；不重试变更请求掩盖失败。[失败与修复证据](validation/backend-m5-1015-01/ci-first-failures.json)。
+- 完整MySQL仍运行，M5尚未完成。真实模型0；原18080/18088不替换。
+
 ## 2026-10-14：M0 项目基线审计
 
 - 只读审计 planning/home/food/receipts/receipt_parser/database、API、ReceiptPanel、Compose、Nginx、迁移、测试、CI 和备份恢复配置。

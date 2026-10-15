@@ -13,7 +13,7 @@ from uuid import UUID
 
 import httpx
 
-from check_async_pipeline import synthetic
+from check_async_pipeline import synthetic, wait_ready
 from manage import Deployment, initialize
 
 
@@ -50,6 +50,7 @@ def run(args):
         listener.bind(('127.0.0.1', args.target_port))
     args.private.mkdir(parents=True, exist_ok=False)
     source = Deployment(args.source_project, args.source_env)
+    wait_ready(args.source_url)
     credentials = json.loads(args.credentials.read_text())
     client = httpx.Client(base_url=args.source_url.rstrip('/') + '/api/v1', timeout=20)
     login = client.post('/auth/login', json={k: credentials[k] for k in ('username', 'password')})

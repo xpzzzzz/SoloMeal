@@ -19,6 +19,7 @@ for(const mobile of [false,true])test(`简洁界面保留录入、菜谱反馈�
   await primary.getByRole('button',{name:'食材库存',exact:true}).click();
   assert.equal(await page.locator('#inventory-entry').evaluate(el=>el.open),false,'库存以查看为主，录入按需展开');
   await page.getByRole('button',{name:'添加库存',exact:true}).click();
+  await page.locator('#inventory-entry[open]').waitFor({state:'attached'});
   assert.equal(await page.locator('#inventory-entry').evaluate(el=>el.open),true);
   await addKindAndBatch(page,{name:'大米',unit:'g',quantity:'300',location:'常温'});
   assert.equal(await page.locator('input[name="quantity"]').getAttribute('step'),'0.001','保留原数量精度');

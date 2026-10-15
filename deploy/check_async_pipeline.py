@@ -22,10 +22,27 @@ def synthetic(blank=False):
     return output.getvalue()
 
 
+def wait_ready(url):
+    """Check the live proxy after Compose may have reused an old healthy status."""
+    if urlparse(url).hostname not in ('127.0.0.1', 'localhost'):
+        raise ValueError('Readiness checks only accept loopback validation deployments')
+    deadline = time.monotonic() + 30
+    with httpx.Client(timeout=5) as client:
+        while time.monotonic() < deadline:
+            try:
+                if client.get(url.rstrip('/') + '/health/ready').status_code == 200:
+                    return
+            except httpx.TransportError:
+                pass
+            time.sleep(.25)
+    raise RuntimeError('Live proxy did not become ready after deployment')
+
+
 def run(url, private):
     if urlparse(url).hostname not in ('127.0.0.1', 'localhost'):
         raise ValueError('Validation only accepts a loopback isolated deployment')
     private.mkdir(parents=True, exist_ok=False)
+    wait_ready(url)
     client = httpx.Client(base_url=url + '/api/v1', timeout=20)
     credentials = {'username': 'm5_' + secrets.token_hex(5), 'password': secrets.token_hex(24)}
 
