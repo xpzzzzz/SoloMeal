@@ -134,7 +134,7 @@ def recipes(page: Page = Depends(), current=Depends(get_identity), db=Depends(ge
     ids = db.scalars(
         select(Recipe.id).where(Recipe.user_id == current[0].id).order_by(Recipe.name, Recipe.id).limit(page.limit).offset(page.offset)
     ).all()
-    views = [food.recipe_view(db, current[0].id, i) for i in ids]
+    views = food.recipe_views(db, current[0].id, ids)
     stored = food.feedback_map(db, current[0].id, list(ids))
     for view in views:
         view["feedback"] = stored.get(view["id"], food.empty_feedback(view["id"]))

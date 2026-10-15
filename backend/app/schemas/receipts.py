@@ -43,3 +43,7 @@ class ReceiptDraft(Input):
 
 class ReceiptEditInput(VersionInput):
     draft: ReceiptDraft
+
+
+class ReceiptParseInput(VersionInput):
+    mode: Literal["ocr_only", "vlm_only", "hybrid"] | None = None

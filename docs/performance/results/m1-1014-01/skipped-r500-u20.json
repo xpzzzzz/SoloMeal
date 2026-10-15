@@ -1,0 +1,6 @@
+{
+  "scale": 500,
+  "users": 20,
+  "reason": "Serial diagnostic ~7.3s per recommendation; cap the largest fixture at 5 users to bound CPU/60s request deadlines",
+  "status": "not executed"
+}

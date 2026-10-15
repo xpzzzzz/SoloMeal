@@ -104,10 +104,10 @@ def _points(value):
 
 
 def score_candidate(recipe, feedback, rows, staples, *, candidate_ingredients=None,
-                    candidate_methods=None, enabled=True, now=None):
+                    candidate_methods=None, enabled=True, now=None, weights=None):
     now = now or utcnow()
-    ingredient_affinity, method_affinity, ingredient_counts, method_counts, _ = _weights(
-        rows, staples, now=now
+    ingredient_affinity, method_affinity, ingredient_counts, method_counts, _ = (
+        weights if weights is not None else _weights(rows, staples, now=now)
     )
     candidate_ingredients = candidate_ingredients if candidate_ingredients is not None else {
         str(line["ingredient_id"])

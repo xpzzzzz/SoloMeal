@@ -1,3 +1,4 @@
+import {clickAction} from './support.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {desktopContext,launchBrowser,makeApi,openPage,signIn,signOut,signUp,startFixture,testDate,useTab,visibleButtons,waitText} from './support.mjs';
@@ -39,9 +40,9 @@ test('F8 今天首页聚合、收藏、做饭、改用时与切换账号',async(
   const eggCard=page.locator('.recommendation-card').filter({hasText:'首页煮蛋'});
   assert.match(await eggCard.innerText(),/现有库存足够，无需采购/);
   const favorited=page.waitForResponse(r=>r.url().endsWith('/recipes/'+boil.id+'/feedback')&&r.request().method()==='PUT');
-  await eggCard.getByRole('button',{name:'收藏',exact:true}).click();
+  await clickAction(eggCard,'收藏');
   assert.equal((await favorited).status(),200);
-  await eggCard.getByRole('button',{name:'已收藏',exact:true}).waitFor();
+  assert.equal(await eggCard.getByRole('button',{name:'已收藏',exact:true,includeHidden:true}).getAttribute('aria-pressed'),'true');
   await useTab(page,'我的菜谱');
   await page.locator('.recipe').filter({hasText:'首页煮蛋'}).getByRole('button',{name:'已收藏',exact:true}).waitFor();
   await useTab(page,'今天');
@@ -54,7 +55,7 @@ test('F8 今天首页聚合、收藏、做饭、改用时与切换账号',async(
   await page.getByRole('button',{name:'结束并确认做饭',exact:true}).click();
   await page.getByLabel('实际耗时（分钟）',{exact:true}).fill('12');
   await page.getByRole('button',{name:'确认做饭并扣库存',exact:true}).click();
-  await page.getByRole('heading',{name:'每一餐都有记录',exact:true}).waitFor();
+  await page.getByRole('heading',{name:'用餐记录',exact:true}).waitFor();
   const records=await call('/cooking');
   assert.equal(records.length,1,'确认做饭才新增记录');
   assert.equal(records[0].actual_minutes,12);
@@ -64,7 +65,7 @@ test('F8 今天首页聚合、收藏、做饭、改用时与切换账号',async(
   await useTab(page,'今天');
   await waitText(page,/首页煮蛋 · \d{4}-\d{2}-\d{2} · 1 人份 · 12 分钟/);
   await page.locator('.home-recent button').first().click();
-  await page.getByRole('heading',{name:'每一餐都有记录',exact:true}).waitFor();
+  await page.getByRole('heading',{name:'用餐记录',exact:true}).waitFor();
   assert.equal(await page.evaluate(()=>document.activeElement?.id),'meal-'+records[0].id,'点击最近做过应聚焦那条记录');
   const row=page.locator('#meal-'+records[0].id);
   await row.getByRole('button',{name:'修改用时',exact:true}).click();

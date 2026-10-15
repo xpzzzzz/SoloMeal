@@ -6,8 +6,8 @@ from sqlalchemy import select
 from ..core.errors import AppError
 from ..models.receipts import ReceiptImport
 from ..schemas.food import VersionInput
-from ..schemas.receipts import ReceiptEditInput
-from ..services import receipts
+from ..schemas.receipts import ReceiptEditInput, ReceiptParseInput
+from ..services import receipt_jobs, receipts
 from ..services.food import owned
 from ..services.receipt_parser import configured
 from .food import Key
@@ -37,6 +37,10 @@ def listing(page: Page = Depends(), current=Depends(get_identity), db=Depends(ge
 @router.get("/capabilities")
 def capabilities(request: Request, current=Depends(get_identity)):
     return {"vision_enabled": configured(request.app.state.settings),
+            "ocr_enabled": request.app.state.settings.receipt_ocr_enabled,
+            "default_mode": request.app.state.settings.receipt_recognition_mode,
+            "async_recognition": True,
+            "max_attempts": request.app.state.settings.receipt_task_max_attempts,
             "daily_limit": request.app.state.settings.receipt_parse_daily_limit}
 
 
@@ -61,14 +65,10 @@ def edit(receipt_id: UUID, body: ReceiptEditInput, key: Key,
     return receipts.edit(db, current[0].id, key, receipt_id, body)
 
 
-@router.post("/{receipt_id}/parse")
-async def parse(receipt_id: UUID, body: VersionInput, key: Key, request: Request,
+@router.post("/{receipt_id}/parse", status_code=202)
+def parse(receipt_id: UUID, body: ReceiptParseInput, key: Key, request: Request,
                 current=Depends(get_identity), db=Depends(get_db)):
-    return await receipts.parse(db, current[0].id, key, receipt_id, body,
-                                request.app.state.settings.receipt_storage_dir,
-                                request.app.state.receipt_parser,
-                                request.app.state.settings.receipt_parser_timeout_seconds,
-                                request.app.state.settings.receipt_parse_daily_limit)
+    return receipt_jobs.enqueue(db, current[0].id, key, receipt_id, body, request.app.state.settings)
 
 
 @router.post("/{receipt_id}/confirm")

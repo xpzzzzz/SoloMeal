@@ -1,4 +1,24 @@
+> 2026-10-15 11:10 后端增强交接：M0～M4.5完成，M5尚未收口，用户已明确批准独立分支、草稿PR及CI，现执行发布验证。本地SQLite674通过/16跳过、前端68、浏览器41通过/4条件跳过、真实CPU/MQ六场景和联合备份通过；完整MySQL被Docker虚拟盘I/O故障中断，不记通过。引擎与原18088已恢复（health200、镜像未替换），本轮验证项目停止且保留卷。源工作区与未提交改动保留；隔离交审分支codex/backend-engineering-m5-1015尚未提交/推送。禁止付费模型；见 [交审范围](docs/backend-engineering-review-1015.md) / [执行记录](docs/backend-engineering-enhancement-progress.md)。
+
+> 2026-10-15 后端增强最新状态：M0～M4.5已完成，M5收口验证中。OCR三模式18次实测、8真实MQ场景、2页面流程通过；最终SQLite674通过/16跳过、浏览器41通过/4条件跳过。正式CPU镜像/干净模型卷、完整MySQL及远程CI尚未全部收口，不能标M5完成。见 [执行记录](docs/backend-engineering-enhancement-progress.md) / [交付说明](docs/backend-engineering-delivery-1015.md)。真实模型0、原18080/18088未替换、未提交推送。
+
 # SoloMeal 接手（2026-09-21：功能扩展分阶段开发入口）
+
+> 2026-10-15 最新后端增强状态：M1/M2/M3/M4已完成，M4.5执行中，M5未开始。依用户授权连续推进至M5或额度耗尽。见 [执行记录](docs/backend-engineering-enhancement-progress.md) / [M4可靠性](docs/validation/receipt-async/m4-reliability-1015.md)。真实MQ故障、双Worker和浏览器丢响应通过；模型0，原18080/18088未替换、未提交推送。现在才检查并接入OCR CPU依赖。
+
+
+> 2026-10-15 最新后端增强状态：M1/M2/M3已完成，M4执行中。用户授权依序连续推进至M5或额度耗尽。见 [执行记录](docs/backend-engineering-enhancement-progress.md) / [M3报告](docs/validation/receipt-async/m3-normal-workflow-1015.md)。MySQL85/85，真实MQ/页面通过；模型0，旧18080/18088未替换、未提交推送；M4完成前不开发OCR。
+
+
+> 2026-10-14 最新后端增强状态：M1/M2已完成，M3执行中。用户授权依序连续推进至M5或额度耗尽。见 [执行记录](docs/backend-engineering-enhancement-progress.md) / [M2优化报告](docs/performance/m2-optimization-1014.md)。MySQL63/63、27响应一致；模型0，旧18080/18088未替换、未提交推送；M4完成前不开发OCR。
+
+
+> 2026-10-14 最新后端增强状态：M1已完成，M2执行中。用户授权依序连续推进至M5或额度耗尽，覆盖旧逐阶段等待确认条款。见 [执行记录](docs/backend-engineering-enhancement-progress.md) / [M1基线](docs/performance/m1-baseline-1014.md)。真实模型0；18080/18088未替换、未提交推送；M4完成前不开发OCR。
+
+
+> 2026-10-14 后端增强 M0 基线审计已完成，等待用户确认：[基线报告](docs/backend-engineering-baseline-m0-1014.md) / [执行记录](docs/backend-engineering-enhancement-progress.md)。本轮仅只读检查与文档交接，pytest 收集662（未执行用例），18088三服务healthy、live/ready200，模型请求0；应用/依赖/部署未改、原工作树改动保留、未提交推送。M1及后续阶段未开始，每阶段完成后停止等待用户确认。
+
+> 2026-10-14 后端工程增强规划已补充 [M4.5：PaddleOCR + Vision LLM 混合小票识别](docs/backend-engineering-enhancement-plan-v1.0.md)。执行顺序 M0 → M1 → M2 → M3 → M4 → M4.5 → M5；M0～M5 主要目标不变。此次仅更新规划，不改变里程碑进度、不提前开发 OCR；继续当前已获确认阶段，每阶段完成后停止，等待用户确认。未经明确确认不得调用付费模型。
 
 > 2026-09-23 使用入口调整：用户选择继续使用 http://127.0.0.1:18088 （Compose 项目 `solomeal-features-0921`），F1～F8 均已审查通过；F9 按用户意愿暂缓。本轮授权将功能代码、迁移、测试和交接记录同步至自有 GitHub 仓库 `xpzzzzz/SoloMeal`。下方“未提交推送”及旧阶段状态按日期保留为历史，当前功能状态见 `docs/feature-expansion-progress.md`。
 

@@ -1,0 +1,11 @@
+{
+  "services": {
+    "api": "sha256:dc59e11934d200ccc3b5fd7e52cee1e2c66afc465d9ba919767c54f024c4804b",
+    "web": "sha256:6aeb3d2a71861aff62aed2a5787448182f380e09e5924b4ba89c2fa5e9d072b7"
+  },
+  "health": {
+    "live": 200,
+    "ready": 200
+  },
+  "original_images_unchanged": true
+}

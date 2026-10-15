@@ -1,0 +1,9 @@
+{
+  "isolated_m3_and_m5_stopped": true,
+  "volumes_preserved": true,
+  "original_18088": {
+    "live": 200,
+    "ready": 200
+  },
+  "real_model_calls": 0
+}

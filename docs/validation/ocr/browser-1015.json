@@ -1,0 +1,21 @@
+{
+  "scenarios": [
+    {
+      "scenario": "conflict",
+      "passed": true,
+      "receipt_id": "4e8e0280-de1e-4ca8-89b4-5dccbc5b38cf",
+      "task_id": "a16f889b-a161-4a2a-bd43-8e6dc0a26f61",
+      "real_model_calls": 0,
+      "human_confirmation_required": true
+    },
+    {
+      "scenario": "ocr_only",
+      "passed": true,
+      "receipt_id": "9f677a5c-5720-4cc7-be34-49118fd11164",
+      "task_id": "ad7c856a-9644-44bd-92a5-d91860d5238a",
+      "real_model_calls": 0,
+      "human_confirmation_required": true
+    }
+  ],
+  "real_model_calls": 0
+}

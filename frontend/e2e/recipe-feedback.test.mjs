@@ -1,3 +1,4 @@
+import {clickAction} from './support.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
@@ -98,10 +99,10 @@ test('收藏与喜欢/不喜欢在刷新后仍在，删除菜谱不影响用餐�
   assert.equal(await page.locator('.recipe').count(),2);
   await shot(page,'recipe-feedback-desktop.png');
 
-  await card(page,FIRST).getByRole('button',{name:'记录做完这道菜'}).click();
+  await clickAction(card(page,FIRST),'记录做完这道菜');
   await page.locator('.modal').getByRole('button',{name:'确认做完'}).click();
   await waitText(page,/已记录，库存同步更新/);
-  await card(page,FIRST).getByRole('button',{name:'删除菜谱'}).click();
+  await clickAction(card(page,FIRST),'删除菜谱');
   await card(page,FIRST).waitFor({state:'detached',timeout:30_000});
   assert.equal((await api.call(token,`/recipes/${target.id}/feedback`)).status,404,'菜谱删除后评价行随之删除');
   const kept=(await api.call(token,'/recipes')).data.find(r=>r.name===SECOND);
@@ -140,6 +141,7 @@ test('窄屏上收藏与评价可以点，标签与按钮都不挤破版面',asy
   for(const label of ['收藏','喜欢']){
    assert.equal(await button(page,FIRST,label).isVisible(),true,`${label} 应在窄屏可见`);
   }
+  await card(page,FIRST).locator('.more-actions>summary').click();
   for(const name of ['记录做完这道菜','编辑菜谱']){
    assert.equal(await card(page,FIRST).getByRole('button',{name,exact:true}).isVisible(),true,`${name} 应在窄屏可见`);
   }

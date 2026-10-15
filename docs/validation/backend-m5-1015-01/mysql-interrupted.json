@@ -1,0 +1,9 @@
+{
+  "status": "interrupted_by_docker_engine_io_failure",
+  "collected_snapshot_tests": 690,
+  "observed_completed_markers": 141,
+  "observed_failure_markers": 3,
+  "git_preflight_failures_retested_passed": 3,
+  "full_suite_passed": false,
+  "exit_code": 4294967295
+}

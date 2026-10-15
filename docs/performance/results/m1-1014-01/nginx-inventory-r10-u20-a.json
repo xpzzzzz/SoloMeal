@@ -1,0 +1,52 @@
+{
+  "run": "nginx-inventory-r10-u20-a",
+  "scale": 10,
+  "mode": "0",
+  "host": "http://web:8080",
+  "warmup_http_status_counts": {
+    "200": 180,
+    "429": 470
+  },
+  "measured_seconds_including_drain": 44.67958078599622,
+  "warmup_seconds_after_spawn": 5,
+  "http_status_counts": {
+    "429": 10681,
+    "200": 893
+  },
+  "total": {
+    "method": "",
+    "name": "Aggregated",
+    "requests": 11574,
+    "failures": 10681,
+    "rps": 250.4345575511012,
+    "raw_requests": 11574,
+    "window_rps": 259.04450749966753,
+    "p50_exact_ms": 1.0975810000672936,
+    "p95_exact_ms": 8.620736000011675,
+    "p50_ms": 1,
+    "p95_ms": 9,
+    "average_ms": 1.7651172111126245,
+    "max_ms": 17.581775995495263,
+    "response_bytes_mean": 883.9744254363228
+  },
+  "endpoints": [
+    {
+      "method": "GET",
+      "name": "/api/v1/inventory",
+      "requests": 11574,
+      "failures": 10681,
+      "rps": 250.4345575511012,
+      "raw_requests": 11574,
+      "window_rps": 259.04450749966753,
+      "p50_exact_ms": 1.0975810000672936,
+      "p95_exact_ms": 8.620736000011675,
+      "p50_ms": 1,
+      "p95_ms": 9,
+      "average_ms": 1.7651172111126245,
+      "max_ms": 17.581775995495263,
+      "response_bytes_mean": 883.9744254363228
+    }
+  ],
+  "percentiles": "Locust histogram buckets; not exact raw quantiles",
+  "user_count_at_quit": 0
+}

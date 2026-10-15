@@ -1,0 +1,21 @@
+{
+  "project": "solomeal-backend-m5-1015-01",
+  "schema_revision": "f1b7d9e31015",
+  "task_table_in_database_dump": true,
+  "recognition_json_column_in_database_dump": true,
+  "task_mode_column_in_database_dump": true,
+  "running_writers_resumed": true,
+  "receipt_task_count": 12,
+  "private_backup_files": {
+    "database.sql": {
+      "bytes": 118267,
+      "sha256": "37d2d6b00f4a6789ad5f6104ac730d2a1115a391a492f837dc40734a0ea330d4"
+    },
+    "uploads.tar": {
+      "bytes": 102400,
+      "sha256": "e159ddbf2a6f50a96ab3548a114f6ee83080c1488fc33c3a05cd09be28e726cb"
+    }
+  },
+  "restore_executed": false,
+  "real_model_calls": 0
+}

@@ -1,0 +1,9 @@
+{
+  "run": "smoke-r10-u1",
+  "scale": 10,
+  "users": 1,
+  "entry": "api",
+  "planned_measured_seconds": 10,
+  "locust_exit_code": 0,
+  "elapsed_wall_seconds": 17.067426919937134
+}

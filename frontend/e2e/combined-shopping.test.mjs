@@ -1,3 +1,4 @@
+import {clickAction} from './support.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {desktopContext,launchBrowser,makeApi,openPage,signUp,startFixture,useTab,testDate} from './support.mjs';
@@ -16,8 +17,8 @@ test('F7 two recipes, merged preview, checks and explicit inventory confirmation
   await call('/quotes','POST',{ingredient_id:egg.id,package_quantity:'6',package_price:'6',source:'本地测试报价',observed_on:testDate(),expected_version:0},crypto.randomUUID());
   await page.getByRole('button',{name:'刷新库存',exact:true}).click();
   await useTab(page,'我的菜谱');
-  for(const name of ['双蛋菜','三蛋菜'])await page.locator('.recipe-grid .recipe').filter({has:page.getByRole('heading',{name,exact:true})}).getByRole('button',{name:'加入采购组合'}).click();
-  await page.locator('.recipe-grid .recipe').first().getByRole('button',{name:'加入采购组合'}).click();
+  for(const name of ['双蛋菜','三蛋菜'])await clickAction(page.locator('.recipe-grid .recipe').filter({has:page.getByRole('heading',{name,exact:true})}),'加入采购组合');
+  await clickAction(page.locator('.recipe-grid .recipe').first(),'加入采购组合');
   assert.equal(await page.locator('.combination-row').count(),2);
   await page.getByRole('button',{name:'计算采购',exact:true}).click();
   const preview=page.locator('.combined-preview');await preview.getByText('总需求 5 个 · 有效库存 3 · 缺口 2',{exact:true}).waitFor();
@@ -29,9 +30,9 @@ test('F7 two recipes, merged preview, checks and explicit inventory confirmation
   await useTab(page,'报价与采购');
   await page.getByRole('button',{name:'刷新报价与采购',exact:true}).waitFor();
   await page.getByRole('button',{name:'保存组合采购清单'}).click();
-  await page.getByRole('heading',{name:'买好需要的，记入厨房',exact:true}).waitFor();
+  await page.getByRole('heading',{name:'采购清单',exact:true}).waitFor();
   await page.getByLabel('已买 · 鸡蛋',{exact:true}).waitFor();
-  assert.equal(await page.locator('.combination-panel').count(),1);
+  assert.equal(await page.locator('.combination-panel').count(),0,'保存后空组合收起，已保存清单仍在采购页');
   assert.equal(await page.locator('.combination-row').count(),0);
   assert.equal((await call('/inventory')).length,1);
   assert.equal(await page.getByRole('button',{name:'核对并入库',exact:true}).isDisabled(),true);

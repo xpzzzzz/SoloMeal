@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="1" failures="0" skipped="0" tests="1" time="0.229" timestamp="2026-10-14T16:29:33.503607+00:00" hostname="b73ed70fcd94"><testcase classname="" name="tests.test_deployment" time="0.000"><error message="collection failure">/usr/local/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&lt;frozen importlib._bootstrap&gt;:1395: in _gcd_import
+    ???
+&lt;frozen importlib._bootstrap&gt;:1360: in _find_and_load
+    ???
+&lt;frozen importlib._bootstrap&gt;:1331: in _find_and_load_unlocked
+    ???
+&lt;frozen importlib._bootstrap&gt;:935: in _load_unlocked
+    ???
+/usr/local/lib/python3.13/site-packages/_pytest/assertion/rewrite.py:188: in exec_module
+    exec(co, module.__dict__)
+D:\Code\meal-manager\backend\tests\test_deployment.py:13: in &lt;module&gt;
+    ???
+&lt;frozen importlib._bootstrap_external&gt;:1019: in exec_module
+    ???
+&lt;frozen importlib._bootstrap_external&gt;:1156: in get_code
+    ???
+&lt;frozen importlib._bootstrap_external&gt;:1214: in get_data
+    ???
+E   FileNotFoundError: [Errno 2] No such file or directory: '/deploy/manage.py'</error></testcase></testsuite></testsuites>

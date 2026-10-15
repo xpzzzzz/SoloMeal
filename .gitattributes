@@ -42,3 +42,11 @@
 # bytes. sampler-masked.csv is CRLF-native PowerShell output, so converting it would
 # change its length and silently invalidate the record.
 /docs/validation/e2e-stress-0918/* -text
+
+# Preserve captured backend-enhancement evidence bytes across checkouts.
+/docs/performance/results/** -text
+/docs/validation/receipt-async/results-m3-1015-01/** -text
+/docs/validation/receipt-async/results-m4-1015-01/** -text
+/docs/validation/backend-m5-1015-01/** -text
+/docs/validation/ocr/*.json -text
+/docs/validation/ocr/*.xml -text

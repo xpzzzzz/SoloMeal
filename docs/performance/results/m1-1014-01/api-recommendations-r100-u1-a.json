@@ -1,0 +1,50 @@
+{
+  "run": "api-recommendations-r100-u1-a",
+  "scale": 100,
+  "mode": "3",
+  "host": "http://api:8000",
+  "warmup_http_status_counts": {
+    "200": 3
+  },
+  "measured_seconds_including_drain": 45.86781490500289,
+  "warmup_seconds_after_spawn": 5,
+  "http_status_counts": {
+    "200": 26
+  },
+  "total": {
+    "method": "",
+    "name": "Aggregated",
+    "requests": 26,
+    "failures": 0,
+    "rps": 0.5595280303128061,
+    "raw_requests": 26,
+    "window_rps": 0.5668462745358321,
+    "p50_exact_ms": 1678.1431209965376,
+    "p95_exact_ms": 1898.1967860017903,
+    "p50_ms": 1700,
+    "p95_ms": 1900,
+    "average_ms": 1695.2003322694509,
+    "max_ms": 2010.5773450050037,
+    "response_bytes_mean": 282072.0
+  },
+  "endpoints": [
+    {
+      "method": "POST",
+      "name": "/api/v1/recommendations",
+      "requests": 26,
+      "failures": 0,
+      "rps": 0.5595280303128061,
+      "raw_requests": 26,
+      "window_rps": 0.5668462745358321,
+      "p50_exact_ms": 1678.1431209965376,
+      "p95_exact_ms": 1898.1967860017903,
+      "p50_ms": 1700,
+      "p95_ms": 1900,
+      "average_ms": 1695.2003322694509,
+      "max_ms": 2010.5773450050037,
+      "response_bytes_mean": 282072.0
+    }
+  ],
+  "percentiles": "Locust histogram buckets; not exact raw quantiles",
+  "user_count_at_quit": 0
+}

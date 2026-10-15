@@ -1,0 +1,162 @@
+{
+  "scenarios": [
+    {
+      "case": "clear",
+      "mode": "ocr_only",
+      "fault": null,
+      "status": "parsed",
+      "task_id": "6da8418d-d228-476f-967b-2e5ed949d74d",
+      "receipt_id": "c947f6d8-a107-4b94-84d4-39189d94ee0f",
+      "accept_ms": 31.1460000000352,
+      "total_ms": 7168.738099999984,
+      "statuses": [
+        "queued",
+        "parsing",
+        "parsed"
+      ],
+      "ocr_line_count": 3,
+      "vlm_calls_mock": 0,
+      "conflict_count": 0,
+      "inventory_count": 0,
+      "real_model_calls": 0
+    },
+    {
+      "case": "multipack",
+      "mode": "vlm_only",
+      "fault": null,
+      "status": "parsed",
+      "task_id": "64f193bb-0dd0-40af-883c-19b5c997ac13",
+      "receipt_id": "36dced72-50be-4801-9c07-1bf544fe0cfa",
+      "accept_ms": 17.385100000069542,
+      "total_ms": 652.3802000000387,
+      "statuses": [
+        "queued",
+        "parsed"
+      ],
+      "ocr_line_count": 0,
+      "vlm_calls_mock": 1,
+      "conflict_count": 0,
+      "inventory_count": 0,
+      "real_model_calls": 0
+    },
+    {
+      "case": "approximate",
+      "mode": "hybrid",
+      "fault": null,
+      "status": "parsed",
+      "task_id": "f2126b0a-7359-407e-af01-cd585ce70dc1",
+      "receipt_id": "faae43a2-5195-4ded-a4cd-3478cd6ce904",
+      "accept_ms": 17.33999999999014,
+      "total_ms": 1577.0013000000063,
+      "statuses": [
+        "queued",
+        "parsing",
+        "parsed"
+      ],
+      "ocr_line_count": 2,
+      "vlm_calls_mock": 1,
+      "conflict_count": 0,
+      "inventory_count": 0,
+      "real_model_calls": 0
+    },
+    {
+      "case": "unknown_package",
+      "mode": "hybrid",
+      "fault": null,
+      "status": "parsed",
+      "task_id": "08727f1f-443d-4451-bc06-d0bad041e888",
+      "receipt_id": "678d4e98-5369-40c9-9e83-79671f0cfa35",
+      "accept_ms": 17.907499999978427,
+      "total_ms": 1268.244999999979,
+      "statuses": [
+        "queued",
+        "parsing",
+        "parsed"
+      ],
+      "ocr_line_count": 2,
+      "vlm_calls_mock": 1,
+      "conflict_count": 0,
+      "inventory_count": 0,
+      "real_model_calls": 0
+    },
+    {
+      "case": "clear",
+      "mode": "hybrid",
+      "fault": "conflict",
+      "status": "parsed",
+      "task_id": "77fba8a7-acdf-4dce-a9e2-cf8ea7e3de61",
+      "receipt_id": "09d73b36-a2a1-4257-8451-d8380df6396c",
+      "accept_ms": 18.044299999928626,
+      "total_ms": 1884.4967999999653,
+      "statuses": [
+        "queued",
+        "parsing",
+        "parsed"
+      ],
+      "ocr_line_count": 3,
+      "vlm_calls_mock": 1,
+      "conflict_count": 1,
+      "inventory_count": 0,
+      "real_model_calls": 0
+    },
+    {
+      "case": "clear",
+      "mode": "hybrid",
+      "fault": "ocr_failed",
+      "status": "parsed",
+      "task_id": "b133fca3-37be-4862-951d-61aa7493db6a",
+      "receipt_id": "2a347fa6-1d3c-4f58-873a-434b5626ffe2",
+      "accept_ms": 16.586800000027324,
+      "total_ms": 342.1170000000302,
+      "statuses": [
+        "queued",
+        "parsed"
+      ],
+      "ocr_line_count": 0,
+      "vlm_calls_mock": 1,
+      "conflict_count": 0,
+      "inventory_count": 0,
+      "real_model_calls": 0
+    },
+    {
+      "case": "clear",
+      "mode": "hybrid",
+      "fault": "both_failed",
+      "status": "failed",
+      "task_id": "f443f970-6b0e-47ac-b036-34ef2e89ae53",
+      "receipt_id": "5c68c856-4a6a-41dd-a257-f9dd90ab42a5",
+      "accept_ms": 17.677499999990687,
+      "total_ms": 343.19520000008197,
+      "statuses": [
+        "queued",
+        "failed"
+      ],
+      "ocr_line_count": 0,
+      "vlm_calls_mock": 1,
+      "conflict_count": 0,
+      "inventory_count": 0,
+      "real_model_calls": 0
+    },
+    {
+      "case": "clear",
+      "mode": "hybrid",
+      "fault": "vlm_failed",
+      "status": "failed",
+      "task_id": "05b6bbdc-cb1e-4b97-9f73-214239126f6c",
+      "receipt_id": "e47a871c-3467-4da3-a98c-f62896a2bc12",
+      "accept_ms": 18.3571000000029,
+      "total_ms": 1885.0311999999576,
+      "statuses": [
+        "queued",
+        "parsing",
+        "failed"
+      ],
+      "ocr_line_count": 3,
+      "vlm_calls_mock": 1,
+      "conflict_count": 0,
+      "inventory_count": 0,
+      "real_model_calls": 0
+    }
+  ],
+  "real_model_calls": 0
+}

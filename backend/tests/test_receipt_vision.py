@@ -12,12 +12,12 @@ import pytest
 from app.core.config import Settings
 from app.core.errors import AppError
 from app.models.food import Operation, utcnow
-from app.models.receipts import ReceiptImport
-from app.services import receipts
+from app.models.receipts import ReceiptParseTask
+from app.services import receipt_jobs
 from app.services.receipt_parser import VisionReceiptParser
 from PIL import Image
 from sqlalchemy import select
-from test_receipts import PNG, setup, upload
+from test_receipts import PNG, parse_and_process, setup, upload
 from test_shopping import post
 
 
@@ -124,7 +124,7 @@ def test_daily_limit_and_replay_do_not_call_provider_twice(client):
     first = '/receipts/'+upload(client, h).json()['id']
     second = '/receipts/'+upload(client, h, 'second-image').json()['id']
     body = {'expected_version': 1}
-    parsed = post(client, h, first+'/parse', body, 'first-parse')
+    parsed = parse_and_process(client, h, first+'/parse', body, 'first-parse')
     assert parsed.status_code == 200
     assert parsed.json()['draft']['items'][0]['uncertain'] is True
     assert post(client, h, first+'/parse', body, 'first-parse').json() == parsed.json()
@@ -135,7 +135,7 @@ def test_daily_limit_and_replay_do_not_call_provider_twice(client):
     assert row['parse_started_at'] is None
 
 
-def test_crash_after_provider_never_reissues_request(client, monkeypatch):
+def test_one_attempt_task_crash_does_not_reissue_and_recovers_to_failed(client, monkeypatch):
     h = setup(client)
     path = '/receipts/'+upload(client, h).json()['id']
     calls = []
@@ -144,19 +144,20 @@ def test_crash_after_provider_never_reissues_request(client, monkeypatch):
             calls.append(1)
             return {'items': []}
     client.app.state.receipt_parser = Parser()
-    original = receipts._finish_parse
+    original = receipt_jobs.finish
     def crash(*args, **kwargs):
         raise RuntimeError('simulated crash before final commit')
-    monkeypatch.setattr(receipts, '_finish_parse', crash)
+    monkeypatch.setattr(receipt_jobs, 'finish', crash)
     with pytest.raises(RuntimeError, match='simulated crash'):
-        post(client, h, path+'/parse', {'expected_version': 1}, 'crashed-parse')
-    monkeypatch.setattr(receipts, '_finish_parse', original)
+        parse_and_process(client, h, path+'/parse', {'expected_version': 1}, 'crashed-parse')
+    monkeypatch.setattr(receipt_jobs, 'finish', original)
     retry = post(client, h, path+'/parse', {'expected_version': 1}, 'crashed-parse')
     assert retry.json()['parse_status'] == 'parsing' and len(calls) == 1
     with client.app.state.sessions() as db:
-        row = db.scalar(select(ReceiptImport))
-        row.parse_started_at = utcnow() - timedelta(seconds=121)
+        task = db.scalar(select(ReceiptParseTask))
+        task.lease_until = utcnow() - timedelta(seconds=1)
         db.commit()
+    receipt_jobs.dispatch(client.app.state.sessions, client.app.state.settings, lambda *_: None)
     assert client.get('/api/v1'+path, headers=h).json()['parse_status'] == 'failed'
     retry = post(client, h, path+'/parse', {'expected_version': 1}, 'crashed-parse')
     assert retry.json()['parse_status'] == 'failed' and len(calls) == 1
@@ -181,17 +182,22 @@ def test_mysql_pending_parse_admission_across_requests(client):
             return {'items': []}
     client.app.state.receipt_parser = Parser()
     body = {'expected_version': 1}
+    accepted = post(client, h, path+'/parse', body, 'pending-parse')
+    assert accepted.status_code == 202
     with ThreadPoolExecutor(max_workers=2) as pool:
-        pending = pool.submit(post, client, h, path+'/parse', body, 'pending-parse')
+        pending = pool.submit(receipt_jobs.execute, client.app.state.sessions,
+                              client.app.state.settings, client.app.state.receipt_parser,
+                              accepted.json()['parse_task_id'])
         try:
             assert entered.wait(5)
-            for target, key, status in [(path, 'pending-parse', 200), (path, 'different-parse', 409),
+            for target, key, status in [(path, 'pending-parse', 202), (path, 'different-parse', 409),
                                         (second, 'different-image', 429)]:
                 response = pool.submit(post, client, h, target+'/parse', body, key).result(timeout=5)
                 assert response.status_code == status, response.text
             assert len(calls) == 1
         finally:
             release.set()
-        assert pending.result(timeout=5).status_code == 200
+        assert pending.result(timeout=5) is None
+    assert client.get('/api/v1'+path, headers=h).json()['parse_status'] == 'parsed'
     with client.app.state.sessions() as db:
         assert len(list(db.scalars(select(Operation).where(Operation.kind == 'receipt_parse')))) == 1

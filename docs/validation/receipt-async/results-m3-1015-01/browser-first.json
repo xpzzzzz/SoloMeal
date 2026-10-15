@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "receipt_id": "95c16956-5491-4287-86a5-43e52d7d79ff",
+  "task_id": "4f353aee-c3ba-472e-91b2-682a2f80e70d",
+  "accept_status": 202,
+  "dirty_input_preserved": true,
+  "relogin_restored": true,
+  "inventory_count": 1,
+  "event_count": 1,
+  "real_model_calls": 0
+}

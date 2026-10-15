@@ -32,6 +32,8 @@ SoloMeal 使用 React、FastAPI 和 MySQL 构建独立 Web 应用。模型负责
 | **显式单 Agent 状态机** | 保存执行轮次、待确认动作、租约和终态，使暂停、取消、冲突与恢复都有明确边界 |
 | **持久化事件 + SSE** | 将运行状态同步到页面；断线后通过事件游标补收，避免旧状态覆盖新状态 |
 | **Docker Compose + Nginx** | 统一 Web、API、数据库与迁移的启动顺序；提供同源入口、分组限流和独立持久化卷 |
+| **Celery + RabbitMQ + MySQL任务表** | 202受理小票任务，持久消息、发布确认、有限重试、执行租约与迟到结果保护；数据库是任务状态事实来源 |
+| **PaddleOCR CPU + 按需Vision LLM** | 本地提取文字、规则校验，再按缺失或歧义请求视觉辅助；三模式可比较，所有结果仍须人工确认 |
 | **pytest + Node Test + Playwright + GitHub Actions** | 分别验证服务端规则、前端状态处理、完整用户流程和真实 MySQL 行为 |
 
 独立应用的数据库是业务事实来源。模型调用期间不持有数据库锁，库存修改由短事务完成；模型不能直接访问数据库、执行任意 Shell 或绕过工具白名单。
@@ -109,6 +111,37 @@ docker compose --env-file ../solomeal-private/local.env -p solomeal-local up -d 
 | `SOLOMEAL_RECIPE_DISCOVERY_ENABLED` | 菜谱候选生成 |
 
 完整部署、模型参数、联合备份与恢复步骤见 [部署指南](deploy/README.md)。开发环境见 [后端说明](backend/README.md)；前端可在 `frontend/` 下运行 `npm ci`、`npm test` 和 `npm run e2e`。新克隆可执行 `git config core.hooksPath .githooks` 启用提交钩子。
+
+### 3.5 后端工程增强：性能、识别与可靠执行
+
+**数据库性能。** 菜谱列表和推荐原来逐道读取，推荐还重复计算同一份历史权重。Locust、SQL计数和MySQL EXPLAIN确认瓶颈后，改为批量查询和请求内复用，未扩连接池或放宽业务校验。500菜谱的推荐SQL从1029降到31、首页1036降到38；同一隔离环境5并发的推荐P95为49702.5ms→4895.3/4884.9ms（两轮）。27份固定时钟的完整响应一致。45秒负载和合成租户不足以代表生产容量；Nginx定向限流的失败样本完整保留。见[M1基线](docs/performance/m1-baseline-1014.md)、[M2实测与口径](docs/performance/m2-optimization-1014.md)。
+
+**技术闭环A：小票字段。** 视觉模型可能增加调用费用且仍会误读数量，因此加入本地PaddleOCR CPU，保留文字、顺序、置信度和位置，以保守规则识别商品、规格、份数、单位和明确小计。明确有效的OCR直接进草稿；缺失、低置信度或歧义才按需视觉辅助。OCR与模型冲突时保留待核对状态，约重/未知包装数量保持空；沿用原字段、单位和整单入库校验。
+
+支持`ocr_only`、`vlm_only`、`hybrid`。6份先冻结合成票共18次模式实测、8个真实MQ场景及2个真实浏览器流程通过。视觉侧使用真值Oracle Mock，不能据此宣称真实准确率或费用下降；默认保留`vlm_only`，OCR默认关闭，用户可显式选择本地或混合。Linux Docker CPU推理已测，Windows仅验证wheel与依赖解析；Celery Worker在Linux运行。见[M4.5对照与限制](docs/validation/ocr/m45-hybrid-1015.md)。
+
+**技术闭环B：慢任务与故障。** HTTP事务只保存受理操作、任务与outbox，再返回202。Celery在独立Worker中执行OCR/VLM，RabbitMQ只传任务UUID。MySQL保存状态、重试次数、期限和执行令牌；重复消息、Worker退出或发布确认丢失由同一任务恢复。人工编辑/取消后，迟到结果无法覆盖新版本；确认入库继续原事务和幂等规则。
+
+```mermaid
+flowchart LR
+  Web[图片上传与模式选择] --> API[FastAPI: 202受理]
+  API --> DB[(MySQL: 私有草稿/任务/outbox)]
+  DB --> Dispatcher[outbox派发]
+  Dispatcher --> MQ[RabbitMQ: 任务UUID]
+  MQ --> Worker[Celery CPU Worker]
+  Worker -->|ocr_only或hybrid| OCR[PaddleOCR与字段规则]
+  Worker -->|vlm_only| Assist[Vision LLM字段提取]
+  OCR -->|hybrid存在缺失或歧义| Assist
+  OCR --> Draft[可编辑草稿]
+  Assist --> Draft
+  Draft --> DB
+  DB --> Review[用户逐项核对]
+  Review --> Confirm[原子确认入库]
+```
+
+真实Broker停机、Worker SIGKILL、重复投递、双Worker、超时重试、取消/编辑及浏览器响应丢失已有验证。单节点RabbitMQ没有集群高可用保证；外部解析可能执行多次，不能承诺外部调用恰好一次。见[M3链路](docs/validation/receipt-async/m3-normal-workflow-1015.md)、[M4故障报告](docs/validation/receipt-async/m4-reliability-1015.md)。
+
+API镜像保留轻量依赖，CPU OCR包只进入Worker镜像。权重通过独立命令从官方源取得并校验固定SHA256，Worker只读私有图片卷与模型卷；数据库和Broker没有宿主机端口。配置、故障降级、干净部署和备份恢复见[部署指南](deploy/README.md)。本轮CI/最终回归进度见[增强执行记录](docs/backend-engineering-enhancement-progress.md)，历史远程CI成功不能替代本轮未提交源码的验证。
 
 ## 4. 验证结果：逐项对应方案，保留适用范围
 

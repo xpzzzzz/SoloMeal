@@ -1,26 +1,21 @@
-import asyncio
 import hashlib
-import logging
 from datetime import timedelta
 from pathlib import Path
 from uuid import UUID, uuid4
 
 from fastapi.encoders import jsonable_encoder
 from pydantic import ValidationError
-from sqlalchemy import func, select
+from sqlalchemy import select
 
 from ..core.errors import AppError
-from ..models.food import Ingredient, Operation, utcnow
-from ..models.identity import User
+from ..models.food import Ingredient, utcnow
 from ..models.receipts import ReceiptImport
 from ..schemas.food import BatchInput
-from ..schemas.receipts import ParsedReceipt, ReceiptDraft
+from ..schemas.receipts import ReceiptDraft
 from . import food
 from .receipt_images import validate_image
-from .receipt_parser import failure_diagnostic
 
 MAX_UPLOAD_BYTES = 5 * 1024 * 1024
-logger = logging.getLogger(__name__)
 
 
 def validate_upload(content, media_type):
@@ -55,9 +50,16 @@ def read_file(root, row):
 
 
 def view(row):
+    expired = (row.parse_finished_at is None and row.parse_deadline_at
+               and utcnow() >= row.parse_deadline_at)
+    legacy_expired = (row.parse_task_id is None and row.parse_status == "parsing"
+                      and row.parse_started_at and utcnow() - row.parse_started_at > timedelta(seconds=120))
     return {"id": row.id, "version": row.version, "status": row.status,
-            "parse_status": ("failed" if row.parse_status == "parsing" and row.parse_started_at
-                             and utcnow() - row.parse_started_at > timedelta(seconds=120) else row.parse_status), "parsed": row.parsed, "draft": row.draft, "result": row.result,
+            "parse_status": "failed" if expired or legacy_expired else row.parse_status,
+            "parse_task_id": row.parse_task_id, "parse_deadline_at": row.parse_deadline_at,
+            "parse_error": "deadline_exceeded" if expired else row.parse_error,
+            "recognition": row.recognition,
+            "parsed": row.parsed, "draft": row.draft, "result": row.result,
             "parse_started_at": row.parse_started_at, "parse_finished_at": row.parse_finished_at,
             "media_type": row.media_type, "byte_size": row.byte_size, "created_at": row.created_at}
 
@@ -114,6 +116,8 @@ def edit(db, user_id, key, receipt_id, body):
         require_draft(row, body.expected_version)
         row.draft = match_draft(db, user_id, body.draft)
         row.version += 1
+        from .receipt_jobs import invalidate
+        invalidate(db, row)
         db.flush()
         return view(row)
     return food.run_operation(db, user_id, key, "receipt_edit",
@@ -149,99 +153,9 @@ def change(db, user_id, key, receipt_id, body, kind):
             row.result = jsonable_encoder({"batches": results, "operation_id": op.id})
             row.status = "completed"
         row.version += 1
+        from .receipt_jobs import invalidate
+        invalidate(db, row)
         db.flush()
         return view(row)
     return food.run_operation(db, user_id, key, "receipt_" + kind,
                               {"receipt_id": str(receipt_id), **body.model_dump(mode="json")}, action)
-
-
-def _parse_result(result):
-    if result.get("receipt_parse_conflict"):
-        raise AppError(409, "RECEIPT_CONFLICT", "Receipt changed; recognition was discarded")
-    return result
-
-
-def _finish_parse(db, user_id, key, receipt_id, version, parsed, status):
-    try:
-        db.scalar(select(User).where(User.id == user_id).with_for_update())
-        db.expire_all()
-        current = food.owned(db, ReceiptImport, receipt_id, user_id, lock=True)
-        op = db.scalar(select(Operation).where(Operation.user_id == user_id, Operation.key == key))
-        if current.parse_finished_at is not None:
-            return _parse_result(op.result)
-        current.parse_finished_at = utcnow()
-        if current.status != "draft" or current.version != version:
-            current.parse_status = "discarded"
-            op.result = {"receipt_parse_conflict": True}
-        else:
-            current.parse_status = status
-            current.parsed = parsed
-            if status == "parsed":
-                draft = ReceiptDraft.model_validate(parsed)
-                for line in draft.items:
-                    # Even a model's confident output cannot skip human review.
-                    line.uncertain = True
-                    try:
-                        line.ingredient_id = UUID(food.resolve(db, user_id, line.name)["id"])
-                    except AppError as exc:
-                        if exc.code != "NOT_FOUND":
-                            raise
-                current.draft = match_draft(db, user_id, draft)
-            current.version += 1
-            db.flush()
-            op.result = jsonable_encoder(view(current))
-        result = op.result
-        db.commit()
-    except Exception:
-        db.rollback()
-        raise
-    return _parse_result(result)
-
-
-async def parse(db, user_id, key, receipt_id, body, root, parser, timeout, daily_limit=10):
-    payload = {"receipt_id": str(receipt_id), **body.model_dump(mode="json")}
-    claim = []
-
-    def admit(op):
-        row = food.owned(db, ReceiptImport, receipt_id, user_id, lock=True)
-        require_draft(row, body.expected_version)
-        if row.version != 1 or row.parse_started_at is not None:
-            raise AppError(409, "RECEIPT_CONFLICT", "This receipt was edited or recognition was already attempted")
-        now = utcnow()
-        attempts = db.scalar(select(func.count()).select_from(ReceiptImport).where(
-            ReceiptImport.user_id == user_id, ReceiptImport.parse_started_at > now - timedelta(days=1)))
-        if attempts >= daily_limit:
-            raise AppError(429, "RECEIPT_PARSE_LIMIT", "Daily recognition limit reached; use manual entry")
-        active = db.scalar(select(ReceiptImport.id).where(
-            ReceiptImport.user_id == user_id, ReceiptImport.parse_finished_at.is_(None),
-            ReceiptImport.parse_started_at > now - timedelta(seconds=120)))
-        if active:
-            raise AppError(429, "RECEIPT_PARSE_BUSY", "Recognition is already running; use manual entry or wait")
-        claim.append((read_file(root, row), row.media_type))
-        row.parse_started_at = now
-        row.parse_status = "parsing"
-        db.flush()
-        return view(row)
-
-    result = food.run_operation(db, user_id, key, "receipt_parse", payload, admit)
-    db.rollback()  # Commit admission and release the transaction before network I/O.
-    if not claim:
-        result = _parse_result(result)
-        if result.get("parse_status") == "parsing":
-            row = food.owned(db, ReceiptImport, receipt_id, user_id)
-            expired = utcnow() - row.parse_started_at > timedelta(seconds=120)
-            db.rollback()
-            if expired:
-                return _finish_parse(db, user_id, key, receipt_id, body.expected_version, {}, "failed")
-        return result
-    content, media_type = claim[0]
-    try:
-        validate_image(content, media_type)
-        output = await asyncio.wait_for(parser.parse(content, media_type), timeout=timeout)
-        parsed = ParsedReceipt.model_validate(output).model_dump(mode="json")
-        status = "parsed"
-    except Exception as exc:
-        logger.warning("Receipt recognition failed receipt_id=%s diagnostic=%s",
-                       receipt_id, failure_diagnostic(exc))
-        parsed, status = {}, "failed"
-    return _finish_parse(db, user_id, key, receipt_id, body.expected_version, parsed, status)

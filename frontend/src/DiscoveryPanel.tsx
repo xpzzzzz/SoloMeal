@@ -76,7 +76,7 @@ export default function DiscoveryPanel({api,items,onChanged,onRecommend,seed}:{a
    try{
     const batch=await api('/recipe-discoveries','POST',body,key);
     claim.current={sig,key,spent:true};await load();setAdded(null);
-    setNotice(`本次返回 ${batch.drafts.length} 道候选${batch.model_name?'（模型 '+batch.model_name+'）':''}，逐道核对后才会入库。`);
+    setNotice(`本次返回 ${batch.drafts.length} 道候选，核对后即可加入我的菜谱。`);
    }catch(error){
     const lost=error instanceof Error&&/网络|离线|连接/.test(error.message);
     claim.current={sig,key,spent:!lost};await load().catch(()=>{});setNewCall(true);throw error;
@@ -89,25 +89,25 @@ export default function DiscoveryPanel({api,items,onChanged,onRecommend,seed}:{a
   {failure&&<p role="alert" className="error">{failure}</p>}
   <section className="panel"><h2>发现新菜谱</h2>
    <p>{capability.model_enabled
-    ?'候选由已配置的模型生成：每次点击最多一次请求、最多 '+capability.candidates+' 道、输出上限 '+capability.output_tokens+' token。生成结果只是草稿，必须逐道人工核对并确认后才进入菜谱库。'
-    :'当前未配置可用的生成模型，仍可手工新建并核对候选草稿；配好模型地址、名称和密钥后，这里的生成会自动开放。'}</p>
-   <div className="row">
+    ?'根据现有食材和厨房偏好发现新菜。生成后先核对，再加入我的菜谱。'
+    :'智能生成暂未开启，可以先手工新建菜谱草稿。'}</p>
+   <details className="condition-details"><summary>调整生成条件</summary><div className="row">
     <label>人数（留空用厨房偏好）<input type="number" min="1" max="10" step="1" value={conditions.servings} onChange={e=>edit({servings:e.target.value})}/></label>
     <label>最多用时（分钟，留空用厨房偏好）<input type="number" min="1" max="480" step="1" value={conditions.maxMinutes} onChange={e=>edit({maxMinutes:e.target.value})}/></label>
    </div>
    <label>本次可用厨具（逗号分隔，留空用厨房偏好）<input value={conditions.equipment} onChange={e=>edit({equipment:e.target.value})}/></label>
    <label>不可放宽的排除食材（逗号分隔）<input value={conditions.excluded} onChange={e=>edit({excluded:e.target.value})}/></label>
-   <label>其他要求（最多 500 字）<textarea rows={2} maxLength={500} value={conditions.requirement} onChange={e=>edit({requirement:e.target.value.slice(0,500)})} placeholder="例如：少油、一锅出"/></label>
+   </details><label>其他要求（最多 500 字）<textarea rows={2} maxLength={500} value={conditions.requirement} onChange={e=>edit({requirement:e.target.value.slice(0,500)})} placeholder="例如：少油、一锅出"/></label>
    <label>优先使用现有库存食材<input type="checkbox" checked={conditions.preferInventory} onChange={e=>edit({preferInventory:e.target.checked})}/></label>
    <div className="row">
-    <button disabled={busy||running||!capability.model_enabled} onClick={generate}>{newCall?'重新发起生成（会产生新的一次模型调用）':'生成候选'}</button>
+    <button disabled={busy||running||!capability.model_enabled} onClick={generate}>{newCall?'重新生成候选':'生成候选'}</button>
     <button className="secondary" disabled={busy} onClick={()=>void run(load)}>刷新候选列表</button>
    </div>
    {running&&<p role="status">正在生成候选，请勿重复点击。</p>}
    {newCall&&<p role="status">上一次生成没有成功。再点一次会新建一次请求，可能产生新的模型调用费用；填写的条件保持不变。</p>}
    {batches.length>0&&<details><summary>最近的生成记录</summary>{batches.slice(0,5).map(b=><p key={b.id}>
-    {b.status==='completed'?'已完成':b.status==='failed'?'未成功':'处理中或已中断'} · {b.drafts.length} 道候选 · {b.model_name||'未使用模型'}
-    {b.error_code?' · 代码 '+b.error_code:''}{b.usage?' · 实际 token '+b.usage.total_tokens:' · 无实际用量'}</p>)}</details>}
+   {b.status==='completed'?'已完成':b.status==='failed'?'未成功':'处理中或已中断'} · {b.drafts.length} 道候选 · {b.model_name||'未记录模型名称'}
+    {b.error_code?' · 代码 '+b.error_code:''}{b.usage?' · 实际 token '+b.usage.total_tokens:' · 未收到用量数据'}</p>)}</details>}
   </section>
   <section className="panel"><h2>候选草稿</h2>
    <p>逐道编辑并校验。「确认加入菜谱库」才会写入正式菜谱；「丢弃」不改变库存与菜谱。生成、编辑、校验都不扣减库存。</p>

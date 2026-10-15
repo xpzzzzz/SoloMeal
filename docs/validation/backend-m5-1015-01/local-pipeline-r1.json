@@ -1,0 +1,112 @@
+{
+  "scenarios": [
+    {
+      "mode": "ocr_only",
+      "fault": null,
+      "status": "parsed",
+      "states": [
+        "queued",
+        "parsing",
+        "parsed"
+      ],
+      "seconds": 1.2817813999999998,
+      "task_id": "c99b5e2d-2c93-4ce3-866e-c2fe473cad51",
+      "ocr_line_count": 1,
+      "last_attempt_mock_vlm_calls": 0,
+      "conflicts": 0,
+      "inventory_before_review": 0
+    },
+    {
+      "mode": "vlm_only",
+      "fault": null,
+      "status": "parsed",
+      "states": [
+        "queued",
+        "parsed"
+      ],
+      "seconds": 0.46817819999978383,
+      "task_id": "d540e71c-3353-46a6-b5ea-9aacd7aac7b5",
+      "ocr_line_count": 0,
+      "last_attempt_mock_vlm_calls": 1,
+      "conflicts": 0,
+      "inventory_before_review": 0
+    },
+    {
+      "mode": "hybrid",
+      "fault": null,
+      "status": "parsed",
+      "states": [
+        "queued",
+        "parsing",
+        "parsed"
+      ],
+      "seconds": 0.874064399999952,
+      "task_id": "1357c4a7-7aa9-470c-a35b-c2245e7ad915",
+      "ocr_line_count": 1,
+      "last_attempt_mock_vlm_calls": 1,
+      "conflicts": 0,
+      "inventory_before_review": 0
+    },
+    {
+      "mode": "hybrid",
+      "fault": "conflict",
+      "status": "parsed",
+      "states": [
+        "queued",
+        "parsing",
+        "parsed"
+      ],
+      "seconds": 1.2843001000001095,
+      "task_id": "1ff7b2e3-4318-458c-8f5a-0a826117cab2",
+      "ocr_line_count": 1,
+      "last_attempt_mock_vlm_calls": 1,
+      "conflicts": 1,
+      "inventory_before_review": 0
+    },
+    {
+      "mode": "hybrid",
+      "fault": "ocr_failed",
+      "status": "parsed",
+      "states": [
+        "queued",
+        "parsing",
+        "parsed"
+      ],
+      "seconds": 0.8812441999998555,
+      "task_id": "9e64bcc3-57e5-4fa4-8750-6256cd0ff3c8",
+      "ocr_line_count": 0,
+      "last_attempt_mock_vlm_calls": 1,
+      "conflicts": 0,
+      "inventory_before_review": 0
+    },
+    {
+      "mode": "hybrid",
+      "fault": "failed",
+      "status": "failed",
+      "states": [
+        "queued",
+        "parsing",
+        "retrying",
+        "parsing",
+        "retrying",
+        "parsing",
+        "failed"
+      ],
+      "seconds": 3.7367286999997305,
+      "task_id": "a8c80489-dde7-48c9-915c-9b44b9857baf",
+      "ocr_line_count": 0,
+      "last_attempt_mock_vlm_calls": 1,
+      "conflicts": 0,
+      "inventory_before_review": 0
+    }
+  ],
+  "confirmed_once": true,
+  "inventory_after_receipt_review": 1,
+  "shopping_confirmed_once": true,
+  "cooking_and_undo_replayed_once": true,
+  "final_quantity_g": "700",
+  "real_model_calls": 0,
+  "mock_usage_is_fixture_only": true,
+  "source_image_sha256": "8206926eb6e3b5ce0d4670e65581fc6282a539c2e16b58f6df41dbec21b531ff",
+  "local_dependency_recovery": true
+}

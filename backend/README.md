@@ -1,3 +1,9 @@
+2026-10-15后端工程增强：M1～M4.5已完成，M5正式依赖、CI与干净部署验证进行中。新增PaddleOCR CPU三模式、MySQL任务/outbox、Celery/RabbitMQ可靠执行；真实模型0。最新状态见[执行记录](../docs/backend-engineering-enhancement-progress.md)，三模式及证据限制见[OCR报告](../docs/validation/ocr/m45-hybrid-1015.md)，正式安装与配置见[部署说明](../deploy/README.md)。下文带日期的授权/状态是历史；当前未经明确确认不得调用付费模型。
+
+开发API继续使用`pip install -r backend/requirements.lock`，不安装OCR；CPU依赖50包独立锁在`requirements-ocr.lock`并由Docker Worker目标安装。Windows不启动原生Celery Worker，统一使用Linux Docker。OCR权重通过独立初始化命令下载、固定摘要校验，识别时只读；默认OCR关闭、模式vlm_only。
+
+小票parse接口现在立即返回202、持久化TaskID，可从原GET读取queued/parsing/retrying/parsed/failed/discarded。OCR/VLM只在Worker执行；编辑/取消使旧令牌失效，未确认不写库存。模型和OCR结果都沿用原Schema、单位/数量和整单原子入库校验。无需Redis或第二套异步任务系统。
+
 2026-09-16部署更新：本地Compose空环境启动、关闭模型降级及真实MySQL与私有图片联合恢复已通过，见[部署说明](../deploy/README.md)和[验收范围](../docs/validation/deployment-restore-0916.md)。P9整体及真人/新主机验收未完成；以下旧部署未交付描述保留为历史。
 
 # SoloMeal backend

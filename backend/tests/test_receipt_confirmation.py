@@ -4,7 +4,7 @@ from threading import Barrier, Event
 
 import pytest
 from app.models.food import Operation
-from app.services import food
+from app.services import food, receipt_jobs
 from sqlalchemy import select
 from test_food import create_ingredient
 from test_receipts import setup, upload
@@ -131,8 +131,12 @@ def test_mysql_late_parse_cannot_overwrite_confirmed_receipt(client):
                 await asyncio.sleep(.01)
             return {'items': [{'name': '迟到识别'}]}
     client.app.state.receipt_parser = Parser()
+    accepted = post(client, h, path+'/parse', {'expected_version': 1}, 'late-parse')
+    assert accepted.status_code == 202
     with ThreadPoolExecutor(max_workers=2) as pool:
-        pending = pool.submit(post, client, h, path+'/parse', {'expected_version': 1}, 'late-parse')
+        pending = pool.submit(receipt_jobs.execute, client.app.state.sessions,
+                              client.app.state.settings, client.app.state.receipt_parser,
+                              accepted.json()['parse_task_id'])
         try:
             assert entered.wait(5)
             draft = {'items': [{'name': '豆子', 'ingredient_id': item, 'quantity': '.5', 'unit': 'kg', 'uncertain': False}]}
@@ -142,6 +146,6 @@ def test_mysql_late_parse_cannot_overwrite_confirmed_receipt(client):
             assert confirmed.result(timeout=5).status_code == 200
         finally:
             release.set()
-        assert pending.result(timeout=5).status_code == 409
+        assert pending.result(timeout=5) is None
     batch = client.get('/api/v1/inventory', headers=h).json()[0]
     assert batch['quantity'] == '500.000' and batch['expires_on'] is None and batch['expiry_source'] == 'unknown'

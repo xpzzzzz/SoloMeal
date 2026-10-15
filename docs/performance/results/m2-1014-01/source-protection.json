@@ -1,0 +1,18 @@
+{
+  "protected_count": 575,
+  "changed_paths": [
+    "AGENTS.md",
+    "backend/app/api/food.py",
+    "backend/app/services/food.py",
+    "backend/app/services/personalization.py",
+    "backend/app/services/planning.py",
+    "CLAUDE.md",
+    "docs/backend-engineering-enhancement-plan-v1.0.md",
+    "docs/backend-engineering-enhancement-progress.md",
+    "NEXT_SESSION.md",
+    "SOLOMEAL_STATUS.md"
+  ],
+  "other_original_files_unchanged": true,
+  "m1_original_files_check_before_m2": "575 files; only plan and progress changed",
+  "real_model_calls": 0
+}

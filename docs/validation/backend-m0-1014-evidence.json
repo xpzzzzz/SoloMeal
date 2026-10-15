@@ -1,0 +1,172 @@
+{
+  "audit_date": "2026-10-14",
+  "stage": "M0",
+  "source_head": "7ccb597e63e17aa0587fab59c4b61c0e621ec5b3",
+  "source_is_dirty": true,
+  "protected_file_count": 572,
+  "installed_packages": {
+    "SQLAlchemy": "2.0.52",
+    "PyMySQL": "1.2.0",
+    "fastapi": "0.141.1",
+    "pydantic": "2.13.5",
+    "pytest": "9.1.1",
+    "alembic": "1.19.2",
+    "httpx": "0.28.1",
+    "Pillow": "12.3.0",
+    "locust": null,
+    "celery": null,
+    "kombu": null,
+    "paddleocr": null,
+    "paddlepaddle": null
+  },
+  "local_settings_allowlisted": {
+    "database_driver": "mysql+pymysql",
+    "database_host": "127.0.0.1",
+    "database_port": 13316,
+    "database_name": "solomeal",
+    "env_file_exists": true,
+    "receipt_storage_dir": "D:\\Code\\meal-manager\\backend\\private_uploads",
+    "agent_enabled": false,
+    "receipt_vision_enabled": true,
+    "recipe_discovery_enabled": false,
+    "model_key_present": true
+  },
+  "pytest_collection": {
+    "exit_code": 0,
+    "summary": [
+      "662 tests collected in 0.59s"
+    ],
+    "node_count": 662,
+    "warning_counts": [],
+    "tests_executed": false
+  },
+  "local_alembic_head": "a7c9e2f10463",
+  "live_source_metadata": {
+    "audited_source_hashes_lf": {
+      "app/core/database.py": "261c44416af2ac2de2f4a08f975686819bb3082a6b169747f37c499452983ed2",
+      "app/services/planning.py": "df91f80b9d5e3491afcedfe2f1ef5c574a320d2c124cf44cdd77f5bb184e3c28",
+      "app/services/home.py": "9de33d0712eef880b850405134b930f6a3cd24002c6b964aeba336b20e566434",
+      "app/services/food.py": "f418910b213086361c89cee8ca0d62737882758aec5032be91c7569f95058d51",
+      "app/services/receipts.py": "f24334d561a6e3cd46e53d54da699a3597d559ac3f511cbd4ed99a863582f10a",
+      "app/services/receipt_parser.py": "db49fd3a10b5925895f64d44fc9608a5d0b14cacf5ca786290d76ab4b1dafa79",
+      "app/api/receipts.py": "f20acf98ea6f402ef2ff336317d2f7533771365215f65ec9bafede1bc69ffa54",
+      "app/models/receipts.py": "020b7fe25e5d49dae47c37977b1714e46832063fd65b91dfdde459118c31ddeb"
+    },
+    "extra_indexes": [
+      {
+        "TABLE_NAME": "auth_sessions",
+        "INDEX_NAME": "ix_auth_sessions_expires_at",
+        "NON_UNIQUE": 1,
+        "SEQ_IN_INDEX": 1,
+        "COLUMN_NAME": "expires_at"
+      },
+      {
+        "TABLE_NAME": "auth_sessions",
+        "INDEX_NAME": "ix_auth_sessions_user_id",
+        "NON_UNIQUE": 1,
+        "SEQ_IN_INDEX": 1,
+        "COLUMN_NAME": "user_id"
+      },
+      {
+        "TABLE_NAME": "auth_sessions",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "SEQ_IN_INDEX": 1,
+        "COLUMN_NAME": "token_hash"
+      },
+      {
+        "TABLE_NAME": "price_quotes",
+        "INDEX_NAME": "ingredient_id",
+        "NON_UNIQUE": 1,
+        "SEQ_IN_INDEX": 1,
+        "COLUMN_NAME": "ingredient_id"
+      },
+      {
+        "TABLE_NAME": "price_quotes",
+        "INDEX_NAME": "ingredient_id",
+        "NON_UNIQUE": 1,
+        "SEQ_IN_INDEX": 2,
+        "COLUMN_NAME": "user_id"
+      },
+      {
+        "TABLE_NAME": "price_quotes",
+        "INDEX_NAME": "ix_price_quotes_user_id",
+        "NON_UNIQUE": 1,
+        "SEQ_IN_INDEX": 1,
+        "COLUMN_NAME": "user_id"
+      },
+      {
+        "TABLE_NAME": "price_quotes",
+        "INDEX_NAME": "PRIMARY",
+        "NON_UNIQUE": 0,
+        "SEQ_IN_INDEX": 1,
+        "COLUMN_NAME": "id"
+      },
+      {
+        "TABLE_NAME": "price_quotes",
+        "INDEX_NAME": "uq_quote_ingredient",
+        "NON_UNIQUE": 0,
+        "SEQ_IN_INDEX": 1,
+        "COLUMN_NAME": "user_id"
+      },
+      {
+        "TABLE_NAME": "price_quotes",
+        "INDEX_NAME": "uq_quote_ingredient",
+        "NON_UNIQUE": 0,
+        "SEQ_IN_INDEX": 2,
+        "COLUMN_NAME": "ingredient_id"
+      }
+    ]
+  },
+  "source_match": {
+    "checked": 8,
+    "normalization": "CRLF to LF only",
+    "mismatches": []
+  },
+  "health": {
+    "live": 200,
+    "ready": 200
+  },
+  "active_project": "solomeal-features-0921",
+  "port": 18088,
+  "frontend_assets": [
+    "index-BIfInUpj.js",
+    "index-Bt3SlEE9.css"
+  ],
+  "live_pool_and_mysql": {
+    "pool_class": "QueuePool",
+    "pool_size": 5,
+    "max_overflow": 10,
+    "pool_timeout_seconds": 30,
+    "pool_recycle_seconds": -1,
+    "pool_pre_ping": true,
+    "connect_timeout_seconds": 5,
+    "mysql_version": "8.0.46",
+    "session_isolation": "READ-COMMITTED",
+    "global_isolation": "REPEATABLE-READ",
+    "max_connections": 151
+  },
+  "docker": {
+    "engine": "29.6.1",
+    "compose": "5.1.4",
+    "os": "linux",
+    "architecture": "x86_64",
+    "cpus": 16,
+    "memory_bytes": 8248299520
+  },
+  "executed_test_suites": 0,
+  "model_requests_in_this_audit": 0,
+  "final_file_preservation": {
+    "checked": 572,
+    "mismatches": [],
+    "new_files": [
+      "docs/backend-engineering-baseline-m0-1014.md",
+      "docs/backend-engineering-enhancement-progress.md",
+      "docs/validation/backend-m0-1014-evidence.json"
+    ]
+  },
+  "initial_worktree_counts": {
+    "modified": 25,
+    "untracked": 5
+  }
+}

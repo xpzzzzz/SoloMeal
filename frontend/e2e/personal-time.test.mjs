@@ -1,3 +1,4 @@
+import {clickAction} from './support.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
@@ -54,7 +55,7 @@ test('个人用时估计改变候选与卡片文案，关闭开关与撤销同�
   await expectEstimate('标准20分钟，暂无个人记录');
 
   // One cooked meal with a typed-in duration is the whole sample set.
-  await page.locator('.recipe').getByRole('button',{name:'记录做完这道菜'}).click();
+  await clickAction(page.locator('.recipe'),'记录做完这道菜');
   await page.locator('.modal').getByRole('button',{name:'确认做完',exact:true}).click();
   await useTab(page,'用餐记录');
   await page.getByRole('button',{name:'填写用时'}).click();
