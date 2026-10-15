@@ -1,0 +1,27 @@
+{
+  "readiness_cases": [
+    {
+      "case": "http_502",
+      "safe_gets": 2,
+      "passed": true
+    },
+    {
+      "case": "transport_failure",
+      "safe_gets": 2,
+      "passed": true
+    },
+    {
+      "case": "non_loopback_refused",
+      "passed": true
+    },
+    {
+      "case": "unavailable_deadline",
+      "passed": true
+    }
+  ],
+  "comfort_passed": 2,
+  "nginx_config_syntax_passed": true,
+  "forced_address_probe": "aborted during initial read-only network listing; no resources created; not passed",
+  "original_ready_http": 200,
+  "real_model_calls": 0
+}

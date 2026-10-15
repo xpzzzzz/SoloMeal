@@ -20,7 +20,7 @@
 - [首轮CI](https://github.com/xpzzzzz/SoloMeal/actions/runs/38675670822)正式API/CPU Worker/Web干净构建、启动和空权重卷初始化通过。前端68、Linux插件378＋300、mypy50文件、覆盖率92%通过。
 - 首轮浏览器39通过/2失败/4条件跳过：两处同为界面测试在requestAnimationFrame展开前即时断言，现等待实际open属性再断言；原首导航超时问题未改动。本地桌面/手机2/2复验通过。
 - 三模式集成首个注册遇502：API切换Mock配置重建后，仍运行的Nginx缓存旧地址；改为Docker DNS动态upstream，并在写入夹具前重新检查实时代理就绪。Nginx1.30.5配置语法检查通过；不重试变更请求掩盖失败。[失败与修复证据](validation/backend-m5-1015-01/ci-first-failures.json)。
-- 完整MySQL仍运行，M5尚未完成。真实模型0；原18080/18088不替换。
+- 首轮完整MySQL步骤已通过；修复后的整轮CI尚待执行，M5尚未完成。真实模型0；原18080/18088不替换。
 
 ## 2026-10-14：M0 项目基线审计
 
