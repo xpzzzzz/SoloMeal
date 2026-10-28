@@ -91,6 +91,8 @@ verify使用原合成账号重新登录，比较全部演示业务快照、旧Ag
 
 ## 停止与后续
 
+可选 Mem0 配置及数据外发边界见 [Mem0 集成说明](../docs/mem0-personalization.md)；Compose 默认关闭，不会从示例文件读取真实密钥。
+
 2026-09-17故障演练：22项保护测试在Windows/Linux通过；1MiB临时卷的备份输出、恢复暂存和图片目标写满，以及新MySQL部分导入失败/非空重试拒绝通过。见[故障报告](../docs/validation/p9-fault-0917.md)。manifest现先写pending并flush/fsync，成功后更名；失败目录不可用于恢复。不要编辑manifest或删除部分恢复数据以强行重试，另选新项目。恢复失败时应用保持停止，db可能仍运行供检查；检查后用stop保留卷。主机断电、MySQL数据盘写满尚未演练。
 
 `docker compose --env-file 私有env -p 项目名 stop`只停服务、保留卷；再次up恢复。不要对含用户数据的项目执行down -v。本次验收保留源演示环境18080，恢复环境18081验证后停止，命名卷和证据保留。

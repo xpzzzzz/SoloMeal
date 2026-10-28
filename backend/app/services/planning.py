@@ -8,12 +8,58 @@ from sqlalchemy import select
 from ..models.food import CookingRecord, Ingredient, IngredientAlias, InventoryBatch, Recipe
 from ..models.identity import UserPreference
 from ..models.shopping import SavedQuote
+from ..schemas.memory import MemoryInput
 from ..schemas.planning import PriceQuote, ScoreWeights
 from .food import convert, feedback_map, normalize, owned, recipe_view
+from .memory import MemoryPreference
+from . import memory_diagnostics as diagnostics
+from .memory_operations import filter_suppressed
 from .personal_time import duration_samples, estimate
+from .personalization import score_candidate, score_memories
 from .personalization import history as preference_history
-from .personalization import score_candidate
 from .quantities import required_quantities, selected_lines
+
+
+def read_memories(db, user_id):
+    """Fetch outside mutation/locking paths; the planner itself never does network I/O."""
+    diagnostics.increment("memory_reads")
+    with diagnostics.duration("memory_read_ms"):
+        return _read_memories(db, user_id)
+
+
+def _read_memories(db, user_id):
+    provider = db.info.get("memory_provider")
+    preferences = db.get(UserPreference, user_id)
+    if not provider or not preferences or not preferences.personalization_enabled:
+        diagnostics.mark(read_status="disabled")
+        return ()
+    try:
+        diagnostics.mark(read_status="ok")
+        result = provider.get_preferences(user_id)
+    except Exception:
+        # A provider outage must not break recommendations.
+        diagnostics.mark(read_status="unavailable")
+        return ()
+    # A provider is an external boundary: reject the whole batch if it violates
+    # the contract, rather than allowing partial or malformed signals into ranking.
+    if not isinstance(result, (list, tuple)) or len(result) > 100:
+        diagnostics.mark(read_status="invalid_provider")
+        return ()
+    if not result:
+        diagnostics.mark_empty_if_ok()
+    for item in result:
+        if (not isinstance(item, MemoryPreference) or type(item.polarity) is not int
+                or not isinstance(item.id, str)):
+            diagnostics.mark(read_status="invalid_provider")
+            return ()
+        try:
+            MemoryInput.model_validate({"category": item.category, "target": item.target,
+                                        "polarity": item.polarity})
+        except ValueError:
+            diagnostics.mark(read_status="invalid_provider")
+            return ()
+    with diagnostics.duration("suppression_ms"):
+        return tuple(filter_suppressed(db, user_id, result))
 
 
 def freeze_quotes(db, user_id, body):
@@ -50,7 +96,7 @@ def purchase_fields(needed, quote, today):
     return fields, subtotal
 
 
-def recommend(db, user_id, body):
+def recommend(db, user_id, body, *, memories=(), _feasibility_probe=False):
     body = freeze_quotes(db, user_id, body)
     today = date.today()
     preferences = db.get(UserPreference, user_id)
@@ -71,7 +117,8 @@ def recommend(db, user_id, body):
     samples = duration_samples(db, user_id, servings)
     personal_time_enabled = bool(preferences.personal_time_enabled)
     personalization_enabled = bool(preferences.personalization_enabled)
-    preference_rows, preference_staples, preference_now = preference_history(db, user_id)
+    if not _feasibility_probe:
+        preference_rows, preference_staples, preference_now = preference_history(db, user_id)
     equipment = {
         normalize(x)
         for x in (body.equipment if body.equipment is not None else preferences.equipment)
@@ -174,6 +221,10 @@ def recommend(db, user_id, body):
                 }
             )
             continue
+        if _feasibility_probe:
+            # A feasible candidate exists. The caller re-runs the planner after
+            # the optional external read, so never score this preliminary pass.
+            return None
         # Normalize per ingredient, never add incompatible grams/ml/pieces.
         count = len(lines)
         components = {
@@ -196,7 +247,15 @@ def recommend(db, user_id, body):
             - weights.repetition * components["recent_repetitions"]
             - weights.purchase_cost * (components["purchase_cost"] or 0)
         )
-        score = base_score + personalization["preference_points"]
+        with diagnostics.duration("candidate_scoring_ms"):
+            memory_score = score_memories(
+                memories if personalization_enabled else (), lines, recipe.get("cooking_methods", []),
+                time_estimate["estimated_minutes"], feedbacks.get(str(recipe_id)),
+            )
+        diagnostics.increment("candidates_scored")
+        if memory_score["reasons"]:
+            diagnostics.increment("candidates_matched")
+        score = base_score + personalization["preference_points"] + memory_score["points"]
         candidates.append(
             {
                 "recipe": recipe,
@@ -226,6 +285,12 @@ def recommend(db, user_id, body):
                 "score_weights": weights.model_dump(),
             }
         )
+        # Keep the disabled/no-match response byte-for-byte compatible with older clients.
+        if memory_score["points"]:
+            candidates[-1]["memory_preference"] = memory_score
+    if _feasibility_probe:
+        # No candidate was scored, but the response still includes history count.
+        preference_rows, _, _ = preference_history(db, user_id)
     candidates.sort(
         key=lambda c: (
             c["budget_status"] == "unknown",
@@ -264,6 +329,28 @@ def recommend(db, user_id, body):
             "window_days": 90,
         },
     }
+
+
+def recommend_with_memory(db, user_id, body):
+    """Skip memory only when the existing planner finds no feasible candidates.
+
+    Re-run after external I/O so the final answer is not built from a snapshot
+    captured before the remote lookup. Both passes use the same planner rules.
+    """
+    provider = db.info.get("memory_provider")
+    preferences = db.get(UserPreference, user_id)
+    if (not provider or getattr(provider, "enabled", True) is False or not preferences
+            or not preferences.personalization_enabled):
+        # The original path cannot make a Mem0 request in these cases, so avoid
+        # an extra planner pass and preserve its disabled diagnostics behavior.
+        memories = read_memories(db, user_id)
+        return recommend(db, user_id, body, memories=memories)
+    initial = recommend(db, user_id, body, _feasibility_probe=True)
+    if initial is not None:
+        return initial
+    memories = read_memories(db, user_id)
+    db.expire_all()
+    return recommend(db, user_id, body, memories=memories)
 
 
 def estimate_purchase(db, user_id, body):

@@ -9,6 +9,7 @@ from .api.agent import router as agent_router
 from .api.discovery import router as discovery_router
 from .api.food import router as food_router
 from .api.home import router as home_router
+from .api.memory import router as memory_router
 from .api.planning import router as planning_router
 from .api.receipts import router as receipts_router
 from .api.routes import router
@@ -17,6 +18,8 @@ from .api.shopping import router as shopping_router
 from .core.config import Settings
 from .core.database import build_engine, build_session_factory
 from .core.errors import AppError
+from .services.memory import get_memory_provider
+from .services.memory_diagnostics import MemoryDiagnosticsMiddleware, mark
 from .services.receipt_parser import VisionReceiptParser
 from .services.recipe_discovery import ModelDiscoveryProvider
 
@@ -27,11 +30,27 @@ def create_app(settings: Settings | None = None):
 
     @asynccontextmanager
     async def lifespan(app):
-        yield
-        engine.dispose()
+        initial_provider = app.state.memory_provider
+        try:
+            yield
+        finally:
+            try:
+                try:
+                    close = getattr(app.state.memory_provider, "close", None)
+                    if close:
+                        close()
+                finally:
+                    if initial_provider is not app.state.memory_provider:
+                        close = getattr(initial_provider, "close", None)
+                        if close:
+                            close()
+            finally:
+                engine.dispose()
 
     app = FastAPI(title="SoloMeal", version="0.1.0", lifespan=lifespan)
+    app.add_middleware(MemoryDiagnosticsMiddleware)
     app.state.settings = settings
+    app.state.memory_provider = get_memory_provider(settings)
     app.state.engine = engine
     app.state.sessions = build_session_factory(engine)
     app.state.receipt_parser = VisionReceiptParser(settings)
@@ -39,6 +58,10 @@ def create_app(settings: Settings | None = None):
 
     @app.exception_handler(AppError)
     async def application_error(request: Request, exc: AppError):
+        if exc.code == "MEMORY_OUTCOME_UNKNOWN":
+            mark(operation_status="unknown")
+        elif exc.code == "MEMORY_PENDING":
+            mark(operation_status="pending")
         headers = {"WWW-Authenticate": "Bearer"} if exc.status == 401 else None
         return JSONResponse(
             status_code=exc.status,
@@ -70,6 +93,7 @@ def create_app(settings: Settings | None = None):
     app.include_router(planning_router)
     app.include_router(shopping_router)
     app.include_router(home_router)
+    app.include_router(memory_router)
     app.include_router(receipts_router)
     app.include_router(discovery_router)
     return app

@@ -1,0 +1,1935 @@
+{
+  "marker": "synthetic-run",
+  "stage": "complete",
+  "http": [
+    {
+      "method": "GET",
+      "kind": "ping",
+      "status": "success",
+      "stage": "ping",
+      "http_status": 200,
+      "response_keys": [
+        "org_id",
+        "project_id",
+        "status",
+        "user_email"
+      ],
+      "project_identity_present": true,
+      "elapsed_ms": 1857.67
+    },
+    {
+      "method": "POST",
+      "kind": "add",
+      "status": "success",
+      "stage": "confirmed_writes",
+      "http_status": 200,
+      "response_keys": [
+        "event_id",
+        "message",
+        "results",
+        "status"
+      ],
+      "result_count": 1,
+      "remote_status": "SUCCEEDED",
+      "elapsed_ms": 1982.69
+    },
+    {
+      "method": "POST",
+      "kind": "add",
+      "status": "success",
+      "stage": "confirmed_writes",
+      "http_status": 200,
+      "response_keys": [
+        "event_id",
+        "message",
+        "results",
+        "status"
+      ],
+      "result_count": 1,
+      "remote_status": "SUCCEEDED",
+      "elapsed_ms": 1881.53
+    },
+    {
+      "method": "POST",
+      "kind": "add",
+      "status": "success",
+      "stage": "confirmed_writes",
+      "http_status": 200,
+      "response_keys": [
+        "event_id",
+        "message",
+        "results",
+        "status"
+      ],
+      "result_count": 1,
+      "remote_status": "SUCCEEDED",
+      "elapsed_ms": 1704.06
+    },
+    {
+      "method": "POST",
+      "kind": "add",
+      "status": "success",
+      "stage": "confirmed_writes",
+      "http_status": 200,
+      "response_keys": [
+        "event_id",
+        "message",
+        "results",
+        "status"
+      ],
+      "result_count": 1,
+      "remote_status": "SUCCEEDED",
+      "elapsed_ms": 1732.28
+    },
+    {
+      "method": "POST",
+      "kind": "search",
+      "status": "success",
+      "stage": "paired_scenarios",
+      "http_status": 200,
+      "response_keys": [
+        "results"
+      ],
+      "result_count": 4,
+      "elapsed_ms": 1413.17
+    },
+    {
+      "method": "POST",
+      "kind": "search",
+      "status": "success",
+      "stage": "paired_scenarios",
+      "http_status": 200,
+      "response_keys": [
+        "results"
+      ],
+      "result_count": 4,
+      "elapsed_ms": 1443.8
+    },
+    {
+      "method": "POST",
+      "kind": "search",
+      "status": "success",
+      "stage": "paired_scenarios",
+      "http_status": 200,
+      "response_keys": [
+        "results"
+      ],
+      "result_count": 4,
+      "elapsed_ms": 1535.63
+    },
+    {
+      "method": "POST",
+      "kind": "search",
+      "status": "success",
+      "stage": "paired_scenarios",
+      "http_status": 200,
+      "response_keys": [
+        "results"
+      ],
+      "result_count": 4,
+      "elapsed_ms": 1621.39
+    },
+    {
+      "method": "POST",
+      "kind": "search",
+      "status": "success",
+      "stage": "paired_scenarios",
+      "http_status": 200,
+      "response_keys": [
+        "results"
+      ],
+      "result_count": 4,
+      "elapsed_ms": 1362.94
+    },
+    {
+      "method": "POST",
+      "kind": "search",
+      "status": "success",
+      "stage": "paired_scenarios",
+      "http_status": 200,
+      "response_keys": [
+        "results"
+      ],
+      "result_count": 4,
+      "elapsed_ms": 1382.61
+    },
+    {
+      "method": "POST",
+      "kind": "search",
+      "status": "success",
+      "stage": "paired_scenarios",
+      "http_status": 200,
+      "response_keys": [
+        "results"
+      ],
+      "result_count": 4,
+      "elapsed_ms": 1429.12
+    },
+    {
+      "method": "POST",
+      "kind": "search",
+      "status": "success",
+      "stage": "paired_scenarios",
+      "http_status": 200,
+      "response_keys": [
+        "results"
+      ],
+      "result_count": 4,
+      "elapsed_ms": 1407.01
+    },
+    {
+      "method": "POST",
+      "kind": "list",
+      "status": "success",
+      "stage": "verified_cleanup",
+      "http_status": 200,
+      "response_keys": [
+        "count",
+        "next",
+        "previous",
+        "results"
+      ],
+      "result_count": 4,
+      "elapsed_ms": 1404.2
+    },
+    {
+      "method": "GET",
+      "kind": "single",
+      "status": "success",
+      "stage": "verified_cleanup",
+      "http_status": 200,
+      "response_keys": [
+        "categories",
+        "created_at",
+        "expiration_date",
+        "id",
+        "lifecycle_state",
+        "memory",
+        "metadata",
+        "replaced_by",
+        "structured_attributes",
+        "synthesized",
+        "updated_at",
+        "user_id"
+      ],
+      "elapsed_ms": 1368.18
+    },
+    {
+      "method": "POST",
+      "kind": "list",
+      "status": "success",
+      "stage": "verified_cleanup",
+      "http_status": 200,
+      "response_keys": [
+        "count",
+        "next",
+        "previous",
+        "results"
+      ],
+      "result_count": 4,
+      "elapsed_ms": 1404.94
+    },
+    {
+      "method": "GET",
+      "kind": "single",
+      "status": "success",
+      "stage": "verified_cleanup",
+      "http_status": 200,
+      "response_keys": [
+        "categories",
+        "created_at",
+        "expiration_date",
+        "id",
+        "lifecycle_state",
+        "memory",
+        "metadata",
+        "replaced_by",
+        "structured_attributes",
+        "synthesized",
+        "updated_at",
+        "user_id"
+      ],
+      "elapsed_ms": 1347.79
+    },
+    {
+      "method": "DELETE",
+      "kind": "single",
+      "status": "success",
+      "stage": "verified_cleanup",
+      "http_status": 200,
+      "response_keys": [
+        "message"
+      ],
+      "elapsed_ms": 1524.32
+    },
+    {
+      "method": "GET",
+      "kind": "single",
+      "status": "success",
+      "stage": "verified_cleanup",
+      "http_status": 200,
+      "response_keys": [
+        "categories",
+        "created_at",
+        "expiration_date",
+        "id",
+        "lifecycle_state",
+        "memory",
+        "metadata",
+        "replaced_by",
+        "structured_attributes",
+        "synthesized",
+        "updated_at",
+        "user_id"
+      ],
+      "elapsed_ms": 1364.21
+    },
+    {
+      "method": "POST",
+      "kind": "list",
+      "status": "success",
+      "stage": "verified_cleanup",
+      "http_status": 200,
+      "response_keys": [
+        "count",
+        "next",
+        "previous",
+        "results"
+      ],
+      "result_count": 3,
+      "elapsed_ms": 1366.32
+    },
+    {
+      "method": "GET",
+      "kind": "single",
+      "status": "success",
+      "stage": "verified_cleanup",
+      "http_status": 200,
+      "response_keys": [
+        "categories",
+        "created_at",
+        "expiration_date",
+        "id",
+        "lifecycle_state",
+        "memory",
+        "metadata",
+        "replaced_by",
+        "structured_attributes",
+        "synthesized",
+        "updated_at",
+        "user_id"
+      ],
+      "elapsed_ms": 1362.12
+    },
+    {
+      "method": "DELETE",
+      "kind": "single",
+      "status": "success",
+      "stage": "verified_cleanup",
+      "http_status": 200,
+      "response_keys": [
+        "message"
+      ],
+      "elapsed_ms": 1669.53
+    },
+    {
+      "method": "GET",
+      "kind": "single",
+      "status": "success",
+      "stage": "verified_cleanup",
+      "http_status": 200,
+      "response_keys": [
+        "categories",
+        "created_at",
+        "expiration_date",
+        "id",
+        "lifecycle_state",
+        "memory",
+        "metadata",
+        "replaced_by",
+        "structured_attributes",
+        "synthesized",
+        "updated_at",
+        "user_id"
+      ],
+      "elapsed_ms": 1375.29
+    },
+    {
+      "method": "POST",
+      "kind": "list",
+      "status": "success",
+      "stage": "verified_cleanup",
+      "http_status": 200,
+      "response_keys": [
+        "count",
+        "next",
+        "previous",
+        "results"
+      ],
+      "result_count": 2,
+      "elapsed_ms": 1422.72
+    },
+    {
+      "method": "GET",
+      "kind": "single",
+      "status": "success",
+      "stage": "verified_cleanup",
+      "http_status": 200,
+      "response_keys": [
+        "categories",
+        "created_at",
+        "expiration_date",
+        "id",
+        "lifecycle_state",
+        "memory",
+        "metadata",
+        "replaced_by",
+        "structured_attributes",
+        "synthesized",
+        "updated_at",
+        "user_id"
+      ],
+      "elapsed_ms": 1375.71
+    },
+    {
+      "method": "DELETE",
+      "kind": "single",
+      "status": "success",
+      "stage": "verified_cleanup",
+      "http_status": 200,
+      "response_keys": [
+        "message"
+      ],
+      "elapsed_ms": 1621.28
+    },
+    {
+      "method": "GET",
+      "kind": "single",
+      "status": "success",
+      "stage": "verified_cleanup",
+      "http_status": 200,
+      "response_keys": [
+        "categories",
+        "created_at",
+        "expiration_date",
+        "id",
+        "lifecycle_state",
+        "memory",
+        "metadata",
+        "replaced_by",
+        "structured_attributes",
+        "synthesized",
+        "updated_at",
+        "user_id"
+      ],
+      "elapsed_ms": 1380.18
+    },
+    {
+      "method": "POST",
+      "kind": "list",
+      "status": "success",
+      "stage": "verified_cleanup",
+      "http_status": 200,
+      "response_keys": [
+        "count",
+        "next",
+        "previous",
+        "results"
+      ],
+      "result_count": 1,
+      "elapsed_ms": 1343.78
+    },
+    {
+      "method": "GET",
+      "kind": "single",
+      "status": "success",
+      "stage": "verified_cleanup",
+      "http_status": 200,
+      "response_keys": [
+        "categories",
+        "created_at",
+        "expiration_date",
+        "id",
+        "lifecycle_state",
+        "memory",
+        "metadata",
+        "replaced_by",
+        "structured_attributes",
+        "synthesized",
+        "updated_at",
+        "user_id"
+      ],
+      "elapsed_ms": 1370.13
+    },
+    {
+      "method": "DELETE",
+      "kind": "single",
+      "status": "success",
+      "stage": "verified_cleanup",
+      "http_status": 200,
+      "response_keys": [
+        "message"
+      ],
+      "elapsed_ms": 1617.54
+    },
+    {
+      "method": "POST",
+      "kind": "list",
+      "status": "success",
+      "stage": "verified_cleanup",
+      "http_status": 200,
+      "response_keys": [
+        "count",
+        "next",
+        "previous",
+        "results"
+      ],
+      "result_count": 0,
+      "elapsed_ms": 1309.81
+    },
+    {
+      "method": "POST",
+      "kind": "search",
+      "status": "success",
+      "stage": "verified_cleanup",
+      "http_status": 200,
+      "response_keys": [
+        "results"
+      ],
+      "result_count": 0,
+      "elapsed_ms": 1430.96
+    }
+  ],
+  "case_results": [
+    {
+      "scenario": {
+        "id": "S1",
+        "type": "positive_ingredient",
+        "equipment": [
+          "pan"
+        ],
+        "max_minutes": 30,
+        "target_recipe": "pepper_pan",
+        "relevant_memory": "ingredient_positive",
+        "top3_predicate": "target_present",
+        "expectation": "The positive ingredient should add 3 and may bring target into Top-3; existing constraints hold."
+      },
+      "groups": {
+        "A": {
+          "elapsed_ms": 15.84,
+          "candidates": [
+            {
+              "name": "negative_pan",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            },
+            {
+              "name": "regular_pan_1",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            },
+            {
+              "name": "regular_pan_2",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            },
+            {
+              "name": "pepper_pan",
+              "base_score": 58.8,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 58.8
+            }
+          ],
+          "rejected_checks": {
+            "forbidden": [
+              "EXCLUDED_INGREDIENT"
+            ],
+            "too_slow": [
+              "TIME_LIMIT"
+            ],
+            "wrong_equipment": [
+              "MISSING_EQUIPMENT"
+            ],
+            "too_expensive": [
+              "BUDGET_EXCEEDED"
+            ]
+          },
+          "hard_violations": 0,
+          "retrieved": [],
+          "remote_requests": 0
+        },
+        "B": {
+          "elapsed_ms": 1437.84,
+          "candidates": [
+            {
+              "name": "pepper_pan",
+              "base_score": 58.8,
+              "memory_points": 3,
+              "memory_reasons": [
+                {
+                  "category": "ingredient",
+                  "target": "pepper_synthetic-run",
+                  "polarity": 1
+                }
+              ],
+              "score": 61.8
+            },
+            {
+              "name": "regular_pan_1",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            },
+            {
+              "name": "regular_pan_2",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            },
+            {
+              "name": "negative_pan",
+              "base_score": 60,
+              "memory_points": -3,
+              "memory_reasons": [
+                {
+                  "category": "cooking_method",
+                  "target": "stew",
+                  "polarity": -1
+                }
+              ],
+              "score": 57
+            }
+          ],
+          "rejected_checks": {
+            "forbidden": [
+              "EXCLUDED_INGREDIENT"
+            ],
+            "too_slow": [
+              "TIME_LIMIT"
+            ],
+            "wrong_equipment": [
+              "MISSING_EQUIPMENT"
+            ],
+            "too_expensive": [
+              "BUDGET_EXCEEDED"
+            ]
+          },
+          "hard_violations": 0,
+          "retrieved": [
+            {
+              "id": "synthetic-id-5",
+              "category": "cooking_method",
+              "target": "stew",
+              "polarity": -1
+            },
+            {
+              "id": "synthetic-id-4",
+              "category": "ingredient",
+              "target": "pepper_synthetic-run",
+              "polarity": 1
+            },
+            {
+              "id": "synthetic-id-6",
+              "category": "time",
+              "target": "20",
+              "polarity": 1
+            },
+            {
+              "id": "synthetic-id-7",
+              "category": "ingredient",
+              "target": "ghost_synthetic-run",
+              "polarity": 1
+            }
+          ],
+          "remote_requests": 1
+        }
+      }
+    },
+    {
+      "scenario": {
+        "id": "S2",
+        "type": "negative_method",
+        "equipment": [
+          "pan"
+        ],
+        "max_minutes": 28,
+        "target_recipe": "negative_pan",
+        "relevant_memory": "method_negative",
+        "top3_predicate": "target_absent",
+        "expectation": "The negative method should subtract 3 and not improve target rank; it is a soft preference, not an exclusion."
+      },
+      "groups": {
+        "B": {
+          "elapsed_ms": 1462.85,
+          "candidates": [
+            {
+              "name": "pepper_pan",
+              "base_score": 58.8,
+              "memory_points": 3,
+              "memory_reasons": [
+                {
+                  "category": "ingredient",
+                  "target": "pepper_synthetic-run",
+                  "polarity": 1
+                }
+              ],
+              "score": 61.8
+            },
+            {
+              "name": "regular_pan_1",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            },
+            {
+              "name": "regular_pan_2",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            },
+            {
+              "name": "negative_pan",
+              "base_score": 60,
+              "memory_points": -3,
+              "memory_reasons": [
+                {
+                  "category": "cooking_method",
+                  "target": "stew",
+                  "polarity": -1
+                }
+              ],
+              "score": 57
+            }
+          ],
+          "rejected_checks": {
+            "forbidden": [
+              "EXCLUDED_INGREDIENT"
+            ],
+            "too_slow": [
+              "TIME_LIMIT"
+            ],
+            "wrong_equipment": [
+              "MISSING_EQUIPMENT"
+            ],
+            "too_expensive": [
+              "BUDGET_EXCEEDED"
+            ]
+          },
+          "hard_violations": 0,
+          "retrieved": [
+            {
+              "id": "synthetic-id-5",
+              "category": "cooking_method",
+              "target": "stew",
+              "polarity": -1
+            },
+            {
+              "id": "synthetic-id-4",
+              "category": "ingredient",
+              "target": "pepper_synthetic-run",
+              "polarity": 1
+            },
+            {
+              "id": "synthetic-id-6",
+              "category": "time",
+              "target": "20",
+              "polarity": 1
+            },
+            {
+              "id": "synthetic-id-7",
+              "category": "ingredient",
+              "target": "ghost_synthetic-run",
+              "polarity": 1
+            }
+          ],
+          "remote_requests": 1
+        },
+        "A": {
+          "elapsed_ms": 14.57,
+          "candidates": [
+            {
+              "name": "negative_pan",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            },
+            {
+              "name": "regular_pan_1",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            },
+            {
+              "name": "regular_pan_2",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            },
+            {
+              "name": "pepper_pan",
+              "base_score": 58.8,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 58.8
+            }
+          ],
+          "rejected_checks": {
+            "forbidden": [
+              "EXCLUDED_INGREDIENT"
+            ],
+            "too_slow": [
+              "TIME_LIMIT"
+            ],
+            "wrong_equipment": [
+              "MISSING_EQUIPMENT"
+            ],
+            "too_expensive": [
+              "BUDGET_EXCEEDED"
+            ]
+          },
+          "hard_violations": 0,
+          "retrieved": [],
+          "remote_requests": 0
+        }
+      }
+    },
+    {
+      "scenario": {
+        "id": "S3",
+        "type": "baseline_already_top3",
+        "equipment": [
+          "microwave"
+        ],
+        "max_minutes": 30,
+        "target_recipe": "pepper_microwave",
+        "relevant_memory": "ingredient_positive",
+        "top3_predicate": "target_present",
+        "expectation": "The target is already in baseline Top-3; report preservation rather than counting it as a newly achieved hit."
+      },
+      "groups": {
+        "A": {
+          "elapsed_ms": 14.3,
+          "candidates": [
+            {
+              "name": "quick_microwave",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            },
+            {
+              "name": "pepper_microwave",
+              "base_score": 58.8,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 58.8
+            }
+          ],
+          "rejected_checks": {
+            "forbidden": [
+              "MISSING_EQUIPMENT",
+              "EXCLUDED_INGREDIENT"
+            ],
+            "too_slow": [
+              "TIME_LIMIT",
+              "MISSING_EQUIPMENT"
+            ],
+            "wrong_equipment": [
+              "MISSING_EQUIPMENT"
+            ],
+            "too_expensive": [
+              "MISSING_EQUIPMENT"
+            ]
+          },
+          "hard_violations": 0,
+          "retrieved": [],
+          "remote_requests": 0
+        },
+        "B": {
+          "elapsed_ms": 1573.99,
+          "candidates": [
+            {
+              "name": "quick_microwave",
+              "base_score": 60,
+              "memory_points": 3,
+              "memory_reasons": [
+                {
+                  "category": "time",
+                  "target": "20",
+                  "polarity": 1
+                }
+              ],
+              "score": 63
+            },
+            {
+              "name": "pepper_microwave",
+              "base_score": 58.8,
+              "memory_points": 3,
+              "memory_reasons": [
+                {
+                  "category": "ingredient",
+                  "target": "pepper_synthetic-run",
+                  "polarity": 1
+                }
+              ],
+              "score": 61.8
+            }
+          ],
+          "rejected_checks": {
+            "forbidden": [
+              "MISSING_EQUIPMENT",
+              "EXCLUDED_INGREDIENT"
+            ],
+            "too_slow": [
+              "TIME_LIMIT",
+              "MISSING_EQUIPMENT"
+            ],
+            "wrong_equipment": [
+              "MISSING_EQUIPMENT"
+            ],
+            "too_expensive": [
+              "MISSING_EQUIPMENT"
+            ]
+          },
+          "hard_violations": 0,
+          "retrieved": [
+            {
+              "id": "synthetic-id-5",
+              "category": "cooking_method",
+              "target": "stew",
+              "polarity": -1
+            },
+            {
+              "id": "synthetic-id-4",
+              "category": "ingredient",
+              "target": "pepper_synthetic-run",
+              "polarity": 1
+            },
+            {
+              "id": "synthetic-id-6",
+              "category": "time",
+              "target": "20",
+              "polarity": 1
+            },
+            {
+              "id": "synthetic-id-7",
+              "category": "ingredient",
+              "target": "ghost_synthetic-run",
+              "polarity": 1
+            }
+          ],
+          "remote_requests": 1
+        }
+      }
+    },
+    {
+      "scenario": {
+        "id": "S4",
+        "type": "unrelated_memory",
+        "equipment": [
+          "wok"
+        ],
+        "max_minutes": 30,
+        "target_recipe": null,
+        "relevant_memory": null,
+        "top3_predicate": null,
+        "expectation": "The ghost ingredient matches no recipe; no memory matches either viable recipe and ranking remains identical."
+      },
+      "groups": {
+        "B": {
+          "elapsed_ms": 1641.85,
+          "candidates": [
+            {
+              "name": "neutral_wok_2",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            },
+            {
+              "name": "neutral_wok_1",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            }
+          ],
+          "rejected_checks": {
+            "forbidden": [
+              "MISSING_EQUIPMENT",
+              "EXCLUDED_INGREDIENT"
+            ],
+            "too_slow": [
+              "TIME_LIMIT",
+              "MISSING_EQUIPMENT"
+            ],
+            "wrong_equipment": [
+              "MISSING_EQUIPMENT"
+            ],
+            "too_expensive": [
+              "MISSING_EQUIPMENT"
+            ]
+          },
+          "hard_violations": 0,
+          "retrieved": [
+            {
+              "id": "synthetic-id-5",
+              "category": "cooking_method",
+              "target": "stew",
+              "polarity": -1
+            },
+            {
+              "id": "synthetic-id-4",
+              "category": "ingredient",
+              "target": "pepper_synthetic-run",
+              "polarity": 1
+            },
+            {
+              "id": "synthetic-id-6",
+              "category": "time",
+              "target": "20",
+              "polarity": 1
+            },
+            {
+              "id": "synthetic-id-7",
+              "category": "ingredient",
+              "target": "ghost_synthetic-run",
+              "polarity": 1
+            }
+          ],
+          "remote_requests": 1
+        },
+        "A": {
+          "elapsed_ms": 13.11,
+          "candidates": [
+            {
+              "name": "neutral_wok_2",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            },
+            {
+              "name": "neutral_wok_1",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            }
+          ],
+          "rejected_checks": {
+            "forbidden": [
+              "MISSING_EQUIPMENT",
+              "EXCLUDED_INGREDIENT"
+            ],
+            "too_slow": [
+              "TIME_LIMIT",
+              "MISSING_EQUIPMENT"
+            ],
+            "wrong_equipment": [
+              "MISSING_EQUIPMENT"
+            ],
+            "too_expensive": [
+              "MISSING_EQUIPMENT"
+            ]
+          },
+          "hard_violations": 0,
+          "retrieved": [],
+          "remote_requests": 0
+        }
+      }
+    },
+    {
+      "scenario": {
+        "id": "S5",
+        "type": "no_matching_signal",
+        "equipment": [
+          "wok"
+        ],
+        "max_minutes": 25,
+        "target_recipe": null,
+        "relevant_memory": null,
+        "top3_predicate": null,
+        "expectation": "Only the 25-minute neutral wok recipe remains and its ranking and score do not change."
+      },
+      "groups": {
+        "A": {
+          "elapsed_ms": 13.24,
+          "candidates": [
+            {
+              "name": "neutral_wok_1",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            }
+          ],
+          "rejected_checks": {
+            "forbidden": [
+              "MISSING_EQUIPMENT",
+              "EXCLUDED_INGREDIENT"
+            ],
+            "too_slow": [
+              "TIME_LIMIT",
+              "MISSING_EQUIPMENT"
+            ],
+            "wrong_equipment": [
+              "MISSING_EQUIPMENT"
+            ],
+            "too_expensive": [
+              "MISSING_EQUIPMENT"
+            ]
+          },
+          "hard_violations": 0,
+          "retrieved": [],
+          "remote_requests": 0
+        },
+        "B": {
+          "elapsed_ms": 1382.75,
+          "candidates": [
+            {
+              "name": "neutral_wok_1",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            }
+          ],
+          "rejected_checks": {
+            "forbidden": [
+              "MISSING_EQUIPMENT",
+              "EXCLUDED_INGREDIENT"
+            ],
+            "too_slow": [
+              "TIME_LIMIT",
+              "MISSING_EQUIPMENT"
+            ],
+            "wrong_equipment": [
+              "MISSING_EQUIPMENT"
+            ],
+            "too_expensive": [
+              "MISSING_EQUIPMENT"
+            ]
+          },
+          "hard_violations": 0,
+          "retrieved": [
+            {
+              "id": "synthetic-id-5",
+              "category": "cooking_method",
+              "target": "stew",
+              "polarity": -1
+            },
+            {
+              "id": "synthetic-id-4",
+              "category": "ingredient",
+              "target": "pepper_synthetic-run",
+              "polarity": 1
+            },
+            {
+              "id": "synthetic-id-6",
+              "category": "time",
+              "target": "20",
+              "polarity": 1
+            },
+            {
+              "id": "synthetic-id-7",
+              "category": "ingredient",
+              "target": "ghost_synthetic-run",
+              "polarity": 1
+            }
+          ],
+          "remote_requests": 1
+        }
+      }
+    },
+    {
+      "scenario": {
+        "id": "S6",
+        "type": "positive_time",
+        "equipment": [
+          "microwave",
+          "wok"
+        ],
+        "max_minutes": 30,
+        "target_recipe": "quick_microwave",
+        "relevant_memory": "time_positive",
+        "top3_predicate": "target_present",
+        "expectation": "A recipe within the remembered 20-minute tendency receives 3 points; baseline may already rank it highly."
+      },
+      "groups": {
+        "B": {
+          "elapsed_ms": 1399.73,
+          "candidates": [
+            {
+              "name": "quick_microwave",
+              "base_score": 60,
+              "memory_points": 3,
+              "memory_reasons": [
+                {
+                  "category": "time",
+                  "target": "20",
+                  "polarity": 1
+                }
+              ],
+              "score": 63
+            },
+            {
+              "name": "pepper_microwave",
+              "base_score": 58.8,
+              "memory_points": 3,
+              "memory_reasons": [
+                {
+                  "category": "ingredient",
+                  "target": "pepper_synthetic-run",
+                  "polarity": 1
+                }
+              ],
+              "score": 61.8
+            },
+            {
+              "name": "neutral_wok_2",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            },
+            {
+              "name": "neutral_wok_1",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            }
+          ],
+          "rejected_checks": {
+            "forbidden": [
+              "MISSING_EQUIPMENT",
+              "EXCLUDED_INGREDIENT"
+            ],
+            "too_slow": [
+              "TIME_LIMIT",
+              "MISSING_EQUIPMENT"
+            ],
+            "wrong_equipment": [
+              "MISSING_EQUIPMENT"
+            ],
+            "too_expensive": [
+              "MISSING_EQUIPMENT"
+            ]
+          },
+          "hard_violations": 0,
+          "retrieved": [
+            {
+              "id": "synthetic-id-5",
+              "category": "cooking_method",
+              "target": "stew",
+              "polarity": -1
+            },
+            {
+              "id": "synthetic-id-4",
+              "category": "ingredient",
+              "target": "pepper_synthetic-run",
+              "polarity": 1
+            },
+            {
+              "id": "synthetic-id-6",
+              "category": "time",
+              "target": "20",
+              "polarity": 1
+            },
+            {
+              "id": "synthetic-id-7",
+              "category": "ingredient",
+              "target": "ghost_synthetic-run",
+              "polarity": 1
+            }
+          ],
+          "remote_requests": 1
+        },
+        "A": {
+          "elapsed_ms": 17.86,
+          "candidates": [
+            {
+              "name": "neutral_wok_2",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            },
+            {
+              "name": "quick_microwave",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            },
+            {
+              "name": "neutral_wok_1",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            },
+            {
+              "name": "pepper_microwave",
+              "base_score": 58.8,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 58.8
+            }
+          ],
+          "rejected_checks": {
+            "forbidden": [
+              "MISSING_EQUIPMENT",
+              "EXCLUDED_INGREDIENT"
+            ],
+            "too_slow": [
+              "TIME_LIMIT",
+              "MISSING_EQUIPMENT"
+            ],
+            "wrong_equipment": [
+              "MISSING_EQUIPMENT"
+            ],
+            "too_expensive": [
+              "MISSING_EQUIPMENT"
+            ]
+          },
+          "hard_violations": 0,
+          "retrieved": [],
+          "remote_requests": 0
+        }
+      }
+    },
+    {
+      "scenario": {
+        "id": "S7",
+        "type": "hard_constraints",
+        "equipment": [
+          "pan",
+          "microwave",
+          "wok"
+        ],
+        "max_minutes": 30,
+        "target_recipe": "pepper_pan",
+        "relevant_memory": "ingredient_positive",
+        "top3_predicate": "target_present",
+        "expectation": "Both groups reject the forbidden, too-slow, wrong-equipment, and known-over-budget recipes."
+      },
+      "groups": {
+        "A": {
+          "elapsed_ms": 14.58,
+          "candidates": [
+            {
+              "name": "negative_pan",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            },
+            {
+              "name": "neutral_wok_2",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            },
+            {
+              "name": "quick_microwave",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            },
+            {
+              "name": "regular_pan_1",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            },
+            {
+              "name": "neutral_wok_1",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            },
+            {
+              "name": "regular_pan_2",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            },
+            {
+              "name": "pepper_microwave",
+              "base_score": 58.8,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 58.8
+            },
+            {
+              "name": "pepper_pan",
+              "base_score": 58.8,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 58.8
+            }
+          ],
+          "rejected_checks": {
+            "forbidden": [
+              "EXCLUDED_INGREDIENT"
+            ],
+            "too_slow": [
+              "TIME_LIMIT"
+            ],
+            "wrong_equipment": [
+              "MISSING_EQUIPMENT"
+            ],
+            "too_expensive": [
+              "BUDGET_EXCEEDED"
+            ]
+          },
+          "hard_violations": 0,
+          "retrieved": [],
+          "remote_requests": 0
+        },
+        "B": {
+          "elapsed_ms": 1448.75,
+          "candidates": [
+            {
+              "name": "quick_microwave",
+              "base_score": 60,
+              "memory_points": 3,
+              "memory_reasons": [
+                {
+                  "category": "time",
+                  "target": "20",
+                  "polarity": 1
+                }
+              ],
+              "score": 63
+            },
+            {
+              "name": "pepper_microwave",
+              "base_score": 58.8,
+              "memory_points": 3,
+              "memory_reasons": [
+                {
+                  "category": "ingredient",
+                  "target": "pepper_synthetic-run",
+                  "polarity": 1
+                }
+              ],
+              "score": 61.8
+            },
+            {
+              "name": "pepper_pan",
+              "base_score": 58.8,
+              "memory_points": 3,
+              "memory_reasons": [
+                {
+                  "category": "ingredient",
+                  "target": "pepper_synthetic-run",
+                  "polarity": 1
+                }
+              ],
+              "score": 61.8
+            },
+            {
+              "name": "neutral_wok_2",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            },
+            {
+              "name": "regular_pan_1",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            },
+            {
+              "name": "neutral_wok_1",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            },
+            {
+              "name": "regular_pan_2",
+              "base_score": 60,
+              "memory_points": 0,
+              "memory_reasons": [],
+              "score": 60
+            },
+            {
+              "name": "negative_pan",
+              "base_score": 60,
+              "memory_points": -3,
+              "memory_reasons": [
+                {
+                  "category": "cooking_method",
+                  "target": "stew",
+                  "polarity": -1
+                }
+              ],
+              "score": 57
+            }
+          ],
+          "rejected_checks": {
+            "forbidden": [
+              "EXCLUDED_INGREDIENT"
+            ],
+            "too_slow": [
+              "TIME_LIMIT"
+            ],
+            "wrong_equipment": [
+              "MISSING_EQUIPMENT"
+            ],
+            "too_expensive": [
+              "BUDGET_EXCEEDED"
+            ]
+          },
+          "hard_violations": 0,
+          "retrieved": [
+            {
+              "id": "synthetic-id-5",
+              "category": "cooking_method",
+              "target": "stew",
+              "polarity": -1
+            },
+            {
+              "id": "synthetic-id-4",
+              "category": "ingredient",
+              "target": "pepper_synthetic-run",
+              "polarity": 1
+            },
+            {
+              "id": "synthetic-id-6",
+              "category": "time",
+              "target": "20",
+              "polarity": 1
+            },
+            {
+              "id": "synthetic-id-7",
+              "category": "ingredient",
+              "target": "ghost_synthetic-run",
+              "polarity": 1
+            }
+          ],
+          "remote_requests": 1
+        }
+      }
+    },
+    {
+      "scenario": {
+        "id": "S8",
+        "type": "no_feasible_candidate",
+        "equipment": [
+          "pan",
+          "microwave",
+          "wok"
+        ],
+        "max_minutes": 10,
+        "target_recipe": null,
+        "relevant_memory": null,
+        "top3_predicate": null,
+        "expectation": "All candidates violate the time constraint; neither group returns a candidate."
+      },
+      "groups": {
+        "B": {
+          "elapsed_ms": 1431.4,
+          "candidates": [],
+          "rejected_checks": {
+            "forbidden": [
+              "TIME_LIMIT",
+              "EXCLUDED_INGREDIENT"
+            ],
+            "too_slow": [
+              "TIME_LIMIT"
+            ],
+            "wrong_equipment": [
+              "TIME_LIMIT",
+              "MISSING_EQUIPMENT"
+            ],
+            "too_expensive": [
+              "TIME_LIMIT"
+            ]
+          },
+          "hard_violations": 0,
+          "retrieved": [
+            {
+              "id": "synthetic-id-5",
+              "category": "cooking_method",
+              "target": "stew",
+              "polarity": -1
+            },
+            {
+              "id": "synthetic-id-4",
+              "category": "ingredient",
+              "target": "pepper_synthetic-run",
+              "polarity": 1
+            },
+            {
+              "id": "synthetic-id-6",
+              "category": "time",
+              "target": "20",
+              "polarity": 1
+            },
+            {
+              "id": "synthetic-id-7",
+              "category": "ingredient",
+              "target": "ghost_synthetic-run",
+              "polarity": 1
+            }
+          ],
+          "remote_requests": 1
+        },
+        "A": {
+          "elapsed_ms": 14.24,
+          "candidates": [],
+          "rejected_checks": {
+            "forbidden": [
+              "TIME_LIMIT",
+              "EXCLUDED_INGREDIENT"
+            ],
+            "too_slow": [
+              "TIME_LIMIT"
+            ],
+            "wrong_equipment": [
+              "TIME_LIMIT",
+              "MISSING_EQUIPMENT"
+            ],
+            "too_expensive": [
+              "TIME_LIMIT"
+            ]
+          },
+          "hard_violations": 0,
+          "retrieved": [],
+          "remote_requests": 0
+        }
+      }
+    }
+  ],
+  "confirmed_memories": [
+    {
+      "key": "ingredient_positive",
+      "id": "synthetic-id-4",
+      "category": "ingredient",
+      "target": "pepper_synthetic-run",
+      "polarity": 1,
+      "deleted": true
+    },
+    {
+      "key": "method_negative",
+      "id": "synthetic-id-5",
+      "category": "cooking_method",
+      "target": "stew",
+      "polarity": -1,
+      "deleted": true
+    },
+    {
+      "key": "time_positive",
+      "id": "synthetic-id-6",
+      "category": "time",
+      "target": "20",
+      "polarity": 1,
+      "deleted": true
+    },
+    {
+      "key": "unrelated",
+      "id": "synthetic-id-7",
+      "category": "ingredient",
+      "target": "ghost_synthetic-run",
+      "polarity": 1,
+      "deleted": true
+    }
+  ],
+  "pending_add": null,
+  "cleanup": "confirmed_and_verified",
+  "isolation": "user-confirmed test project, isolated synthetic SQLite",
+  "http_limit": 60,
+  "isolated_timeout_seconds": 10,
+  "protocol": {
+    "protocol": "SoloMeal real Mem0 fixed synthetic AB, version 1",
+    "design": "One synthetic user, one fixed recipe and inventory dataset, four confirmed memories, alternating paired requests. The unique run marker is substituted only for fixture names and does not depend on outcomes.",
+    "limits": {
+      "remote_http_requests_including_ping": 60,
+      "memories": 4,
+      "scenarios": 8
+    },
+    "memories": [
+      {
+        "key": "ingredient_positive",
+        "category": "ingredient",
+        "target": "pepper_synthetic-run",
+        "polarity": 1,
+        "source": "以后喜欢pepper_synthetic-run"
+      },
+      {
+        "key": "method_negative",
+        "category": "cooking_method",
+        "target": "stew",
+        "polarity": -1,
+        "source": "以后不喜欢炖"
+      },
+      {
+        "key": "time_positive",
+        "category": "time",
+        "target": "20",
+        "polarity": 1,
+        "source": "以后尽量20分钟"
+      },
+      {
+        "key": "unrelated",
+        "category": "ingredient",
+        "target": "ghost_synthetic-run",
+        "polarity": 1,
+        "source": "以后喜欢ghost_synthetic-run"
+      }
+    ],
+    "fixture": {
+      "equipment_default": [
+        "pan",
+        "microwave",
+        "wok"
+      ],
+      "excluded_ingredients": [
+        "allergen"
+      ],
+      "inventory_grams": {
+        "rice": 100,
+        "pepper_synthetic-run": 98,
+        "allergen": 100,
+        "expensive": 0
+      },
+      "recipe_ingredient_quantity_grams": 100,
+      "recipes": [
+        {
+          "name": "pepper_pan",
+          "ingredient": "pepper_synthetic-run",
+          "method": "steam",
+          "minutes": 25,
+          "equipment": "pan"
+        },
+        {
+          "name": "regular_pan_1",
+          "ingredient": "rice",
+          "method": "boil",
+          "minutes": 25,
+          "equipment": "pan"
+        },
+        {
+          "name": "regular_pan_2",
+          "ingredient": "rice",
+          "method": "bake",
+          "minutes": 25,
+          "equipment": "pan"
+        },
+        {
+          "name": "negative_pan",
+          "ingredient": "rice",
+          "method": "stew",
+          "minutes": 25,
+          "equipment": "pan"
+        },
+        {
+          "name": "quick_microwave",
+          "ingredient": "rice",
+          "method": "steam",
+          "minutes": 15,
+          "equipment": "microwave"
+        },
+        {
+          "name": "pepper_microwave",
+          "ingredient": "pepper_synthetic-run",
+          "method": "steam",
+          "minutes": 25,
+          "equipment": "microwave"
+        },
+        {
+          "name": "neutral_wok_1",
+          "ingredient": "rice",
+          "method": "boil",
+          "minutes": 25,
+          "equipment": "wok"
+        },
+        {
+          "name": "neutral_wok_2",
+          "ingredient": "rice",
+          "method": "bake",
+          "minutes": 29,
+          "equipment": "wok"
+        },
+        {
+          "name": "forbidden",
+          "ingredient": "allergen",
+          "method": "steam",
+          "minutes": 25,
+          "equipment": "pan"
+        },
+        {
+          "name": "too_slow",
+          "ingredient": "rice",
+          "method": "boil",
+          "minutes": 40,
+          "equipment": "pan"
+        },
+        {
+          "name": "wrong_equipment",
+          "ingredient": "rice",
+          "method": "boil",
+          "minutes": 25,
+          "equipment": "oven"
+        },
+        {
+          "name": "too_expensive",
+          "ingredient": "expensive",
+          "method": "boil",
+          "minutes": 25,
+          "equipment": "pan"
+        }
+      ],
+      "request_common": {
+        "budget": "1",
+        "max_minutes": 30,
+        "quotes": [
+          {
+            "ingredient": "pepper_synthetic-run",
+            "package_quantity": "100",
+            "package_price": "0.50"
+          },
+          {
+            "ingredient": "expensive",
+            "package_quantity": "100",
+            "package_price": "5.00"
+          }
+        ]
+      }
+    },
+    "scenarios": [
+      {
+        "id": "S1",
+        "type": "positive_ingredient",
+        "equipment": [
+          "pan"
+        ],
+        "max_minutes": 30,
+        "target_recipe": "pepper_pan",
+        "relevant_memory": "ingredient_positive",
+        "top3_predicate": "target_present",
+        "expectation": "The positive ingredient should add 3 and may bring target into Top-3; existing constraints hold."
+      },
+      {
+        "id": "S2",
+        "type": "negative_method",
+        "equipment": [
+          "pan"
+        ],
+        "max_minutes": 28,
+        "target_recipe": "negative_pan",
+        "relevant_memory": "method_negative",
+        "top3_predicate": "target_absent",
+        "expectation": "The negative method should subtract 3 and not improve target rank; it is a soft preference, not an exclusion."
+      },
+      {
+        "id": "S3",
+        "type": "baseline_already_top3",
+        "equipment": [
+          "microwave"
+        ],
+        "max_minutes": 30,
+        "target_recipe": "pepper_microwave",
+        "relevant_memory": "ingredient_positive",
+        "top3_predicate": "target_present",
+        "expectation": "The target is already in baseline Top-3; report preservation rather than counting it as a newly achieved hit."
+      },
+      {
+        "id": "S4",
+        "type": "unrelated_memory",
+        "equipment": [
+          "wok"
+        ],
+        "max_minutes": 30,
+        "target_recipe": null,
+        "relevant_memory": null,
+        "top3_predicate": null,
+        "expectation": "The ghost ingredient matches no recipe; no memory matches either viable recipe and ranking remains identical."
+      },
+      {
+        "id": "S5",
+        "type": "no_matching_signal",
+        "equipment": [
+          "wok"
+        ],
+        "max_minutes": 25,
+        "target_recipe": null,
+        "relevant_memory": null,
+        "top3_predicate": null,
+        "expectation": "Only the 25-minute neutral wok recipe remains and its ranking and score do not change."
+      },
+      {
+        "id": "S6",
+        "type": "positive_time",
+        "equipment": [
+          "microwave",
+          "wok"
+        ],
+        "max_minutes": 30,
+        "target_recipe": "quick_microwave",
+        "relevant_memory": "time_positive",
+        "top3_predicate": "target_present",
+        "expectation": "A recipe within the remembered 20-minute tendency receives 3 points; baseline may already rank it highly."
+      },
+      {
+        "id": "S7",
+        "type": "hard_constraints",
+        "equipment": [
+          "pan",
+          "microwave",
+          "wok"
+        ],
+        "max_minutes": 30,
+        "target_recipe": "pepper_pan",
+        "relevant_memory": "ingredient_positive",
+        "top3_predicate": "target_present",
+        "expectation": "Both groups reject the forbidden, too-slow, wrong-equipment, and known-over-budget recipes."
+      },
+      {
+        "id": "S8",
+        "type": "no_feasible_candidate",
+        "equipment": [
+          "pan",
+          "microwave",
+          "wok"
+        ],
+        "max_minutes": 10,
+        "target_recipe": null,
+        "relevant_memory": null,
+        "top3_predicate": null,
+        "expectation": "All candidates violate the time constraint; neither group returns a candidate."
+      }
+    ],
+    "metrics": "Top-1/Top-3 use target presence for positive cases and target absence for the negative case, only S1,S2,S3,S6,S7. Retrieval hit uses each case's stated relevant_memory. S4,S5,S8 are excluded from preference-rate denominators and assess no-signal stability. Report per-case results and retrieval of the unrelated memory separately.",
+    "safety": "No real user data, no real Agent model, no automatic write retry after unknown result, unique synthetic user, verify ownership and IDs before cleanup; no relaxed safety constraints. Budget reserves at least 22 remote calls before each scenario pair for cleanup."
+  },
+  "current_scenario": "S8",
+  "last_retrieval": [],
+  "last_retrieval_http_start": 31
+}

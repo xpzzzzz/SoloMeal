@@ -1,0 +1,237 @@
+{
+  "kind": "synthetic engineering comparison, not real retrieval or quality evaluation",
+  "request": {
+    "max_minutes": 30
+  },
+  "repeats_per_group": 10,
+  "cases": [
+    {
+      "preference": {
+        "category": "cooking_method",
+        "target": "stir_fry",
+        "polarity": 1
+      },
+      "fake_returned_relevant": 1,
+      "fake_returned_unrelated": 1,
+      "groups": {
+        "A": {
+          "top3": [
+            {
+              "name": "ordinary-boil",
+              "base_score": 60.0,
+              "score": 60.0,
+              "memory_preference": null
+            },
+            {
+              "name": "ordinary-steam",
+              "base_score": 60.0,
+              "score": 60.0,
+              "memory_preference": null
+            },
+            {
+              "name": "ordinary-stew",
+              "base_score": 60.0,
+              "score": 60.0,
+              "memory_preference": null
+            }
+          ],
+          "preferred_in_top3": 0,
+          "hard_constraints_passed": 2,
+          "hard_constraints_total": 2,
+          "median_request_ms": 18.718
+        },
+        "B": {
+          "top3": [
+            {
+              "name": "preferred-stir-fry",
+              "base_score": 58.8,
+              "score": 61.8,
+              "memory_preference": {
+                "points": 3,
+                "reasons": [
+                  {
+                    "category": "cooking_method",
+                    "target": "stir_fry",
+                    "polarity": 1
+                  }
+                ]
+              }
+            },
+            {
+              "name": "ordinary-boil",
+              "base_score": 60.0,
+              "score": 60.0,
+              "memory_preference": null
+            },
+            {
+              "name": "ordinary-steam",
+              "base_score": 60.0,
+              "score": 60.0,
+              "memory_preference": null
+            }
+          ],
+          "preferred_in_top3": 1,
+          "hard_constraints_passed": 2,
+          "hard_constraints_total": 2,
+          "median_request_ms": 17.107
+        },
+        "additional_median_ms": -1.611
+      }
+    },
+    {
+      "preference": {
+        "category": "ingredient",
+        "target": "pepper",
+        "polarity": 1
+      },
+      "fake_returned_relevant": 1,
+      "fake_returned_unrelated": 1,
+      "groups": {
+        "A": {
+          "top3": [
+            {
+              "name": "ordinary-boil",
+              "base_score": 60.0,
+              "score": 60.0,
+              "memory_preference": null
+            },
+            {
+              "name": "ordinary-steam",
+              "base_score": 60.0,
+              "score": 60.0,
+              "memory_preference": null
+            },
+            {
+              "name": "ordinary-stew",
+              "base_score": 60.0,
+              "score": 60.0,
+              "memory_preference": null
+            }
+          ],
+          "preferred_in_top3": 0,
+          "hard_constraints_passed": 2,
+          "hard_constraints_total": 2,
+          "median_request_ms": 15.917
+        },
+        "B": {
+          "top3": [
+            {
+              "name": "preferred-stir-fry",
+              "base_score": 58.8,
+              "score": 61.8,
+              "memory_preference": {
+                "points": 3,
+                "reasons": [
+                  {
+                    "category": "ingredient",
+                    "target": "pepper",
+                    "polarity": 1
+                  }
+                ]
+              }
+            },
+            {
+              "name": "ordinary-boil",
+              "base_score": 60.0,
+              "score": 60.0,
+              "memory_preference": null
+            },
+            {
+              "name": "ordinary-steam",
+              "base_score": 60.0,
+              "score": 60.0,
+              "memory_preference": null
+            }
+          ],
+          "preferred_in_top3": 1,
+          "hard_constraints_passed": 2,
+          "hard_constraints_total": 2,
+          "median_request_ms": 15.549
+        },
+        "additional_median_ms": -0.368
+      }
+    },
+    {
+      "preference": {
+        "category": "time",
+        "target": "20",
+        "polarity": 1
+      },
+      "fake_returned_relevant": 1,
+      "fake_returned_unrelated": 1,
+      "groups": {
+        "A": {
+          "top3": [
+            {
+              "name": "ordinary-boil",
+              "base_score": 60.0,
+              "score": 60.0,
+              "memory_preference": null
+            },
+            {
+              "name": "ordinary-steam",
+              "base_score": 60.0,
+              "score": 60.0,
+              "memory_preference": null
+            },
+            {
+              "name": "ordinary-stew",
+              "base_score": 60.0,
+              "score": 60.0,
+              "memory_preference": null
+            }
+          ],
+          "preferred_in_top3": 0,
+          "hard_constraints_passed": 2,
+          "hard_constraints_total": 2,
+          "median_request_ms": 15.507
+        },
+        "B": {
+          "top3": [
+            {
+              "name": "preferred-stir-fry",
+              "base_score": 58.8,
+              "score": 61.8,
+              "memory_preference": {
+                "points": 3,
+                "reasons": [
+                  {
+                    "category": "time",
+                    "target": "20",
+                    "polarity": 1
+                  }
+                ]
+              }
+            },
+            {
+              "name": "ordinary-boil",
+              "base_score": 60.0,
+              "score": 60.0,
+              "memory_preference": null
+            },
+            {
+              "name": "ordinary-steam",
+              "base_score": 60.0,
+              "score": 60.0,
+              "memory_preference": null
+            }
+          ],
+          "preferred_in_top3": 1,
+          "hard_constraints_passed": 2,
+          "hard_constraints_total": 2,
+          "median_request_ms": 16.271
+        },
+        "additional_median_ms": 0.764
+      }
+    }
+  ],
+  "real_mem0_latency_ms": null,
+  "real_model_tokens": null,
+  "real_service_cost": null,
+  "notes": [
+    "A uses the disabled provider; B uses a fake provider.",
+    "Both groups use the same user, database, recipes, constraints and request.",
+    "Elapsed time includes local HTTP handling; fake overhead is not service latency.",
+    "Fake retrieval returns prescribed records and cannot establish actual retrieval accuracy."
+  ]
+}

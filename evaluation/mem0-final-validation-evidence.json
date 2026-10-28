@@ -1,0 +1,168 @@
+{
+  "mode": "real",
+  "stage": "complete",
+  "empty": {
+    "http_status": 200,
+    "candidates": 0,
+    "remote_requests": 0,
+    "total_ms": 33.205,
+    "diagnostic_emitted": false,
+    "unexpected_remote_attempt_blocked": false
+  },
+  "viable": {
+    "total_ms": 581.103,
+    "remote_requests": 1,
+    "search_results": 1,
+    "candidate_count": 2,
+    "favorite_base": 0.0,
+    "favorite_memory_points": 3,
+    "favorite_score": 3.0,
+    "favorite_top1": true,
+    "reason_matches": true,
+    "hard_constraints": {
+      "excluded": true,
+      "slow": true,
+      "equipment": true,
+      "budget": true
+    },
+    "diagnostic": {
+      "business_request_ms": 579.981,
+      "memory_read_ms": 556.3978999998653,
+      "http_requests": 1,
+      "search_http_requests": 1,
+      "http_request_ms": [
+        553.627
+      ],
+      "client_setup_ms": 0.0034000040614046156,
+      "response_json_ms": 0.03190000279573724,
+      "memory_conversion_ms": 0.0301000036415644,
+      "suppression_ms": 1.4335000014398247,
+      "candidate_scoring_ms": 0.01780000457074493,
+      "read_status": "ok",
+      "search_results": 1,
+      "ownership_lookups": 0,
+      "candidates_matched": 1
+    }
+  },
+  "http": [
+    {
+      "number": 1,
+      "kind": "add",
+      "status": 200,
+      "http_version": "HTTP/1.1",
+      "remote_status": "SUCCEEDED",
+      "outcome": "success",
+      "wrapper_ms": 2465.987,
+      "tcp_started": 1,
+      "tls_started": 1,
+      "send_started": 1
+    },
+    {
+      "number": 2,
+      "kind": "search",
+      "status": 200,
+      "http_version": "HTTP/1.1",
+      "result_count": 1,
+      "outcome": "success",
+      "wrapper_ms": 553.703,
+      "tcp_started": 0,
+      "tls_started": 0,
+      "send_started": 1
+    },
+    {
+      "number": 3,
+      "kind": "list",
+      "status": 200,
+      "http_version": "HTTP/1.1",
+      "result_count": 1,
+      "outcome": "success",
+      "wrapper_ms": 495.579,
+      "tcp_started": 0,
+      "tls_started": 0,
+      "send_started": 1
+    },
+    {
+      "number": 4,
+      "kind": "get",
+      "status": 200,
+      "http_version": "HTTP/1.1",
+      "outcome": "success",
+      "wrapper_ms": 517.219,
+      "tcp_started": 0,
+      "tls_started": 0,
+      "send_started": 1
+    },
+    {
+      "number": 5,
+      "kind": "list",
+      "status": 200,
+      "http_version": "HTTP/1.1",
+      "result_count": 1,
+      "outcome": "success",
+      "wrapper_ms": 500.646,
+      "tcp_started": 0,
+      "tls_started": 0,
+      "send_started": 1
+    },
+    {
+      "number": 6,
+      "kind": "get",
+      "status": 200,
+      "http_version": "HTTP/1.1",
+      "outcome": "success",
+      "wrapper_ms": 508.263,
+      "tcp_started": 0,
+      "tls_started": 0,
+      "send_started": 1
+    },
+    {
+      "number": 7,
+      "kind": "delete",
+      "status": 200,
+      "http_version": "HTTP/1.1",
+      "outcome": "success",
+      "wrapper_ms": 697.318,
+      "tcp_started": 0,
+      "tls_started": 0,
+      "send_started": 1
+    },
+    {
+      "number": 8,
+      "kind": "search",
+      "status": 200,
+      "http_version": "HTTP/1.1",
+      "result_count": 0,
+      "outcome": "success",
+      "wrapper_ms": 559.583,
+      "tcp_started": 0,
+      "tls_started": 0,
+      "send_started": 1
+    }
+  ],
+  "post_delete": {
+    "total_ms": 584.293,
+    "search_results": 0,
+    "memory_score_present": false,
+    "diagnostic": {
+      "business_request_ms": 583.338,
+      "memory_read_ms": 560.5962999979965,
+      "http_requests": 1,
+      "search_http_requests": 1,
+      "http_request_ms": [
+        559.532
+      ],
+      "client_setup_ms": 0.0027999994927085936,
+      "response_json_ms": 0.01780000457074493,
+      "memory_conversion_ms": 0.0,
+      "suppression_ms": 0.0017999991541728377,
+      "candidate_scoring_ms": 0.00839999847812578,
+      "read_status": "empty",
+      "search_results": 0,
+      "ownership_lookups": 0,
+      "candidates_matched": 0
+    }
+  },
+  "write_state": "confirmed",
+  "cleanup": "confirmed_and_search_empty",
+  "unresolved_operations": 0
+}

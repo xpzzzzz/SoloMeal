@@ -5,6 +5,8 @@ REASONS = {
     "TIME_LIMIT": "用时超过限制", "MISSING_EQUIPMENT": "缺少所需厨具",
     "EXCLUDED_INGREDIENT": "含排除食材", "BUDGET_EXCEEDED": "补购超过预算",
 }
+METHODS = {"stir_fry": "炒", "steam": "蒸", "boil": "煮", "stew": "炖",
+           "bake": "烤", "pan_fry": "煎", "cold": "凉拌", "other": "其他"}
 
 
 def cooking_availability(candidate):
@@ -39,6 +41,13 @@ def render(result):
                         "include_optional": candidate["include_optional"],
                         "prepare_cooking": availability})
         lines.append(f"{recipe['name']} · {candidate['servings']}人份 · {recipe['minutes']}分钟")
+        for reason in candidate.get("memory_preference", {}).get("reasons", []):
+            target = reason["target"]
+            if reason["category"] == "time":
+                target = f"{target}分钟内"
+            elif reason["category"] == "cooking_method":
+                target = METHODS.get(target, target)
+            lines.append(f"长期偏好：{'偏好' if reason['polarity'] > 0 else '少推荐'}{target}。")
         lines.append("本餐用量：" + "；".join(
             f"{item['name']} {quantity(item, 'quantity')}" for item in candidate["required_ingredients"]))
         if not candidate["shopping"]:

@@ -18,6 +18,7 @@ bearer = HTTPBearer(auto_error=False)
 
 def get_db(request: Request):
     with request.app.state.sessions() as db:
+        db.info["memory_provider"] = request.app.state.memory_provider
         yield db
 
 

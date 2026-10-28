@@ -1,0 +1,44 @@
+{
+  "protocol": "SoloMeal real Mem0 fixed synthetic AB, version 1",
+  "design": "One synthetic user, one fixed recipe and inventory dataset, four confirmed memories, alternating paired requests. The unique run marker is substituted only for fixture names and does not depend on outcomes.",
+  "limits": {"remote_http_requests_including_ping": 60, "memories": 4, "scenarios": 8},
+  "memories": [
+    {"key": "ingredient_positive", "category": "ingredient", "target": "pepper_{run}", "polarity": 1, "source": "以后喜欢pepper_{run}"},
+    {"key": "method_negative", "category": "cooking_method", "target": "stew", "polarity": -1, "source": "以后不喜欢炖"},
+    {"key": "time_positive", "category": "time", "target": "20", "polarity": 1, "source": "以后尽量20分钟"},
+    {"key": "unrelated", "category": "ingredient", "target": "ghost_{run}", "polarity": 1, "source": "以后喜欢ghost_{run}"}
+  ],
+  "fixture": {
+    "equipment_default": ["pan", "microwave", "wok"],
+    "excluded_ingredients": ["allergen"],
+    "inventory_grams": {"rice": 100, "pepper_{run}": 98, "allergen": 100, "expensive": 0},
+    "recipe_ingredient_quantity_grams": 100,
+    "recipes": [
+      {"name": "pepper_pan", "ingredient": "pepper_{run}", "method": "steam", "minutes": 25, "equipment": "pan"},
+      {"name": "regular_pan_1", "ingredient": "rice", "method": "boil", "minutes": 25, "equipment": "pan"},
+      {"name": "regular_pan_2", "ingredient": "rice", "method": "bake", "minutes": 25, "equipment": "pan"},
+      {"name": "negative_pan", "ingredient": "rice", "method": "stew", "minutes": 25, "equipment": "pan"},
+      {"name": "quick_microwave", "ingredient": "rice", "method": "steam", "minutes": 15, "equipment": "microwave"},
+      {"name": "pepper_microwave", "ingredient": "pepper_{run}", "method": "steam", "minutes": 25, "equipment": "microwave"},
+      {"name": "neutral_wok_1", "ingredient": "rice", "method": "boil", "minutes": 25, "equipment": "wok"},
+      {"name": "neutral_wok_2", "ingredient": "rice", "method": "bake", "minutes": 29, "equipment": "wok"},
+      {"name": "forbidden", "ingredient": "allergen", "method": "steam", "minutes": 25, "equipment": "pan"},
+      {"name": "too_slow", "ingredient": "rice", "method": "boil", "minutes": 40, "equipment": "pan"},
+      {"name": "wrong_equipment", "ingredient": "rice", "method": "boil", "minutes": 25, "equipment": "oven"},
+      {"name": "too_expensive", "ingredient": "expensive", "method": "boil", "minutes": 25, "equipment": "pan"}
+    ],
+    "request_common": {"budget": "1", "max_minutes": 30, "quotes": [{"ingredient": "pepper_{run}", "package_quantity": "100", "package_price": "0.50"}, {"ingredient": "expensive", "package_quantity": "100", "package_price": "5.00"}]}
+  },
+  "scenarios": [
+    {"id": "S1", "type": "positive_ingredient", "equipment": ["pan"], "max_minutes": 30, "target_recipe": "pepper_pan", "relevant_memory": "ingredient_positive", "top3_predicate": "target_present", "expectation": "The positive ingredient should add 3 and may bring target into Top-3; existing constraints hold."},
+    {"id": "S2", "type": "negative_method", "equipment": ["pan"], "max_minutes": 28, "target_recipe": "negative_pan", "relevant_memory": "method_negative", "top3_predicate": "target_absent", "expectation": "The negative method should subtract 3 and not improve target rank; it is a soft preference, not an exclusion."},
+    {"id": "S3", "type": "baseline_already_top3", "equipment": ["microwave"], "max_minutes": 30, "target_recipe": "pepper_microwave", "relevant_memory": "ingredient_positive", "top3_predicate": "target_present", "expectation": "The target is already in baseline Top-3; report preservation rather than counting it as a newly achieved hit."},
+    {"id": "S4", "type": "unrelated_memory", "equipment": ["wok"], "max_minutes": 30, "target_recipe": null, "relevant_memory": null, "top3_predicate": null, "expectation": "The ghost ingredient matches no recipe; no memory matches either viable recipe and ranking remains identical."},
+    {"id": "S5", "type": "no_matching_signal", "equipment": ["wok"], "max_minutes": 25, "target_recipe": null, "relevant_memory": null, "top3_predicate": null, "expectation": "Only the 25-minute neutral wok recipe remains and its ranking and score do not change."},
+    {"id": "S6", "type": "positive_time", "equipment": ["microwave", "wok"], "max_minutes": 30, "target_recipe": "quick_microwave", "relevant_memory": "time_positive", "top3_predicate": "target_present", "expectation": "A recipe within the remembered 20-minute tendency receives 3 points; baseline may already rank it highly."},
+    {"id": "S7", "type": "hard_constraints", "equipment": ["pan", "microwave", "wok"], "max_minutes": 30, "target_recipe": "pepper_pan", "relevant_memory": "ingredient_positive", "top3_predicate": "target_present", "expectation": "Both groups reject the forbidden, too-slow, wrong-equipment, and known-over-budget recipes."},
+    {"id": "S8", "type": "no_feasible_candidate", "equipment": ["pan", "microwave", "wok"], "max_minutes": 10, "target_recipe": null, "relevant_memory": null, "top3_predicate": null, "expectation": "All candidates violate the time constraint; neither group returns a candidate."}
+  ],
+  "metrics": "Top-1/Top-3 use target presence for positive cases and target absence for the negative case, only S1,S2,S3,S6,S7. Retrieval hit uses each case's stated relevant_memory. S4,S5,S8 are excluded from preference-rate denominators and assess no-signal stability. Report per-case results and retrieval of the unrelated memory separately.",
+  "safety": "No real user data, no real Agent model, no automatic write retry after unknown result, unique synthetic user, verify ownership and IDs before cleanup; no relaxed safety constraints. Budget reserves at least 22 remote calls before each scenario pair for cleanup."
+}

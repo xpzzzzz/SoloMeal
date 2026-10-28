@@ -103,6 +103,46 @@ def _points(value):
     return round(float(value), 6)
 
 
+def score_memories(memories, lines, methods, estimated_minutes, feedback):
+    """Match only structured recipe features; never turn a memory into a constraint.
+
+    Recipe-level explicit feedback already directly scores this candidate. Avoid adding
+    another preference signal to that candidate. Conflicting memories are ignored until
+    corrected, and duplicates cannot amplify a signal.
+    """
+    if feedback and (feedback.get("favorite") or feedback.get("rating") in ("like", "dislike")):
+        return {"points": 0, "reasons": []}
+    features = {
+        "ingredient": {str(line.get("name", "")).strip().lower() for line in lines},
+        "cooking_method": {str(method).strip().lower() for method in methods},
+    }
+    values = {}
+    for memory in memories:
+        category = memory.category
+        target = str(memory.target).strip().lower()
+        polarity = memory.polarity
+        if category not in ("ingredient", "cooking_method", "time") or not target or polarity not in (-1, 1):
+            continue
+        if category == "time":
+            try:
+                minutes = int(target)
+            except ValueError:
+                continue
+            if polarity != 1 or not 1 <= minutes <= 480 or estimated_minutes > minutes:
+                continue
+        elif target not in features[category]:
+            continue
+        values.setdefault((category, target), set()).add(polarity)
+    matches = [(key, next(iter(signs))) for key, signs in sorted(values.items()) if len(signs) == 1]
+    raw = sum(3 * sign for _, sign in matches)
+    points = max(-6, min(6, raw))
+    return {
+        "points": points,
+        "reasons": [{"category": category, "target": target, "polarity": sign}
+                    for (category, target), sign in matches],
+    }
+
+
 def score_candidate(recipe, feedback, rows, staples, *, candidate_ingredients=None,
                     candidate_methods=None, enabled=True, now=None):
     now = now or utcnow()
