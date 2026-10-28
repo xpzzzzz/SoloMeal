@@ -75,9 +75,18 @@ test('脚本生成三道候选：逐项定位错误、编辑保存后才入库�
  const {token,inventory}=await seedKitchen(server.url,user,PASSWORD);
  const context=await desktopContext(browser);
  try{
+  await context.addInitScript(() => {
+   const json=Response.prototype.json;
+   Response.prototype.json=async function(){
+    const value=await json.call(this);
+    if(this.url.endsWith('/recipe-discoveries/capabilities'))await new Promise(resolve=>setTimeout(resolve,300));
+    return value;
+   };
+  });
   const page=await openPage(context,server.url);
   await signIn(page,user,PASSWORD);
   await openDiscovery(page);
+  await waitText(page,/候选由已配置的模型生成/);
   assert.match(await page.evaluate(()=>document.body.innerText),/候选由已配置的模型生成/);
 
   await page.getByLabel('人数（留空用厨房偏好）').fill('2');
