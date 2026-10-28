@@ -14,7 +14,7 @@ from ..models.food import CookingRecord, Ingredient, InventoryBatch
 from ..models.shopping import ShoppingList
 from ..schemas.planning import PlanningInput
 from .food import feedback_map
-from .planning import recommend
+from .planning import recommend_with_memory
 
 ATTENTION_DAYS = 3
 ATTENTION_LIMIT = 5
@@ -94,7 +94,7 @@ def attention(db, user_id, today):
 def recommendations(db, user_id, today):
     """The reviewed planner's own answer, echoed as a request so the shared panel can reuse it."""
     body = PlanningInput(scenario="default")
-    result = recommend(db, user_id, body)
+    result = recommend_with_memory(db, user_id, body)
     return {
         **result,
         # Cards need the saved favourite to show its real state, not to guess it.

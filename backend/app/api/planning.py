@@ -7,7 +7,7 @@ from ..models.plans import MealPlan
 from ..schemas.food import CookingInput
 from ..schemas.planning import ConfirmPlanInput, PlanInput, PlanningInput, RevisePlanInput
 from ..services import food, plans
-from ..services.planning import recommend
+from ..services.planning import recommend_with_memory
 from .food import Key
 from .pagination import Page
 from .routes import get_db, get_identity
@@ -17,7 +17,7 @@ router = APIRouter(prefix="/api/v1")
 
 @router.post("/recommendations")
 def recommendations(body: PlanningInput, current=Depends(get_identity), db=Depends(get_db)):
-    return recommend(db, current[0].id, body)
+    return recommend_with_memory(db, current[0].id, body)
 
 
 @router.post("/plans", status_code=201)

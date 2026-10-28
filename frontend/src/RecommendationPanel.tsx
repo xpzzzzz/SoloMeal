@@ -2,6 +2,7 @@ import {useEffect,useRef,useState} from 'react';
 import {SessionChangedError} from './session';
 import {timeLabel} from './personalTime';
 import {MoreActions} from './ui';
+import {methodName} from './cookingMethods';
 
 type Weights={inventory:number;expiry:number;repetition:number;purchase_cost:number};
 const PRESETS:Record<string,{label:string;weights:Weights}>={
@@ -73,7 +74,7 @@ export default function RecommendationPanel({api,result,onResult,preferenceText,
  <p>食材满足度 {Math.round(c.score_components.inventory_coverage*100)}% · 按食材行比例计算</p>
  <p>{c.can_cook_now?'现有库存足够，无需采购':`需采购${c.missing_ingredient_count??c.shopping.length}种食材：`+c.shopping.map((i:any)=>i.name+' '+Number(i.missing_quantity)+units[i.unit]).join('；')}</p>
  {c.shopping.length>0&&<p>{c.price_complete?'补购估计 ¥'+c.known_purchase_cost:Number(c.known_purchase_cost)>0?'估价不完整，已知部分 ¥'+c.known_purchase_cost:'价格未知 / 估价不完整'}</p>}
- <ul className="preference-explanation"><li>{c.recipe.name}：{preferenceText(c)}</li><li>{scenario==='less_shopping'?`缺口共${c.shopping.length}种，优先减少采购种类`:c.score_components.expiry_coverage>0?`可使用临期食材，临期满足度${Math.round(c.score_components.expiry_coverage*100)}%`:c.can_cook_now?'当前食材已满足本餐用量':`最近7天完成过${c.score_components.recent_repetitions}次，已按重复惩罚参与排序`}</li></ul>
+ <ul className="preference-explanation"><li>{c.recipe.name}：{preferenceText(c)}</li>{c.memory_preference?.reasons?.map((r:any)=><li key={`${r.category}:${r.target}`}>长期偏好：{r.category==='time'?`${r.target}分钟内`:r.category==='cooking_method'?methodName(r.target):r.target}（{r.polarity>0?'偏好':'少推荐'}）</li>)}<li>{scenario==='less_shopping'?`缺口共${c.shopping.length}种，优先减少采购种类`:c.score_components.expiry_coverage>0?`可使用临期食材，临期满足度${Math.round(c.score_components.expiry_coverage*100)}%`:c.can_cook_now?'当前食材已满足本餐用量':`最近7天完成过${c.score_components.recent_repetitions}次，已按重复惩罚参与排序`}</li></ul>
  </div><div className="recommendation-actions"><button disabled={busy} onClick={()=>onCook(c)}>开始做饭</button><button className="secondary" disabled={busy} onClick={()=>setSkipped([...skipped,c.recipe.id])}>换一道</button><MoreActions><button className="secondary" disabled={busy} onClick={()=>onAdd(c)}>加入采购组合</button><button disabled={busy} onClick={()=>void run(()=>onSave(c,result.request))}>保存这餐方案</button>{onFavorite&&<button className={favorites?.[c.recipe.id]?.favorite?'chosen':'secondary'} aria-pressed={!!favorites?.[c.recipe.id]?.favorite} disabled={busy} onClick={()=>void run(async()=>{await onFavorite(c,{favorite:!favorites?.[c.recipe.id]?.favorite,rating:(favorites?.[c.recipe.id]?.rating as 'neutral'|'like'|'dislike')||'neutral'});})}>{favorites?.[c.recipe.id]?.favorite?'已收藏':'收藏'}</button>}</MoreActions></div></article>)}
  <p>显示{visible.length}道，本次还有{Math.max(0,remaining.length-visible.length)}道未显示。</p>
  </>}

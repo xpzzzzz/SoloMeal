@@ -143,6 +143,8 @@ frontend 目录执行 npm ci、npm run dev，访问 http://127.0.0.1:5173。API 
 
 ## 验证
 
+可选的长期饮食偏好记忆默认关闭；配置、隐私、支持的字段及对照方法见 [Mem0 集成说明](../docs/mem0-personalization.md)。
+
 backend 目录：
 
 ```powershell

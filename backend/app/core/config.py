@@ -41,6 +41,10 @@ class Settings(BaseSettings):
         return value
 
     model_api_key: SecretStr | None = None
+    # Hosted Mem0 is optional and independent of the chat model.
+    mem0_enabled: bool = False
+    mem0_api_key: SecretStr | None = None
+    mem0_timeout_seconds: float = Field(default=2, gt=0, le=10)
     # Recipe discovery reuses the chat endpoint but has its own switch and output budget,
     # so enabling it cannot silently change the existing Agent's limits.
     recipe_discovery_enabled: bool = False
