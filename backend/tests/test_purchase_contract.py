@@ -156,6 +156,24 @@ def test_protocol_is_pinned_and_registration_has_six_bounded_slots(tmp_path):
         load_protocol(path)
 
 
+def test_registration_only_hashes_the_seven_p8_files(tmp_path, monkeypatch):
+    import hashlib
+    from scripts import purchase_contract
+
+    folder = tmp_path / "evaluation"
+    folder.mkdir()
+    names = {"amendments-v1.1.json", "amendments-v1.2.json", "freeze-v1.1.json",
+             "freeze-v1.2.json", "freeze-v1.json", "protocol-v1.json", "scenarios-v1.json"}
+    for name in names:
+        (folder / name).write_text(name, encoding="utf-8")
+    (folder / "mem0-extra.json").write_text("unrelated", encoding="utf-8")
+    monkeypatch.setattr(purchase_contract, "ROOT", tmp_path / "backend")
+    result = purchase_contract.registration({"cases": []}, Settings(_env_file=None))
+    assert result["frozen_json_sha256"] == {
+        name: hashlib.sha256(name.encode()).hexdigest() for name in names
+    }
+
+
 def test_request_cap_counts_attempts_before_provider_and_preserves_input(tmp_path):
     class Provider:
         calls = 0

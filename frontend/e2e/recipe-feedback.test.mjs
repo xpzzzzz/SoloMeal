@@ -32,9 +32,15 @@ async function createRecipe(page,{name,methods}){
 
 // The card writes the whole state each time, so every tap is one PUT the page waits for.
 async function tap(page,name,label){
+ const control=button(page,name,label);
+ const previous=label==='收藏'?await control.getAttribute('aria-pressed'):null;
  const saved=page.waitForResponse(r=>r.url().endsWith('/feedback')&&r.request().method()==='PUT',{timeout:30_000});
- await button(page,name,label).click();
+ await control.click();
  assert.equal((await saved).status(),200,`${label} 应当保存成功`);
+ // A response can arrive before its JSON is processed and React commits the update.
+ if(label==='清除评价')await control.waitFor({state:'detached'});
+ else await page.waitForFunction(([element,expected])=>element.getAttribute('aria-pressed')===expected,
+  [await control.elementHandle(),label==='收藏'?(previous==='true'?'false':'true'):'true']);
 }
 
 test('收藏与喜欢/不喜欢在刷新后仍在，删除菜谱不影响用餐记录',async()=>{
@@ -43,6 +49,15 @@ test('收藏与喜欢/不喜欢在刷新后仍在，删除菜谱不影响用餐�
  try{
   browser=await launchBrowser();
   const context=await desktopContext(browser);
+  // Reproduce a slow response-body consumer without changing the server result.
+  await context.addInitScript(() => {
+   const json=Response.prototype.json;
+   Response.prototype.json=async function(){
+    const value=await json.call(this);
+    if(this.url.endsWith('/feedback'))await new Promise(resolve=>setTimeout(resolve,300));
+    return value;
+   };
+  });
   const page=await openPage(context,server.url);
   const api=makeApi(server.url);
   await signUp(page,'ui_fb_owner_0922',PASSWORD);

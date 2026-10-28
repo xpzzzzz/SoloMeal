@@ -15,7 +15,7 @@ def analyze(evidence):
     no_match_changed = 0
     candidates = {group: 0 for group in ("A", "B")}
     violations = {group: 0 for group in ("A", "B")}
-    latencies = {group: [] for group in ("A", "B")}
+    latencies: dict[str, list[float]] = {group: [] for group in ("A", "B")}
     deltas = []
     for case in results:
         spec, groups = case["scenario"], case["groups"]

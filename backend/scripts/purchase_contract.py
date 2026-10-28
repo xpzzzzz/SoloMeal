@@ -34,6 +34,9 @@ PROTOCOL = ROOT.parent / "docs/validation/p8-purchase-contract-v2-protocol.json"
 MODES = ("fixed_workflow", "direct_model", "agent_tools")
 IDS = ("PURCHASE-CONTRACT-V2-01", "PLANNING-CONTRACT-V2-01")
 PROTOCOL_SHA256 = "def799b0dbd0ab6be360d3992ee66e5b8ec53b2c73eb97351c6d9c20fce21e33"
+# The P8 registration pins these seven files; unrelated evaluations are not part of it.
+FROZEN_JSON_NAMES = ("amendments-v1.1.json", "amendments-v1.2.json", "freeze-v1.1.json",
+                     "freeze-v1.2.json", "freeze-v1.json", "protocol-v1.json", "scenarios-v1.json")
 
 
 def load_protocol(path=PROTOCOL):
@@ -183,8 +186,8 @@ def registration(protocol, settings):
             "prompt_version": PROMPT_VERSION, "system_sha256": fingerprint(SYSTEM),
             "tools_sha256": fingerprint(tools()), "direct_prompt_version": DIRECT_VERSION,
             "direct_system_sha256": fingerprint(DIRECT_SYSTEM),
-            "frozen_json_sha256": {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
-                                   for p in sorted((ROOT.parent / "evaluation").glob("*.json"))},
+            "frozen_json_sha256": {name: hashlib.sha256((ROOT.parent / "evaluation" / name).read_bytes()).hexdigest()
+                                   for name in FROZEN_JSON_NAMES},
             "model": settings.model_name, "transport": "httpx", "transport_version": httpx.__version__,
             "temperature": "provider_default_unknown", "top_p": "provider_default_unknown",
             "slots": [{"scenario": spec["id"], "mode": mode, "max_requests":
