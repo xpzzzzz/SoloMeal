@@ -50,3 +50,8 @@ label:has(>input[type="checkbox"]){display:flex;align-items:center;gap:8px}input
 @media(max-width:640px){.recommendation-card .row>button{flex:1 1 130px}}
 
 .combination-panel fieldset,.purchase-editor fieldset{border:0;padding:0;margin:0;min-width:0}.combination-row{padding:14px 0;border-top:1px solid #e8edde;display:grid;gap:10px}.combination-panel input[type=checkbox],.purchase-editor input[type=checkbox]{width:auto;align-self:flex-start}.purchase-editor .row{flex-wrap:wrap}.purchase-editor .row>label{flex:1 1 130px}.purchase-editor .row>button{flex:1 1 160px}.purchase-editor button{white-space:normal}.combination-panel button{margin-top:8px}
+.proactive-inbox{margin:1rem 0}
+.proactive-card{border:1px solid #d87b4a;box-shadow:0 0 0 1px rgba(216,123,74,.18);border-radius:1rem;background:#fffaf5;padding:1.1rem;margin-bottom:.75rem;transition:opacity .3s}
+.proactive-card h2{margin-top:0}
+.proactive-card.proactive-busy{opacity:.55}
+.proactive-why{font-size:.9rem;margin:.5rem 0}

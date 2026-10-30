@@ -2,6 +2,8 @@ import React, {useEffect, useRef, useState} from 'react';
 import {SessionChangedError} from './session';
 import {errorText} from './errorText';
 import RecommendationPanel from './RecommendationPanel';
+import ProactiveInbox from './features/proactivity/ProactiveInbox';
+import type {Action as ProactiveAction} from './features/proactivity/api';
 import {RecipeArt} from './ui';
 import {attentionSummary, attentionText, emptyText, expiryTag, READ_ONLY_SECTIONS, recentSummary, recentText,
  sectionTitle, shoppingSummary, shoppingText} from './homeText';
@@ -18,11 +20,12 @@ const HINTS:Record<string,string>={attention:'三天内到期与已过期',recom
 const text=(e:unknown)=>e instanceof Error&&e.message?e.message:'这一栏暂时读不到，请稍后重试';
 
 export default function HomePanel({api,emptyAccount,onImport,goTo,onHistory,preferenceText,onCook,onAdd,onSave,
-onSettings,onDiscover,favorite}:{
+onSettings,onDiscover,favorite,onProactiveAction,proactiveKeys}:{
  api:Api;emptyAccount:boolean;onImport:()=>Promise<void>;goTo:(tab:string)=>void;onHistory:(id:string)=>void;
  preferenceText:(candidate:any)=>string;onCook:(candidate:any)=>void;onAdd:(candidate:any)=>void;
  onSave:(candidate:any,request:any)=>Promise<void>;onSettings:()=>void;onDiscover:(constraints:any)=>void;
  favorite:(candidate:any,next:{favorite:boolean;rating:Rating})=>Promise<Saved>;
+ onProactiveAction:(action:ProactiveAction,itemId:string)=>Promise<void>;proactiveKeys:Map<string,string>;
 }){
  const [home,setHome]=useState<Home|null>(null);
  const [recos,setRecos]=useState<any>(null);
@@ -105,6 +108,7 @@ onSettings,onDiscover,favorite}:{
    {loadError&&<p role="alert">{loadError}</p>}
    {notice&&<p role="status">{notice}</p>}
    </section>
+  <ProactiveInbox api={api} onAction={onProactiveAction} keys={proactiveKeys}/>
   {emptyAccount&&<section className="panel home-start"><h2>先把厨房装起来</h2>
    <p>先记下手边的食材，再从三道基础示例开始。导入菜谱不会添加库存。</p>
    <div className="row"><button className="secondary" onClick={()=>goTo('inventory-add')}>添加库存</button>
