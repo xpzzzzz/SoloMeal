@@ -13,6 +13,8 @@ class Settings(BaseSettings):
     )
     database_url: str = Field(default="mysql+pymysql://solomeal:CHANGE_ME@127.0.0.1:3306/solomeal?charset=utf8mb4", repr=False)
     session_ttl_seconds: int = Field(default=86400, ge=60, le=604800)
+    tick_token: SecretStr | None = None
+    demo_mode: bool = False
 
     agent_enabled: bool = False
     model_base_url: str = "https://api.openai.com/v1"
