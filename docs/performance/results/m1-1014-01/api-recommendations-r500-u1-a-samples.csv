@@ -1,0 +1,13 @@
+phase,time_unix,method,name,response_ms,failed
+measured,1791990137.4473948,POST,/api/v1/recommendations,9205.948647999321,0
+measured,1791990145.3332558,POST,/api/v1/recommendations,7816.118794005888,0
+measured,1791990153.3669689,POST,/api/v1/recommendations,7968.432870002289,0
+measured,1791990161.687196,POST,/api/v1/recommendations,8229.717574999086,0
+measured,1791990169.965692,POST,/api/v1/recommendations,8092.750559000706,0
+measured,1791990178.0467918,POST,/api/v1/recommendations,8023.705496998446,0
+measured,1791990186.2767189,POST,/api/v1/recommendations,8168.5286659994745,0
+measured,1791990194.4876828,POST,/api/v1/recommendations,8034.555743004603,0
+measured,1791990202.6969576,POST,/api/v1/recommendations,8114.914683996176,0
+measured,1791990210.5514588,POST,/api/v1/recommendations,7775.165277998894,0
+measured,1791990218.6437676,POST,/api/v1/recommendations,7993.986993998988,0
+measured,1791990226.8769767,POST,/api/v1/recommendations,8076.13589399989,0

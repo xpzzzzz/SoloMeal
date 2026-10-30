@@ -9,6 +9,13 @@ import assert from 'node:assert/strict';
  } from './support.mjs';
 
 let server,browser,api;
+async function waitRunState(page,status,steps){
+ await page.waitForFunction(({status,steps})=>{
+  const state=document.querySelector('.run-state')?.textContent;
+  const diagnostic=[...document.querySelectorAll('.technical-details')].find(d=>d.querySelector('summary')?.textContent==='工具执行记录');
+  return state?.includes(status)&&diagnostic?.textContent.includes(`已执行 ${steps} 轮`);
+ },{status,steps},{timeout:30_000});
+}
 const PASSWORD='offline-fixture-1';
 
 before(async()=>{
@@ -29,7 +36,7 @@ test('一个运行中的助手请求遇到断网，只会在恢复后继续，�
  await page.getByLabel('想安排怎样的一餐？').fill('测试查询断网恢复');
  await page.getByRole('button',{name:'发送'}).click();
  // steps already counts the in-flight model call, so the running status appears with 1 轮.
- await waitText(page,/运行中 · 已执行 1 轮/);
+ await waitRunState(page,'运行中',1);
 
  await context.setOffline(true);
  await waitText(page,/浏览器已离线，恢复网络后页面会自动同步/);
@@ -48,10 +55,10 @@ test('一个运行中的助手请求遇到断网，只会在恢复后继续，�
 
  await context.setOffline(false);
  await page.waitForFunction(()=>navigator.onLine===true);
- await waitText(page,/可继续 · 已执行 1 轮/);
+ await waitRunState(page,'可继续',1);
  assert.ok((await visibleButtons(page)).some(b=>b.text==='继续执行'),'恢复后应可继续原运行');
  await page.getByRole('button',{name:'继续执行'}).click();
- await waitText(page,/已完成 · 已执行 2 轮/);
+ await waitRunState(page,'已完成',2);
  await waitText(page,/脚本测试：已查询库存/);
 
  // The record list stays collapsed, so read textContent instead of rendered text.
@@ -112,7 +119,7 @@ test('一个标签页离线时的取消不会生效，另一标签页确认后�
  await useTab(pageB,'一人食助手');
  await waitText(pageB,/测试入库双标签页 · 1 次运行/);
  await pageB.getByText('测试入库双标签页 · 1 次运行').click();
- await waitText(pageB,/等待确认 · 已执行 1 轮/);
+ await waitRunState(pageB,'等待确认',1);
 
  await contextA.setOffline(true);
  await waitText(pageA,/浏览器已离线/);

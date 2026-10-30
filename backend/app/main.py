@@ -1,4 +1,6 @@
 from contextlib import asynccontextmanager
+from datetime import datetime, timedelta, timezone
+from threading import RLock
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
@@ -9,8 +11,11 @@ from .api.agent import router as agent_router
 from .api.discovery import router as discovery_router
 from .api.food import router as food_router
 from .api.home import router as home_router
+from .api.internal import router as internal_router
 from .api.memory import router as memory_router
 from .api.planning import router as planning_router
+from .api.proactivity import router as proactivity_router
+from .api.proactivity import simulate as proactivity_simulate
 from .api.receipts import router as receipts_router
 from .api.routes import router
 from .api.run_events import router as run_events_router
@@ -50,6 +55,10 @@ def create_app(settings: Settings | None = None):
     app = FastAPI(title="SoloMeal", version="0.1.0", lifespan=lifespan)
     app.add_middleware(MemoryDiagnosticsMiddleware)
     app.state.settings = settings
+    app.state.proactivity_clock = lambda: datetime.now(timezone.utc)
+    app.state.proactivity_offsets = {}
+    app.state.proactivity_offset_lock = RLock()
+    app.state.proactivity_day = timedelta(days=1)
     app.state.memory_provider = get_memory_provider(settings)
     app.state.engine = engine
     app.state.sessions = build_session_factory(engine)
@@ -91,8 +100,12 @@ def create_app(settings: Settings | None = None):
     app.include_router(agent_router)
     app.include_router(run_events_router)
     app.include_router(planning_router)
+    app.include_router(proactivity_router)
+    if settings.demo_mode:
+        app.add_api_route("/api/v1/proactivity/simulate", proactivity_simulate, methods=["POST"])
     app.include_router(shopping_router)
     app.include_router(home_router)
+    app.include_router(internal_router)
     app.include_router(memory_router)
     app.include_router(receipts_router)
     app.include_router(discovery_router)

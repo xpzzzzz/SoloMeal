@@ -148,7 +148,11 @@ def test_protocol_is_pinned_and_registration_has_six_bounded_slots(tmp_path):
     assert len(registered["slots"]) == 6
     assert sum(s["max_requests"] for s in registered["slots"]) == 18
     assert {s["scenario"] for s in registered["slots"]} == set(IDS)
-    assert len(registered["frozen_json_sha256"]) == 7
+    # Registration hashes the seven P8 protocol inputs, not independent later evidence.
+    assert set(registered["frozen_json_sha256"]) == {
+        "amendments-v1.1.json", "amendments-v1.2.json", "freeze-v1.json",
+        "freeze-v1.1.json", "freeze-v1.2.json", "protocol-v1.json", "scenarios-v1.json",
+    }
     assert "model_api_key" not in registered
     path = tmp_path / "changed.json"
     path.write_bytes(PROTOCOL.read_bytes().replace(b'"max_requests": 18', b'"max_requests": 19'))

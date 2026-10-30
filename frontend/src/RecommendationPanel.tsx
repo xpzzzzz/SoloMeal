@@ -1,6 +1,7 @@
 import {useEffect,useRef,useState} from 'react';
 import {SessionChangedError} from './session';
 import {timeLabel} from './personalTime';
+import {MoreActions} from './ui';
 import {methodName} from './cookingMethods';
 
 type Weights={inventory:number;expiry:number;repetition:number;purchase_cost:number};
@@ -57,10 +58,10 @@ export default function RecommendationPanel({api,result,onResult,preferenceText,
  <label>本次用时上限（分钟）<input type="number" min="1" max="480" step="1" value={effectiveMinutes??''} placeholder="使用厨房偏好" onChange={e=>{changed();setScenario('custom');setMinutes(e.target.value===''?null:Number(e.target.value));}}/></label>
  {scenario==='quick'&&<small>最多20分钟；切换其他场景会恢复手动基线或厨房偏好的用时。</small>}
  {scenario==='less_shopping'&&<p>优先少缺几种食材，不代表价格最低。</p>}
- <label>本次补购预算（元，可留空）<input type="number" min="0" step="0.01" value={budget} onChange={e=>{changed();setScenario('custom');setBudget(e.target.value);}}/></label>
+ <details className="recommendation-options"><summary>预算与更多偏好</summary><label>本次补购预算（元，可留空）<input type="number" min="0" step="0.01" value={budget} onChange={e=>{changed();setScenario('custom');setBudget(e.target.value);}}/></label>
  <label>本餐使用可选配料<input type="checkbox" checked={optional} onChange={e=>{changed();setScenario('custom');setOptional(e.target.checked);}}/></label>
  <details><summary>推荐评分权重</summary><p>厨具、忌口、数量和预算检查始终有效。成本权重启用时，未知价格排在完整报价之后。</p>{(Object.keys(weights) as (keyof Weights)[]).map(k=><label key={k}>{{inventory:'库存覆盖',expiry:'临期优先',repetition:'近期重复惩罚',purchase_cost:'每元补购成本惩罚'}[k]}<input type="number" min="0" max="100" step="1" value={weights[k]} onChange={e=>{changed();setScenario('custom');setWeights({...weights,[k]:Number(e.target.value)});}}/></label>)}</details>
- <button onClick={()=>void run(recommend)}>{busy?'处理中…':'生成本餐推荐'}</button>{result&&<button className="secondary" onClick={()=>void run(recommend)}>重新推荐</button>}
+ </details><button onClick={()=>void run(recommend)}>{busy?'处理中…':'生成本餐推荐'}</button>
  </fieldset>
  {error&&<p role="alert">{error}</p>}
  {result&&<>
@@ -74,7 +75,7 @@ export default function RecommendationPanel({api,result,onResult,preferenceText,
  <p>{c.can_cook_now?'现有库存足够，无需采购':`需采购${c.missing_ingredient_count??c.shopping.length}种食材：`+c.shopping.map((i:any)=>i.name+' '+Number(i.missing_quantity)+units[i.unit]).join('；')}</p>
  {c.shopping.length>0&&<p>{c.price_complete?'补购估计 ¥'+c.known_purchase_cost:Number(c.known_purchase_cost)>0?'估价不完整，已知部分 ¥'+c.known_purchase_cost:'价格未知 / 估价不完整'}</p>}
  <ul className="preference-explanation"><li>{c.recipe.name}：{preferenceText(c)}</li>{c.memory_preference?.reasons?.map((r:any)=><li key={`${r.category}:${r.target}`}>长期偏好：{r.category==='time'?`${r.target}分钟内`:r.category==='cooking_method'?methodName(r.target):r.target}（{r.polarity>0?'偏好':'少推荐'}）</li>)}<li>{scenario==='less_shopping'?`缺口共${c.shopping.length}种，优先减少采购种类`:c.score_components.expiry_coverage>0?`可使用临期食材，临期满足度${Math.round(c.score_components.expiry_coverage*100)}%`:c.can_cook_now?'当前食材已满足本餐用量':`最近7天完成过${c.score_components.recent_repetitions}次，已按重复惩罚参与排序`}</li></ul>
- </div><div className="row"><button className="secondary" disabled={busy} onClick={()=>onAdd(c)}>加入采购组合</button><button disabled={busy} onClick={()=>onCook(c)}>开始做饭</button><button disabled={busy} onClick={()=>void run(()=>onSave(c,result.request))}>保存这餐方案</button><button className="secondary" disabled={busy} onClick={()=>setSkipped([...skipped,c.recipe.id])}>换一道</button>{onFavorite&&<button className={favorites?.[c.recipe.id]?.favorite?'chosen':'secondary'} aria-pressed={!!favorites?.[c.recipe.id]?.favorite} disabled={busy} onClick={()=>void run(async()=>{await onFavorite(c,{favorite:!favorites?.[c.recipe.id]?.favorite,rating:(favorites?.[c.recipe.id]?.rating as 'neutral'|'like'|'dislike')||'neutral'});})}>{favorites?.[c.recipe.id]?.favorite?'已收藏':'收藏'}</button>}</div></article>)}
+ </div><div className="recommendation-actions"><button disabled={busy} onClick={()=>onCook(c)}>开始做饭</button><button className="secondary" disabled={busy} onClick={()=>setSkipped([...skipped,c.recipe.id])}>换一道</button><MoreActions><button className="secondary" disabled={busy} onClick={()=>onAdd(c)}>加入采购组合</button><button disabled={busy} onClick={()=>void run(()=>onSave(c,result.request))}>保存这餐方案</button>{onFavorite&&<button className={favorites?.[c.recipe.id]?.favorite?'chosen':'secondary'} aria-pressed={!!favorites?.[c.recipe.id]?.favorite} disabled={busy} onClick={()=>void run(async()=>{await onFavorite(c,{favorite:!favorites?.[c.recipe.id]?.favorite,rating:(favorites?.[c.recipe.id]?.rating as 'neutral'|'like'|'dislike')||'neutral'});})}>{favorites?.[c.recipe.id]?.favorite?'已收藏':'收藏'}</button>}</MoreActions></div></article>)}
  <p>显示{visible.length}道，本次还有{Math.max(0,remaining.length-visible.length)}道未显示。</p>
  </>}
  {candidates.length>0&&candidates.length<3&&<button className="secondary" onClick={discovery}>当前有 {candidates.length} 道符合条件的菜谱，发现更多</button>}

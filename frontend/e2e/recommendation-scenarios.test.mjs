@@ -1,3 +1,4 @@
+import {clickAction} from './support.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {desktopContext,launchBrowser,makeApi,openPage,signUp,startFixture,useTab} from './support.mjs';
@@ -42,16 +43,16 @@ test('F6 scenes, swap exhaustion/reset, constraints and read-only behavior',asyn
   await useTab(page,'食材库存');await useTab(page,'我的菜谱');await panel.getByText('本次候选已看完',{exact:true}).waitFor();
   await panel.getByRole('button',{name:'重置本次候选'}).click();assert.equal(await panel.locator('.recommendation-card').count(),3);
   await panel.locator('.recommendation-card').first().getByRole('button',{name:'换一道',exact:true}).click();
-  await panel.getByRole('button',{name:'重新推荐',exact:true}).click();await panel.locator('.recommendation-card').first().waitFor();
+  await panel.getByRole('button',{name:'生成本餐推荐',exact:true}).click();await panel.locator('.recommendation-card').first().waitFor();
   assert.equal(await panel.locator('.recommendation-card').count(),3);
   await page.setViewportSize({width:390,height:844});
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1));
   if(process.env.F6_PREVIEW_URL){await page.screenshot({path:'.tmp-e2e/f6-mobile.png',fullPage:true});await page.setViewportSize({width:1280,height:900});await page.screenshot({path:'.tmp-e2e/f6-desktop.png',fullPage:true});}
   assert.deepEqual(await call('/inventory'),before);assert.deepEqual(await call('/recipes'),recipesBefore);assert.deepEqual(await call('/cooking'),[]);
   assert.equal((await call('/me/preferences')).max_minutes,45);assert.deepEqual(page.problems,[]);
-  await panel.locator('.recommendation-card').first().getByRole('button',{name:'保存这餐方案',exact:true}).click();await page.getByText('已保存方案，可在下方确认或更新',{exact:true}).waitFor();
+  await clickAction(panel.locator('.recommendation-card').first(),'保存这餐方案');await page.getByText('已保存方案，可在待做餐食中查看',{exact:true}).waitFor();
   const plans=await call('/plans');assert.equal(plans.length,1);assert.equal(plans[0].snapshot.request.scenario,'clear_fridge');assert.equal(plans[0].snapshot.request.max_minutes,32);
-  await page.getByLabel('本次用时上限（分钟）').fill('1');await panel.getByRole('button',{name:'生成本餐推荐',exact:true}).click();await panel.getByText('超出用时上限：5道').waitFor();await panel.getByRole('button',{name:'发现菜谱',exact:true}).click();await page.getByRole('heading',{name:'发现新菜，先核对再加'}).waitFor();
+  await page.getByLabel('本次用时上限（分钟）').fill('1');await panel.getByRole('button',{name:'生成本餐推荐',exact:true}).click();await panel.getByText('超出用时上限：5道').waitFor();await panel.getByRole('button',{name:'发现菜谱',exact:true}).click();await page.getByRole('heading',{name:'发现新菜谱'}).waitFor();
   await context.close();
  }finally{await browser?.close();await server.stop();}
 });

@@ -1,0 +1,22 @@
+{
+  "probe": "parallel-r100-u20",
+  "requests": 20,
+  "statuses": {
+    "200": 18,
+    "503": 2
+  },
+  "failures": [
+    {
+      "tag": "parallel-r100-u20-n11",
+      "sql_count": 0,
+      "pool_acquire_ms": 30000.279519998003
+    },
+    {
+      "tag": "parallel-r100-u20-n17",
+      "sql_count": 0,
+      "pool_acquire_ms": 30007.99616600125
+    }
+  ],
+  "tool_exit_code": 1,
+  "note": "actual diagnostic HTTP 503; do not treat as successful probe"
+}

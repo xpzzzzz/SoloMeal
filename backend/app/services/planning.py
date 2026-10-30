@@ -10,12 +10,12 @@ from ..models.identity import UserPreference
 from ..models.shopping import SavedQuote
 from ..schemas.memory import MemoryInput
 from ..schemas.planning import PriceQuote, ScoreWeights
-from .food import convert, feedback_map, normalize, owned, recipe_view
+from .food import convert, feedback_map, normalize, owned, recipe_views
 from .memory import MemoryPreference
 from . import memory_diagnostics as diagnostics
 from .memory_operations import filter_suppressed
 from .personal_time import duration_samples, estimate
-from .personalization import score_candidate, score_memories
+from .personalization import _weights, score_candidate, score_memories
 from .personalization import history as preference_history
 from .quantities import required_quantities, selected_lines
 
@@ -119,6 +119,7 @@ def recommend(db, user_id, body, *, memories=(), _feasibility_probe=False):
     personalization_enabled = bool(preferences.personalization_enabled)
     if not _feasibility_probe:
         preference_rows, preference_staples, preference_now = preference_history(db, user_id)
+        preference_weights = _weights(preference_rows, preference_staples, now=preference_now)
     equipment = {
         normalize(x)
         for x in (body.equipment if body.equipment is not None else preferences.equipment)
@@ -172,8 +173,8 @@ def recommend(db, user_id, body, *, memories=(), _feasibility_probe=False):
     candidates, rejected = [], []
     ids = db.scalars(select(Recipe.id).where(Recipe.user_id == user_id).order_by(Recipe.id)).all()
     feedbacks = feedback_map(db, user_id, [str(recipe_id) for recipe_id in ids])
-    for recipe_id in ids:
-        recipe = recipe_view(db, user_id, recipe_id)
+    for recipe in recipe_views(db, user_id, ids):
+        recipe_id = recipe["id"]
         time_estimate = estimate(recipe, servings,
                                  samples.get((str(recipe_id), recipe["version"]), []),
                                  personal_time_enabled=personal_time_enabled)
@@ -238,7 +239,7 @@ def recommend(db, user_id, body, *, memories=(), _feasibility_probe=False):
             candidate_ingredients={str(x["ingredient_id"]) for x in lines
                                    if not x.get("is_staple", False)},
             candidate_methods=recipe.get("cooking_methods", []),
-            enabled=personalization_enabled, now=preference_now,
+            enabled=personalization_enabled, now=preference_now, weights=preference_weights,
         )
         weights = body.score_weights
         base_score = (

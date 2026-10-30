@@ -136,7 +136,15 @@ jobs:
         with:
           python-version: "3.13"
       - name: Install independent backend dependencies
-        run: pip install -r backend/requirements.lock
+        run: pip install -r backend/requirements.lock ruff==0.16.6
+      - name: Backend name and syntax checks
+        run: |
+          ruff check backend/app backend/tests --select F,E9
+          python -m compileall -q backend/app backend/migrations deploy
+      - name: Fast performance-tool isolation guards
+        env:
+          PYTHONPATH: backend:docs/performance
+        run: python -m unittest discover -s docs/performance -p test_sandbox_tools.py
       # The registration test asserts a real diagnostic run freezes the built
       # frontend assets alongside the protocol, so it needs an actual build
       # output. Kept unconditional rather than skipping the assertion: a guard
@@ -202,13 +210,71 @@ jobs:
         working-directory: frontend
         run: npm run e2e
 
+  receipt-pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      SOLOMEAL_AGENT_ENABLED: "false"
+      SOLOMEAL_RECEIPT_VISION_ENABLED: "false"
+      SOLOMEAL_MODEL_API_KEY: ""
+      SOLOMEAL_MODEL_NAME: ""
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+      - name: Install validation client (no OCR on the runner)
+        run: pip install -r backend/requirements.lock
+      - name: Prepare private isolated Compose settings
+        run: python deploy/manage.py init --env-file "$RUNNER_TEMP/solomeal-ci/deployment.env" --port 18090
+      - name: Build pinned API, CPU Worker and web
+        run: docker compose --env-file "$RUNNER_TEMP/solomeal-ci/deployment.env" -p solomeal-ci build api worker web
+      - name: Start clean migrated environment, models disabled
+        run: docker compose --env-file "$RUNNER_TEMP/solomeal-ci/deployment.env" -p solomeal-ci up -d --no-build --wait --wait-timeout 240
+      - name: Core cooking, undo, manual receipt and private file checks
+        run: python deploy/demo.py seed --url http://127.0.0.1:18090 --evidence "$RUNNER_TEMP/solomeal-ci/demo"
+      - name: Download and verify pinned public CPU weights in an empty volume
+        run: docker compose --env-file "$RUNNER_TEMP/solomeal-ci/deployment.env" -p solomeal-ci --profile ocr-setup run --rm --no-deps ocr-models
+      - name: Enable only the local synthetic VLM fixture
+        run: docker compose --env-file "$RUNNER_TEMP/solomeal-ci/deployment.env" -f compose.yaml -f deploy/ci/compose.yaml -p solomeal-ci up -d --no-build --wait --wait-timeout 240
+      - name: Real MySQL RabbitMQ Celery CPU OCR and three-mode integration
+        run: python deploy/check_async_pipeline.py --url http://127.0.0.1:18090 --private "$RUNNER_TEMP/solomeal-ci/async"
+      - name: Recheck health after Worker and Broker restart
+        run: |
+          docker compose --env-file "$RUNNER_TEMP/solomeal-ci/deployment.env" -f compose.yaml -f deploy/ci/compose.yaml -p solomeal-ci restart rabbitmq worker
+          docker compose --env-file "$RUNNER_TEMP/solomeal-ci/deployment.env" -f compose.yaml -f deploy/ci/compose.yaml -p solomeal-ci up -d --no-build --wait --wait-timeout 240
+          python -c "import urllib.request; assert urllib.request.urlopen('http://127.0.0.1:18090/health/ready',timeout=5).status == 200"
+      - name: Disable the synthetic provider before the restore exercise
+        run: |
+          docker compose --env-file "$RUNNER_TEMP/solomeal-ci/deployment.env" -f compose.yaml -f deploy/ci/compose.yaml -p solomeal-ci stop mock-vlm
+          echo 'SOLOMEAL_RECEIPT_OCR_ENABLED=true' >> "$RUNNER_TEMP/solomeal-ci/deployment.env"
+          docker compose --env-file "$RUNNER_TEMP/solomeal-ci/deployment.env" -p solomeal-ci up -d --no-build --wait --wait-timeout 240
+      - name: Restore SQL, private image and unpublished outbox task into a fresh project
+        run: >-
+          python deploy/check_restore_outbox.py
+          --source-project solomeal-ci --source-env "$RUNNER_TEMP/solomeal-ci/deployment.env"
+          --source-url http://127.0.0.1:18090 --credentials "$RUNNER_TEMP/solomeal-ci/async/credentials.json"
+          --target-project solomeal-ci-restore --target-env "$RUNNER_TEMP/solomeal-ci/restored.env"
+          --target-port 18091 --backup "$RUNNER_TEMP/solomeal-ci/backup"
+          --private "$RUNNER_TEMP/solomeal-ci/restore-checks"
+      # Private images, response bodies, database dumps and tokens are never uploaded.
+      - name: Stop isolated services, preserve runner evidence until job disposal
+        if: always()
+        run: |
+          if [ -f "$RUNNER_TEMP/solomeal-ci/deployment.env" ]; then
+            docker compose --env-file "$RUNNER_TEMP/solomeal-ci/deployment.env" -f compose.yaml -f deploy/ci/compose.yaml -p solomeal-ci stop
+          fi
+          if [ -f "$RUNNER_TEMP/solomeal-ci/restored.env" ]; then
+            docker compose --env-file "$RUNNER_TEMP/solomeal-ci/restored.env" -p solomeal-ci-restore stop
+          fi
+
   ci-complete:
     # One stable check name for the branch ruleset to require. Matrix legs come and go, so
     # requiring them individually would turn a dropped Python version into a required check
     # that never reports again — and an unsatisfiable required check blocks every merge.
     # This job depends on the ones that must pass and fails unless all of them succeeded.
     if: always()
-    needs: [tests, types, coverage, backend, frontend, browser-e2e]
+    needs: [tests, types, coverage, backend, frontend, browser-e2e, receipt-pipeline]
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:

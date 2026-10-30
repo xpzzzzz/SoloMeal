@@ -505,6 +505,8 @@ class ModelDiscoveryProvider:
             "max_completion_tokens": s.discovery_max_output_tokens,
             "store": False,
         }
+        if s.model_enable_thinking is not None:
+            payload["enable_thinking"] = s.model_enable_thinking
         try:
             async with httpx.AsyncClient(timeout=s.discovery_timeout_seconds, follow_redirects=False,
                                         transport=self.transport) as client:
@@ -525,6 +527,9 @@ class ModelDiscoveryProvider:
                 raise ValueError("Incomplete or non-data response")
             usage = usage_metadata(body.get("usage"))
             return _candidates(message["content"]), usage
+        except httpx.TimeoutException as exc:
+            raise AppError(504, "MODEL_TIMEOUT",
+                           "Recipe generation timed out; retry is available") from exc
         except (httpx.HTTPError, ValueError, KeyError, IndexError, TypeError) as exc:
             raise AppError(502, "DISCOVERY_FAILED",
                            "Recipe generation failed; retry is available") from exc

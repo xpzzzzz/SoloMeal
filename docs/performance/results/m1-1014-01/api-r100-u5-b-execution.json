@@ -1,0 +1,9 @@
+{
+  "run": "api-r100-u5-b",
+  "scale": 100,
+  "users": 5,
+  "entry": "api",
+  "planned_measured_seconds": 45,
+  "locust_exit_code": 0,
+  "elapsed_wall_seconds": 60.815329790115356
+}

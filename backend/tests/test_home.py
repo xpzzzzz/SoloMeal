@@ -228,7 +228,9 @@ def test_home_sections_query_narrows_the_work_and_reports_favourites(client):
 
 def test_home_is_read_only_and_scoped_to_this_account(client):
     h, item, rid = planning_setup(client)
-    stock(client, h, item, "100", key="home-read-only", expires=on(0))
+    # The home date is UTC; native cooking historically uses the host calendar.
+    # Keep this read-only test's stock usable under both, including Shanghai midnight.
+    stock(client, h, item, "100", key="home-read-only", expires=max(TODAY, date.today()).isoformat())
     assert cook(client, h, rid, "home-ro-cook").status_code == 201
     before = {path: client.get("/api/v1" + path, headers=h).json()
               for path in ("/inventory", "/inventory/events", "/cooking", "/shopping", "/plans", "/recipes")}

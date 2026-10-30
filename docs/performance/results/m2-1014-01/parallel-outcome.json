@@ -1,0 +1,10 @@
+{
+  "requests": 20,
+  "http_200": 20,
+  "failures": 0,
+  "pool_acquire_max_ms": 4708.335679999436,
+  "elapsed_max_ms": 6630.70362599683,
+  "sql_counts": [
+    31
+  ]
+}

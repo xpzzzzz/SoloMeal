@@ -1,0 +1,1363 @@
+{
+  "runs": [
+    {
+      "run": "api-inventory-r10-u20-a",
+      "scale": 10,
+      "users": 20,
+      "entry": "api",
+      "planned_measured_seconds": 45,
+      "locust_exit_code": 0,
+      "elapsed_wall_seconds": 53.74080514907837,
+      "measured_seconds": 44.77190283899836,
+      "mode": "0",
+      "requests": 3240,
+      "failures": 0,
+      "rps": 72.36681477781224,
+      "http_status_counts": {
+        "200": 3240
+      },
+      "endpoints": [
+        {
+          "name": "/api/v1/inventory",
+          "samples": 3240,
+          "failures": 0,
+          "p50_ms": 194.5032040021033,
+          "p95_ms": 271.389175002696,
+          "success_p50_ms": 194.5032040021033,
+          "success_p95_ms": 271.389175002696,
+          "mean_ms": 200.97828129043512,
+          "max_ms": 446.8153460038593
+        }
+      ]
+    },
+    {
+      "run": "api-r10-u1-a",
+      "scale": 10,
+      "users": 1,
+      "entry": "api",
+      "planned_measured_seconds": 45,
+      "locust_exit_code": 0,
+      "elapsed_wall_seconds": 53.042481660842896,
+      "measured_seconds": 44.64496250699449,
+      "mode": "mixed",
+      "requests": 377,
+      "failures": 0,
+      "rps": 8.444401760689926,
+      "http_status_counts": {
+        "200": 377
+      },
+      "endpoints": [
+        {
+          "name": "/api/v1/recipes",
+          "samples": 76,
+          "failures": 0,
+          "p50_ms": 24.424673996691126,
+          "p95_ms": 36.28332999505801,
+          "success_p50_ms": 24.424673996691126,
+          "success_p95_ms": 36.28332999505801,
+          "mean_ms": 25.781551670948637,
+          "max_ms": 44.67688799923053
+        },
+        {
+          "name": "/api/v1/home",
+          "samples": 76,
+          "failures": 0,
+          "p50_ms": 83.38571300555486,
+          "p95_ms": 107.39309200289426,
+          "success_p50_ms": 83.38571300555486,
+          "success_p95_ms": 107.39309200289426,
+          "mean_ms": 86.30794847417029,
+          "max_ms": 130.83516500046244
+        },
+        {
+          "name": "/api/v1/recommendations",
+          "samples": 75,
+          "failures": 0,
+          "p50_ms": 74.24852900294354,
+          "p95_ms": 93.3481770043727,
+          "success_p50_ms": 74.24852900294354,
+          "success_p95_ms": 93.3481770043727,
+          "mean_ms": 77.18933612030621,
+          "max_ms": 97.35865000402555
+        },
+        {
+          "name": "/api/v1/cooking",
+          "samples": 75,
+          "failures": 0,
+          "p50_ms": 11.959563002164941,
+          "p95_ms": 13.597233999462333,
+          "success_p50_ms": 11.959563002164941,
+          "success_p95_ms": 13.597233999462333,
+          "mean_ms": 12.12703190637209,
+          "max_ms": 18.243011996673886
+        },
+        {
+          "name": "/api/v1/inventory",
+          "samples": 75,
+          "failures": 0,
+          "p50_ms": 8.79961899772752,
+          "p95_ms": 9.913353002048098,
+          "success_p50_ms": 8.79961899772752,
+          "success_p95_ms": 9.913353002048098,
+          "mean_ms": 8.963178426686985,
+          "max_ms": 12.215276998176705
+        }
+      ]
+    },
+    {
+      "run": "api-r10-u20-a",
+      "scale": 10,
+      "users": 20,
+      "entry": "api",
+      "planned_measured_seconds": 45,
+      "locust_exit_code": 0,
+      "elapsed_wall_seconds": 54.09768557548523,
+      "measured_seconds": 46.63505507000082,
+      "mode": "mixed",
+      "requests": 612,
+      "failures": 0,
+      "rps": 13.123175239771177,
+      "http_status_counts": {
+        "200": 612
+      },
+      "endpoints": [
+        {
+          "name": "/api/v1/recommendations",
+          "samples": 131,
+          "failures": 0,
+          "p50_ms": 2588.0261929996777,
+          "p95_ms": 3376.2635070015676,
+          "success_p50_ms": 2588.0261929996777,
+          "success_p95_ms": 3376.2635070015676,
+          "mean_ms": 2648.7596912364734,
+          "max_ms": 3545.21787900012
+        },
+        {
+          "name": "/api/v1/home",
+          "samples": 123,
+          "failures": 0,
+          "p50_ms": 2494.395549998444,
+          "p95_ms": 3277.7369530012948,
+          "success_p50_ms": 2494.395549998444,
+          "success_p95_ms": 3277.7369530012948,
+          "mean_ms": 2550.295764463303,
+          "max_ms": 3667.129195004236
+        },
+        {
+          "name": "/api/v1/cooking",
+          "samples": 120,
+          "failures": 0,
+          "p50_ms": 402.5612380064558,
+          "p95_ms": 875.2170559964725,
+          "success_p50_ms": 402.5612380064558,
+          "success_p95_ms": 875.2170559964725,
+          "mean_ms": 452.0142168918028,
+          "max_ms": 1449.077864002902
+        },
+        {
+          "name": "/api/v1/inventory",
+          "samples": 119,
+          "failures": 0,
+          "p50_ms": 350.95830500358716,
+          "p95_ms": 672.3616449962719,
+          "success_p50_ms": 350.95830500358716,
+          "success_p95_ms": 672.3616449962719,
+          "mean_ms": 379.4129026217651,
+          "max_ms": 1134.6719349967316
+        },
+        {
+          "name": "/api/v1/recipes",
+          "samples": 119,
+          "failures": 0,
+          "p50_ms": 1079.7231320029823,
+          "p95_ms": 1716.4082439994672,
+          "success_p50_ms": 1079.7231320029823,
+          "success_p95_ms": 1716.4082439994672,
+          "mean_ms": 1148.7589236471154,
+          "max_ms": 2114.046684000641
+        }
+      ]
+    },
+    {
+      "run": "api-r10-u5-a",
+      "scale": 10,
+      "users": 5,
+      "entry": "api",
+      "planned_measured_seconds": 45,
+      "locust_exit_code": 0,
+      "elapsed_wall_seconds": 54.399574279785156,
+      "measured_seconds": 44.81355863700446,
+      "mode": "mixed",
+      "requests": 595,
+      "failures": 0,
+      "rps": 13.277231670432064,
+      "http_status_counts": {
+        "200": 595
+      },
+      "endpoints": [
+        {
+          "name": "/api/v1/home",
+          "samples": 121,
+          "failures": 0,
+          "p50_ms": 619.795154001622,
+          "p95_ms": 750.4766729980474,
+          "success_p50_ms": 619.795154001622,
+          "success_p95_ms": 750.4766729980474,
+          "mean_ms": 597.837693553862,
+          "max_ms": 906.0904170037247
+        },
+        {
+          "name": "/api/v1/inventory",
+          "samples": 119,
+          "failures": 0,
+          "p50_ms": 61.36692699510604,
+          "p95_ms": 83.44291100365808,
+          "success_p50_ms": 61.36692699510604,
+          "success_p95_ms": 83.44291100365808,
+          "mean_ms": 58.128575310761605,
+          "max_ms": 104.22585800552042
+        },
+        {
+          "name": "/api/v1/recommendations",
+          "samples": 119,
+          "failures": 0,
+          "p50_ms": 568.0940689999261,
+          "p95_ms": 726.6461730032461,
+          "success_p50_ms": 568.0940689999261,
+          "success_p95_ms": 726.6461730032461,
+          "mean_ms": 534.729841789693,
+          "max_ms": 895.9847110018018
+        },
+        {
+          "name": "/api/v1/cooking",
+          "samples": 118,
+          "failures": 0,
+          "p50_ms": 62.64518499665428,
+          "p95_ms": 90.6675130026997,
+          "success_p50_ms": 62.64518499665428,
+          "success_p95_ms": 90.6675130026997,
+          "mean_ms": 62.0203927371792,
+          "max_ms": 153.59324800374452
+        },
+        {
+          "name": "/api/v1/recipes",
+          "samples": 118,
+          "failures": 0,
+          "p50_ms": 269.95149899448734,
+          "p95_ms": 355.86167799920077,
+          "success_p50_ms": 269.95149899448734,
+          "success_p95_ms": 355.86167799920077,
+          "mean_ms": 258.13384327107167,
+          "max_ms": 404.1171499993652
+        }
+      ]
+    },
+    {
+      "run": "api-r100-u1-a",
+      "scale": 100,
+      "users": 1,
+      "entry": "api",
+      "planned_measured_seconds": 45,
+      "locust_exit_code": 0,
+      "elapsed_wall_seconds": 53.09670829772949,
+      "measured_seconds": 45.66452083799959,
+      "mode": "mixed",
+      "requests": 62,
+      "failures": 0,
+      "rps": 1.3577280317897673,
+      "http_status_counts": {
+        "200": 62
+      },
+      "endpoints": [
+        {
+          "name": "/api/v1/home",
+          "samples": 13,
+          "failures": 0,
+          "p50_ms": 1491.2406150033348,
+          "p95_ms": 1683.6175429998548,
+          "success_p50_ms": 1491.2406150033348,
+          "success_p95_ms": 1683.6175429998548,
+          "mean_ms": 1524.7358655391367,
+          "max_ms": 1683.6175429998548
+        },
+        {
+          "name": "/api/v1/recommendations",
+          "samples": 13,
+          "failures": 0,
+          "p50_ms": 1489.7263749953709,
+          "p95_ms": 1576.8542420046288,
+          "success_p50_ms": 1489.7263749953709,
+          "success_p95_ms": 1576.8542420046288,
+          "mean_ms": 1498.505156846547,
+          "max_ms": 1576.8542420046288
+        },
+        {
+          "name": "/api/v1/cooking",
+          "samples": 12,
+          "failures": 0,
+          "p50_ms": 20.195154997054487,
+          "p95_ms": 71.32972100225743,
+          "success_p50_ms": 20.195154997054487,
+          "success_p95_ms": 71.32972100225743,
+          "mean_ms": 25.888011083225138,
+          "max_ms": 71.32972100225743
+        },
+        {
+          "name": "/api/v1/inventory",
+          "samples": 12,
+          "failures": 0,
+          "p50_ms": 12.840496994613204,
+          "p95_ms": 13.79399599682074,
+          "success_p50_ms": 12.840496994613204,
+          "success_p95_ms": 13.79399599682074,
+          "mean_ms": 12.868028582185312,
+          "max_ms": 13.79399599682074
+        },
+        {
+          "name": "/api/v1/recipes",
+          "samples": 12,
+          "failures": 0,
+          "p50_ms": 173.53074400307378,
+          "p95_ms": 205.26701099879574,
+          "success_p50_ms": 173.53074400307378,
+          "success_p95_ms": 205.26701099879574,
+          "mean_ms": 178.22028024905498,
+          "max_ms": 205.26701099879574
+        }
+      ]
+    },
+    {
+      "run": "api-r100-u20-a",
+      "scale": 100,
+      "users": 20,
+      "entry": "api",
+      "planned_measured_seconds": 45,
+      "locust_exit_code": 0,
+      "elapsed_wall_seconds": 71.1051037311554,
+      "measured_seconds": 64.51040040999942,
+      "mode": "mixed",
+      "requests": 50,
+      "failures": 0,
+      "rps": 0.7750688211857659,
+      "http_status_counts": {
+        "200": 50
+      },
+      "endpoints": [
+        {
+          "name": "/api/v1/recipes",
+          "samples": 20,
+          "failures": 0,
+          "p50_ms": 6795.761250003125,
+          "p95_ms": 21449.685364001198,
+          "success_p50_ms": 6795.761250003125,
+          "success_p95_ms": 21449.685364001198,
+          "mean_ms": 10350.044294149848,
+          "max_ms": 21556.30023199774
+        },
+        {
+          "name": "/api/v1/home",
+          "samples": 20,
+          "failures": 0,
+          "p50_ms": 23099.660767999012,
+          "p95_ms": 43492.118622001726,
+          "success_p50_ms": 23099.660767999012,
+          "success_p95_ms": 43492.118622001726,
+          "mean_ms": 31500.04336564998,
+          "max_ms": 44012.41467199725
+        },
+        {
+          "name": "/api/v1/recommendations",
+          "samples": 10,
+          "failures": 0,
+          "p50_ms": 31083.64858799905,
+          "p95_ms": 39122.21145499643,
+          "success_p50_ms": 31083.64858799905,
+          "success_p95_ms": 39122.21145499643,
+          "mean_ms": 34634.82972129932,
+          "max_ms": 39122.21145499643
+        }
+      ]
+    },
+    {
+      "run": "api-r100-u5-a",
+      "scale": 100,
+      "users": 5,
+      "entry": "api",
+      "planned_measured_seconds": 45,
+      "locust_exit_code": 0,
+      "elapsed_wall_seconds": 60.27241849899292,
+      "measured_seconds": 52.75208778299566,
+      "mode": "mixed",
+      "requests": 55,
+      "failures": 0,
+      "rps": 1.042612763048384,
+      "http_status_counts": {
+        "200": 55
+      },
+      "endpoints": [
+        {
+          "name": "/api/v1/home",
+          "samples": 15,
+          "failures": 0,
+          "p50_ms": 9276.149306999287,
+          "p95_ms": 10116.479052005161,
+          "success_p50_ms": 9276.149306999287,
+          "success_p95_ms": 10116.479052005161,
+          "mean_ms": 9362.139280400394,
+          "max_ms": 10116.479052005161
+        },
+        {
+          "name": "/api/v1/recommendations",
+          "samples": 10,
+          "failures": 0,
+          "p50_ms": 9697.576635000587,
+          "p95_ms": 9958.991259001778,
+          "success_p50_ms": 9697.576635000587,
+          "success_p95_ms": 9958.991259001778,
+          "mean_ms": 9732.247466900299,
+          "max_ms": 9958.991259001778
+        },
+        {
+          "name": "/api/v1/cooking",
+          "samples": 10,
+          "failures": 0,
+          "p50_ms": 205.44871199672343,
+          "p95_ms": 300.0865639987751,
+          "success_p50_ms": 205.44871199672343,
+          "success_p95_ms": 300.0865639987751,
+          "mean_ms": 185.70327699926565,
+          "max_ms": 300.0865639987751
+        },
+        {
+          "name": "/api/v1/inventory",
+          "samples": 10,
+          "failures": 0,
+          "p50_ms": 122.2461440047482,
+          "p95_ms": 306.311801999982,
+          "success_p50_ms": 122.2461440047482,
+          "success_p95_ms": 306.311801999982,
+          "mean_ms": 154.5831238014216,
+          "max_ms": 306.311801999982
+        },
+        {
+          "name": "/api/v1/recipes",
+          "samples": 10,
+          "failures": 0,
+          "p50_ms": 2612.492263004242,
+          "p95_ms": 3165.072317002341,
+          "success_p50_ms": 2612.492263004242,
+          "success_p95_ms": 3165.072317002341,
+          "mean_ms": 2675.2945124004327,
+          "max_ms": 3165.072317002341
+        }
+      ]
+    },
+    {
+      "run": "api-r100-u5-b",
+      "scale": 100,
+      "users": 5,
+      "entry": "api",
+      "planned_measured_seconds": 45,
+      "locust_exit_code": 0,
+      "elapsed_wall_seconds": 60.815329790115356,
+      "measured_seconds": 51.51449329399475,
+      "mode": "mixed",
+      "requests": 55,
+      "failures": 0,
+      "rps": 1.0676607005743677,
+      "http_status_counts": {
+        "200": 55
+      },
+      "endpoints": [
+        {
+          "name": "/api/v1/home",
+          "samples": 15,
+          "failures": 0,
+          "p50_ms": 9162.554042995907,
+          "p95_ms": 9925.234335998539,
+          "success_p50_ms": 9162.554042995907,
+          "success_p95_ms": 9925.234335998539,
+          "mean_ms": 9087.722450265332,
+          "max_ms": 9925.234335998539
+        },
+        {
+          "name": "/api/v1/recommendations",
+          "samples": 10,
+          "failures": 0,
+          "p50_ms": 9542.554929001199,
+          "p95_ms": 9827.418872002454,
+          "success_p50_ms": 9542.554929001199,
+          "success_p95_ms": 9827.418872002454,
+          "mean_ms": 9516.474002200266,
+          "max_ms": 9827.418872002454
+        },
+        {
+          "name": "/api/v1/cooking",
+          "samples": 10,
+          "failures": 0,
+          "p50_ms": 188.48124199575977,
+          "p95_ms": 313.6425029952079,
+          "success_p50_ms": 188.48124199575977,
+          "success_p95_ms": 313.6425029952079,
+          "mean_ms": 181.05817980031134,
+          "max_ms": 313.6425029952079
+        },
+        {
+          "name": "/api/v1/inventory",
+          "samples": 10,
+          "failures": 0,
+          "p50_ms": 91.06837699800963,
+          "p95_ms": 298.21238199656364,
+          "success_p50_ms": 91.06837699800963,
+          "success_p95_ms": 298.21238199656364,
+          "mean_ms": 147.4828530983359,
+          "max_ms": 298.21238199656364
+        },
+        {
+          "name": "/api/v1/recipes",
+          "samples": 10,
+          "failures": 0,
+          "p50_ms": 2489.2249100012123,
+          "p95_ms": 3185.046393999073,
+          "success_p50_ms": 2489.2249100012123,
+          "success_p95_ms": 3185.046393999073,
+          "mean_ms": 2596.2230825003644,
+          "max_ms": 3185.046393999073
+        }
+      ]
+    },
+    {
+      "run": "api-r500-u1-a",
+      "scale": 500,
+      "users": 1,
+      "entry": "api",
+      "planned_measured_seconds": 45,
+      "locust_exit_code": 0,
+      "elapsed_wall_seconds": 56.981937408447266,
+      "measured_seconds": 49.37132390199986,
+      "mode": "mixed",
+      "requests": 16,
+      "failures": 0,
+      "rps": 0.3240747611256966,
+      "http_status_counts": {
+        "200": 16
+      },
+      "endpoints": [
+        {
+          "name": "/api/v1/home",
+          "samples": 4,
+          "failures": 0,
+          "p50_ms": 7478.271694999421,
+          "p95_ms": 7874.2405110024265,
+          "success_p50_ms": 7478.271694999421,
+          "success_p95_ms": 7874.2405110024265,
+          "mean_ms": 7553.78594324975,
+          "max_ms": 7874.2405110024265
+        },
+        {
+          "name": "/api/v1/recommendations",
+          "samples": 3,
+          "failures": 0,
+          "p50_ms": 7253.368523000972,
+          "p95_ms": 7402.889335993677,
+          "success_p50_ms": 7253.368523000972,
+          "success_p95_ms": 7402.889335993677,
+          "mean_ms": 7281.9978606664035,
+          "max_ms": 7402.889335993677
+        },
+        {
+          "name": "/api/v1/cooking",
+          "samples": 3,
+          "failures": 0,
+          "p50_ms": 22.468535004009027,
+          "p95_ms": 22.549984998477157,
+          "success_p50_ms": 22.468535004009027,
+          "success_p95_ms": 22.549984998477157,
+          "mean_ms": 22.297342666812863,
+          "max_ms": 22.549984998477157
+        },
+        {
+          "name": "/api/v1/inventory",
+          "samples": 3,
+          "failures": 0,
+          "p50_ms": 17.654386996582616,
+          "p95_ms": 17.907708999700844,
+          "success_p50_ms": 17.654386996582616,
+          "success_p95_ms": 17.907708999700844,
+          "mean_ms": 17.648099000022437,
+          "max_ms": 17.907708999700844
+        },
+        {
+          "name": "/api/v1/recipes",
+          "samples": 3,
+          "failures": 0,
+          "p50_ms": 172.62214399670484,
+          "p95_ms": 195.3166390012484,
+          "success_p50_ms": 172.62214399670484,
+          "success_p95_ms": 195.3166390012484,
+          "mean_ms": 179.5583563313509,
+          "max_ms": 195.3166390012484
+        }
+      ]
+    },
+    {
+      "run": "api-r500-u5-a",
+      "scale": 500,
+      "users": 5,
+      "entry": "api",
+      "planned_measured_seconds": 45,
+      "locust_exit_code": 0,
+      "elapsed_wall_seconds": 60.528888463974,
+      "measured_seconds": 52.947446536003554,
+      "mode": "mixed",
+      "requests": 6,
+      "failures": 0,
+      "rps": 0.1133199123383614,
+      "http_status_counts": {
+        "200": 6
+      },
+      "endpoints": [
+        {
+          "name": "/api/v1/home",
+          "samples": 5,
+          "failures": 0,
+          "p50_ms": 47198.871747998055,
+          "p95_ms": 47623.521129004075,
+          "success_p50_ms": 47198.871747998055,
+          "success_p95_ms": 47623.521129004075,
+          "mean_ms": 47194.494808600575,
+          "max_ms": 47623.521129004075
+        },
+        {
+          "name": "/api/v1/recommendations",
+          "samples": 1,
+          "failures": 0,
+          "p50_ms": 8587.598389996856,
+          "p95_ms": 8587.598389996856,
+          "success_p50_ms": 8587.598389996856,
+          "success_p95_ms": 8587.598389996856,
+          "mean_ms": 8587.598389996856,
+          "max_ms": 8587.598389996856
+        }
+      ]
+    },
+    {
+      "run": "api-r500-u5-b",
+      "scale": 500,
+      "users": 5,
+      "entry": "api",
+      "planned_measured_seconds": 45,
+      "locust_exit_code": 0,
+      "elapsed_wall_seconds": 68.33572745323181,
+      "measured_seconds": 60.243895922001684,
+      "mode": "mixed",
+      "requests": 7,
+      "failures": 0,
+      "rps": 0.11619434455339614,
+      "http_status_counts": {
+        "200": 7
+      },
+      "endpoints": [
+        {
+          "name": "/api/v1/home",
+          "samples": 5,
+          "failures": 0,
+          "p50_ms": 46782.01814099884,
+          "p95_ms": 46892.83567899838,
+          "success_p50_ms": 46782.01814099884,
+          "success_p95_ms": 46892.83567899838,
+          "mean_ms": 46246.97596959886,
+          "max_ms": 46892.83567899838
+        },
+        {
+          "name": "/api/v1/recommendations",
+          "samples": 2,
+          "failures": 0,
+          "p50_ms": 16224.210458996822,
+          "p95_ms": 18500.720284006093,
+          "success_p50_ms": 16224.210458996822,
+          "success_p95_ms": 18500.720284006093,
+          "mean_ms": 17362.465371501457,
+          "max_ms": 18500.720284006093
+        }
+      ]
+    },
+    {
+      "run": "api-recommendations-r100-u1-a",
+      "scale": 100,
+      "users": 1,
+      "entry": "api",
+      "planned_measured_seconds": 45,
+      "locust_exit_code": 0,
+      "elapsed_wall_seconds": 54.58879280090332,
+      "measured_seconds": 45.86781490500289,
+      "mode": "3",
+      "requests": 26,
+      "failures": 0,
+      "rps": 0.5668462745358321,
+      "http_status_counts": {
+        "200": 26
+      },
+      "endpoints": [
+        {
+          "name": "/api/v1/recommendations",
+          "samples": 26,
+          "failures": 0,
+          "p50_ms": 1678.1431209965376,
+          "p95_ms": 1898.1967860017903,
+          "success_p50_ms": 1678.1431209965376,
+          "success_p95_ms": 1898.1967860017903,
+          "mean_ms": 1695.2003322694509,
+          "max_ms": 2010.5773450050037
+        }
+      ]
+    },
+    {
+      "run": "api-recommendations-r100-u5-a",
+      "scale": 100,
+      "users": 5,
+      "entry": "api",
+      "planned_measured_seconds": 90,
+      "locust_exit_code": 0,
+      "elapsed_wall_seconds": 106.30896925926208,
+      "measured_seconds": 98.59641627399833,
+      "mode": "3",
+      "requests": 50,
+      "failures": 0,
+      "rps": 0.5071178232386313,
+      "http_status_counts": {
+        "200": 50
+      },
+      "endpoints": [
+        {
+          "name": "/api/v1/recommendations",
+          "samples": 50,
+          "failures": 0,
+          "p50_ms": 10229.612626993912,
+          "p95_ms": 10529.885286996432,
+          "success_p50_ms": 10229.612626993912,
+          "success_p95_ms": 10529.885286996432,
+          "mean_ms": 10241.743110419775,
+          "max_ms": 10682.401211000979
+        }
+      ]
+    },
+    {
+      "run": "api-recommendations-r500-u1-a",
+      "scale": 500,
+      "users": 1,
+      "entry": "api",
+      "planned_measured_seconds": 90,
+      "locust_exit_code": 0,
+      "elapsed_wall_seconds": 101.00418758392334,
+      "measured_seconds": 93.3379940770028,
+      "mode": "3",
+      "requests": 12,
+      "failures": 0,
+      "rps": 0.128565008479828,
+      "http_status_counts": {
+        "200": 12
+      },
+      "endpoints": [
+        {
+          "name": "/api/v1/recommendations",
+          "samples": 12,
+          "failures": 0,
+          "p50_ms": 8034.555743004603,
+          "p95_ms": 9205.948647999321,
+          "success_p50_ms": 8034.555743004603,
+          "success_p95_ms": 9205.948647999321,
+          "mean_ms": 8124.996766833647,
+          "max_ms": 9205.948647999321
+        }
+      ]
+    },
+    {
+      "run": "api-recommendations-r500-u5-a",
+      "scale": 500,
+      "users": 5,
+      "entry": "api",
+      "planned_measured_seconds": 180,
+      "locust_exit_code": 0,
+      "elapsed_wall_seconds": 198.2868208885193,
+      "measured_seconds": 190.64374930699705,
+      "mode": "3",
+      "requests": 20,
+      "failures": 0,
+      "rps": 0.10490771437669137,
+      "http_status_counts": {
+        "200": 20
+      },
+      "endpoints": [
+        {
+          "name": "/api/v1/recommendations",
+          "samples": 20,
+          "failures": 0,
+          "p50_ms": 48563.93292199937,
+          "p95_ms": 49702.54979799938,
+          "success_p50_ms": 48563.93292199937,
+          "success_p95_ms": 49702.54979799938,
+          "mean_ms": 48720.234493250246,
+          "max_ms": 49865.668334001384
+        }
+      ]
+    },
+    {
+      "run": "nginx-inventory-r10-u20-a",
+      "scale": 10,
+      "users": 20,
+      "entry": "nginx",
+      "planned_measured_seconds": 45,
+      "locust_exit_code": 1,
+      "elapsed_wall_seconds": 53.02787637710571,
+      "measured_seconds": 44.67958078599622,
+      "mode": "0",
+      "requests": 11574,
+      "failures": 10681,
+      "rps": 259.04450749966753,
+      "http_status_counts": {
+        "429": 10681,
+        "200": 893
+      },
+      "endpoints": [
+        {
+          "name": "/api/v1/inventory",
+          "samples": 11574,
+          "failures": 10681,
+          "p50_ms": 1.0975810000672936,
+          "p95_ms": 8.620736000011675,
+          "success_p50_ms": 8.794519999355543,
+          "success_p95_ms": 10.12738399731461,
+          "mean_ms": 1.7651172111126245,
+          "max_ms": 17.581775995495263
+        }
+      ]
+    },
+    {
+      "run": "nginx-r10-u20-a",
+      "scale": 10,
+      "users": 20,
+      "entry": "nginx",
+      "planned_measured_seconds": 45,
+      "locust_exit_code": 0,
+      "elapsed_wall_seconds": 53.61831569671631,
+      "measured_seconds": 46.08222638800362,
+      "mode": "mixed",
+      "requests": 609,
+      "failures": 0,
+      "rps": 13.215507316689418,
+      "http_status_counts": {
+        "200": 609
+      },
+      "endpoints": [
+        {
+          "name": "/api/v1/home",
+          "samples": 122,
+          "failures": 0,
+          "p50_ms": 2452.257423006813,
+          "p95_ms": 3326.9448010032647,
+          "success_p50_ms": 2452.257423006813,
+          "success_p95_ms": 3326.9448010032647,
+          "mean_ms": 2547.6507196810835,
+          "max_ms": 3975.534751996747
+        },
+        {
+          "name": "/api/v1/recommendations",
+          "samples": 132,
+          "failures": 0,
+          "p50_ms": 2442.670554999495,
+          "p95_ms": 3275.503298995318,
+          "success_p50_ms": 2442.670554999495,
+          "success_p95_ms": 3275.503298995318,
+          "mean_ms": 2505.0021384770043,
+          "max_ms": 3436.565496995172
+        },
+        {
+          "name": "/api/v1/cooking",
+          "samples": 121,
+          "failures": 0,
+          "p50_ms": 367.3641499990481,
+          "p95_ms": 768.2631489951746,
+          "success_p50_ms": 367.3641499990481,
+          "success_p95_ms": 768.2631489951746,
+          "mean_ms": 442.07312916541395,
+          "max_ms": 1236.1025040008826
+        },
+        {
+          "name": "/api/v1/inventory",
+          "samples": 118,
+          "failures": 0,
+          "p50_ms": 357.5521469974774,
+          "p95_ms": 989.7709949946147,
+          "success_p50_ms": 357.5521469974774,
+          "success_p95_ms": 989.7709949946147,
+          "mean_ms": 428.53521120331743,
+          "max_ms": 1342.4906359941815
+        },
+        {
+          "name": "/api/v1/recipes",
+          "samples": 116,
+          "failures": 0,
+          "p50_ms": 1145.3116960037732,
+          "p95_ms": 1849.3123459993512,
+          "success_p50_ms": 1145.3116960037732,
+          "success_p95_ms": 1849.3123459993512,
+          "mean_ms": 1231.70975309479,
+          "max_ms": 2267.6795840015984
+        }
+      ]
+    },
+    {
+      "run": "smoke-r10-u1",
+      "scale": 10,
+      "users": 1,
+      "entry": "api",
+      "planned_measured_seconds": 10,
+      "locust_exit_code": 0,
+      "elapsed_wall_seconds": 17.067426919937134,
+      "measured_seconds": 9.627888107999752,
+      "mode": "mixed",
+      "requests": 82,
+      "failures": 0,
+      "rps": 8.516924904005347,
+      "http_status_counts": {
+        "200": 82
+      },
+      "endpoints": [
+        {
+          "name": "/api/v1/recipes",
+          "samples": 17,
+          "failures": 0,
+          "p50_ms": 23.965571002918296,
+          "p95_ms": 28.350862994557247,
+          "success_p50_ms": 23.965571002918296,
+          "success_p95_ms": 28.350862994557247,
+          "mean_ms": 24.11467582329779,
+          "max_ms": 28.350862994557247
+        },
+        {
+          "name": "/api/v1/home",
+          "samples": 17,
+          "failures": 0,
+          "p50_ms": 79.5538249949459,
+          "p95_ms": 98.75281600398012,
+          "success_p50_ms": 79.5538249949459,
+          "success_p95_ms": 98.75281600398012,
+          "mean_ms": 80.73586417552124,
+          "max_ms": 98.75281600398012
+        },
+        {
+          "name": "/api/v1/recommendations",
+          "samples": 16,
+          "failures": 0,
+          "p50_ms": 71.82313199882628,
+          "p95_ms": 76.61386799736647,
+          "success_p50_ms": 71.82313199882628,
+          "success_p95_ms": 76.61386799736647,
+          "mean_ms": 71.8779343760616,
+          "max_ms": 76.61386799736647
+        },
+        {
+          "name": "/api/v1/cooking",
+          "samples": 16,
+          "failures": 0,
+          "p50_ms": 11.498455998662394,
+          "p95_ms": 12.460865000321064,
+          "success_p50_ms": 11.498455998662394,
+          "success_p95_ms": 12.460865000321064,
+          "mean_ms": 11.591564063110127,
+          "max_ms": 12.460865000321064
+        },
+        {
+          "name": "/api/v1/inventory",
+          "samples": 16,
+          "failures": 0,
+          "p50_ms": 8.488500003295485,
+          "p95_ms": 9.659917996032164,
+          "success_p50_ms": 8.488500003295485,
+          "success_p95_ms": 9.659917996032164,
+          "mean_ms": 8.584138248806994,
+          "max_ms": 9.659917996032164
+        }
+      ]
+    }
+  ],
+  "serial_diagnostics": [
+    {
+      "scale": 10,
+      "path": "/api/v1/cooking",
+      "samples": 2,
+      "sql_counts": [
+        3,
+        3
+      ],
+      "elapsed_ms": [
+        12.227238999912515,
+        11.585764004848897
+      ],
+      "cursor_ms": [
+        2.1701770019717515,
+        2.108767999743577
+      ],
+      "pool_acquire_ms": [
+        0.007834001735318452,
+        0.00715100031811744
+      ],
+      "connection_held_ms": [
+        9.970177001378033,
+        9.67930699698627
+      ]
+    },
+    {
+      "scale": 10,
+      "path": "/api/v1/home",
+      "samples": 2,
+      "sql_counts": [
+        56,
+        56
+      ],
+      "elapsed_ms": [
+        130.5586989983567,
+        128.78304900368676
+      ],
+      "cursor_ms": [
+        33.74331504892325,
+        49.87804601842072
+      ],
+      "pool_acquire_ms": [
+        0.008950999472290277,
+        0.00770499900681898
+      ],
+      "connection_held_ms": [
+        102.38834800111363,
+        127.0533759961836
+      ]
+    },
+    {
+      "scale": 10,
+      "path": "/api/v1/inventory",
+      "samples": 2,
+      "sql_counts": [
+        3,
+        3
+      ],
+      "elapsed_ms": [
+        56.71004299802007,
+        8.356767000805121
+      ],
+      "cursor_ms": [
+        3.1341179928858764,
+        2.245346004201565
+      ],
+      "pool_acquire_ms": [
+        0.034626995329745114,
+        0.006527996447402984
+      ],
+      "connection_held_ms": [
+        31.671885997639038,
+        6.501294999907259
+      ]
+    },
+    {
+      "scale": 10,
+      "path": "/api/v1/recipes",
+      "samples": 2,
+      "sql_counts": [
+        24,
+        24
+      ],
+      "elapsed_ms": [
+        29.904677998274565,
+        25.41826899687294
+      ],
+      "cursor_ms": [
+        13.565558001573663,
+        12.893681014247704
+      ],
+      "pool_acquire_ms": [
+        0.009315997886005789,
+        0.0071309987106360495
+      ],
+      "connection_held_ms": [
+        27.84396799688693,
+        23.570838995510712
+      ]
+    },
+    {
+      "scale": 10,
+      "path": "/api/v1/recommendations",
+      "samples": 2,
+      "sql_counts": [
+        49,
+        49
+      ],
+      "elapsed_ms": [
+        85.48197000345681,
+        92.30690299591515
+      ],
+      "cursor_ms": [
+        30.04641096049454,
+        33.358303022396285
+      ],
+      "pool_acquire_ms": [
+        0.00768499739933759,
+        0.007161004759836942
+      ],
+      "connection_held_ms": [
+        83.51949300413253,
+        90.33724499749951
+      ]
+    },
+    {
+      "scale": 100,
+      "path": "/api/v1/cooking",
+      "samples": 2,
+      "sql_counts": [
+        3,
+        3
+      ],
+      "elapsed_ms": [
+        20.839009994233493,
+        19.112355999823194
+      ],
+      "cursor_ms": [
+        3.455940997810103,
+        3.4527750103734434
+      ],
+      "pool_acquire_ms": [
+        0.007071001164149493,
+        0.006309004675131291
+      ],
+      "connection_held_ms": [
+        18.91370100202039,
+        17.441923002479598
+      ]
+    },
+    {
+      "scale": 100,
+      "path": "/api/v1/home",
+      "samples": 2,
+      "sql_counts": [
+        236,
+        236
+      ],
+      "elapsed_ms": [
+        1669.515642002807,
+        1570.5367389964522
+      ],
+      "cursor_ms": [
+        220.3887609866797,
+        193.60155905451393
+      ],
+      "pool_acquire_ms": [
+        0.007634000212419778,
+        0.007089998689480126
+      ],
+      "connection_held_ms": [
+        1667.9086650037789,
+        1568.9325650018873
+      ]
+    },
+    {
+      "scale": 100,
+      "path": "/api/v1/inventory",
+      "samples": 2,
+      "sql_counts": [
+        3,
+        3
+      ],
+      "elapsed_ms": [
+        14.048067998373881,
+        12.655080994591117
+      ],
+      "cursor_ms": [
+        5.016441995394416,
+        4.067864996613935
+      ],
+      "pool_acquire_ms": [
+        0.007832997653167695,
+        0.011501004337333143
+      ],
+      "connection_held_ms": [
+        12.214583999593742,
+        10.550879997026641
+      ]
+    },
+    {
+      "scale": 100,
+      "path": "/api/v1/recipes",
+      "samples": 2,
+      "sql_counts": [
+        204,
+        204
+      ],
+      "elapsed_ms": [
+        234.85536899534054,
+        195.47676300135208
+      ],
+      "cursor_ms": [
+        133.63052302156575,
+        112.32077497697901
+      ],
+      "pool_acquire_ms": [
+        0.006943002517800778,
+        0.006802998541388661
+      ],
+      "connection_held_ms": [
+        233.02263199730078,
+        193.63541399798123
+      ]
+    },
+    {
+      "scale": 100,
+      "path": "/api/v1/recommendations",
+      "samples": 2,
+      "sql_counts": [
+        229,
+        229
+      ],
+      "elapsed_ms": [
+        1747.7604229934514,
+        1572.3571970011108
+      ],
+      "cursor_ms": [
+        210.0568330133683,
+        184.61814500915352
+      ],
+      "pool_acquire_ms": [
+        0.006961003236938268,
+        0.006823000148870051
+      ],
+      "connection_held_ms": [
+        1746.2587409972912,
+        1570.695180002076
+      ]
+    },
+    {
+      "scale": 500,
+      "path": "/api/v1/cooking",
+      "samples": 2,
+      "sql_counts": [
+        3,
+        3
+      ],
+      "elapsed_ms": [
+        21.231842001725454,
+        21.114533999934793
+      ],
+      "cursor_ms": [
+        5.177168000955135,
+        5.287814004987013
+      ],
+      "pool_acquire_ms": [
+        0.006804002623539418,
+        0.0070789974415674806
+      ],
+      "connection_held_ms": [
+        19.4660359993577,
+        19.07514299819013
+      ]
+    },
+    {
+      "scale": 500,
+      "path": "/api/v1/home",
+      "samples": 2,
+      "sql_counts": [
+        1036,
+        1036
+      ],
+      "elapsed_ms": [
+        7365.398804999131,
+        7290.908408998803
+      ],
+      "cursor_ms": [
+        774.9607939549605,
+        782.3789928515907
+      ],
+      "pool_acquire_ms": [
+        0.009196002793032676,
+        0.007479000487364829
+      ],
+      "connection_held_ms": [
+        7363.139332999708,
+        7289.103220005927
+      ]
+    },
+    {
+      "scale": 500,
+      "path": "/api/v1/inventory",
+      "samples": 2,
+      "sql_counts": [
+        3,
+        3
+      ],
+      "elapsed_ms": [
+        17.58531999803381,
+        16.04281299660215
+      ],
+      "cursor_ms": [
+        9.228733004420064,
+        8.01510400197003
+      ],
+      "pool_acquire_ms": [
+        0.006911999662406743,
+        0.008046001312322915
+      ],
+      "connection_held_ms": [
+        15.65759699587943,
+        14.030377999006305
+      ]
+    },
+    {
+      "scale": 500,
+      "path": "/api/v1/recipes",
+      "samples": 2,
+      "sql_counts": [
+        204,
+        204
+      ],
+      "elapsed_ms": [
+        212.10118199815042,
+        178.89740300597623
+      ],
+      "cursor_ms": [
+        121.06043301901082,
+        103.59491097187856
+      ],
+      "pool_acquire_ms": [
+        0.006387999746948481,
+        0.007429996912833303
+      ],
+      "connection_held_ms": [
+        210.09303999744589,
+        177.0572369932779
+      ]
+    },
+    {
+      "scale": 500,
+      "path": "/api/v1/recommendations",
+      "samples": 2,
+      "sql_counts": [
+        1029,
+        1029
+      ],
+      "elapsed_ms": [
+        7297.451064005145,
+        7287.892180997005
+      ],
+      "cursor_ms": [
+        758.7239859203692,
+        741.0106527750031
+      ],
+      "pool_acquire_ms": [
+        0.007971997547429055,
+        0.009274001058656722
+      ],
+      "connection_held_ms": [
+        7295.503574001486,
+        7286.001655993459
+      ]
+    }
+  ],
+  "percentile_method": "nearest-rank over saved response_ms samples, including failed responses"
+}

@@ -1,0 +1,9 @@
+{
+  "run": "api-recommendations-r100-u1-a",
+  "scale": 100,
+  "users": 1,
+  "entry": "api",
+  "planned_measured_seconds": 45,
+  "locust_exit_code": 0,
+  "elapsed_wall_seconds": 54.58879280090332
+}

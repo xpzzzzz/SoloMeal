@@ -1,0 +1,4 @@
+# CPU-only compatibility candidate; resolved pins will be frozen after actual validation.
+paddlepaddle==3.3.1
+paddleocr==3.7.0
+paddlex==3.7.2

@@ -1,0 +1,41 @@
+{
+  "failure_window_utc": "2026-10-15 02:39",
+  "observed_disk_io_errors": 39,
+  "sample": [
+    {
+      "time": "2026-10-15T02:39:42.737011572Z",
+      "component": "kmsg",
+      "msg": "I/O error, dev sdd, sector 1067219352 op 0x1:(WRITE) flags 0x0 phys_seg 2 prio class 2"
+    },
+    {
+      "time": "2026-10-15T02:39:42.737041853Z",
+      "component": "kmsg",
+      "msg": "I/O error, dev sdd, sector 47769136 op 0x1:(WRITE) flags 0x0 phys_seg 84 prio class 2"
+    },
+    {
+      "time": "2026-10-15T02:39:42.737106314Z",
+      "component": "kmsg",
+      "msg": "EXT4-fs warning (device sdd): ext4_end_bio:342: I/O error 10 writing to inode 310392 starting block 5971142)"
+    },
+    {
+      "time": "2026-10-15T02:39:42.742552240Z",
+      "component": "kmsg",
+      "msg": "EXT4-fs error (device sdd): ext4_journal_check_start:84: comm kworker/u32:1: Detected aborted journal"
+    },
+    {
+      "time": "2026-10-15T02:39:42.742561787Z",
+      "component": "kmsg",
+      "msg": "Buffer I/O error on dev sdd, logical block 0, lost sync page write"
+    },
+    {
+      "time": "2026-10-15T02:39:42.742570234Z",
+      "component": "kmsg",
+      "msg": "EXT4-fs (sdd): I/O error while writing superblock"
+    }
+  ],
+  "root_cause": "unresolved",
+  "c_free_bytes_after_failure": 1628520448,
+  "new_build_completed_before_failure": true,
+  "final_rebuild_exit": 1,
+  "full_mysql_interrupted": true
+}

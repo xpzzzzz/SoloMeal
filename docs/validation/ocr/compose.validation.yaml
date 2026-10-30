@@ -1,0 +1,20 @@
+services:
+  api:
+    environment:
+      SOLOMEAL_RECEIPT_OCR_ENABLED: "true"
+  worker:
+    image: solomeal-ocr:compat-1015-01
+    environment:
+      SOLOMEAL_RECEIPT_OCR_ENABLED: "true"
+      SOLOMEAL_RECEIPT_OCR_MODEL_DIR: /ocr-models/official_models
+      SOLOMEAL_RECEIPT_PARSER_TIMEOUT_SECONDS: "60"
+      SOLOMEAL_RECEIPT_DISPATCH_INTERVAL_SECONDS: "0.5"
+      PYTHONPATH: /app:/validation:/ocr-validation
+      PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK: "True"
+    command: [python, /ocr-validation/supervise_validation.py]
+    mem_limit: 2g
+    volumes:
+      - ./backend/app:/app/app:ro
+      - ./docs/validation/ocr:/ocr-validation:ro
+      - ${OCR_VALIDATION_DATASET}:/dataset:ro
+      - ${OCR_VALIDATION_CACHE}:/ocr-models:ro

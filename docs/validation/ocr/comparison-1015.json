@@ -1,0 +1,463 @@
+{
+  "dataset_kind": "synthetic",
+  "ground_truth_frozen_before_ocr": true,
+  "mock_vlm_kind": "ground_truth_oracle_not_a_quality_baseline",
+  "real_model_calls": 0,
+  "token_usage": null,
+  "rows": [
+    {
+      "case": "clear",
+      "mode": "ocr_only",
+      "status": "parsed",
+      "correct_fields": {
+        "name": 2,
+        "quantity": 2,
+        "unit": 2,
+        "amount": 2
+      },
+      "expected_items": 2,
+      "fields_requiring_correction_against_ground_truth": 0,
+      "actual_items": 2,
+      "conflicts": 0,
+      "issues": [],
+      "ocr_lines": 3,
+      "path": [
+        "ocr"
+      ],
+      "process_ms": 27763.736066997808,
+      "mock_vlm_calls": 0,
+      "real_vlm_calls": 0,
+      "token_usage": null
+    },
+    {
+      "case": "clear",
+      "mode": "vlm_only",
+      "status": "parsed",
+      "correct_fields": {
+        "name": 2,
+        "quantity": 2,
+        "unit": 2,
+        "amount": 2
+      },
+      "expected_items": 2,
+      "fields_requiring_correction_against_ground_truth": 0,
+      "actual_items": 2,
+      "conflicts": 0,
+      "issues": [],
+      "ocr_lines": 0,
+      "path": [
+        "vlm"
+      ],
+      "process_ms": 3.058391004742589,
+      "mock_vlm_calls": 1,
+      "real_vlm_calls": 0,
+      "token_usage": null
+    },
+    {
+      "case": "clear",
+      "mode": "hybrid",
+      "status": "parsed",
+      "correct_fields": {
+        "name": 2,
+        "quantity": 2,
+        "unit": 2,
+        "amount": 2
+      },
+      "expected_items": 2,
+      "fields_requiring_correction_against_ground_truth": 0,
+      "actual_items": 2,
+      "conflicts": 0,
+      "issues": [],
+      "ocr_lines": 3,
+      "path": [
+        "ocr"
+      ],
+      "process_ms": 1462.3646629988798,
+      "mock_vlm_calls": 0,
+      "real_vlm_calls": 0,
+      "token_usage": null
+    },
+    {
+      "case": "blurred",
+      "mode": "ocr_only",
+      "status": "parsed",
+      "correct_fields": {
+        "name": 2,
+        "quantity": 2,
+        "unit": 2,
+        "amount": 2
+      },
+      "expected_items": 2,
+      "fields_requiring_correction_against_ground_truth": 0,
+      "actual_items": 2,
+      "conflicts": 0,
+      "issues": [],
+      "ocr_lines": 3,
+      "path": [
+        "ocr"
+      ],
+      "process_ms": 1176.818619002006,
+      "mock_vlm_calls": 0,
+      "real_vlm_calls": 0,
+      "token_usage": null
+    },
+    {
+      "case": "blurred",
+      "mode": "vlm_only",
+      "status": "parsed",
+      "correct_fields": {
+        "name": 2,
+        "quantity": 2,
+        "unit": 2,
+        "amount": 2
+      },
+      "expected_items": 2,
+      "fields_requiring_correction_against_ground_truth": 0,
+      "actual_items": 2,
+      "conflicts": 0,
+      "issues": [],
+      "ocr_lines": 0,
+      "path": [
+        "vlm"
+      ],
+      "process_ms": 2.833430997270625,
+      "mock_vlm_calls": 1,
+      "real_vlm_calls": 0,
+      "token_usage": null
+    },
+    {
+      "case": "blurred",
+      "mode": "hybrid",
+      "status": "parsed",
+      "correct_fields": {
+        "name": 2,
+        "quantity": 2,
+        "unit": 2,
+        "amount": 2
+      },
+      "expected_items": 2,
+      "fields_requiring_correction_against_ground_truth": 0,
+      "actual_items": 2,
+      "conflicts": 0,
+      "issues": [],
+      "ocr_lines": 3,
+      "path": [
+        "ocr"
+      ],
+      "process_ms": 1165.7460679998621,
+      "mock_vlm_calls": 0,
+      "real_vlm_calls": 0,
+      "token_usage": null
+    },
+    {
+      "case": "multipack",
+      "mode": "ocr_only",
+      "status": "parsed",
+      "correct_fields": {
+        "name": 2,
+        "quantity": 2,
+        "unit": 2,
+        "amount": 2
+      },
+      "expected_items": 2,
+      "fields_requiring_correction_against_ground_truth": 0,
+      "actual_items": 2,
+      "conflicts": 0,
+      "issues": [],
+      "ocr_lines": 3,
+      "path": [
+        "ocr"
+      ],
+      "process_ms": 1175.8633450008347,
+      "mock_vlm_calls": 0,
+      "real_vlm_calls": 0,
+      "token_usage": null
+    },
+    {
+      "case": "multipack",
+      "mode": "vlm_only",
+      "status": "parsed",
+      "correct_fields": {
+        "name": 2,
+        "quantity": 2,
+        "unit": 2,
+        "amount": 2
+      },
+      "expected_items": 2,
+      "fields_requiring_correction_against_ground_truth": 0,
+      "actual_items": 2,
+      "conflicts": 0,
+      "issues": [],
+      "ocr_lines": 0,
+      "path": [
+        "vlm"
+      ],
+      "process_ms": 3.0861690029269084,
+      "mock_vlm_calls": 1,
+      "real_vlm_calls": 0,
+      "token_usage": null
+    },
+    {
+      "case": "multipack",
+      "mode": "hybrid",
+      "status": "parsed",
+      "correct_fields": {
+        "name": 2,
+        "quantity": 2,
+        "unit": 2,
+        "amount": 2
+      },
+      "expected_items": 2,
+      "fields_requiring_correction_against_ground_truth": 0,
+      "actual_items": 2,
+      "conflicts": 0,
+      "issues": [],
+      "ocr_lines": 3,
+      "path": [
+        "ocr"
+      ],
+      "process_ms": 1234.4401010050206,
+      "mock_vlm_calls": 0,
+      "real_vlm_calls": 0,
+      "token_usage": null
+    },
+    {
+      "case": "approximate",
+      "mode": "ocr_only",
+      "status": "parsed",
+      "correct_fields": {
+        "name": 1,
+        "quantity": 1,
+        "unit": 1,
+        "amount": 1
+      },
+      "expected_items": 1,
+      "fields_requiring_correction_against_ground_truth": 0,
+      "actual_items": 1,
+      "conflicts": 0,
+      "issues": [
+        "approximate_or_range"
+      ],
+      "ocr_lines": 2,
+      "path": [
+        "ocr"
+      ],
+      "process_ms": 872.6049730030354,
+      "mock_vlm_calls": 0,
+      "real_vlm_calls": 0,
+      "token_usage": null
+    },
+    {
+      "case": "approximate",
+      "mode": "vlm_only",
+      "status": "parsed",
+      "correct_fields": {
+        "name": 1,
+        "quantity": 1,
+        "unit": 1,
+        "amount": 1
+      },
+      "expected_items": 1,
+      "fields_requiring_correction_against_ground_truth": 0,
+      "actual_items": 1,
+      "conflicts": 0,
+      "issues": [],
+      "ocr_lines": 0,
+      "path": [
+        "vlm"
+      ],
+      "process_ms": 2.8679569950327277,
+      "mock_vlm_calls": 1,
+      "real_vlm_calls": 0,
+      "token_usage": null
+    },
+    {
+      "case": "approximate",
+      "mode": "hybrid",
+      "status": "parsed",
+      "correct_fields": {
+        "name": 1,
+        "quantity": 1,
+        "unit": 1,
+        "amount": 1
+      },
+      "expected_items": 1,
+      "fields_requiring_correction_against_ground_truth": 0,
+      "actual_items": 1,
+      "conflicts": 0,
+      "issues": [
+        "approximate_or_range"
+      ],
+      "ocr_lines": 2,
+      "path": [
+        "ocr",
+        "vlm"
+      ],
+      "process_ms": 890.3802419954445,
+      "mock_vlm_calls": 1,
+      "real_vlm_calls": 0,
+      "token_usage": null
+    },
+    {
+      "case": "missing_amount",
+      "mode": "ocr_only",
+      "status": "parsed",
+      "correct_fields": {
+        "name": 1,
+        "quantity": 1,
+        "unit": 1,
+        "amount": 1
+      },
+      "expected_items": 1,
+      "fields_requiring_correction_against_ground_truth": 0,
+      "actual_items": 1,
+      "conflicts": 0,
+      "issues": [
+        "amount_missing"
+      ],
+      "ocr_lines": 2,
+      "path": [
+        "ocr"
+      ],
+      "process_ms": 725.7901499979198,
+      "mock_vlm_calls": 0,
+      "real_vlm_calls": 0,
+      "token_usage": null
+    },
+    {
+      "case": "missing_amount",
+      "mode": "vlm_only",
+      "status": "parsed",
+      "correct_fields": {
+        "name": 1,
+        "quantity": 1,
+        "unit": 1,
+        "amount": 1
+      },
+      "expected_items": 1,
+      "fields_requiring_correction_against_ground_truth": 0,
+      "actual_items": 1,
+      "conflicts": 0,
+      "issues": [],
+      "ocr_lines": 0,
+      "path": [
+        "vlm"
+      ],
+      "process_ms": 2.623848005896434,
+      "mock_vlm_calls": 1,
+      "real_vlm_calls": 0,
+      "token_usage": null
+    },
+    {
+      "case": "missing_amount",
+      "mode": "hybrid",
+      "status": "parsed",
+      "correct_fields": {
+        "name": 1,
+        "quantity": 1,
+        "unit": 1,
+        "amount": 1
+      },
+      "expected_items": 1,
+      "fields_requiring_correction_against_ground_truth": 0,
+      "actual_items": 1,
+      "conflicts": 0,
+      "issues": [
+        "amount_missing"
+      ],
+      "ocr_lines": 2,
+      "path": [
+        "ocr",
+        "vlm"
+      ],
+      "process_ms": 746.3112589975935,
+      "mock_vlm_calls": 1,
+      "real_vlm_calls": 0,
+      "token_usage": null
+    },
+    {
+      "case": "unknown_package",
+      "mode": "ocr_only",
+      "status": "parsed",
+      "correct_fields": {
+        "name": 1,
+        "quantity": 1,
+        "unit": 1,
+        "amount": 1
+      },
+      "expected_items": 1,
+      "fields_requiring_correction_against_ground_truth": 0,
+      "actual_items": 1,
+      "conflicts": 0,
+      "issues": [
+        "package_count_unknown"
+      ],
+      "ocr_lines": 2,
+      "path": [
+        "ocr"
+      ],
+      "process_ms": 762.1658300049603,
+      "mock_vlm_calls": 0,
+      "real_vlm_calls": 0,
+      "token_usage": null
+    },
+    {
+      "case": "unknown_package",
+      "mode": "vlm_only",
+      "status": "parsed",
+      "correct_fields": {
+        "name": 1,
+        "quantity": 1,
+        "unit": 1,
+        "amount": 1
+      },
+      "expected_items": 1,
+      "fields_requiring_correction_against_ground_truth": 0,
+      "actual_items": 1,
+      "conflicts": 0,
+      "issues": [],
+      "ocr_lines": 0,
+      "path": [
+        "vlm"
+      ],
+      "process_ms": 2.783705000183545,
+      "mock_vlm_calls": 1,
+      "real_vlm_calls": 0,
+      "token_usage": null
+    },
+    {
+      "case": "unknown_package",
+      "mode": "hybrid",
+      "status": "parsed",
+      "correct_fields": {
+        "name": 1,
+        "quantity": 1,
+        "unit": 1,
+        "amount": 1
+      },
+      "expected_items": 1,
+      "fields_requiring_correction_against_ground_truth": 0,
+      "actual_items": 1,
+      "conflicts": 0,
+      "issues": [
+        "package_count_unknown"
+      ],
+      "ocr_lines": 2,
+      "path": [
+        "ocr",
+        "vlm"
+      ],
+      "process_ms": 792.230692000885,
+      "mock_vlm_calls": 1,
+      "real_vlm_calls": 0,
+      "token_usage": null
+    }
+  ],
+  "limitations": [
+    "Six synthetic receipts do not establish real receipt generalization.",
+    "A perfect Mock VLM is a workflow fixture, not evidence of VLM quality or cost.",
+    "Cold model initialization and warm inference are distinct.",
+    "Correction counts compare ground truth, not independent human trials."
+  ],
+  "private_evidence_sha256": "ccff0f807d35cb553f81cd179e98177ec52b865219919b843b4d589e5b6aaa47"
+}

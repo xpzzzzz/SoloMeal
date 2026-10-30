@@ -8,7 +8,7 @@ from app.core.config import Settings
 from app.models.agent import AgentRun
 from app.models.food import Operation, Recipe
 from app.schemas.planning import PlanningInput
-from app.services import agent, personalization, planning
+from app.services import agent, planning
 from app.services.memory import MemoryPreference, MemoryProvider, _encode
 from app.services.memory_operations import _pref_key
 from app.services.planning import read_memories, recommend
@@ -118,23 +118,23 @@ def test_unknown_budget_still_has_candidates_and_reads_memory(client):
     assert all(c['budget_status'] == 'unknown' for c in result['candidates'])
 
 
-def test_viable_probe_skips_history_scoring_for_api_and_agent(client, monkeypatch):
+def test_viable_request_scores_history_once_for_api_and_agent(client, monkeypatch):
     _, headers, _, _, _ = fixture(client)
     calls = mock_provider(client, [MemoryPreference('ingredient', 'tomato', 1)])
     scoring = []
-    original = personalization._weights
+    original = planning._weights
     def counted(*args, **kwargs):
         scoring.append(1)
         return original(*args, **kwargs)
-    monkeypatch.setattr(personalization, '_weights', counted)
+    monkeypatch.setattr(planning, '_weights', counted)
     assert len(client.post('/api/v1/recommendations', headers=headers, json={}).json()['candidates']) == 2
-    assert len(scoring) == 2 and len(calls) == 1
+    assert len(scoring) == 1 and len(calls) == 1
     scoring.clear()
     calls.clear()
     client.app.state.agent_model = Scripted(call('recommend_meal', {}))
     run = create_agent(client, headers, key='once-run').json()
     assert len(step(client, headers, run['id'])['events'][0]['result']['candidates']) == 2
-    assert len(scoring) == 2 and len(calls) == 1
+    assert len(scoring) == 1 and len(calls) == 1
 
 
 def test_disabled_memory_or_personalization_keeps_one_planner_pass(client, monkeypatch):

@@ -1,0 +1,21 @@
+services:
+  api:
+    environment:
+      SOLOMEAL_RECEIPT_VISION_ENABLED: "true"
+      SOLOMEAL_MODEL_NAME: scripted-test-only
+      SOLOMEAL_MODEL_API_KEY: fixture-not-a-real-key
+      SOLOMEAL_MODEL_BASE_URL: http://127.0.0.1:9
+      SOLOMEAL_AGENT_ENABLED: "false"
+      SOLOMEAL_RECIPE_DISCOVERY_ENABLED: "false"
+    ports:
+      - "127.0.0.1:${VALIDATION_API_PORT:-18111}:8000"
+  worker:
+    environment:
+      SOLOMEAL_RECEIPT_VISION_ENABLED: "false"
+      SOLOMEAL_MODEL_NAME: ""
+      SOLOMEAL_MODEL_API_KEY: ""
+      PYTHONPATH: /app:/validation
+    command: [python, /validation/supervise_fixture.py]
+    volumes:
+      - ${VALIDATION_KIT_DIR}:/validation:ro
+      - ${VALIDATION_PRIVATE_DIR}:/validation-private

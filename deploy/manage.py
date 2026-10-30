@@ -23,8 +23,10 @@ def initialize(path, port):
     fd = os.open(path, os.O_CREAT | os.O_EXCL | os.O_WRONLY, 0o600)
     with os.fdopen(fd, "w", encoding="utf-8", newline="\n") as stream:
         stream.write(f"DB_PASSWORD={secrets.token_hex(24)}\nDB_ROOT_PASSWORD={secrets.token_hex(32)}\n"
+                     f"RABBITMQ_PASSWORD={secrets.token_hex(24)}\n"
                      f"BIND_ADDRESS=127.0.0.1\nHTTP_PORT={port}\nIMAGE_TAG=local\n"
-                     "SOLOMEAL_AGENT_ENABLED=false\nSOLOMEAL_RECEIPT_VISION_ENABLED=false\n")
+                     "SOLOMEAL_AGENT_ENABLED=false\nSOLOMEAL_RECEIPT_VISION_ENABLED=false\n"
+                     "SOLOMEAL_RECEIPT_OCR_ENABLED=false\nSOLOMEAL_RECEIPT_RECOGNITION_MODE=vlm_only\n")
 
 
 class Deployment:
@@ -40,7 +42,8 @@ class Deployment:
                 raise ValueError("Database passwords must be generated hexadecimal values")
         self.project = project
         self.command = ["docker", "compose", "--project-directory", str(ROOT),
-                        "--env-file", str(env_file.resolve()), "-f", str(ROOT / "compose.yaml"), "-p", project]
+                        "--env-file", str(env_file.resolve()), "-f", str(ROOT / "compose.yaml"),
+                        "-f", str(ROOT / "deploy/proactivity.compose.yaml"), "-p", project]
 
     def run(self, *args, stdin=None, stdout=None):
         result = subprocess.run([*self.command, *args], stdin=stdin,
@@ -62,7 +65,7 @@ class Deployment:
     def backup(self, folder):
         folder.mkdir(parents=True, exist_ok=False)
         running = self.run("ps", "--services", "--status", "running").decode().split()
-        writers = [s for s in ("web", "api") if s in running]
+        writers = [s for s in ("proactivity-tick", "web", "api", "worker") if s in running]
         try:
             if writers:
                 self.run("stop", *writers)
@@ -76,7 +79,7 @@ class Deployment:
                 self.upload("export", stdout=stream)
             manifest = {"format": "solomeal-backup-v1", "source_project": self.project,
                 "created_at": datetime.now(timezone.utc).isoformat(), "schema_revision": revision,
-                "consistency": "Compose web/api stopped during database and upload capture",
+                "consistency": "Running Compose proactivity-tick/web/api/worker stopped during database and upload capture",
                 "files": {name: digest(folder / name) for name in ("database.sql", "uploads.tar")}}
             pending = folder / "manifest.json.pending"
             with pending.open("x", encoding="utf-8") as stream:
@@ -98,7 +101,7 @@ class Deployment:
             if digest(folder / name) != expected:
                 raise ValueError("Backup checksum mismatch")
         running = self.run("ps", "--services", "--status", "running").decode().split()
-        if any(s in running for s in ("web", "api", "migrate")):
+        if any(s in running for s in ("proactivity-tick", "web", "api", "migrate", "worker")):
             raise ValueError("Restore requires application and migration services stopped")
         self.run("up", "-d", "--wait", "--wait-timeout", "180", "db")
         if self.sql("SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='solomeal'") != "0":

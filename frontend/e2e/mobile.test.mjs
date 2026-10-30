@@ -1,3 +1,4 @@
+import {clickAction} from './support.mjs';
 import test,{before,after} from 'node:test';
 import assert from 'node:assert/strict';
 import {
@@ -51,7 +52,7 @@ test('手机纯键盘可以建号、录库存、保存偏好与包装报价，�
  const page=await openPage(context,server.url);
  assert.equal(await page.evaluate(()=>matchMedia('(pointer: coarse)').matches),true,'夹具应报告为触摸设备');
  await keyboardSignUp(page,'ui_mob_keys_0908',PASSWORD);
- assert.deepEqual((await page.getByRole('navigation',{name:'主导航'}).getByRole('button').allInnerTexts()),TABS);
+ assert.deepEqual((await page.getByRole('navigation',{name:'主导航'}).getByRole('button').allInnerTexts()),['今天','食材库存','我的菜谱','报价与采购']);
  assert.ok(await page.getByRole('button',{name:'退出登录'}).isVisible(),'窄屏也必须能退出登录');
 
  await useTab(page,'食材库存');
@@ -146,7 +147,7 @@ test('手机上可以从报价走到采购入库、做饭与撤销',async()=>{
 
  await page.getByRole('button',{name:'生成本餐推荐'}).tap();
  await waitText(page,/需采购1种食材：鸡蛋/);
- await page.getByRole('button',{name:'保存这餐方案'}).first().tap();
+ await clickAction(page,'保存这餐方案');
  await waitText(page,/已保存方案/);
  await page.evaluate(()=>window.scrollTo(0,document.body.scrollHeight));
  await page.getByRole('button',{name:'准备采购'}).tap();

@@ -1,0 +1,41 @@
+{
+  "table_counts": {
+    "users": 15,
+    "user_preferences": 15,
+    "auth_sessions": 15,
+    "ingredients": 960,
+    "ingredient_aliases": 960,
+    "recipes": 3050,
+    "recipe_ingredients": 15250,
+    "recipe_feedback": 1025,
+    "inventory_batches": 12200,
+    "cooking_records": 3200,
+    "price_quotes": 240,
+    "shopping_lists": 315,
+    "operations": 0,
+    "inventory_events": 0,
+    "receipt_imports": 0
+  },
+  "table_semantic_hashes": {
+    "users": "74ac0d1c8dcc24005658323aa8bcb0e46d91e6613aa586c4763f4444a4594a99",
+    "user_preferences": "be24930ef7d37baf443572c1e8c062b02c4c74e93e3065fe7360117f1e0ac205",
+    "auth_sessions": "b6a9489d2085b8c9d67e330f62f7f78923c5b7786cc2690ab57f5faa136d68bb",
+    "ingredients": "bfec27662cf79b8b8ae5c766a3a7310d529d62b9351ab3d77effb4bad46132a8",
+    "ingredient_aliases": "4de68c5f5ff952f19e11d4894f1500fe2ed1328e0584e346cf8c3662d343f09f",
+    "recipes": "e8a2aa32ea40703070faa3e8442643ec30de300e093728f7b784219a47897ddf",
+    "recipe_ingredients": "83919e03be21e07a86c0ea13bf490ecf70fce8cd92dfe6c2bf3825fa62c3ec22",
+    "recipe_feedback": "1ddc94e69195fb7643ceba794222c54edfe7c9c854ded122b052b567433c67ff",
+    "inventory_batches": "46e1c672108fac1ef052f8983e179bab56b2457d982a39ddb9af0879a4b595fb",
+    "cooking_records": "5efbd34e1fb98e0325d8790cf3835f7c241c890c82eb60a9194a06058164a41e",
+    "price_quotes": "92f38313e68973b135769e1f3f909919700ec27ff5d1849327188c97e57cb2ff",
+    "shopping_lists": "14cbbb6f3621c142cc75b1bf54c39bd5478080413d6bfb4b5ec2c6bfc2334f70",
+    "operations": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "inventory_events": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "receipt_imports": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  },
+  "secret_fields_excluded": [
+    "password_hash",
+    "token_hash",
+    "expires_at"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "live": 200,
+  "ready": 200,
+  "docker_control": "timeout_after_5_seconds",
+  "original_head": "7ccb597e63e17aa0587fab59c4b61c0e621ec5b3",
+  "original_staged_paths": [],
+  "free_c_bytes": 783044608
+}

@@ -1,0 +1,15 @@
+services:
+  proactivity-tick:
+    image: solomeal-api:${IMAGE_TAG:-local}
+    environment:
+      SOLOMEAL_DATABASE_URL: mysql+pymysql://solomeal:${DB_PASSWORD}@db:3306/solomeal?charset=utf8mb4
+    # External scheduling process: every run is bounded and deduplicated by the database.
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - 'while :; do date -u +%FT%TZ; if python -m app.commands.tick; then sleep 3600; else echo "Proactive tick failed; retry in 60 seconds"; sleep 60; fi; done'
+    depends_on:
+      db:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    restart: unless-stopped

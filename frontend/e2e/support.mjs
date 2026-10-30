@@ -31,13 +31,13 @@ function freePort(){
 }
 
 // The scripted fixture is the only service these tests talk to: temporary SQLite, never a real model.
-export async function startFixture(modelDelay,{receiptParser=false,recipeDiscovery=false}={}){
+export async function startFixture(modelDelay,{receiptParser=false,recipeDiscovery=false,proactivityDemo=false}={}){
  await assert.doesNotReject(access(path.join(FRONTEND,'dist','index.html')),'frontend/dist is missing; run npm run build first');
  const port=await freePort();
  const url=`http://127.0.0.1:${port}`;
  await mkdir(SHOTS,{recursive:true});
  const dataDir=await mkdtemp(path.join(SHOTS,'db-'));
- const child=spawn(PYTHON,[FIXTURE,'--port',String(port),'--model-delay',String(modelDelay),'--data-dir',dataDir,...(receiptParser?['--receipt-parser']:[]),...(recipeDiscovery?['--recipe-discovery']:[])],
+ const child=spawn(PYTHON,[FIXTURE,'--port',String(port),'--model-delay',String(modelDelay),'--data-dir',dataDir,...(receiptParser?['--receipt-parser']:[]),...(recipeDiscovery?['--recipe-discovery']:[]),...(proactivityDemo?['--proactivity-demo']:[])],
   {cwd:path.join(ROOT,'backend'),stdio:['ignore','pipe','pipe'],windowsHide:true});
  let log='',spawnError,closed=false;
  const done=new Promise(resolve=>child.once('close',()=>{closed=true;resolve();}));
@@ -118,7 +118,37 @@ export async function signOut(page){
 }
 
 export async function useTab(page,name){
- await page.getByRole('navigation',{name:'主导航'}).getByRole('button',{name,exact:true}).click();
+ const primary=page.getByRole('navigation',{name:'主导航'});
+ if(name==='发现菜谱'){
+  await primary.getByRole('button',{name:'我的菜谱',exact:true}).click();
+  await page.getByRole('navigation',{name:'菜谱功能'}).getByRole('button',{name,exact:true}).click();
+ }else if(name==='小票录入'){
+  await primary.getByRole('button',{name:'食材库存',exact:true}).click();
+  await page.getByRole('navigation',{name:'库存功能'}).getByRole('button',{name,exact:true}).click();
+ }else if(['厨房偏好','用餐记录'].includes(name)){
+  await page.getByRole('navigation',{name:'厨房工具'}).getByRole('button',{name,exact:true}).click();
+ }else if(name==='一人食助手'){
+  await page.getByRole('button',{name,exact:true}).click();
+ }else await primary.getByRole('button',{name,exact:true}).click();
+ // Existing operation tests deliberately reveal the forms they exercise. The comfort
+ // flow test uses the navigation directly to verify the actual collapsed defaults.
+ const selectors={食材库存:'#inventory-entry',我的菜谱:'#recipe-recommendations',报价与采购:'#quote-settings',发现菜谱:'.condition-details',一人食助手:'.conversation-history'};
+ const detail=page.locator(selectors[name]||'details[data-unused]');
+ if(await detail.count()&&!await detail.first().evaluate(el=>el.open))await detail.first().locator('summary').first().click();
+ if(name==='我的菜谱'){
+  const options=page.locator('.recommendation-options');
+  if(await options.count()&&!await options.evaluate(el=>el.open))await options.locator('summary').first().click();
+  const plans=page.locator('#saved-plans');
+  if(await plans.locator('.history-row').count()&&!await plans.evaluate(el=>el.open))await plans.locator('summary').first().click();
+ }
+}
+
+export async function clickAction(scope,name){
+ const action=scope.getByRole('button',{name,exact:typeof name==='string',includeHidden:true}).first();
+ await action.waitFor({state:'attached'});
+ // Expand outer disclosures before inner menus, by clicking the same summaries a user sees.
+ for(const summary of await action.locator('xpath=ancestor::details[not(@open)]/summary').all())await summary.click();
+ await action.click();
 }
 
 // The panel re-reads preferences on every mount and the field is controlled, so a

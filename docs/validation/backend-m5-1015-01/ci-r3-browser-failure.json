@@ -1,0 +1,22 @@
+{
+  "run_id": 38697339561,
+  "run_url": "https://github.com/xpzzzzz/SoloMeal/actions/runs/38697339561",
+  "head_sha": "2e913c1aa251aee9e6027e3a7a10234bfe488445",
+  "job_id": 116296923615,
+  "passed": 40,
+  "failed": 1,
+  "skipped": 4,
+  "location": "frontend/e2e/comfort.test.mjs:67",
+  "message": "Mobile comfort flow expected one favorite recipe but observed zero",
+  "analysis": "The previous rating action and favorite action share the same success notice; waiting for its text is not evidence the new favorite request has completed",
+  "fix": "Wait for the favorite PUT response to return 200 and then for the actual 已收藏 button before enabling the favorites-only filter",
+  "page_goto_timeout": false,
+  "application_code_changed": false,
+  "earlier_complete_code_ci": 38676874837,
+  "paid_model_calls": 0,
+  "local_fix_validation": {
+    "desktop_and_mobile_passed": 2,
+    "failed": 0,
+    "seconds": 18.1098224
+  }
+}

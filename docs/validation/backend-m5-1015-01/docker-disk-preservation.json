@@ -1,0 +1,26 @@
+{
+  "stopped_before_copy": true,
+  "initial_copy_hash_mismatch": true,
+  "original_files_deleted": false,
+  "original_files_replaced": false,
+  "copies": [
+    {
+      "file": "docker_data.vhdx",
+      "bytes": 19105054720,
+      "sha256": "2cd81c1847f5d143f106ec2b408c46351a9264cf46c7e1c2094489073fac71d6",
+      "identical": true,
+      "changed_blocks_in_initial_copy": 3,
+      "initial_copy_sha256": "516ff8c100cdde55610722c9fba82c39c9cfc65d946bd7d919e6db90a6f40bf9",
+      "source_stable_during_verified_copy": true
+    },
+    {
+      "file": "ext4.vhdx",
+      "bytes": 109051904,
+      "sha256": "640e946a01f0a107c32cc1589ca93ac7c90c35c3047176be35afc4b87726b5bb",
+      "identical": true,
+      "changed_blocks_in_initial_copy": 0,
+      "initial_copy_sha256": "640e946a01f0a107c32cc1589ca93ac7c90c35c3047176be35afc4b87726b5bb",
+      "source_stable_during_verified_copy": true
+    }
+  ]
+}

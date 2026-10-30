@@ -86,8 +86,8 @@ test('脚本生成三道候选：逐项定位错误、编辑保存后才入库�
   const page=await openPage(context,server.url);
   await signIn(page,user,PASSWORD);
   await openDiscovery(page);
-  await waitText(page,/候选由已配置的模型生成/);
-  assert.match(await page.evaluate(()=>document.body.innerText),/候选由已配置的模型生成/);
+  await waitText(page,/根据现有食材和厨房偏好发现新菜/);
+  assert.match(await page.evaluate(()=>document.body.innerText),/根据现有食材和厨房偏好发现新菜/);
 
   await page.getByLabel('人数（留空用厨房偏好）').fill('2');
   await page.getByLabel('最多用时（分钟，留空用厨房偏好）').fill('20');
@@ -97,7 +97,7 @@ test('脚本生成三道候选：逐项定位错误、编辑保存后才入库�
   assert.equal(await page.getByLabel('本次可用厨具（逗号分隔，留空用厨房偏好）').inputValue(),'煮锅','刷新读取不能覆盖已填写的厨具');
 
   await page.getByRole('button',{name:'生成候选',exact:true}).click();
-  await waitText(page,/本次返回 3 道候选（模型 scripted-discovery-fixture）/);
+  await waitText(page,/本次返回 3 道候选，核对后即可加入我的菜谱/);
   assert.equal(await page.locator('section.draft-editor').count(),3,'一次生成应给出三道可编辑候选');
   assert.match(await page.evaluate(()=>document.body.innerText),/本次条件：2 人、最多 20 分钟/);
 
@@ -121,7 +121,7 @@ test('脚本生成三道候选：逐项定位错误、编辑保存后才入库�
   assert.equal(await page.locator('section.draft-editor').count(),2,'入库的候选离开待核对列表');
 
   await page.getByRole('button',{name:'用当前条件重新推荐',exact:true}).click();
-  await waitText(page,/下一顿，做什么？/);
+  await waitText(page,/我的菜谱/);
   await waitText(page,/脚本番茄鸡蛋面 · 2 人份/);
   assert.match(await page.evaluate(()=>document.body.innerText),/需采购1种食材：脚本土鸡蛋 2个/,'缺料应转为补购提示而不是丢掉候选');
 
@@ -266,7 +266,7 @@ test('确认第六批之前的草稿后，重新推荐仍带该批次保存的�
   assert.equal(body.servings,1,'重新推荐必须沿用该批次的人数');
   assert.equal(body.max_minutes,15,'重新推荐必须沿用该批次的用时上限');
   assert.deepEqual(body.equipment,['煮锅']);
-  await waitText(page,/下一顿，做什么？/);
+  await waitText(page,/我的菜谱/);
   const batches=await makeApi(server.url).call(token,'/recipe-discoveries');
   assert.equal(batches.data.length,6,'六批各登记一次生成');
   assert.deepEqual(page.problems,[]);
@@ -285,7 +285,7 @@ test('未配置生成模型时生成入口关闭，仍可手工新建、校验�
   const loaded=page.waitForResponse(r=>r.url().endsWith('/recipe-discoveries/capabilities')&&r.request().method()==='GET');
   await useTab(page,'发现菜谱');
   await loaded;
-  assert.match(await page.evaluate(()=>document.body.innerText),/当前未配置可用的生成模型/);
+  assert.match(await page.evaluate(()=>document.body.innerText),/智能生成暂未开启/);
   assert.equal(await page.getByRole('button',{name:'生成候选',exact:true}).isDisabled(),true);
 
   await page.getByRole('button',{name:'手工新建草稿',exact:true}).click();

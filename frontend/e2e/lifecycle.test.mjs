@@ -1,3 +1,4 @@
+import {clickAction} from './support.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
@@ -56,10 +57,10 @@ test('盘点归档恢复、菜谱编辑和方案版本取消在刷新后与服�
   await recipe.getByRole('button',{name:'保存菜谱'}).click();
   await page.locator('.recipe').getByRole('heading',{name:'生命周期煮蛋',exact:true}).waitFor();
   await page.getByRole('button',{name:'生成本餐推荐'}).click();
-  await page.getByRole('button',{name:'保存这餐方案'}).click();
+  await clickAction(page,'保存这餐方案');
   await waitText(page,/已保存方案/);
   const plan=(await api.call(token,'/plans')).data[0];
-  await page.getByRole('button',{name:'编辑菜谱',exact:true}).click();
+  await clickAction(page,'编辑菜谱');
   const edit=page.locator('details.panel').filter({hasText:'编辑「生命周期煮蛋」'});
   await edit.getByLabel('菜谱名称').fill('修改后的煮蛋');
   await edit.getByLabel('数量',{exact:true}).fill('3');

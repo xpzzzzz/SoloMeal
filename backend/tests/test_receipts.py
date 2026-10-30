@@ -5,7 +5,7 @@ from concurrent.futures import ThreadPoolExecutor
 import pytest
 from app.models.food import InventoryBatch, InventoryEvent, Operation
 from app.models.receipts import ReceiptImport
-from app.services import receipts
+from app.services import receipt_jobs, receipts
 from sqlalchemy import func, select
 from test_food import create_ingredient
 from test_identity import account, auth
@@ -22,6 +22,16 @@ def setup(client, name="receipt_owner"):
 def upload(client, h, key="receipt-upload", content=PNG, media_type="image/png"):
     return client.post('/api/v1/receipts', content=content,
                        headers={**h, 'Idempotency-Key': key, 'Content-Type': media_type})
+
+
+def parse_and_process(client, headers, path, body, key):
+    """Assert the new HTTP contract, then explicitly drive the DB worker with a Mock."""
+    client.app.state.settings.receipt_task_max_attempts = 1
+    accepted = post(client, headers, path, body, key)
+    assert accepted.status_code == 202, accepted.text
+    receipt_jobs.execute(client.app.state.sessions, client.app.state.settings,
+                         client.app.state.receipt_parser, accepted.json()['parse_task_id'])
+    return client.get('/api/v1' + path.removesuffix('/parse'), headers=headers)
 
 
 def test_private_upload_replay_owner_scoped_hint_and_download(client):
@@ -78,7 +88,7 @@ def test_parser_unknown_alias_edit_replay_and_no_inventory(client):
     client.app.state.receipt_parser = FixtureParser()
     row = upload(client, h).json()
     path = '/receipts/'+row['id']
-    parsed = post(client, h, path+'/parse', {'expected_version':1}, 'receipt-parse')
+    parsed = parse_and_process(client, h, path+'/parse', {'expected_version':1}, 'receipt-parse')
     assert parsed.status_code == 200, parsed.text
     parsed = parsed.json()
     assert parsed['parse_status'] == 'parsed' and parsed['version'] == 2
@@ -120,7 +130,7 @@ def test_parser_failure_keeps_manual_fallback_and_sanitizes(client, mode, caplog
     if mode != 'unconfigured':
         client.app.state.receipt_parser = BrokenParser()
     row = upload(client, h).json()
-    result = post(client, h, '/receipts/'+row['id']+'/parse', {'expected_version':1}, 'failed-parse')
+    result = parse_and_process(client, h, '/receipts/'+row['id']+'/parse', {'expected_version':1}, 'failed-parse')
     assert result.status_code == 200, result.text
     assert result.json()['parse_status'] == 'failed'
     assert result.json()['parsed'] == {} and result.json()['draft']['items'] == []
@@ -129,9 +139,9 @@ def test_parser_failure_keeps_manual_fallback_and_sanitizes(client, mode, caplog
     assert 'raw receipt' not in caplog.text
     diagnostic = {'unconfigured': 'unavailable', 'timeout': 'timeout',
                   'invalid': 'invalid_response', 'exception': 'unknown'}[mode]
-    records = [r for r in caplog.records if r.name == 'app.services.receipts']
+    records = [r for r in caplog.records if r.name == 'app.services.receipt_jobs']
     assert len(records) == 1
-    assert diagnostic in records[0].getMessage() and row['id'] in records[0].getMessage()
+    assert diagnostic in records[0].getMessage() and result.json()['parse_task_id'] in records[0].getMessage()
     assert records[0].exc_info is None
     edited = post(client, h, '/receipts/'+row['id']+'/edit',
                   {'expected_version':2,'draft':{'items':[{'name':'手工补录'}]}}, 'manual-fallback')
@@ -187,8 +197,12 @@ def test_mysql_edit_during_parser_does_not_hold_owner_lock_or_overwrite(client):
             return {'items':[{'name':'late parser'}]}
 
     client.app.state.receipt_parser = PausedParser()
+    accepted = post(client, h, path+'/parse', {'expected_version':1}, 'parse-racing')
+    assert accepted.status_code == 202
     with ThreadPoolExecutor(max_workers=2) as pool:
-        pending = pool.submit(post, client, h, path+'/parse', {'expected_version':1}, 'parse-racing')
+        pending = pool.submit(receipt_jobs.execute, client.app.state.sessions,
+                              client.app.state.settings, client.app.state.receipt_parser,
+                              accepted.json()['parse_task_id'])
         try:
             assert entered.wait(5)
             edit = pool.submit(post, client, h, path+'/edit',
@@ -197,5 +211,6 @@ def test_mysql_edit_during_parser_does_not_hold_owner_lock_or_overwrite(client):
             assert result.status_code == 200, result.text
         finally:
             release.set()
-        assert pending.result(timeout=5).status_code == 409
+        assert pending.result(timeout=5) is None
+    assert client.get('/api/v1'+path, headers=h).json()['parse_status'] == 'discarded'
     assert client.get('/api/v1'+path, headers=h).json()['draft']['items'][0]['name'] == '人工核对'

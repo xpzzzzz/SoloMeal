@@ -1,0 +1,94 @@
+{
+  "seed": 1014,
+  "as_of": "2026-10-14",
+  "scales": {
+    "10": {
+      "users": 5,
+      "recipes_per_user": 10,
+      "ingredients_per_user": 64,
+      "batches_per_user": 40,
+      "history_per_user": 40,
+      "shopping_per_user": 3
+    },
+    "100": {
+      "users": 5,
+      "recipes_per_user": 100,
+      "ingredients_per_user": 64,
+      "batches_per_user": 400,
+      "history_per_user": 200,
+      "shopping_per_user": 10
+    },
+    "500": {
+      "users": 5,
+      "recipes_per_user": 500,
+      "ingredients_per_user": 64,
+      "batches_per_user": 2000,
+      "history_per_user": 400,
+      "shopping_per_user": 50
+    }
+  },
+  "data_fingerprint_recipe_and_inventory": "59af52faa1ff26feb961ab4a6aa1d93607a05362515105d528d91741c412b1b4",
+  "users": [
+    {
+      "scale": 10,
+      "user_id": "0c4ed60d-bafb-5712-b4a4-2e4c87b026a1"
+    },
+    {
+      "scale": 10,
+      "user_id": "76ed8fb4-3039-54f2-9a23-9c5c2c2fb869"
+    },
+    {
+      "scale": 10,
+      "user_id": "224857cd-6d80-53af-8f85-b089990d58af"
+    },
+    {
+      "scale": 10,
+      "user_id": "f1fedbe9-e48d-5006-a442-6ad43201a0a1"
+    },
+    {
+      "scale": 10,
+      "user_id": "762aba6a-4c37-5bb3-9800-d07842151370"
+    },
+    {
+      "scale": 100,
+      "user_id": "f5dd4f30-81ce-54da-8152-eea4bee98d0d"
+    },
+    {
+      "scale": 100,
+      "user_id": "f6bdea56-48a5-5419-9c86-704ad32258bb"
+    },
+    {
+      "scale": 100,
+      "user_id": "bb2efb25-c642-542d-992e-fdc85c575a67"
+    },
+    {
+      "scale": 100,
+      "user_id": "ce3b271b-8d1f-5dc3-9f28-f27f33fccbc7"
+    },
+    {
+      "scale": 100,
+      "user_id": "fb8d1ca9-9c37-50a9-9156-28f77e5419cd"
+    },
+    {
+      "scale": 500,
+      "user_id": "32943427-2665-59a9-8ae2-236fbf3a2cb7"
+    },
+    {
+      "scale": 500,
+      "user_id": "5813420c-c38d-5988-b886-ede46c5b2ba8"
+    },
+    {
+      "scale": 500,
+      "user_id": "d9d05307-cefc-5a73-b389-3488990c9fa9"
+    },
+    {
+      "scale": 500,
+      "user_id": "1a159050-95b1-55e1-a1a2-37fda1eb4c4a"
+    },
+    {
+      "scale": 500,
+      "user_id": "fe6c02b5-737a-53c8-b4d8-1222dbf468ac"
+    }
+  ],
+  "note": "Synthetic read-side fixture; credentials excluded; no real user data"
+}
