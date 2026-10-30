@@ -1,6 +1,11 @@
 from decimal import ROUND_CEILING, Decimal
 
 
+def format_quantity(quantity: Decimal, unit: str) -> str:
+    """Format a stored base-unit quantity without changing its numeric value."""
+    return f"{format(quantity.normalize(), 'f')}{unit}"
+
+
 def selected_lines(recipe, include_optional=False):
     return [
         line
