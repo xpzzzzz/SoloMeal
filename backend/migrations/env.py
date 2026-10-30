@@ -1,7 +1,16 @@
 from alembic import context
 from app.core.config import Settings
 from app.core.database import Base
-from app.models import agent, discovery, food, identity, plans, receipts, shopping  # noqa: F401
+from app.models import (  # noqa: F401
+    agent,
+    discovery,
+    food,
+    identity,
+    plans,
+    proactivity,
+    receipts,
+    shopping,
+)
 from sqlalchemy import create_engine, pool
 
 url = Settings().database_url
