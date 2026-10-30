@@ -50,3 +50,9 @@
 /docs/validation/backend-m5-1015-01/** -text
 /docs/validation/ocr/*.json -text
 /docs/validation/ocr/*.xml -text
+
+# Preserve the byte-hashed evaluation amendment across checkouts.
+/evaluation/amendments-v1.2.json -text
+/evaluation/protocol-v1.json -text
+/evaluation/README.md -text
+/docs/validation/p8-purchase-contract-v2-protocol.json -text
