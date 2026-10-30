@@ -61,7 +61,7 @@ OCR缺依赖/权重或运行失败时，hybrid在视觉已配置的情况下使�
 
 API202受理，任务/outbox与原幂等操作一起提交，outbox监管进程向durable quorum队列发布并等待确认。Celery采用prefork、late ack、prefetch1和有限重试；执行租约默认120秒、硬上限90秒、总期限900秒、最多3次、重试基准10秒。状态以MySQL为准，消息或发布确认丢失可由outbox重新派发。解析期间不持数据库连接。Worker退出可能使外部解析重执行，不能承诺外部调用恰好一次；RabbitMQ单节点不具备集群HA。
 
-备份现在同时停止当时正在运行的web/api/**worker**，再导出全库与私有图片，完成后仅恢复原运行服务。`receipt_parse_tasks`、识别模式、OCR证据和操作幂等结果都包含在全库备份中。恢复拒绝运行中的Worker；使用同版本镜像在新项目恢复后，先准备公开模型缓存再启动Worker。**Broker卷不作为业务事实备份**：未完成任务由数据库outbox恢复；已过期任务明确结束，不能延长期限伪装仍可执行。维护窗口仍不得从外部启动脚本写库。
+备份现在同时停止当时正在运行的主动提醒定时器、web/api/**worker**，再导出全库与私有图片，完成后仅恢复原运行服务。恢复拒绝运行中的定时器和Worker；使用同版本镜像在新项目恢复后，先准备公开模型缓存再启动Worker。`receipt_parse_tasks`、识别模式、OCR证据和操作幂等结果都包含在全库备份中。**Broker卷不作为业务事实备份**：未完成任务由数据库outbox恢复；已过期任务明确结束，不能延长期限伪装仍可执行。维护窗口仍不得从外部启动脚本写库。
 
 CI专用`deploy/ci/compose.yaml`显式加入封闭的合成Mock服务，只用于独立测试项目；不用于用户部署。`deploy/check_async_pipeline.py`以实际MySQL/RabbitMQ/Celery/CPU OCR验证三模式、冲突、失败和人工入库，不连接付费模型。原阶段证据见[M3](../docs/validation/receipt-async/m3-normal-workflow-1015.md)、[M4](../docs/validation/receipt-async/m4-reliability-1015.md)、[M4.5](../docs/validation/ocr/m45-hybrid-1015.md)。
 

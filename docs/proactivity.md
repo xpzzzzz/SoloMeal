@@ -47,7 +47,7 @@ python -m app.commands.tick --user-id <用户UUID>
 docker compose --env-file <私有配置文件> -p <项目名> -f compose.yaml -f deploy/proactivity.compose.yaml up -d --no-build --no-deps proactivity-tick
 ```
 
-定时器日志仅输出执行时间和计数；失败时记录通用错误并在下一次周期重试。Docker 停止期间不会执行，恢复后从启动时刻重新开始，不能视为严格按整点执行的任务。
+定时器日志仅输出执行时间和计数；失败时记录通用错误并在 60 秒后重试，成功后等待一小时。Docker 停止期间不会执行，恢复后从启动时刻重新开始，不能视为严格按整点执行的任务。备份工具会先停止正在运行的定时器和其他写入服务，完成后只恢复原先运行的服务。
 
 `SOLOMEAL_DEMO_MODE=true` 时才注册 `/api/v1/proactivity/simulate` 和显示首页“推进 1 天”按钮。模拟时间只属于当前进程和当前用户，不修改系统时钟；它会按新时间运行一次该用户的 tick。重启或跨进程不会共享偏移，因此只适合本地演示。演示时也遵守静默和每日限额。
 

@@ -231,3 +231,18 @@ def test_restore_refuses_a_running_worker_before_import(tmp_path):
     with pytest.raises(ValueError, match='stopped'):
         deployment.restore(tmp_path)
     assert not any(call[0] in ('exec', 'run') for call in deployment.calls)
+
+
+def test_backup_stops_and_resumes_tick_with_existing_writers(tmp_path):
+    deployment = SuccessfulDeployment(running=b'web\napi\nworker\nproactivity-tick\ndb\n')
+    deployment.backup(tmp_path / 'backup')
+    assert ('stop', 'proactivity-tick', 'web', 'api', 'worker') in deployment.calls
+    assert deployment.calls[-1] == ('start', 'worker', 'api', 'web', 'proactivity-tick')
+
+
+def test_restore_refuses_running_tick_before_import(tmp_path):
+    backup_files(tmp_path)
+    deployment = FakeDeployment(running=b'db\nproactivity-tick\n')
+    with pytest.raises(ValueError, match='stopped'):
+        deployment.restore(tmp_path)
+    assert not any(call[0] in ('exec', 'run') for call in deployment.calls)
