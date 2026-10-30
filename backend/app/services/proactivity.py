@@ -28,6 +28,46 @@ class Signal:
     expires_at: datetime | None
 
 
+@dataclass(frozen=True)
+class DecisionContext:
+    now: datetime
+    enabled: bool = True
+    daily_limit: int = 1
+    used_today: int = 0
+    quiet_start: str = "22:00"
+    quiet_end: str = "08:00"
+    snooze_until: datetime | None = None
+    suppressed_kinds: frozenset[str] = frozenset()
+
+
+def in_quiet_hours(now: datetime, start: str, end: str) -> bool:
+    current = now.astimezone(SHANGHAI).time().replace(tzinfo=None)
+    first, last = time.fromisoformat(start), time.fromisoformat(end)
+    if first == last:
+        return False
+    return first <= current < last if first < last else current >= first or current < last
+
+
+def select_signals(signals: list[Signal], ctx: DecisionContext) -> list[Signal]:
+    if not ctx.enabled or (ctx.snooze_until and ctx.now < _utc(ctx.snooze_until)):
+        return []
+    if in_quiet_hours(ctx.now, ctx.quiet_start, ctx.quiet_end):
+        return []
+    room = max(0, ctx.daily_limit - ctx.used_today)
+    candidates = [item for item in signals if item.kind not in ctx.suppressed_kinds]
+    candidates.sort(key=lambda item: (-item.priority, item.expires_at or datetime.max.replace(tzinfo=timezone.utc),
+                                      item.subject_key))
+    return candidates[:room]
+
+
+def build_action(payload: dict) -> dict:
+    if payload.get("kind") == "shopping_stale":
+        return {"type": "open_shopping", "shopping_id": payload["shopping_id"]}
+    if payload.get("recipe_id"):
+        return {"type": "open_plan_flow", "recipe_id": payload["recipe_id"], "prefill": {"servings": 1}}
+    return {"type": "open_inventory", "batch_id": payload["batch_id"]}
+
+
 def _utc(value: datetime) -> datetime:
     # Existing database DATETIME columns store UTC without a timezone.
     return value.replace(tzinfo=timezone.utc) if value.tzinfo is None else value.astimezone(timezone.utc)
