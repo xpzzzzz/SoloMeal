@@ -709,11 +709,11 @@ def exception_trial(client, case, mode, recorded):
     extension = None
     original = agent_service.dispatch
 
-    def fault(db, user_id, name, args, constraints=None):
+    def fault(db, user_id, name, args, constraints=None, **kwargs):
         if case["id"] == "A020" and name == "get_inventory" and not args and not injected:
             injected.append({"tool": name, "code": "TOOL_TIMEOUT", "synthetic": True})
             return {"error": {"code": "TOOL_TIMEOUT", "message": "库存读取暂时超时，可重试。"}}, None
-        return original(db, user_id, name, args, constraints)
+        return original(db, user_id, name, args, constraints, **kwargs)
 
     if mode == "direct_model":
         try:

@@ -12,7 +12,7 @@ from app.models.proactivity import ProactiveItem, ProactiveSetting
 from app.models.shopping import ShoppingList
 from app.services import proactivity_store
 from app.services.proactivity import in_quiet_hours
-from app.services.proactivity_store import tick_user
+from app.services.proactivity_store import inbox, tick_user
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import sessionmaker
@@ -93,6 +93,7 @@ def test_three_consecutive_dismissals_suppress_kind_for_7_days(tick_db):
         setup(db)
         history(db, ["dismissed"] * 3)
         assert tick_user(db, "u", NOW)["created"] == 0
+        assert inbox(db, "u", NOW)["meta"]["suppression_until"] == {"expiring_batch": "2026-11-05"}
         from app.services.proactivity_store import suppressed_kinds
         assert suppressed_kinds(db, "u", NOW + timedelta(days=6)) == set()
 
